@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   minishell.h                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:11:58 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/10/26 14:12:14 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int main()
-{
-	int		status;
-	char	*line;
+# include "libft/libft.h"
+# include "get_next_line/get_next_line.h"
+//
+# include <stdio.h>
 
-	status = 1;
-	while (status)
-	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
-	}
-	return (0);
-}
+#endif
