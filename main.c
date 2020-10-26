@@ -6,13 +6,13 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:11:58 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/26 14:13:31 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main()
+int	main(void)
 {
 	int		status;
 	char	*line;
