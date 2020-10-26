@@ -13,7 +13,7 @@
 NAME = minishell
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-SOURCE_CPP = main.cpp get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SOURCE_C = main.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 
 GREEN = \033[0;38;5;114m
