@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_lstsize.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/11/06 14:26:54 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/18 13:50:38 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include "libft.h"
 
-int main()
+int	ft_lstsize(t_list *lst)
 {
-	int		status;
-	char	*line;
+	int	i;
 
-	status = 1;
-	while (status)
+	i = 0;
+	while (lst != 0)
 	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
+		lst = lst->next;
+		i++;
 	}
-	return (0);
+	return (i);
 }

@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_lstlast.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/11/06 14:29:00 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/20 13:26:20 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include "libft.h"
 
-int main()
+t_list	*ft_lstlast(t_list *lst)
 {
-	int		status;
-	char	*line;
-
-	status = 1;
-	while (status)
-	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
-	}
-	return (0);
+	if (!lst)
+		return (0);
+	while (lst->next != 0)
+		lst = lst->next;
+	return (lst);
 }

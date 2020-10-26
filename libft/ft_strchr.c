@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strchr.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/10/29 09:19:03 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/21 16:07:30 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include "libft.h"
 
-int main()
+char	*ft_strchr(const char *s, int c)
 {
-	int		status;
-	char	*line;
+	int	i;
+	int	s_len;
 
-	status = 1;
-	while (status)
+	i = 0;
+	s_len = ft_strlen(s);
+	while (i < (s_len + 1))
 	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
 	}
 	return (0);
 }

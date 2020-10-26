@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_lstnew.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/11/06 14:08:06 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/20 13:31:32 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int main()
+t_list	*ft_lstnew(void *content)
 {
-	int		status;
-	char	*line;
+	t_list	*new;
 
-	status = 1;
-	while (status)
-	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
-	}
-	return (0);
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	new->content = content;
+	new->next = 0;
+	return (new);
 }

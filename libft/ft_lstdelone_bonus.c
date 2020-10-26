@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_lstdelone.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/11/06 14:45:20 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/20 13:11:29 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int main()
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int		status;
-	char	*line;
-
-	status = 1;
-	while (status)
+	if (lst)
 	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
+		del(lst->content);
+		free(lst);
 	}
-	return (0);
 }

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_memset.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/10/29 09:59:28 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/21 15:51:12 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include <stddef.h>
 
-int main()
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int		status;
-	char	*line;
+	size_t	i;
 
-	status = 1;
-	while (status)
+	i = 0;
+	while (i < len)
 	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
+		((unsigned char *)b)[i] = (unsigned char)c;
+		i++;
 	}
-	return (0);
+	return (b);
 }

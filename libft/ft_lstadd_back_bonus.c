@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_lstadd_back.c                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/11/06 14:35:30 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/20 13:29:07 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include "libft.h"
 
-int main()
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	int		status;
-	char	*line;
+	t_list	*temp;
 
-	status = 1;
-	while (status)
+	if (!new)
+		return ;
+	if (*alst == NULL)
+		*alst = new;
+	else
 	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
+		temp = *alst;
+		while (temp->next != 0)
+			temp = temp->next;
+		temp->next = new;
 	}
-	return (0);
 }

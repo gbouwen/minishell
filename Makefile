@@ -6,15 +6,16 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/19 13:35:07 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/10/26 14:05:36 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-SOURCE_C = main.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SOURCE_C = main.c
 OBJECT_FILES = $(SOURCE_C:.c=.o)
+LIBRARIES = -Llibft -lft -Lget_next_line -lgnl
 
 GREEN = \033[0;38;5;114m
 RED = \033[38;5;124m
@@ -29,18 +30,28 @@ all: $(NAME)
 
 $(NAME): $(OBJECT_FILES)
 	@echo "-----------------------------------"
+	@echo "$(GREEN)Compiling libft:$(NORMAL)"
+	@make bonus -C libft
+	@echo "-----------------------------------"
+	@echo "$(GREEN)Compiling get_next_line:$(NORMAL)"
+	@make -C get_next_line
+	@echo "-----------------------------------"
 	@echo "$(BLUE)Created executable:$(NORMAL)	$(NAME)"
 	@echo "-----------------------------------"
-	@$(CC) $(FLAGS) $(OBJECT_FILES) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJECT_FILES) $(LIBRARIES) -o $(NAME)
 
 clean:
 	@echo "$(RED)Removed all .o files$(NORMAL)"
 	@echo "-----------------------------------"
+	@make clean -C libft
+	@make clean -C get_next_line
 	@/bin/rm -f $(OBJECT_FILES)
 
 fclean: clean
 	@echo "$(RED)Removed executable:$(NORMAL)	$(NAME)"
 	@echo "-----------------------------------"
+	@make fclean -C libft
+	@make fclean -C get_next_line
 	@/bin/rm -f $(NAME)
 
 re: fclean all

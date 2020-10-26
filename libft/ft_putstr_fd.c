@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_putstr_fd.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/10/31 15:49:47 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/20 13:10:22 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include <unistd.h>
 
-int main()
+void	ft_putstr_fd(char *s, int fd)
 {
-	int		status;
-	char	*line;
+	size_t	i;
 
-	status = 1;
-	while (status)
+	if (s == 0)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
 	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
+		write(fd, &s[i], 1);
+		i++;
 	}
-	return (0);
 }

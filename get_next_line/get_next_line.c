@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 14:00:08 by tblanker       #+#    #+#                */
-/*   Updated: 2020/02/12 10:35:49 by tblanker      ########   odam.nl         */
+/*   Updated: 2020/10/26 14:00:56 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static	int	buf_concatenate(int ret_val, char **buffer, int fd, char **line)
 {
 	char temp_buffer[BUFFER_SIZE + 1];
 
-	while (ret_val == BUFFER_SIZE && !(ft_strchr(*buffer, '\n')))
+	while (ret_val == BUFFER_SIZE && !(gnl_ft_strchr(*buffer, '\n')))
 	{
 		ret_val = read(fd, temp_buffer, BUFFER_SIZE);
 		temp_buffer[ret_val] = '\0';
@@ -84,7 +84,7 @@ static	int	buf_concatenate(int ret_val, char **buffer, int fd, char **line)
 		if (!(*buffer))
 			return (-1);
 	}
-	if (ft_strchr(*buffer, '\n'))
+	if (gnl_ft_strchr(*buffer, '\n'))
 		return (newline_found(line, buffer));
 	*line = gnl_strdup(*buffer);
 	free(*buffer);
@@ -101,7 +101,7 @@ int			get_next_line(int fd, char **line)
 	int			ret_val;
 	char		*temp;
 
-	if (prev_buffer && ft_strchr(prev_buffer, '\n'))
+	if (prev_buffer && gnl_ft_strchr(prev_buffer, '\n'))
 		return (newline_found(line, &prev_buffer));
 	ret_val = read(fd, buffer, BUFFER_SIZE);
 	if (ret_val == -1 || BUFFER_SIZE < 0)

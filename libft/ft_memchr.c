@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_memchr.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/26 14:02:03 by gbouwen       ########   odam.nl         */
+/*   Created: 2019/10/30 10:57:47 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/21 15:43:22 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include <stddef.h>
 
-int main()
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int		status;
-	char	*line;
+	const unsigned char *u_s;
+	size_t				i;
 
-	status = 1;
-	while (status)
+	u_s = s;
+	i = 0;
+	while (i < n)
 	{
-		ft_putstr_fd("> ", 1);
-		get_next_line(0, &line);
-		printf("%s\n", line);
+		if (u_s[i] == (unsigned char)c)
+			return ((void *)(s + i));
+		i++;
 	}
 	return (0);
 }
