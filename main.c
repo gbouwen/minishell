@@ -1,6 +1,6 @@
 int main()
 {
-	printf("Hoi");
+	printf("hoi");
 	printf("Gijs");
 	return (0);
 }
