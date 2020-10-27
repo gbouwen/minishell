@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strchr.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/27 12:16:23 by tiemen        ########   odam.nl         */
+/*   Created: 2019/10/29 09:19:03 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/21 16:07:30 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *env[])
+char	*ft_strchr(const char *s, int c)
 {
-	int		status;
-	char	*line;
-	char	*home;
-	char 	*token;
+	int	i;
+	int	s_len;
 
-	home = "~";
-	status = 1;
-	while (status)
+	i = 0;
+	s_len = ft_strlen(s);
+	while (i < (s_len + 1))
 	{
-		printf("%s$ ", home);
-		get_next_line(0, &line);
-		strtok()
-		printf("%s\n", line);
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
 	}
 	return (0);
 }

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/17 15:42:20 by tblanker       #+#    #+#                */
-/*   Updated: 2020/02/12 10:26:28 by tblanker      ########   odam.nl         */
+/*   Created: 2020/01/17 15:42:20 by tblanker      #+#    #+#                 */
+/*   Updated: 2020/10/26 14:16:49 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE 200
 # endif
 
-int		ft_strchr(const char *s, int c);
+int		gnl_ft_strchr(const char *s, int c);
 int		get_next_line(int fd, char **line);
 char	*gnl_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);

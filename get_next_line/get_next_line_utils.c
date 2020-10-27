@@ -5,14 +5,14 @@
 /*                                                     +:+                    */
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/18 10:34:06 by tblanker       #+#    #+#                */
-/*   Updated: 2020/02/12 10:26:16 by tblanker      ########   odam.nl         */
+/*   Created: 2020/01/18 10:34:06 by tblanker      #+#    #+#                 */
+/*   Updated: 2020/10/26 14:16:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int				ft_strchr(const char *s, int c)
+int				gnl_ft_strchr(const char *s, int c)
 {
 	while (*s)
 	{

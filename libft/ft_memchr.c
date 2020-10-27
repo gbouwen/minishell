@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_memchr.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/27 12:16:23 by tiemen        ########   odam.nl         */
+/*   Created: 2019/10/30 10:57:47 by gbouwen       #+#    #+#                 */
+/*   Updated: 2019/11/21 15:43:22 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stddef.h>
 
-int	main(int argc, char *argv[], char *env[])
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int		status;
-	char	*line;
-	char	*home;
-	char 	*token;
+	const unsigned char *u_s;
+	size_t				i;
 
-	home = "~";
-	status = 1;
-	while (status)
+	u_s = s;
+	i = 0;
+	while (i < n)
 	{
-		printf("%s$ ", home);
-		get_next_line(0, &line);
-		strtok()
-		printf("%s\n", line);
+		if (u_s[i] == (unsigned char)c)
+			return ((void *)(s + i));
+		i++;
 	}
 	return (0);
 }
