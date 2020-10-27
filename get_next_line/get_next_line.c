@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 14:00:08 by tblanker      #+#    #+#                 */
-/*   Updated: 2020/10/26 14:16:18 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/26 14:43:05 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*cut_to_newline(char *buffer, char *line)
 	int i;
 
 	i = 0;
-	line = (char *)malloc(sizeof(char) * ft_strlen(buffer) + 1);
+	line = (char *)malloc(sizeof(char) * gnl_ft_strlen(buffer) + 1);
 	if (!line)
 	{
 		free(buffer);
@@ -43,13 +43,13 @@ static char	*cut_from_newline(char *buffer)
 	while (buffer[i] != '\n')
 		i++;
 	i++;
-	res = (char *)malloc(sizeof(char) * (ft_strlen(buffer) - i) + 1);
+	res = (char *)malloc(sizeof(char) * (gnl_ft_strlen(buffer) - i) + 1);
 	if (!res)
 	{
 		free(buffer);
 		return (0);
 	}
-	res[(ft_strlen(buffer) - i)] = '\0';
+	res[(gnl_ft_strlen(buffer) - i)] = '\0';
 	while (buffer[i])
 	{
 		res[j] = buffer[i];

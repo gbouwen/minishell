@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/18 10:34:06 by tblanker      #+#    #+#                 */
-/*   Updated: 2020/10/26 14:16:35 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/26 14:42:42 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char			*gnl_strjoin(char *s1, char *s2)
 		free(s1);
 		return (NULL);
 	}
-	p = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	p = (char *)malloc(sizeof(char) * (gnl_ft_strlen(s1) + gnl_ft_strlen(s2) + 1));
 	if (!p)
 	{
 		free(s1);
@@ -68,7 +68,7 @@ char			*gnl_strjoin(char *s1, char *s2)
 	return (p);
 }
 
-size_t			ft_strlen(const char *s)
+size_t			gnl_ft_strlen(const char *s)
 {
 	int	i;
 
@@ -89,15 +89,15 @@ char			*gnl_strdup(char *s1)
 	if (!s1)
 		return (NULL);
 	i = 0;
-	p = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	p = malloc(sizeof(char) * (gnl_ft_strlen(s1) + 1));
 	if (p)
 	{
-		while (i < ft_strlen(s1))
+		while (i < gnl_ft_strlen(s1))
 		{
 			p[i] = s1[i];
 			i++;
 		}
-		p[ft_strlen(s1)] = '\0';
+		p[gnl_ft_strlen(s1)] = '\0';
 	}
 	return (p);
 }
