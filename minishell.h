@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/27 12:53:12 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/27 15:43:03 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
+# include "ft_printf/libftprintf.h"
 
-//
-# include <stdio.h>
+# include "builtins/builtins.h"
 
 #endif

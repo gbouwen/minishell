@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:04 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/27 16:38:03 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/27 16:40:14 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	builtin_pwd(void);
 //int	builtin_export(void);
 //int	builtin_unset(void);
 //int	builtin_env(void);
-//int	builtin_exit(void);
+int	builtin_exit(void);
 
 #endif

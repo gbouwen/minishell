@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/27 12:53:29 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/10/27 15:43:22 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Wextra -Werror
 SOURCE_C =	main.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
-LIBRARIES = -Llibft -lft -Lget_next_line -lgnl
+LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf
 
 GREEN = \033[0;38;5;114m
 RED = \033[38;5;124m
@@ -37,6 +37,9 @@ $(NAME): $(OBJECT_FILES)
 	@echo "$(GREEN)Compiling get_next_line:$(NORMAL)"
 	@make -C get_next_line
 	@echo "-----------------------------------"
+	@echo "$(GREEN)Compiling ft_printf:$(NORMAL)"
+	@make -C ft_printf
+	@echo "-----------------------------------"
 	@echo "$(BLUE)Created executable:$(NORMAL)	$(NAME)"
 	@echo "-----------------------------------"
 	@$(CC) $(FLAGS) $(OBJECT_FILES) $(LIBRARIES) -o $(NAME)
@@ -46,6 +49,7 @@ clean:
 	@echo "-----------------------------------"
 	@make clean -C libft
 	@make clean -C get_next_line
+	@make clean -C ft_printf
 	@/bin/rm -f $(OBJECT_FILES)
 
 fclean: clean
@@ -53,6 +57,7 @@ fclean: clean
 	@echo "-----------------------------------"
 	@make fclean -C libft
 	@make fclean -C get_next_line
+	@make fclean -C ft_printf
 	@/bin/rm -f $(NAME)
 
 re: fclean all
