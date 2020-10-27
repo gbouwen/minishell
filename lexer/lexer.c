@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/27 16:49:53 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/27 16:58:06 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int		get_type(char c)
 {
 	if (c == ';')
 		return (CHAR_SEMICOLON);
-	else
-		return (CHAR_GENERAL);
+	if (c == ' ')
+		return (CHAR_WHITESPACE);
+	return (c);
 }
 
 void	lexer(lexer_t *lexer, char *line, int length)
