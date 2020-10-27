@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/27 12:40:58 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/27 12:51:50 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	print_structs(t_command *commands)
 {
-	printf("%s\n", commands[0]->arg_list);
+	commands[0].arg_list = "hoi";
+	printf("%s\n", commands[0].arg_list);
 	return ;
 }
 
@@ -29,9 +30,10 @@ int	main(void)
 	while (status)
 	{
 		get_next_line(0, &line);
-		parse_line(line, commands);
+		parse_line(line, &commands);
 		printf("ha\n");
-		print_structs(&commands);
+		printf("|%s|\n", commands[0].arg_list);
+		print_structs(commands);
 		printf("%s\n", line);
 	}
 	return (0);

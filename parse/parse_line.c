@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 11:27:32 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/27 12:36:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/27 12:50:47 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		countCommands(char **splitLine)
 	return (i);
 }
 
-void	fillStructs(int amount, char **splitLine, t_command *commands)
+void	fillStructs(int amount, char **splitLine, t_command **commands)
 {
 	int	i;
 
@@ -30,8 +30,8 @@ void	fillStructs(int amount, char **splitLine, t_command *commands)
 	while (i < amount)
 	{
 		printf("|%d|\n", i);
-		commands[i].arg_list = splitLine[i];
-		printf("|%s|\n", commands[i].arg_list);
+		commands[i]->arg_list = splitLine[i];
+		printf("|%s|\n", commands[i]->arg_list);
 		i++;
 	}
 	return ;
@@ -45,6 +45,7 @@ void	parse_line(char *line, t_command *commands)
 	splitLine = ft_split(line, ';');
 	amount = countCommands(splitLine);
 	commands = ft_calloc(amount, sizeof(t_command));
-	fillStructs(amount, splitLine, commands);
+	fillStructs(amount, splitLine, &commands);
+	printf("|%s|\n", commands[0].arg_list);
 	return ;
 }
