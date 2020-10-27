@@ -6,15 +6,14 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/27 12:39:31 by tiemen        ########   odam.nl          #
+#    Updated: 2020/10/27 16:33:09 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-SOURCE_C =	main.c \
-			parse/parse_line.c
+SOURCE_C =	main.c lexer/lexer.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl
