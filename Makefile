@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/28 12:17:54 by tiemen        ########   odam.nl          #
+#    Updated: 2020/10/28 15:46:01 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,3 +61,8 @@ fclean: clean
 	@/bin/rm -f $(NAME)
 
 re: fclean all
+
+push: fclean
+	git add .
+	git commit -m "quick push from makefile"
+	git push
