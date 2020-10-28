@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstadd_back.c                                   :+:    :+:            */
+/*   ft_lstadd_back_bonus.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/06 14:35:30 by gbouwen       #+#    #+#                 */
-/*   Updated: 2019/11/20 13:29:07 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 12:02:41 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,8 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 		temp->next = new;
 	}
 }
+						token->data[j] = 0;
+						token->next = malloc(sizeof(tok_t));
+						token = token->next;
+						tok_init(token, size - i);
+						j = 0;
