@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 15:02:57 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 15:07:29 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,14 @@ void	state_check(lexer_t *lexer, t_list **token, char *line, int i)
 {
 	if (lexer->state == GENERAL)
 		state_general(lexer, token, line, i);
-	if (lexer->state == IN_QUOTE)
+	else if (lexer->state == IN_QUOTE)
 	{
 		(*token)->content[(*token)->current_char] = line[i];
 		(*token)->current_char++;
 		if ((*token)->type == CHAR_QUOTE)
 			lexer->state = GENERAL;
 	}
-	if (lexer->state == IN_DOUBLE_QUOTE)
+	else if (lexer->state == IN_DOUBLE_QUOTE)
 	{
 		(*token)->content[(*token)->current_char] = line[i];
 		(*token)->current_char++;
