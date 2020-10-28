@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:00:51 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/28 16:17:42 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 16:33:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	set_token_data(t_list **token, char *line, int i)
 	(*token)->type = TOKEN;
 }
 
-void	set_special_token(lexer_t *lexer, t_list **token)
+void	set_special_token(t_lexer *lexer, t_list **token)
 {
 	(*token)->content[0] = lexer->char_type;
 	(*token)->content[1] = '\0';
@@ -37,7 +37,7 @@ void	set_special_token(lexer_t *lexer, t_list **token)
 	*token = (*token)->next;
 }
 
-void	end_token(lexer_t *lexer, t_list **token, int i)
+void	end_token(t_lexer *lexer, t_list **token, int i)
 {
 	if ((*token)->current_char > 0)
 	{
