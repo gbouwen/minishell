@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 10:58:50 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/28 11:17:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(void)
 		t_list *temp = lexer_list.token_list;
 		while (temp != NULL)
 		{
-			printf("|| %s, %d ||", temp->content, temp->type);
+			printf("|| %s, %d ||\n", temp->content, temp->type);
 			temp = temp->next;
 		}
 		printf("%s\n", line);

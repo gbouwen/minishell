@@ -6,13 +6,13 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/27 17:04:45 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/10/28 11:18:26 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS =
 SOURCE_C =	main.c lexer/lexer.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)

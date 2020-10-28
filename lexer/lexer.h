@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:26:26 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 11:07:24 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 11:50:45 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@
 # define CHAR_PIPE '|'
 # define CHAR_ESCAPE '\\'
 # define CHAR_NEWLINE '\n'
+# define CHAR_NULL '\0'
+# define TOKEN -1
 
 typedef	struct		lexer_s
 {
-	t_list			*token_list;
-	int				num_tokens;
+	t_list	*token_list;
+	int		num_tokens;
+	int		char_type;
+	int		state;
 }					lexer_t;
 
 enum {
