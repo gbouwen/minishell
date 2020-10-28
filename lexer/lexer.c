@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 14:52:51 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 14:57:01 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	state_general(lexer_t *lexer, t_list **token, char *line, int i)
 	if (lexer->char_type == CHAR_GENERAL)
 	{
 		(*token)->content[(*token)->current_char] = line[i];
-<<<<<<< HEAD
 		(*token)->current_char++;
 		(*token)->type = TOKEN;
 	}
@@ -70,8 +69,6 @@ void	state_general(lexer_t *lexer, t_list **token, char *line, int i)
 	else if (lexer->char_type == CHAR_ESCAPE)
 	{
 		(*token)->content[(*token)->current_char] = line[i + 1];
-=======
->>>>>>> a35c1d42afe1aff53f47c450d1fd5a0d42a00802
 		(*token)->current_char++;
 		(*token)->type = TOKEN;
 	}
