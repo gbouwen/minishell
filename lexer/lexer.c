@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 15:18:33 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/28 15:27:01 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,53 +44,45 @@ int		get_char_type(char c)
 	return (CHAR_GENERAL);
 }
 
+void	set_token_data(lexer_t *lexer, t_list **token, char *line, int i)
+{
+	(*token)->content[(*token)->current_char] = line[i];
+	(*token)->current_char++;
+	(*token)->type = TOKEN;
+}
+
+void	end_token(lexer_t *lexer, t_list **token, char *line, int i)
+{
+	if ((*token)->current_char > 0)
+	{
+		(*token)->content[(*token)->current_char] = '\0';
+		(*token)->next = malloc(sizeof(t_list));
+		*token = (*token)->next;
+		init_token(*token, lexer->line_length - i);
+	}
+}
+
 void	state_general(lexer_t *lexer, t_list **token, char *line, int i)
 {
 	if (lexer->char_type == CHAR_GENERAL)
-	{
-		(*token)->content[(*token)->current_char] = line[i];
-		(*token)->current_char++;
-		(*token)->type = TOKEN;
-	}
+		set_token_data(lexer, token, line, i);
 	else if (lexer->char_type == CHAR_QUOTE)
 	{
 		lexer->state = IN_QUOTE;
-		(*token)->content[(*token)->current_char] = line[i];
-		(*token)->current_char++;
-		(*token)->type = TOKEN;
+		set_token_data(lexer, token, line, i);
 	}
 	else if (lexer->char_type == CHAR_DOUBLE_QUOTE)
 	{
 		lexer->state = IN_DOUBLE_QUOTE;
-		(*token)->content[(*token)->current_char] = line[i];
-		(*token)->current_char++;
-		(*token)->type = TOKEN;
+		set_token_data(lexer, token, line, i);
 	}
 	else if (lexer->char_type == CHAR_ESCAPE)
-	{
-		(*token)->content[(*token)->current_char] = line[i + 1];
-		(*token)->current_char++;
-		(*token)->type = TOKEN;
-	}
+		set_token_data(lexer, token, line, i + 1);
 	else if (lexer->char_type == CHAR_WHITESPACE)
-	{
-		if ((*token)->current_char > 0)
-		{
-			(*token)->content[(*token)->current_char] = '\0';
-			(*token)->next = malloc(sizeof(t_list));
-			*token = (*token)->next;
-			init_token(*token, lexer->line_length - i);
-		}
-	}
+		end_token(lexer, token, line, i);
 	else
 	{
-		if ((*token)->current_char > 0)
-		{
-			(*token)->content[(*token)->current_char] = '\0';
-			(*token)->next = malloc(sizeof(t_list));
-			*token = (*token)->next;
-			init_token(*token, lexer->line_length - i);
-		}
+		end_token(lexer, token, line, i);
 		(*token)->content[0] = lexer->char_type;
 		(*token)->content[1] = '\0';
 		(*token)->type = lexer->char_type;
