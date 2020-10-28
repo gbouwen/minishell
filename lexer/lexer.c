@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 14:57:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 14:58:26 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,6 @@ void	lexer(lexer_t *lexer, char *line, int length)
 	{
 		lexer->char_type = get_char_type(line[i]);
 		state_check(lexer, &token, line, i);
-        /*if (lexer->state == IN_QUOTE)*/
-		/*if (lexer->state == IN_DOUBLE_QUOTE)*/
-		/*if (lexer->state == IN_ESC)*/
 		(lexer->char_type == CHAR_ESCAPE) ? i += 2 : i++;
 	}
 }
