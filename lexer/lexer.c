@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 15:27:01 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/28 15:41:00 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ void	end_token(lexer_t *lexer, t_list **token, char *line, int i)
 	}
 }
 
+void	set_special_token(lexer_t *lexer, t_list **token, char *line, int i)
+{
+	(*token)->content[0] = lexer->char_type;
+	(*token)->content[1] = '\0';
+	(*token)->type = lexer->char_type;
+	(*token)->next = malloc(sizeof(t_list));
+	*token = (*token)->next;
+}
+
 void	state_general(lexer_t *lexer, t_list **token, char *line, int i)
 {
 	if (lexer->char_type == CHAR_GENERAL)
@@ -83,11 +92,7 @@ void	state_general(lexer_t *lexer, t_list **token, char *line, int i)
 	else
 	{
 		end_token(lexer, token, line, i);
-		(*token)->content[0] = lexer->char_type;
-		(*token)->content[1] = '\0';
-		(*token)->type = lexer->char_type;
-		(*token)->next = malloc(sizeof(t_list));
-		*token = (*token)->next;
+		set_special_token(lexer, token, line, i);
 		init_token(*token, lexer->line_length - i);
 	}
 }
@@ -125,7 +130,6 @@ void	lexer(lexer_t *lexer, char *line, int length)
 	i = 0;
 	while (line[i] != '\0')
 	{
-		printf("%d\n", i);
 		lexer->char_type = get_char_type(line[i]);
 		state_check(lexer, &token, line, i);
 		(lexer->char_type == CHAR_ESCAPE) ? i += 2 : i++;
