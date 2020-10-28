@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 15:16:05 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 15:18:24 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ void	lexer(lexer_t *lexer, char *line, int length)
 	i = 0;
 	while (line[i] != '\0')
 	{
-		printf("%d\n", i);
 		lexer->char_type = get_char_type(line[i]);
 		state_check(lexer, &token, line, i);
 		(lexer->char_type == CHAR_ESCAPE) ? i += 2 : i++;
