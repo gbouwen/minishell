@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 14:16:42 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/28 14:40:28 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int		get_char_type(char c)
 	return (CHAR_GENERAL);
 }
 
-void	state_general(lexer_t *lexer, t_list **token, char c, int i)
+void	state_general(lexer_t *lexer, t_list **token, char *line, int i)
 {
 	if (lexer->char_type == CHAR_GENERAL)
 	{
-		(*token)->content[(*token)->current_char] = c;
+		(*token)->content[(*token)->current_char] = line[i];
 		(*token)->current_char++;
 		(*token)->type = TOKEN;
 	}
@@ -61,6 +61,26 @@ void	state_general(lexer_t *lexer, t_list **token, char c, int i)
 			*token = (*token)->next;
 			init_token(*token, lexer->line_length - i);
 		}
+	}
+}
+
+void	state_check(lexer_t *lexer, t_list **token, char *line, int i)
+{
+	if (lexer->state == GENERAL)
+		state_general(lexer, token, line, i);
+	if (lexer->state == IN_QUOTE)
+	{
+		(*token)->content[(*token)->current_char] = line[i];
+		(*token)->current_char++;
+		if ((*token)->type == CHAR_QUOTE)
+			lexer->state = GENERAL;
+	}
+	if (lexer->state == IN_DOUBLE_QUOTE)
+	{
+		(*token)->content[(*token)->current_char] = line[i];
+		(*token)->current_char++;
+		if ((*token)->type == CHAR_DOUBLE_QUOTE)
+			lexer->state = GENERAL;
 	}
 }
 
@@ -78,8 +98,7 @@ void	lexer(lexer_t *lexer, char *line, int length)
 	while (line[i] != '\0')
 	{
 		lexer->char_type = get_char_type(line[i]);
-		if (lexer->state == GENERAL)
-			state_general(lexer, &token, line[i], i);
+		state_check(lexer, &token, line, i);
         /*if (lexer->state == IN_QUOTE)*/
 		/*if (lexer->state == IN_DOUBLE_QUOTE)*/
 		/*if (lexer->state == IN_ESC)*/

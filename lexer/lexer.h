@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:26:26 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 12:16:20 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 14:36:02 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ typedef	struct		lexer_s
 
 enum {
 	GENERAL,
-	IN_QOUTE,
-	IN_DOUBLE_QOUTE,
-	IN_ESC
+	IN_QUOTE,
+	IN_DOUBLE_QUOTE,
 };
 
 int		get_type(char c);
