@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:26:26 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/27 16:32:25 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/28 10:58:09 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # define CHAR_GENERAL -1
 # define CHAR_SEMICOLON ';'
 # define CHAR_WHITESPACE ' '
+# define CHAR_GREATER '>'
+# define CHAR_LESSER '<'
+# define CHAR_QOUTE '\''
+# define CHAR_DOUBLE_QOUTE '\"'
+# define CHAR_PIPE '|'
+# define CHAR_ESCAPE '\\'
+# define CHAR_NEWLINE '\n'
 
 typedef	struct		lexer_s
 {
