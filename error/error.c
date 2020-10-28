@@ -6,14 +6,14 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 12:16:41 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 16:30:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 17:03:19 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "error.h"
 
-void	exit_error(char *error)
+void	exit_error(char *message)
 {
-	ft_printf("Error: %s\n", error);
+	ft_printf("Error: %s\n", message);
 	exit(1);
 }

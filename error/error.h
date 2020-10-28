@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   error.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/28 17:14:18 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/10/28 17:06:17 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef ERROR_H
+# define ERROR_H
 
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "ft_printf/libftprintf.h"
-# include "lexer/lexer.h"
-# include "error/error.h"
+# include "../minishell.h"
 
-# include <stdio.h> //
+void	error(char *message);
 
 #endif

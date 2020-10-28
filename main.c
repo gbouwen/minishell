@@ -21,6 +21,7 @@ int	main(void)
 
 	lexer_data.token_list = NULL;
 	status = 1;
+	exit_error("ha");
 	while (status)
 	{
 		ft_printf("> ");
