@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstadd_back_bonus.c                             :+:    :+:            */
+/*   error.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
+/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/06 14:35:30 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/28 14:03:38 by tiemen        ########   odam.nl         */
+/*   Created: 2020/10/28 12:16:41 by tiemen        #+#    #+#                 */
+/*   Updated: 2020/10/28 12:17:39 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	put_error(char *error)
 {
-	t_list	*temp;
-
-	if (!new)
-		return ;
-	if (*alst == NULL)
-		*alst = new;
-	else
-	{
-		temp = *alst;
-		while (temp->next != 0)
-			temp = temp->next;
-		temp->next = new;
-	}
+	ft_putstr_fd("Error: ", 1);
+	ft_putstr_fd(error, 1);
+	ft_putstr_fd("\n", 1);
+	exit(1);
 }
