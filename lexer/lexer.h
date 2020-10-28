@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:26:26 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 10:58:09 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/28 11:07:24 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define CHAR_WHITESPACE ' '
 # define CHAR_GREATER '>'
 # define CHAR_LESSER '<'
-# define CHAR_QOUTE '\''
-# define CHAR_DOUBLE_QOUTE '\"'
+# define CHAR_QUOTE '\''
+# define CHAR_DOUBLE_QUOTE '\"'
 # define CHAR_PIPE '|'
 # define CHAR_ESCAPE '\\'
 # define CHAR_NEWLINE '\n'
@@ -35,7 +35,8 @@ typedef	struct		lexer_s
 enum {
 	GENERAL,
 	IN_QOUTE,
-	IN_DOUBLE_QOUTE
+	IN_DOUBLE_QOUTE,
+	IN_ESC
 };
 
 int		get_type(char c);
