@@ -15,6 +15,6 @@
 
 # include "../minishell.h"
 
-void	error(char *message);
+void	exit_error(char *message);
 
 #endif
