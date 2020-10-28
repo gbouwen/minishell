@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:26:26 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 11:50:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 12:16:20 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct		lexer_s
 	int		num_tokens;
 	int		char_type;
 	int		state;
+	int		line_length;
 }					lexer_t;
 
 enum {

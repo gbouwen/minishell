@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 12:16:01 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/28 14:13:43 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,24 @@ int		get_char_type(char c)
 	return (CHAR_GENERAL);
 }
 
-void	state_general(lexer_t *lexer, t_list *token, char c)
+void	state_general(lexer_t *lexer, t_list *token, char c, int i)
 {
 	if (lexer->char_type == CHAR_GENERAL)
 	{
 		token->content[token->current_char] = c;
 		token->current_char++;
 		token->type = TOKEN;
+	}
+	else if (lexer->char_type == CHAR_WHITESPACE)
+	{
+		if (token->current_char > 0)
+		{
+			token->content[token->current_char + 1] = '\0';
+			token->next = malloc(sizeof(t_list));
+			printf("state funct: %p\n", token->next);
+			token = token->next;
+			init_token(token, lexer->line_length - i);
+		}
 	}
 }
 
@@ -61,19 +72,19 @@ void	lexer(lexer_t *lexer, char *line, int length)
 
 	lexer->state = GENERAL;
 	lexer->token_list = malloc(sizeof(t_list));
-	if (!lexer->token_list)
-	{
-		free(line);
-		put_error("MALLOC ERROR.");
-	}
+	lexer->line_length = length;
 	token = lexer->token_list;
-	init_token(token, length);
+	init_token(token, lexer->line_length);
 	i = 0;
 	while (line[i] != '\0')
 	{
 		lexer->char_type = get_char_type(line[i]);
 		if (lexer->state == GENERAL)
-			state_general(lexer, token, line[i]);
+			state_general(lexer, token, line[i], i);
+		printf("lexer funct: %p\n", token);
+        /*if (lexer->state == IN_QUOTE)*/
+		/*if (lexer->state == IN_DOUBLE_QUOTE)*/
+		/*if (lexer->state == IN_ESC)*/
 		i++;
 	}
 }
