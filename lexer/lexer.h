@@ -39,8 +39,8 @@ typedef	struct		lexer_s
 
 enum {
 	GENERAL,
-	IN_QOUTE,
-	IN_DOUBLE_QOUTE,
+	IN_QUOTE,
+	IN_DOUBLE_QUOTE,
 	IN_ESC
 };
 
