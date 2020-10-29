@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:05:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/29 16:42:15 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/29 17:45:24 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	state_general(t_lexer *lexer_data, t_list **token, char *line, int i)
 	else
 	{
 		end_token(lexer_data, token, i);
-		set_special_token(lexer_data, token);
-		init_token(*token, lexer_data->line_length - i);
+		set_special_token(lexer_data, token, i);
 	}
 }
 
