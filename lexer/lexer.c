@@ -6,132 +6,37 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 15:41:00 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/28 17:18:37 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-void	init_token(t_list *token, int length)
+static void	init_lexer(t_lexer *lexer_data, int length)
 {
-	token->content = malloc(length + 1);
-	token->content[length] = '\0';
-	token->current_char = 0;
-	token->type = 0;
-	token->next = NULL;
+	lexer_data->state = GENERAL;
+	lexer_data->token_list = malloc(sizeof(t_list));
+	if (!lexer_data->token_list)
+		exit_error("Malloc failed.");
+	lexer_data->line_length = length;
 }
 
-int		get_char_type(char c)
-{
-	if (c == ';')
-		return (CHAR_SEMICOLON);
-	if (c == ' ')
-		return (CHAR_WHITESPACE);
-	if (c == '>')
-		return (CHAR_GREATER);
-	if (c == '<')
-		return (CHAR_LESSER);
-	if (c == '\'')
-		return (CHAR_QUOTE);
-	if (c == '\"')
-		return (CHAR_DOUBLE_QUOTE);
-	if (c == '|')
-		return (CHAR_PIPE);
-	if (c == '\\')
-		return (CHAR_ESCAPE);
-	if (c == '\n')
-		return (CHAR_NEWLINE);
-	return (CHAR_GENERAL);
-}
-
-void	set_token_data(lexer_t *lexer, t_list **token, char *line, int i)
-{
-	(*token)->content[(*token)->current_char] = line[i];
-	(*token)->current_char++;
-	(*token)->type = TOKEN;
-}
-
-void	end_token(lexer_t *lexer, t_list **token, char *line, int i)
-{
-	if ((*token)->current_char > 0)
-	{
-		(*token)->content[(*token)->current_char] = '\0';
-		(*token)->next = malloc(sizeof(t_list));
-		*token = (*token)->next;
-		init_token(*token, lexer->line_length - i);
-	}
-}
-
-void	set_special_token(lexer_t *lexer, t_list **token, char *line, int i)
-{
-	(*token)->content[0] = lexer->char_type;
-	(*token)->content[1] = '\0';
-	(*token)->type = lexer->char_type;
-	(*token)->next = malloc(sizeof(t_list));
-	*token = (*token)->next;
-}
-
-void	state_general(lexer_t *lexer, t_list **token, char *line, int i)
-{
-	if (lexer->char_type == CHAR_GENERAL)
-		set_token_data(lexer, token, line, i);
-	else if (lexer->char_type == CHAR_QUOTE)
-	{
-		lexer->state = IN_QUOTE;
-		set_token_data(lexer, token, line, i);
-	}
-	else if (lexer->char_type == CHAR_DOUBLE_QUOTE)
-	{
-		lexer->state = IN_DOUBLE_QUOTE;
-		set_token_data(lexer, token, line, i);
-	}
-	else if (lexer->char_type == CHAR_ESCAPE)
-		set_token_data(lexer, token, line, i + 1);
-	else if (lexer->char_type == CHAR_WHITESPACE)
-		end_token(lexer, token, line, i);
-	else
-	{
-		end_token(lexer, token, line, i);
-		set_special_token(lexer, token, line, i);
-		init_token(*token, lexer->line_length - i);
-	}
-}
-
-void	state_check(lexer_t *lexer, t_list **token, char *line, int i)
-{
-	if (lexer->state == GENERAL)
-		state_general(lexer, token, line, i);
-	else if (lexer->state == IN_QUOTE)
-	{
-		(*token)->content[(*token)->current_char] = line[i];
-		(*token)->current_char++;
-		if (lexer->char_type == CHAR_QUOTE)
-			lexer->state = GENERAL;
-	}
-	else if (lexer->state == IN_DOUBLE_QUOTE)
-	{
-		(*token)->content[(*token)->current_char] = line[i];
-		(*token)->current_char++;
-		if (lexer->char_type == CHAR_DOUBLE_QUOTE)
-			lexer->state = GENERAL;
-	}
-}
-
-void	lexer(lexer_t *lexer, char *line, int length)
+void	lexer(t_lexer *lexer_data, char *line, int length)
 {
 	t_list		*token;
 	int			i;
 
-	lexer->state = GENERAL;
-	lexer->token_list = malloc(sizeof(t_list));
-	lexer->line_length = length;
-	token = lexer->token_list;
-	init_token(token, lexer->line_length);
+	init_lexer(lexer_data, length);
+	token = lexer_data->token_list;
+	init_token(token, lexer_data->line_length);
 	i = 0;
 	while (line[i] != '\0')
 	{
-		lexer->char_type = get_char_type(line[i]);
-		state_check(lexer, &token, line, i);
-		(lexer->char_type == CHAR_ESCAPE) ? i += 2 : i++;
+		lexer_data->char_type = get_char_type(line[i]);
+		state_check(lexer_data, &token, line, i);
+		if (lexer_data->char_type == CHAR_ESCAPE)
+			i += 2;
+		else
+			i++;
 	}
 }

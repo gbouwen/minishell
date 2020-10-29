@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   parser.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
+/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/28 17:14:18 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
+/*   Updated: 2020/10/29 23:03:10 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
 
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "ft_printf/libftprintf.h"
-# include "lexer/lexer.h"
-# include "error/error.h"
+#include "minishell.h"
+/*
+complete_command consists of: (task) ';' (complete_command) 
+							or (task) ';' 
 
-# include <stdio.h> //
 
-#endif
+ */
+void parser(lexer_t *lexer_data)
+{
+	
+}

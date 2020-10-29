@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/18 10:34:06 by tblanker      #+#    #+#                 */
-/*   Updated: 2020/10/26 14:42:42 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/28 16:49:33 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ char			*gnl_strjoin(char *s1, char *s2)
 		free(s1);
 		return (NULL);
 	}
-	p = (char *)malloc(sizeof(char) * (gnl_ft_strlen(s1) + gnl_ft_strlen(s2) + 1));
+	p = (char *)malloc(sizeof(char) * (gnl_ft_strlen(s1)
+											+ gnl_ft_strlen(s2) + 1));
 	if (!p)
 	{
 		free(s1);
