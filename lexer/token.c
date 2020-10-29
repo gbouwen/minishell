@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:00:51 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/29 10:42:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/29 14:26:17 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_token(t_list *token, int length)
 {
 	token->content = malloc(length + 1);
-	token->content[length] = '\0';
+	ft_bzero(token->content, length + 1);
 	token->current_char = 0;
 	token->type = 0;
 	token->next = NULL;

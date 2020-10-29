@@ -6,7 +6,7 @@
 #    By: gbouwen <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/28 13:23:35 by gbouwen       #+#    #+#                  #
-#    Updated: 2019/11/20 13:35:13 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/10/29 14:32:04 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,23 +42,23 @@ all: $(NAME)
 $(NAME): $(SOURCE_O)
 	@echo "$(BLUE)Adding to library...$(NORMAL)"
 	@ar rc $(NAME) $(SOURCE_O) $?
-	@echo "$(GREEN)Successfully added to library!"
+	@echo "$(GREEN)Successfully added to library!$(NORMAL)"
 
 clean:
 	@echo "$(RED)Removing all .o files...$(NORMAL)"
 	@/bin/rm -f $(SOURCE_O) $(BONUS_O)
-	@echo "$(GREEN)Succesfully removed all object files!"
+	@echo "$(GREEN)Succesfully removed all object files!$(NORMAL)"
 
 fclean: clean
 	@echo "$(RED)Removing libft.a...$(NORMAL)"
 	@/bin/rm -f $(NAME)
-	@echo "$(GREEN)Successfully removed libft.a!"
+	@echo "$(GREEN)Successfully removed libft.a!$(NORMAL)"
 
 re: fclean all
 
 bonus: $(NAME) $(BONUS_O)
 	@echo "$(BLUE)Adding to library...$(NORMAL)"
 	@ar rc $(NAME) $(BONUS_O) $?
-	@echo "$(GREEN)Succesfully added to library!"
+	@echo "$(GREEN)Succesfully added to library!$(NORMAL)"
 
 .PHONY: all clean fclean re bonus
