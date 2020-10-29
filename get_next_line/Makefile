@@ -6,7 +6,7 @@
 #    By: gbouwen <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/04 14:19:21 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/29 14:31:30 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/10/29 14:40:27 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,12 @@ $(NAME): $(SOURCE_O)
 
 clean:
 	@echo "$(RED)Removing all .o files...$(NORMAL)"
-	/bin/rm -f $(SOURCE_O) $(BONUS_O)
+	@/bin/rm -f $(SOURCE_O) $(BONUS_O)
 	@echo "$(GREEN)Succesfully removed all object files!$(NORMAL)"
 
 fclean: clean
 	@echo "$(RED)Removing libgnl.a...$(NORMAL)"
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 	@echo "$(GREEN)Successfully removed libgnl.a!$(NORMAL)"
 
 re: fclean all
