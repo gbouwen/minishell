@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:52:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/28 16:53:33 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/29 14:29:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "lexer.h"
 # include "../minishell.h"
 
-# define CHAR_GENERAL -1
+# define CHAR_GENERAL 1
 # define CHAR_SEMICOLON ';'
 # define CHAR_WHITESPACE ' '
 # define CHAR_GREATER '>'
@@ -27,7 +27,7 @@
 # define CHAR_ESCAPE '\\'
 # define CHAR_NEWLINE '\n'
 # define CHAR_NULL '\0'
-# define TOKEN -1
+# define TOKEN 1
 
 enum
 {
