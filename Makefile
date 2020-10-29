@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/28 17:04:50 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/10/29 16:46:06 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ FLAGS = -Wall -Wextra -Werror
 SOURCE_C =	main.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
-			lexer/state_check.c \
 			lexer/state.c \
 			lexer/token.c \
 			error/error.c
