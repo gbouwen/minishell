@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 17:18:10 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/29 11:45:37 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(void)
 
 	lexer_data.token_list = NULL;
 	status = 1;
-	exit_error("ha");
 	while (status)
 	{
 		ft_printf("> ");
