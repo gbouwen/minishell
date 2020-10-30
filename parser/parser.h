@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/30 00:33:07 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/30 13:12:30 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 # define PATHNAME 1
 # define ARGUMENT 2
-# define FILENAME 3
+# define PIPE 3
+# define FILENAME 4
 
 typedef struct bt_node
 {

@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/30 00:55:47 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/30 12:59:38 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,28 @@ t_node *command(t_list **token)
 	}
 	return(command);
 }
+
+// t_node *task_function(t_list **token)
+// {
+// 	t_node *result;
+// 	t_node *task;
+
+// 	task = command(token);
+// 	if ((*token)->type == CHAR_PIPE)
+// 	{
+// 		(*token) = (*token)->next;
+// 		if ((*token)->type == 0)
+// 			return(NULL);
+// 		result = malloc(sizeof(t_node));
+// 		result->type = PIPE;
+// 		result->left = task;
+// 		printf("hashdj%ssad\n", "sadjiasoijd");
+// 		result->right = task_function(token);
+// 	}
+// 	if (result != NULL)
+// 		return (result);
+// 	return(task);
+// }
 
 t_node *parser(t_lexer *lexer_data)
 {
