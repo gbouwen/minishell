@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/29 14:12:59 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/30 10:48:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_lexer(t_lexer *lexer_data, int length)
 	lexer_data->line_length = length;
 }
 
-void	lexer(t_lexer *lexer_data, char *line, int length)
+void		lexer(t_lexer *lexer_data, char *line, int length)
 {
 	t_list		*token;
 	int			i;
