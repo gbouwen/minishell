@@ -6,11 +6,17 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/29 17:45:24 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/30 11:57:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	delete_content(void *content)
+{
+	if (content)
+		free(content);
+}
 
 int	main(void)
 {
@@ -25,6 +31,8 @@ int	main(void)
 	{
 		ft_printf("> ");
 		get_next_line(0, &line);
+		if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
+			break ;
 		lexer(&lexer_data, line, ft_strlen(line));
 		temp = lexer_data.token_list;
 		while (temp != NULL)
@@ -33,6 +41,7 @@ int	main(void)
 			temp = temp->next;
 		}
 		printf("%s\n", line);
+		ft_lstclear(&lexer_data.token_list, delete_content);
 		free(line);
 	}
 	free(line);

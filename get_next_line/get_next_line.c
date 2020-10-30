@@ -6,11 +6,13 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 14:00:08 by tblanker      #+#    #+#                 */
-/*   Updated: 2020/10/27 12:40:03 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/10/30 12:14:48 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+#include <stdio.h>
 
 static char	*cut_to_newline(char *buffer, char *line)
 {
@@ -68,7 +70,8 @@ static	int	newline_found(char **line, char **buffer)
 	temp = cut_from_newline(*buffer);
 	if (!temp || !(*line))
 		return (-1);
-	*buffer = temp;
+	*buffer = gnl_strdup(temp);
+	free(temp);
 	return (1);
 }
 
