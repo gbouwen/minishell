@@ -6,17 +6,16 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/30 00:31:02 by tiemen        ########   odam.nl          #
+#    Updated: 2020/10/30 14:25:03 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = 
 SOURCE_C =	main.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
-			lexer/state_check.c \
 			lexer/state.c \
 			lexer/token.c \
 			parser/parser.c \

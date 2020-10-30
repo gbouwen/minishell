@@ -1,1 +1,7 @@
 
+		pathname = malloc(sizeof(t_pathname));
+		pathname->data = ft_strdup((*token)->content);
+		pathname->type = PATHNAME;
+		pathname->right = NULL;
+		pathname->left = NULL;
+		(*token) = (*token)->next;
