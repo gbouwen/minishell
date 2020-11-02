@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/30 11:57:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/30 16:27:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	main(void)
 	{
 		ft_printf("> ");
 		get_next_line(0, &line);
-		if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
-			break ;
 		lexer(&lexer_data, line, ft_strlen(line));
 		temp = lexer_data.token_list;
 		while (temp != NULL)

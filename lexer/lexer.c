@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/30 10:50:29 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/02 13:55:51 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void		lexer(t_lexer *lexer_data, char *line, int length)
 	while (line[i] != '\0')
 	{
 		lexer_data->char_type = get_char_type(line[i]);
-		if (lexer_data->state == GENERAL)
-			state_general(lexer_data, &token, line, i);
-		else
-			state_quotes(lexer_data, &token, line[i]);
+		state_check(lexer_data, &token, line, i);
 		i++;
 	}
 	if (lexer_data->state != GENERAL)
