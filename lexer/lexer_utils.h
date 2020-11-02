@@ -6,14 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:52:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/29 14:29:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/10/30 13:12:53 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_UTILS_H
 # define LEXER_UTILS_H
 
-# include "lexer.h"
 # include "../minishell.h"
 
 # define CHAR_GENERAL 1
