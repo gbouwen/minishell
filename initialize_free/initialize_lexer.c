@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cd.c                                               :+:    :+:            */
+/*   initialize_lexer.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:53:35 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:40:00 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 15:45:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "initialize.h"
 
-void	builtin_cd(t_node *node)
+void	initialize_lexer(t_lexer *lexer)
 {
-	int	ret;
-
-	if (node->right)
-		node = node->right;
-	ret = chdir(node->data);
-	if (ret == -1)
-		ft_printf("error: could not change directory\n");
+	lexer->token_list = NULL;
+	lexer->char_type = 0;
+	lexer->state = 0;
+	lexer->line_length = 0;
 }

@@ -6,13 +6,13 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/03 13:36:31 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/03 15:45:48 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-static void	init_lexer(t_lexer *lexer_data, int length)
+static void	set_lexer(t_lexer *lexer_data, int length)
 {
 	lexer_data->state = GENERAL;
 	lexer_data->token_list = malloc(sizeof(t_list));
@@ -26,7 +26,7 @@ void		lexer(t_lexer *lexer_data, char *line, int length)
 	t_list		*token;
 	int			i;
 
-	init_lexer(lexer_data, length);
+	set_lexer(lexer_data, length);
 	token = lexer_data->token_list;
 	init_token(token, lexer_data->line_length);
 	i = 0;

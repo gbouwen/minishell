@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cd.c                                               :+:    :+:            */
+/*   executer.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:53:35 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 16:32:27 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef EXECUTER_H
+# define EXECUTER_H
 
-void	builtin_cd(t_node *node)
-{
-	int	ret;
+# include "../minishell.h"
+# include "../struct.h"
+# include "../parser/parser.h"
+# include "../builtins/builtins.h"
 
-	if (node->right)
-		node = node->right;
-	ret = chdir(node->data);
-	if (ret == -1)
-		ft_printf("error: could not change directory\n");
-}
+int		executer(t_data data);
+void	commands(t_node *tree);
+
+#endif

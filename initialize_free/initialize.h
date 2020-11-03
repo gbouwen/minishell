@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cd.c                                               :+:    :+:            */
+/*   initialize.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:53:35 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:37:40 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 16:43:40 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef INITIALIZE_H
+# define INITIALIZE_H
 
-void	builtin_cd(t_node *node)
-{
-	int	ret;
+# include "../minishell.h"
+# include "../struct.h"
+# include "../lexer/lexer_utils.h"
+# include "../parser/parser.h"
 
-	if (node->right)
-		node = node->right;
-	ret = chdir(node->data);
-	if (ret == -1)
-		ft_printf("error: could not change directory\n");
-}
+void	initialize_data(t_data *data);
+void	initialize_lexer(t_lexer *lexer);
+
+#endif

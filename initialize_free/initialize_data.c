@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cd.c                                               :+:    :+:            */
+/*   initialize_data.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:53:35 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:35:21 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 16:43:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "initialize.h"
 
-void	builtin_cd(t_node *node)
+void	initialize_data(t_data *data)
 {
-	int	ret;
-
-	if (node->right)
-		node = node->right;
-	ret = chdir(node->data);
-	if (ret == -1)
-		ft_printf("error: could not change directory\n");
+	data->cmdline = NULL;
+	data->read_val = 0;
+	initialize_lexer(&data->lexer);
 }

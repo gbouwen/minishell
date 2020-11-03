@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/03 12:33:01 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/03 16:43:16 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,21 @@ NAME = minishell
 CC = gcc
 FLAGS =
 SOURCE_C =	main.c \
-			read_commandline/read_commandline.c \
+			read_cmdline/read_cmdline.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
 			lexer/state.c \
 			lexer/token.c \
 			parser/parser.c \
+			executer/executer.c \
+			executer/commands.c \
+			initialize_free/initialize_data.c \
+			initialize_free/initialize_lexer.c \
+			initialize_free/free_list_content.c \
+			builtins/echo.c \
+			builtins/pwd.c \
+			builtins/cd.c \
+			builtins/exit.c \
 			error/error.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)

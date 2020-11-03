@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cd.c                                               :+:    :+:            */
+/*   struct.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:53:35 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 15:57:16 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-void	builtin_cd(t_node *node)
+# include "minishell.h"
+
+typedef struct	s_data
 {
-	int	ret;
+	char		*cmdline;
+	int			read_val;
+	t_lexer		lexer;
+	t_node		*binary_tree;
+}				t_data;
 
-	if (node->right)
-		node = node->right;
-	ret = chdir(node->data);
-	if (ret == -1)
-		ft_printf("error: could not change directory\n");
-}
+#endif

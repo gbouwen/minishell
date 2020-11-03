@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cd.c                                               :+:    :+:            */
+/*   commands.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:53:35 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 16:55:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "executer.h"
 
-void	builtin_cd(t_node *node)
+void	commands(t_node *tree)
 {
-	int	ret;
-
-	if (node->right)
-		node = node->right;
-	ret = chdir(node->data);
-	if (ret == -1)
-		ft_printf("error: could not change directory\n");
+	if (ft_strncmp(tree->data, "echo", 4) == 0)
+		builtin_echo(tree);
+	if (ft_strncmp(tree->data, "pwd", 3) == 0)
+		builtin_pwd(tree);
+	if (ft_strncmp(tree->data, "cd", 2) == 0)
+		builtin_cd(tree);
+	if (ft_strncmp(tree->data, "exit", 4) == 0)
+		builtin_exit(tree);
 }

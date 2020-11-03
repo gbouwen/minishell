@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/03 13:38:59 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/03 16:28:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int		match(int type, char **str)
 	}
 	return (0);
 }
-// <command>		==	<simple command> '<' <filename> 
+// <command>		==	<simple command> '<' <filename>
 // 					OR	<simple command> '>' <filename>
 // 					OR	<simple command>
 t_node	*command()
-{	
+{
 	t_node	*cmd_node;
 	t_list	*saved_token;
-	
+
 	saved_token = current_token;
 	cmd_node = command_greater();
 	if (cmd_node != NULL)
@@ -146,23 +146,23 @@ t_node	*simple_command_args()
 void	print_tree_utils(t_node *root, int space)
 {
    int count = 4;
-    if (root == NULL)  
-        return;  
-   
-    space += count;  
-  
-    // Process right child first  
+    if (root == NULL)
+        return;
+
+    space += count;
+
+    // Process right child first
 	   print_tree_utils(root->left, space);
-  
-    // Print current node after space  
-    // count  
+
+    // Print current node after space
+    // count
     printf("\n");
-    for (int i = count; i < space; i++)  
+    for (int i = count; i < space; i++)
        	printf(" ");
-	printf("%s, %d\n", root->data, root->type); 
-  
+	printf("%s, %d\n", root->data, root->type);
+
     // Process left child
-    print_tree_utils(root->right, space); 
+    print_tree_utils(root->right, space);
 }
 
 void	print_tree(t_node *root)
@@ -179,7 +179,7 @@ t_node *parser(t_lexer *lexer_data)
 	nodes = &node;
 	node = command();
 	node = *nodes;
-	print_tree(node);
+//	print_tree(node);
     // printf("node type %d\n", (*nodes)->type);
 	// printf("node right = %d, %s\n", (*nodes)->right->type, (*nodes)->right->data);
 	// printf("node right = %d, %s\n", (*nodes)->right->right->type, (*nodes)->right->right->data);

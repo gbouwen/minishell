@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "read_commandline.h"
+#include "read_cmdline.h"
 
 static char	*first_read(char *buff)
 {

@@ -6,19 +6,21 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:31:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/02 17:09:40 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/03 16:56:43 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include "../parser/parser.h"
+
 void	builtin_echo(t_node *command);
 void	builtin_cd(t_node *command);
-void	builtin_pwd(void);
-//void	builtin_export(void);
-//void	builtin_unset(void);
-//void	builtin_env(void);
-void	builtin_exit(void);
+void	builtin_pwd(t_node *command);
+//void	builtin_export(t_node *command);
+//void	builtin_unset(t_node *command);
+//void	builtin_env(t_node *command);
+void	builtin_exit(t_node *command);
 
 #endif
