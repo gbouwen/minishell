@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/03 12:52:16 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/03 13:38:59 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int		match(int type, char **str)
 	}
 	return (0);
 }
-
+// <command>		==	<simple command> '<' <filename> 
+// 					OR	<simple command> '>' <filename>
+// 					OR	<simple command>
 t_node	*command()
 {	
 	t_node	*cmd_node;

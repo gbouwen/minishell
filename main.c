@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/03 12:34:48 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/03 13:36:59 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(void)
 			temp = temp->next;
 		}
 		printf("%s\n", line);
-//		parser(&lexer_data);
+		parser(&lexer_data);
 		ft_lstclear(&lexer_data.token_list, delete_content);
 		free(line);
 	}
