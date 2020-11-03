@@ -6,14 +6,15 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/30 14:25:03 by tiemen        ########   odam.nl          #
+#    Updated: 2020/11/03 12:33:01 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = 
+FLAGS =
 SOURCE_C =	main.c \
+			read_commandline/read_commandline.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
 			lexer/state.c \

@@ -12,8 +12,6 @@
 
 #include "get_next_line.h"
 
-#include <stdio.h>
-
 static char	*cut_to_newline(char *buffer, char *line)
 {
 	int i;

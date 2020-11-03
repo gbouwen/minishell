@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   pwd.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 12:33:16 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/02 16:36:34 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/02 16:48:33 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "builtins.h"
 
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "ft_printf/libftprintf.h"
-# include "read_commandline/read_commandline.h"
-# include "lexer/lexer_utils.h"
-# include "lexer/lexer.h"
-# include "error/error.h"
-# include "parser/parser.h"
+void	builtin_pwd(void)
+{
+	char	*buff;
 
-# include <stdio.h> //
-
-#endif
+	getcwd(buff, 1000);
+	ft_putstr_fd(buff, fd);
+	ft_putstr_fd("\n", fd);
+}

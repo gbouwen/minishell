@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   read_commandline.h                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 12:33:16 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 10:36:21 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 12:32:24 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef READ_COMMANDLINE_H
+# define READ_COMMANDLINE_H
 
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "ft_printf/libftprintf.h"
-# include "read_commandline/read_commandline.h"
-# include "lexer/lexer_utils.h"
-# include "lexer/lexer.h"
-# include "error/error.h"
-# include "parser/parser.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
 
-# include <stdio.h> //
+int	read_commandline(char **line);
 
 #endif

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   builtins.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 12:33:16 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/02 15:31:41 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/02 17:09:40 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "ft_printf/libftprintf.h"
-# include "read_commandline/read_commandline.h"
-# include "lexer/lexer_utils.h"
-# include "lexer/lexer.h"
-# include "error/error.h"
-# include "parser/parser.h"
-
-# include <stdio.h> //
+void	builtin_echo(t_node *command);
+void	builtin_cd(t_node *command);
+void	builtin_pwd(void);
+//void	builtin_export(void);
+//void	builtin_unset(void);
+//void	builtin_env(void);
+void	builtin_exit(void);
 
 #endif

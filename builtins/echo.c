@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   echo.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 12:33:16 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/02 16:47:29 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "builtins.h"
 
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "ft_printf/libftprintf.h"
-# include "read_commandline/read_commandline.h"
-# include "lexer/lexer_utils.h"
-# include "lexer/lexer.h"
-# include "error/error.h"
-# include "parser/parser.h"
+void	builtin_echo(t_node *node)
+{
+	int	fd;
+	int	newline;
 
-# include <stdio.h> //
-
-#endif
+	fd = 1;
+	newline = 1;
+	if (ft_strncmp(node->left.data, "-n", 2) == 0)
+	{
+		newline = 0;
+		node = node->left;
+	}
+	while (node->left)
+	{
+		node = node->left;
+		ft_putstr_fd(node->data, fd);
+	}
+	if (newline)
+		ft_putstr_fd("\n", fd);
+}
