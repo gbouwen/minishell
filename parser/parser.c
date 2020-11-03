@@ -6,11 +6,13 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/02 14:01:22 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/03 12:52:16 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+t_list	*current_token = NULL;
 
 void	attach_tree_node(t_node *attach, int type, t_node *left, t_node *right)
 {
@@ -19,124 +21,167 @@ void	attach_tree_node(t_node *attach, int type, t_node *left, t_node *right)
 	attach->type = type;
 }
 
-t_node *general_token_2(t_list **token)
+void	delete_tree(t_node *node)
 {
-	t_node *node;
-
-	(*token) = (*token)->next;
-	if ((*token) && (*token)->type == TOKEN)
-	{
-		node = malloc(sizeof(t_node));
-		node->data = ft_strdup((*token)->content);
-		attach_tree_node(node, ARGUMENT, general_token_2(token), NULL);
-		return (node);
-	}
-	else
-		return (NULL);
-	return (NULL);
-	
+	if (node == NULL)
+		return;
+	if (node->data)
+		free(node->data);
+	delete_tree(node->left);
+	delete_tree(node->right);
 }
 
-t_node	*simple_command(t_list **token)
+int		match(int type, char **str)
 {
-	t_node *pathname;
+	if (!(current_token))
+		return (0);
+	if (current_token->type == type)
+	{
+		if (current_token->type == TOKEN)
+			*str = ft_strdup(current_token->content);
+		current_token = current_token->next;
+		return (1);
+	}
+	return (0);
+}
+
+t_node	*command()
+{	
+	t_node	*cmd_node;
+	t_list	*saved_token;
+	
+	saved_token = current_token;
+	cmd_node = command_greater();
+	if (cmd_node != NULL)
+		return (cmd_node);
+	current_token = saved_token;
+	cmd_node = command_lesser();
+	if (cmd_node != NULL)
+		return (cmd_node);
+	current_token = saved_token;
+	cmd_node = simple_command();
+	if (current_token->type != 0)
+		return (NULL);
+	if (cmd_node != NULL)
+		return (cmd_node);
+	return (NULL);
+}
+
+t_node	*command_lesser()
+{
 	char	*str;
-	t_node *arguments;
+	t_node	*filename;
+	t_node	*cmd_node;
 
-	
-	if ((*token)->type != TOKEN)
+	cmd_node = simple_command();
+	if (!match(CHAR_LESSER, NULL))
 		return (NULL);
-	str = ft_strdup((*token)->content);
-	arguments = general_token_2(token);
-	pathname = malloc(sizeof(t_node));
-	pathname->data = str;
-	attach_tree_node(pathname, PATHNAME, arguments, NULL);
-	return (pathname);
-}
-
-t_node *command(t_list **token)
-{
-	t_node *command;
-	t_node *filename;
-	
-	command = simple_command(token);
-	if ((*token) && (*token)->type == CHAR_GREATER)
+	if (!match(TOKEN, &str))
 	{
-		if (!((*token)->next) || (*token)->next->type != TOKEN)
-			return (NULL);
-		(*token) = (*token)->next;
-		filename = malloc(sizeof(t_node));
-		filename->data = ft_strdup((*token)->content);
-		attach_tree_node(filename, FILE_IN, command, NULL);
-		(*token) = (*token)->next;
-		return (filename);
+		delete_tree(cmd_node);
+		return (NULL);
 	}
-	if ((*token) && (*token)->type == CHAR_LESSER)
+	filename = malloc(sizeof(t_node));
+	filename->data = str;
+	attach_tree_node(filename, FILE_IN, NULL, cmd_node);
+	if (current_token->type == 0)
+		return (filename);
+	return (command());
+}
+
+t_node	*command_greater()
+{
+	char	*str;
+	t_node	*filename;
+	t_node	*cmd_node;
+
+	cmd_node = simple_command();
+	if (!match(CHAR_GREATER, NULL))
+		return (NULL);
+	if (!match(TOKEN, &str))
 	{
-		if (!((*token)->next) || (*token)->next->type != TOKEN)
-			return (NULL);
-		(*token) = (*token)->next;
-		filename = malloc(sizeof(t_node));
-		filename->data = ft_strdup((*token)->content);
-		attach_tree_node(filename, FILE_OUT, command, NULL);
-		(*token) = (*token)->next;
-		return (filename);
+		delete_tree(cmd_node);
+		return (NULL);
 	}
-	return(command);
+	filename = malloc(sizeof(t_node));
+	filename->data = str;
+	attach_tree_node(filename, FILE_OUT, NULL, cmd_node);
+	if (current_token->type == 0)
+		return (filename);
+	return (command());
 }
 
-t_node *task_function_1(t_list **token)
+t_node *simple_command()
 {
-	t_node *result;
-	t_node *task;
-	t_node *cmd;
+	t_node		*simple_cmd;
+	t_node		*arguments;
+	char		*str;
 
-	cmd = command(token);
-	if (cmd == NULL)
+	if (!match(TOKEN, &str))
 		return (NULL);
-	if ((*token) && (*token)->type != CHAR_PIPE)
-		return (NULL);
-	task = validate_tasks(token);
-	if (task == NULL)
-		return (NULL);
-	(*token) = (*token)->next;
-	result = malloc(sizeof(t_node));
-	result->type = PIPE;
-	result->left = cmd;
-	result->right = task;
-	return (result);
+	arguments = simple_command_args();
+	simple_cmd = malloc(sizeof(t_node));
+	attach_tree_node(simple_cmd, PATHNAME, NULL, arguments);
+	simple_cmd->data = str;
+	return (simple_cmd);
 }
 
-t_node *validate_tasks(t_list **token)
+t_node	*simple_command_args()
 {
-	t_node *node;
+	t_node	*list_args;
+	t_node	*argument;
+	char	*str;
 
-	node = task_function_1(token);
-	if (node != NULL)
-		return (node);
-	node = command(token);
-	if (node != NULL)
-		return (node);
-	return (NULL);
+	if (!match(TOKEN, &str))
+		return(NULL);
+	list_args = simple_command_args();
+	argument = malloc(sizeof(t_node));
+	argument->data = str;
+	attach_tree_node(argument, ARGUMENT, NULL, list_args);
+	return (argument);
+}
+
+void	print_tree_utils(t_node *root, int space)
+{
+   int count = 4;
+    if (root == NULL)  
+        return;  
+   
+    space += count;  
+  
+    // Process right child first  
+	   print_tree_utils(root->left, space);
+  
+    // Print current node after space  
+    // count  
+    printf("\n");
+    for (int i = count; i < space; i++)  
+       	printf(" ");
+	printf("%s, %d\n", root->data, root->type); 
+  
+    // Process left child
+    print_tree_utils(root->right, space); 
+}
+
+void	print_tree(t_node *root)
+{
+	print_tree_utils(root, 0);
 }
 
 t_node *parser(t_lexer *lexer_data)
 {
-	t_list	*token;
+	t_node	**nodes;
 	t_node	*node;
 
-	token = lexer_data->token_list;
-	node = validate_tasks(&token);
-	
-	// while (node->left)
-	// {
-	// 	printf("%s\n", node->data);
-	// 	node = node->left;
-	// // }
-	 	// printf("node : %s, type: %d\n", node->data, node->type);
-		// printf("node : %s, type: %d\n", node->left->data, node->type);
-		// printf("node : %s, type: %d\n", node->left->left->data, node->type);
+	current_token = lexer_data->token_list;
+	nodes = &node;
+	node = command();
+	node = *nodes;
+	print_tree(node);
+    // printf("node type %d\n", (*nodes)->type);
+	// printf("node right = %d, %s\n", (*nodes)->right->type, (*nodes)->right->data);
+	// printf("node right = %d, %s\n", (*nodes)->right->right->type, (*nodes)->right->right->data);
 	if (node == NULL)
 		ft_printf("Parser error\n");
-	return (node);
+	return (*nodes);
 }
