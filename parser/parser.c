@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/03 13:38:59 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/03 17:58:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int		match(int type, char **str)
 	}
 	return (0);
 }
-// <command>		==	<simple command> '<' <filename> 
-// 					OR	<simple command> '>' <filename>
+// <command>		==	<command> '<' <filename> 
+// 					OR	<command> '>' <filename>
 // 					OR	<simple command>
 t_node	*command()
 {	
@@ -69,6 +69,42 @@ t_node	*command()
 	return (NULL);
 }
 
+t_node	*command_greater()
+{
+	char	*str;
+	t_node	*filename;
+	t_node	*cmd_node;
+	t_node	*error_node;
+
+	cmd_node = simple_command();
+	if (!match(CHAR_GREATER, NULL))
+		return (NULL);
+	if (current_token->type == 0)
+	{
+		error_node = malloc(sizeof(t_node));
+		error_node->left = NULL;
+		error_node->right = NULL;
+		error_node->type = 9;
+		return (error_node);
+	}
+	if (!match(TOKEN, &str))
+	{
+		delete_tree(cmd_node);
+		return (NULL);
+	}
+	filename = malloc(sizeof(t_node));
+	filename->data = str;
+	attach_tree_node(filename, FILE_OUT, command(), cmd_node);
+	error_node = filename;
+	while (error_node)
+	{
+		if (error_node->type == 9)
+			return (NULL);
+		error_node = error_node->left;
+	}
+	return (filename);
+}
+
 t_node	*command_lesser()
 {
 	char	*str;
@@ -86,30 +122,6 @@ t_node	*command_lesser()
 	filename = malloc(sizeof(t_node));
 	filename->data = str;
 	attach_tree_node(filename, FILE_IN, NULL, cmd_node);
-	if (current_token->type == 0)
-		return (filename);
-	return (command());
-}
-
-t_node	*command_greater()
-{
-	char	*str;
-	t_node	*filename;
-	t_node	*cmd_node;
-
-	cmd_node = simple_command();
-	if (!match(CHAR_GREATER, NULL))
-		return (NULL);
-	if (!match(TOKEN, &str))
-	{
-		delete_tree(cmd_node);
-		return (NULL);
-	}
-	filename = malloc(sizeof(t_node));
-	filename->data = str;
-	attach_tree_node(filename, FILE_OUT, NULL, cmd_node);
-	if (current_token->type == 0)
-		return (filename);
 	return (command());
 }
 
@@ -145,23 +157,15 @@ t_node	*simple_command_args()
 
 void	print_tree_utils(t_node *root, int space)
 {
-   int count = 4;
+   int count = 2;
     if (root == NULL)  
         return;  
-   
     space += count;  
-  
-    // Process right child first  
-	   print_tree_utils(root->left, space);
-  
-    // Print current node after space  
-    // count  
+	print_tree_utils(root->left, space);
     printf("\n");
     for (int i = count; i < space; i++)  
        	printf(" ");
 	printf("%s, %d\n", root->data, root->type); 
-  
-    // Process left child
     print_tree_utils(root->right, space); 
 }
 
@@ -183,7 +187,7 @@ t_node *parser(t_lexer *lexer_data)
     // printf("node type %d\n", (*nodes)->type);
 	// printf("node right = %d, %s\n", (*nodes)->right->type, (*nodes)->right->data);
 	// printf("node right = %d, %s\n", (*nodes)->right->right->type, (*nodes)->right->right->data);
-	if (node == NULL)
+	if (node == NULL || node->type == 9)
 		ft_printf("Parser error\n");
 	return (*nodes);
 }
