@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/30 13:16:59 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/03 03:02:57 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void		lexer(t_lexer *lexer_data, char *line, int length)
 			state_quotes(lexer_data, &token, line[i]);
 		i++;
 	}
+	// always adding token of type 0
+	token->next = malloc(sizeof(t_list));
+	token = token->next;
+	init_token(token, 1);
 	if (lexer_data->state != GENERAL)
 		printf("Error executing command\n");
 }
