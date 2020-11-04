@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   builtins.h                                         :+:    :+:            */
+/*   initialize_lexer.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:31:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/04 10:57:36 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:40:00 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 15:45:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "initialize.h"
 
-# include "../parser/parser.h"
-
-void	builtin_echo(t_node *command);
-void	builtin_cd(t_node *command);
-void	builtin_pwd(t_node *command);
-//void	builtin_export(t_node *command);
-//void	builtin_unset(t_node *command);
-void	builtin_env(t_node *command, char **envp);
-void	builtin_exit(t_node *command);
-
-#endif
+void	initialize_lexer(t_lexer *lexer)
+{
+	lexer->token_list = NULL;
+	lexer->char_type = 0;
+	lexer->state = 0;
+	lexer->line_length = 0;
+}

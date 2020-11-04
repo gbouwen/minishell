@@ -6,14 +6,14 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 13:24:33 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/04 14:16:14 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "../minishell.h"
+# include "../minishell.h"
 
 # define ARGUMENT 1
 # define PATHNAME 2
@@ -21,7 +21,6 @@
 # define FILE_IN 4
 # define PIPE 5
 # define NODE_SEQUENCE 6
-
 
 typedef struct bt_node
 {
@@ -48,5 +47,6 @@ t_node	*set_error_node(t_list *error_token);
 void	print_tree(t_node *root);
 void	print_tree_utils(t_node *root, int space);
 t_node	*check_parser_error(t_node *root);
+t_node	*parser(t_lexer *lexer_data);
 
 #endif

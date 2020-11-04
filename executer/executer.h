@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   read_commandline.h                                 :+:    :+:            */
+/*   executer.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 10:36:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 12:32:24 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/04 10:55:56 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_COMMANDLINE_H
-# define READ_COMMANDLINE_H
+#ifndef EXECUTER_H
+# define EXECUTER_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
+# include "../minishell.h"
+# include "../struct.h"
+# include "../parser/parser.h"
+# include "../builtins/builtins.h"
 
-int	read_commandline(char **line);
+int		executer(t_data data);
+void	commands(t_data data);
 
 #endif
