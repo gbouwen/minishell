@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/03 12:33:01 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/04 13:28:15 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,11 @@ SOURCE_C =	main.c \
 			lexer/state.c \
 			lexer/token.c \
 			parser/parser.c \
-			error/error.c
+			error/error.c \
+			parser/binary_tree.c \
+			parser/cmd_prod.c \
+			parser/simple_cmd_prod.c \
+			parser/parser_utils.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf

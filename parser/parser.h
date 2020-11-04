@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/03 02:17:30 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/04 13:24:33 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,22 @@ typedef struct bt_node
 	struct bt_node	*left;
 }				t_node;
 
+t_list	*current_token;
 
 t_node	*simple_command_args();
 t_node 	*simple_command();
 t_node	*command_greater();
 t_node	*command_lesser();
 t_node	*command();
-// t_node *parser(t_lexer *lexer_data);
-// t_node *validate_tasks(t_list **token);
-// t_node *argument_tokens(t_list **token);
-// t_node *command(t_list **token);
+
+int		match(int type, char **str);
+
+void	attach_tree_node(t_node *attach, int type, t_node *left,
+						t_node *right);
+void	delete_tree(t_node *node);
+t_node	*set_error_node(t_list *error_token);
+void	print_tree(t_node *root);
+void	print_tree_utils(t_node *root, int space);
+t_node	*check_parser_error(t_node *root);
 
 #endif
