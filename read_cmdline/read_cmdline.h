@@ -17,6 +17,6 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 
-int	read_commandline(char **line);
+int	read_cmdline(char **line);
 
 #endif
