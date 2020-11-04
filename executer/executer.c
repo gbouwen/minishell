@@ -19,7 +19,7 @@ int	executer(t_data data)
 	data.read_val = read_cmdline(&data.cmdline);
 	if (data.read_val == -1)
 		return (-1);
-	lexer(&data.lexer, data.cmdline, ft_strlen(data.cmdline));
+	lexer(&data.lexer, data.cmdline);
    /* temp = data.lexer.token_list; //*/
 	/*while (temp != NULL) //*/
 	/*{ //*/
