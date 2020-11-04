@@ -6,14 +6,15 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/04 10:56:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/04 16:36:29 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "minishell.h"
+# include "lexer/lexer_utils.h"
+# include "parser/parser.h"
 
 typedef struct	s_data
 {

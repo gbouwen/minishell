@@ -6,14 +6,16 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:26:26 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 13:39:52 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/04 16:33:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "../minishell.h"
+# include <stdlib.h>
+# include "lexer_utils.h"
+# include "../initialize_free/free.h"
 
 void	lexer(t_lexer *lexer, char *line);
 

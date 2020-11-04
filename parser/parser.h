@@ -6,12 +6,18 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 15:59:14 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/04 16:44:08 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+# include <stdio.h> //
+# include <stdlib.h>
+# include "../libft/libft.h"
+# include "../lexer/lexer_utils.h"
+# include "../ft_printf/libftprintf.h"
 
 typedef struct s_node
 {
@@ -20,8 +26,6 @@ typedef struct s_node
 	struct s_node	*right;
 	struct s_node	*left;
 }				t_node;
-
-# include "../minishell.h"
 
 # define ARGUMENT 1
 # define PATHNAME 2

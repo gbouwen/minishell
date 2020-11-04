@@ -6,12 +6,14 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:52:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 15:44:23 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/04 16:32:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_UTILS_H
 # define LEXER_UTILS_H
+
+# include "../libft/libft.h"
 
 typedef	struct		s_lexer
 {
@@ -20,8 +22,6 @@ typedef	struct		s_lexer
 	int		state;
 	int		line_length;
 }					t_lexer;
-
-# include "../minishell.h"
 
 # define CHAR_GENERAL 1
 # define CHAR_SEMICOLON ';'
