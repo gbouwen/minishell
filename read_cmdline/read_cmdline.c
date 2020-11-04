@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 12:35:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/04 11:45:30 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,38 @@ static char	*concat_buff(char *line, char *buff)
 	return (new_line);
 }
 
-int	read_commandline(char **line)
+void		read_fail(char *line)
+{
+	if (line != NULL)
+		free(line);
+	exit(0);
+}
+
+int			read_newline(char **line)
+{
+	*line = ft_strdup("");
+	return (1);
+}
+
+int			read_cmdline(char **line)
 {
 	int		val_read;
 	char	buff[1];
 
 	buff[0] = '\0';
 	val_read = read(0, buff, 1);
-	if (buff[0] == '\n' || val_read < 1)
-	{
-		*line = ft_strdup("");
-		return (1);
-	}
+	if (val_read == -1)
+		read_fail(*line);
+	if (buff[0] == '\n')
+		return (read_newline(line));
 	*line = first_read(buff);
 	if (*line == NULL)
 		return (-1);
 	while (val_read == 1)
 	{
-		read(0, buff, 1);
+		val_read = read(0, buff, 1);
+		if (val_read == -1)
+			read_fail(*line);
 		if (buff[0] == '\n')
 			return (1);
 		*line = concat_buff(*line, buff);
