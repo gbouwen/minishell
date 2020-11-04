@@ -6,12 +6,20 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 14:16:14 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/04 15:59:14 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+typedef struct s_node
+{
+	int				type;
+	char			*data;
+	struct s_node	*right;
+	struct s_node	*left;
+}				t_node;
 
 # include "../minishell.h"
 
@@ -21,14 +29,6 @@
 # define FILE_IN 4
 # define PIPE 5
 # define NODE_SEQUENCE 6
-
-typedef struct bt_node
-{
-	int				type;
-	char			*data;
-	struct bt_node	*right;
-	struct bt_node	*left;
-}				t_node;
 
 t_list	*current_token;
 
