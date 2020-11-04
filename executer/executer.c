@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:44:12 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/04 11:15:54 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	executer(t_data data)
 {
 //	t_list	*temp; //
 
-	data.read_val = read_commandline(&data.cmdline);
+	data.read_val = read_cmdline(&data.cmdline);
 	if (data.read_val == -1)
 		return (-1);
 	lexer(&data.lexer, data.cmdline, ft_strlen(data.cmdline));
@@ -27,9 +27,9 @@ int	executer(t_data data)
 		/*temp = temp->next; //*/
 	/*} //*/
 	/*printf("%s\n", data.cmdline); //*/
-	data.binary_tree = parser(&data.lexer);
-	if (data.binary_tree != NULL)
-		commands(data.binary_tree);
+	data.tree = parser(&data.lexer);
+	if (data.tree != NULL)
+		commands(data);
 	ft_lstclear(&data.lexer.token_list, free_list_content);
 	free(data.cmdline);
 	return (1);

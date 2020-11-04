@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/03 16:43:16 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/04 10:55:31 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,9 @@ SOURCE_C =	main.c \
 			initialize_free/initialize_lexer.c \
 			initialize_free/free_list_content.c \
 			builtins/echo.c \
-			builtins/pwd.c \
 			builtins/cd.c \
+			builtins/pwd.c \
+			builtins/env.c \
 			builtins/exit.c \
 			error/error.c
 

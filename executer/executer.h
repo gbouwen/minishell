@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:32:27 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/04 10:55:56 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 # include "../builtins/builtins.h"
 
 int		executer(t_data data);
-void	commands(t_node *tree);
+void	commands(t_data data);
 
 #endif

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   builtins.h                                         :+:    :+:            */
+/*   env.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:31:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/04 10:57:36 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/04 10:48:45 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/04 10:57:46 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "builtins.h"
 
-# include "../parser/parser.h"
+void	builtin_env(t_node *command, char **envp)
+{
+	int	i;
 
-void	builtin_echo(t_node *command);
-void	builtin_cd(t_node *command);
-void	builtin_pwd(t_node *command);
-//void	builtin_export(t_node *command);
-//void	builtin_unset(t_node *command);
-void	builtin_env(t_node *command, char **envp);
-void	builtin_exit(t_node *command);
-
-#endif
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		ft_printf("%s\n", envp[i]);
+		i++;
+	}
+}
