@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   command_productions.c                              :+:    :+:            */
+/*   cmd_prod.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:25:43 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 13:26:11 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/05 17:41:05 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,16 @@ t_node	*command()
 	t_node	*cmd_node;
 	t_list	*saved_token;
 	
-	saved_token = current_token;
+	saved_token = g_current_tok;
 	cmd_node = command_greater();
 	if (cmd_node != NULL)
 		return (cmd_node);
-	current_token = saved_token;
+	g_current_tok = saved_token;
 	cmd_node = command_lesser();
 	if (cmd_node != NULL)
 		return (cmd_node);
-	current_token = saved_token;
+	g_current_tok = saved_token;
 	cmd_node = simple_command();
-	if (current_token->type != 0)
-		return (NULL);
 	if (cmd_node != NULL)
 		return (cmd_node);
 	return (NULL);
@@ -42,10 +40,10 @@ t_node	*command_greater()
 	t_list	*error_token;
 
 	cmd_node = simple_command();
-	error_token = current_token;
+	error_token = g_current_tok;
 	if (!match(CHAR_GREATER, NULL))
 		return (NULL);
-	if (current_token->type == 0)
+	if (g_current_tok->type == 0)
 		return (set_error_node(error_token));
 	if (!match(TOKEN, &str))
 	{
@@ -66,10 +64,10 @@ t_node	*command_lesser()
 	t_list	*error_token;
 
 	cmd_node = simple_command();
-	error_token = current_token;
+	error_token = g_current_tok;
 	if (!match(CHAR_LESSER, NULL))
 		return (NULL);
-	if (current_token->type == 0)
+	if (g_current_tok->type == 0)
 		return (set_error_node(error_token));
 	if (!match(TOKEN, &str))
 	{

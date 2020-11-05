@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/04 15:58:22 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/05 17:42:25 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SOURCE_C =	main.c \
 			parser/binary_tree.c \
 			parser/cmd_prod.c \
 			parser/simple_cmd_prod.c \
+			parser/task_prod.c \
 			parser/parser_utils.c \
 			executer/executer.c \
 			executer/commands.c \
@@ -34,8 +35,7 @@ SOURCE_C =	main.c \
 			builtins/cd.c \
 			builtins/pwd.c \
 			builtins/env.c \
-			builtins/exit.c \
-			error/error.c
+			builtins/exit.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf

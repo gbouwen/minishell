@@ -6,35 +6,40 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 13:23:36 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/05 17:41:05 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*check_parser_error(t_node *root)
+int		*check_parser_error(t_node *root)
 {
-	t_node	*error_node;
+	int check;
 	
-	error_node = root;
-	while (error_node)
-	{	
-		if (error_node->type == 9)
-			return (error_node);
-		error_node = error_node->left;
+	check = 1;
+	if (root)
+	{
+		if (root->type == 9)
+			return (0);
+		check = check_parser_error(root->left);
+		if (check == 0)
+			return (0);
+		check = check_parser_error(root->right);
+		if (check == 0)
+			return (0);
 	}
-	return (NULL);
+	return (check);
 }
 
 int		match(int type, char **str)
 {
-	if (!(current_token))
+	if (!(g_current_tok))
 		return (0);
-	if (current_token->type == type)
+	if (g_current_tok->type == type)
 	{
-		if (current_token->type == TOKEN)
-			*str = ft_strdup(current_token->content);
-		current_token = current_token->next;
+		if (g_current_tok->type == TOKEN)
+			*str = ft_strdup(g_current_tok->content);
+		g_current_tok = g_current_tok->next;
 		return (1);
 	}
 	return (0);
@@ -42,7 +47,7 @@ int		match(int type, char **str)
 
 void	print_tree_utils(t_node *root, int space)
 {
-   int count = 2;
+   int count = 5;
     if (root == NULL)  
         return;  
     space += count;  

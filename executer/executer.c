@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/04 11:15:54 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/05 17:47:58 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	executer(t_data data)
 	/*} //*/
 	/*printf("%s\n", data.cmdline); //*/
 	data.tree = parser(&data.lexer);
-	if (data.tree != NULL)
-		commands(data);
-	ft_lstclear(&data.lexer.token_list, free_list_content);
-	free(data.cmdline);
+	// if (data.tree != NULL)
+	// 	commands(data);
+	// ft_lstclear(&data.lexer.token_list, free_list_content);
+	// free(data.cmdline);
 	return (1);
 }
