@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/05 16:11:51 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/05 17:36:19 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av, char **envp)
 	while (status == 1)
 	{
 		ft_printf("> ");
-		status = executer(data);
+		status = executer(&data);
 	}
 	return (0);
 }
