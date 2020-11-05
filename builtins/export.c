@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 10:35:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/05 13:00:23 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/05 13:12:39 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_sorted(char **envp, int sorted_indexes[], int len)
 	i = 0;
 	while (i < len)
 	{
-		ft_printf("%s\n", envp[sorted_indexes[i]]);
+		ft_printf("declare -x %s\n", envp[sorted_indexes[i]]);
 		i++;
 	}
 }
@@ -55,14 +55,16 @@ void	sort_and_print(char **envp, int len)
 	int	temp;
 
 	initialize_indexes_array(sorted_indexes, len);
+	i = 0;
 	while (i < len - 1)
 	{
 		min = i;
 		x = i + 1;
 		while (x < len)
 		{
-			if (ft_strncmp(envp[min], envp[x], ft_strlen(envp[min])) > 0)
+			if (ft_strncmp(envp[sorted_indexes[min]], envp[sorted_indexes[x]], ft_strlen(envp[min])) > 0)
 				min = x;
+			x++;
 		}
 		if (min != i)
 		{
@@ -70,6 +72,7 @@ void	sort_and_print(char **envp, int len)
 			sorted_indexes[min] = sorted_indexes[i];
 			sorted_indexes[i] = temp;
 		}
+		i++;
 	}
 	print_sorted(envp, sorted_indexes, len);
 }
