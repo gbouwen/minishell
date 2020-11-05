@@ -6,14 +6,22 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:52:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/30 13:12:53 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/04 16:32:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_UTILS_H
 # define LEXER_UTILS_H
 
-# include "../minishell.h"
+# include "../libft/libft.h"
+
+typedef	struct		s_lexer
+{
+	t_list	*token_list;
+	int		char_type;
+	int		state;
+	int		line_length;
+}					t_lexer;
 
 # define CHAR_GENERAL 1
 # define CHAR_SEMICOLON ';'
@@ -34,14 +42,5 @@ enum
 	IN_QUOTE,
 	IN_DOUBLE_QUOTE,
 };
-
-typedef	struct		s_lexer
-{
-	t_list	*token_list;
-	int		num_tokens;
-	int		char_type;
-	int		state;
-	int		line_length;
-}					t_lexer;
 
 #endif

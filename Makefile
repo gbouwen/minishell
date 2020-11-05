@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/04 13:28:15 by tiemen        ########   odam.nl          #
+#    Updated: 2020/11/04 15:58:22 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 CC = gcc
 FLAGS =
 SOURCE_C =	main.c \
-			read_commandline/read_commandline.c \
+			read_cmdline/read_cmdline.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
 			lexer/state.c \
@@ -24,7 +24,18 @@ SOURCE_C =	main.c \
 			parser/binary_tree.c \
 			parser/cmd_prod.c \
 			parser/simple_cmd_prod.c \
-			parser/parser_utils.c
+			parser/parser_utils.c \
+			executer/executer.c \
+			executer/commands.c \
+			initialize_free/initialize_data.c \
+			initialize_free/initialize_lexer.c \
+			initialize_free/free_list_content.c \
+			builtins/echo.c \
+			builtins/cd.c \
+			builtins/pwd.c \
+			builtins/env.c \
+			builtins/exit.c \
+			error/error.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf

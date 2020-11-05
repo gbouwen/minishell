@@ -6,48 +6,28 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/03 13:36:59 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/04 11:48:43 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	delete_content(void *content)
-{
-	if (content)
-		free(content);
-}
-
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
 	int			status;
-	char		*line;
-	t_lexer		lexer_data;
-	t_list		*temp;
+	t_data		data;
 
-	lexer_data.token_list = NULL;
+	if (ac != 1)
+	{
+		printf("%s doesn't work with arguments.\n", av[1]);
+		return (0);
+	}
 	status = 1;
-	while (status)
+	initialize_data(&data, envp);
+	while (status == 1)
 	{
 		ft_printf("> ");
-		status = read_commandline(&line);
-		if (status == -1)
-		{
-			ft_lstclear(&lexer_data.token_list, delete_content);
-			return (-1);
-		}
-		lexer(&lexer_data, line, ft_strlen(line));
-		temp = lexer_data.token_list;
-		while (temp != NULL)
-		{
-			printf("|| %s, %d ||\n", temp->content, temp->type);
-			temp = temp->next;
-		}
-		printf("%s\n", line);
-		parser(&lexer_data);
-		ft_lstclear(&lexer_data.token_list, delete_content);
-		free(line);
+		status = executer(data);
 	}
-	free(line);
 	return (0);
 }

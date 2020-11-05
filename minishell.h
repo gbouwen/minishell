@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 12:33:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/03 15:56:08 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
 # include "ft_printf/libftprintf.h"
-# include "read_commandline/read_commandline.h"
+# include "read_cmdline/read_cmdline.h"
 # include "lexer/lexer_utils.h"
 # include "lexer/lexer.h"
-# include "error/error.h"
 # include "parser/parser.h"
+# include "error/error.h"
+# include "initialize_free/initialize.h"
+# include "initialize_free/free.h"
+# include "struct.h"
+# include "executer/executer.h"
 
 # include <stdio.h> //
 

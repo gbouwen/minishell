@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   read_commandline.h                                 :+:    :+:            */
+/*   initialize_data.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 10:36:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 12:32:24 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:35:21 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/04 10:47:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_COMMANDLINE_H
-# define READ_COMMANDLINE_H
+#include "initialize.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-
-int	read_commandline(char **line);
-
-#endif
+void	initialize_data(t_data *data, char **envp)
+{
+	data->cmdline = NULL;
+	data->env_variables = envp;
+	data->read_val = 0;
+	initialize_lexer(&data->lexer);
+}
