@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/04 15:58:22 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/05 12:54:27 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SOURCE_C =	main.c \
 			lexer/state.c \
 			lexer/token.c \
 			parser/parser.c \
-			error/error.c \
 			parser/binary_tree.c \
 			parser/cmd_prod.c \
 			parser/simple_cmd_prod.c \
@@ -33,6 +32,7 @@ SOURCE_C =	main.c \
 			builtins/echo.c \
 			builtins/cd.c \
 			builtins/pwd.c \
+			builtins/export.c \
 			builtins/env.c \
 			builtins/exit.c \
 			error/error.c
