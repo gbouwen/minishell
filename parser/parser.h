@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 13:24:33 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/04 14:08:24 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_node 	*simple_command();
 t_node	*command_greater();
 t_node	*command_lesser();
 t_node	*command();
+t_node	*task_pipe();
 
 int		match(int type, char **str);
 
