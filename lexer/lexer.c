@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 13:48:25 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/05 14:32:39 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		lexer(t_lexer *lexer, char *line)
 	token->next = malloc(sizeof(t_list));
 	token = token->next;
 	init_token(lexer, token, line, 1);
+	// has to give multiline error
 	if (lexer->state != GENERAL)
 		printf("Error executing command\n");
 }

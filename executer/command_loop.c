@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/05 11:56:25 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/05 14:25:59 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-void	commands(t_data data)
+void	command_loop(t_data data)
 {
 	if (ft_strncmp(data.tree->data, "echo", 4) == 0)
 		builtin_echo(data.tree);

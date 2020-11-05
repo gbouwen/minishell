@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/05 12:54:27 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/05 16:23:19 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,10 @@ NAME = minishell
 CC = gcc
 FLAGS =
 SOURCE_C =	main.c \
+			initialize_free/initialize_data.c \
+			initialize_free/initialize_lexer.c \
+			initialize_free/free_list_content.c \
+			initialize_free/set_env_variables.c \
 			read_cmdline/read_cmdline.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
@@ -25,14 +29,12 @@ SOURCE_C =	main.c \
 			parser/simple_cmd_prod.c \
 			parser/parser_utils.c \
 			executer/executer.c \
-			executer/commands.c \
-			initialize_free/initialize_data.c \
-			initialize_free/initialize_lexer.c \
-			initialize_free/free_list_content.c \
+			executer/command_loop.c \
 			builtins/echo.c \
 			builtins/cd.c \
 			builtins/pwd.c \
 			builtins/export.c \
+			builtins/export_no_arguments.c \
 			builtins/env.c \
 			builtins/exit.c \
 			error/error.c
