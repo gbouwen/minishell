@@ -13,6 +13,7 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include "../initialize_free/free.h"
 # include "../helper_functions/helper_functions.h"
 # include "../error/error.h"
 # include "../struct.h"

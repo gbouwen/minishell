@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   free_struct_error.c                                :+:    :+:            */
+/*   free_env_variables.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/06 10:52:24 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 16:21:21 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/06 16:19:59 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 16:27:25 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "free.h"
 
-void		free_struct_error(t_data *data)
+void	free_env_variables(char **envp)
 {
-	free(data->cmdline);
-	free_env_variables(data->env_variables);
-	if (data->lexer.token_list != NULL)
-		ft_lstclear(&data->lexer.token_list, free_list_content);
+	int	i;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		free(envp[i]);
+		i++;
+	}
+	free(envp);
 }

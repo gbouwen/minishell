@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 16:17:24 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 16:22:40 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	change_pwd_env(char **envp)
 		{
 			getcwd(buff, 4096);
 			envp[i] = ft_strjoin("PWD=", buff);
+			break ;
 		}
 		i++;
 	}
