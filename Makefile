@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/06 15:05:23 by tiemen        ########   odam.nl          #
+#    Updated: 2020/11/06 15:14:19 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SOURCE_C =	main.c \
 			builtins/export_no_arguments.c \
 			builtins/export_variable.c \
 			builtins/env.c \
-			builtins/exit.c
+			builtins/exit.c \
+			error/error.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf
