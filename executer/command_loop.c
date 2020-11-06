@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:33:17 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 15:46:37 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	command_loop(t_data *data)
 	else if (ft_strncmp(data->tree->content, "pwd", 3) == 0)
 		builtin_pwd(data->tree);
 	else if (ft_strncmp(data->tree->content, "cd", 2) == 0)
-		builtin_cd(data->tree);
+		builtin_cd(data->tree, data->env_variables);
 	else if (ft_strncmp(data->tree->content, "export", 6) == 0)
 		builtin_export(data);
 	/*else if (ft_strncmp(data.tree->content, "unset", 5) == 0)*/
