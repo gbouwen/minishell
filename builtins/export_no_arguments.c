@@ -6,21 +6,11 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:38:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 12:28:41 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 13:01:07 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-static int		get_env_len(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i] != NULL)
-		i++;
-	return (i);
-}
 
 static void	initialize_indexes_array(int *sorted_indexes, int len)
 {
@@ -32,6 +22,18 @@ static void	initialize_indexes_array(int *sorted_indexes, int len)
 		sorted_indexes[i] = i;
 		i++;
 	}
+}
+
+static void	print_value(char *env_variable, int x)
+{
+	ft_putstr_fd("=\"", 1);
+	x++;
+	while (env_variable[x] != '\0')
+	{
+		ft_putchar_fd(env_variable[x], 1);
+		x++;
+	}
+	ft_putstr_fd("\"\n", 1);
 }
 
 static void	print_sorted(char **env, int sorted_indexes[], int len)
@@ -49,14 +51,10 @@ static void	print_sorted(char **env, int sorted_indexes[], int len)
 			ft_putchar_fd(env[sorted_indexes[i]][x], 1);
 			x++;
 		}
-		ft_putstr_fd("=\"", 1);
-		x++;
-		while (env[sorted_indexes[i]][x] != '\0')
-		{
-			ft_putchar_fd(env[sorted_indexes[i]][x], 1);
-			x++;
-		}
-		ft_putstr_fd("\"\n", 1);
+		if (env[sorted_indexes[i]][x] == '=')
+			print_value(env[sorted_indexes[i]], x);
+		else
+			ft_putstr_fd("\n", 1);
 		i++;
 	}
 }

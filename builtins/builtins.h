@@ -6,13 +6,14 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:31:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/05 16:50:50 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 12:59:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include "../helper_functions/helper_functions.h"
 # include "../error/error.h"
 # include "../struct.h"
 # include "../parser/parser.h"

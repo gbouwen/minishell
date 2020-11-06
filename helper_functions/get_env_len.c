@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   initialize.h                                       :+:    :+:            */
+/*   get_env_len.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 15:37:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 12:59:26 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/06 12:57:25 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 12:57:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INITIALIZE_H
-# define INITIALIZE_H
+#include "helper_functions.h"
 
-# include "../helper_functions/helper_functions.h"
-# include "../struct.h"
-# include "../error/error.h"
+int	get_env_len(char **env)
+{
+	int	i;
 
-void	initialize_data(t_data *data, char **envp);
-void	set_env_variables(t_data *data, char **envp);
-void	initialize_lexer(t_lexer *lexer);
-
-#endif
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	return (i);
+}
