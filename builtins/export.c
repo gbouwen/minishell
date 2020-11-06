@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   free.h                                             :+:    :+:            */
+/*   export.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 15:37:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 10:54:56 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/05 10:35:41 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/05 17:36:18 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#include "builtins.h"
 
-# include "../struct.h"
+void	builtin_export(t_data *data)
+{
+	int	len;
 
-void	free_list_content(void *content);
-void	free_struct_error(t_data *data);
-
-#endif
+	if (!data->tree->right)
+		builtin_export_no_arguments(data->env_variables);
+	else
+		builtin_export_variable(data);
+}

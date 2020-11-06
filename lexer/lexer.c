@@ -6,44 +6,45 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 13:48:25 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 12:00:36 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-static void	set_lexer(t_lexer *lexer, char *line)
+static void	set_lexer(t_data *data)
 {
-	lexer->state = GENERAL;
-	lexer->token_list = malloc(sizeof(t_list));
-	if (!lexer->token_list)
+	data->lexer.state = GENERAL;
+	data->lexer.token_list = malloc(sizeof(t_list));
+	if (!data->lexer.token_list)
 	{
-		free(line);
+		free_struct_error(data);
 		exit_error("Malloc failed.");
 	}
-	ft_bzero(lexer->token_list, sizeof(t_list));
-	lexer->line_length = ft_strlen(line);
+	ft_bzero(data->lexer.token_list, sizeof(t_list));
+	data->lexer.line_length = ft_strlen(data->cmdline);
 }
 
-void		lexer(t_lexer *lexer, char *line)
+void		lexer(t_data *data)
 {
 	t_list		*token;
 	int			i;
 
-	set_lexer(lexer, line);
-	token = lexer->token_list;
-	init_token(lexer, token, line, lexer->line_length);
+	set_lexer(data);
+	token = data->lexer.token_list;
+	init_token(data, token, data->lexer.line_length);
 	i = 0;
-	while (line[i] != '\0')
+	while (data->cmdline[i] != '\0')
 	{
-		lexer->char_type = get_char_type(line[i]);
-		state_check(lexer, &token, line, i);
+		data->lexer.char_type = get_char_type(data->cmdline[i]);
+		state_check(data, &token, i);
 		i++;
 	}
 	// always adding token of type 0
 	token->next = malloc(sizeof(t_list));
 	token = token->next;
-	init_token(lexer, token, line, 1);
-	if (lexer->state != GENERAL)
+	init_token(data, token, 1);
+	// has to give multiline error
+	if (data->lexer.state != GENERAL)
 		printf("Error executing command\n");
 }

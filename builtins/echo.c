@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 16:26:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/05 14:37:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	builtin_echo(t_node *node)
 
 	fd = 1;
 	newline = 1;
-	if (ft_strncmp(node->right->data, "-n", 2) == 0)
+	if (node->right)
 	{
-		newline = 0;
-		node = node->right;
+		if (ft_strncmp(node->right->data, "-n", 2) == 0)
+		{
+			newline = 0;
+			node = node->right;
+		}
 	}
 	while (node->right)
 	{

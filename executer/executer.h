@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/04 16:42:04 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/05 17:33:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../lexer/lexer.h"
 # include "../builtins/builtins.h"
 
-int		executer(t_data data);
-void	commands(t_data data);
+int		executer(t_data *data);
+void	command_loop(t_data *data);
 
 #endif

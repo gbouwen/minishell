@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   free.h                                             :+:    :+:            */
+/*   free_struct_error.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 15:37:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 10:54:56 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/06 10:52:24 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 11:55:05 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#include "free.h"
 
-# include "../struct.h"
+static void	free_environment(char **envp)
+{
+	int	i;
 
-void	free_list_content(void *content);
-void	free_struct_error(t_data *data);
+	i = 0;
+   /* while (envp[i] != NULL)*/
+	/*{*/
+		/*free(envp[i]);*/
+	/*}*/
+	free(envp);
+}
 
-#endif
+void		free_struct_error(t_data *data)
+{
+	free(data->cmdline);
+	free_environment(data->env_variables);
+	if (data->lexer.token_list != NULL)
+		ft_lstclear(&data->lexer.token_list, free_list_content);
+}

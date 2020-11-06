@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/06 12:52:05 by tiemen        ########   odam.nl          #
+#    Updated: 2020/11/06 15:05:23 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,17 @@ NAME = minishell
 CC = gcc
 FLAGS =
 SOURCE_C =	main.c \
+			initialize_free/initialize_data.c \
+			initialize_free/initialize_lexer.c \
+			initialize_free/free_list_content.c \
+			initialize_free/free_struct_error.c \
+			initialize_free/set_env_variables.c \
 			read_cmdline/read_cmdline.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
 			lexer/state.c \
 			lexer/token.c \
 			parser/parser.c \
-			error/error.c \
 			parser/binary_tree.c \
 			parser/cmd_prod.c \
 			parser/simple_cmd_prod.c \
@@ -28,13 +32,13 @@ SOURCE_C =	main.c \
 			parser/sequence_prod.c \
 			parser/parser_utils.c \
 			executer/executer.c \
-			executer/commands.c \
-			initialize_free/initialize_data.c \
-			initialize_free/initialize_lexer.c \
-			initialize_free/free_list_content.c \
+			executer/command_loop.c \
 			builtins/echo.c \
 			builtins/cd.c \
 			builtins/pwd.c \
+			builtins/export.c \
+			builtins/export_no_arguments.c \
+			builtins/export_variable.c \
 			builtins/env.c \
 			builtins/exit.c
 
