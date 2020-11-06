@@ -21,7 +21,7 @@ void	builtin_echo(t_node *node)
 	newline = 1;
 	if (node->right)
 	{
-		if (ft_strncmp(node->right->data, "-n", 2) == 0)
+		if (ft_strncmp(node->right->content, "-n", 2) == 0)
 		{
 			newline = 0;
 			node = node->right;
@@ -30,7 +30,7 @@ void	builtin_echo(t_node *node)
 	while (node->right)
 	{
 		node = node->right;
-		ft_putstr_fd(node->data, fd);
+		ft_putstr_fd(node->content, fd);
 		ft_putstr_fd(" ", fd);
 	}
 	if (newline)

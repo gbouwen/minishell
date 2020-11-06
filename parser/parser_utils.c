@@ -15,7 +15,7 @@
 int		check_parser_error(t_node *root)
 {
 	int check;
-	
+
 	check = 1;
 	if (root)
 	{
@@ -49,14 +49,14 @@ int		match(int type, char **str)
 void	print_tree_utils(t_node *root, int space)
 {
    int count = 5;
-    if (root == NULL)  
-        return;  
-    space += count;  
+    if (root == NULL)
+        return;
+    space += count;
 	print_tree_utils(root->left, space);
     printf("\n");
     for (int i = count; i < space; i++)
        	printf(" ");
-	printf("%s, %d\n", root->data, root->type);
+	printf("%s, %d\n", root->content, root->type);
     print_tree_utils(root->right, space);
 }
 

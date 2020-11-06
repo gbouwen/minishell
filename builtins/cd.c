@@ -19,7 +19,7 @@ void	builtin_cd(t_node *node)
 
 	if (node->right)
 		temp = node->right;
-	ret = chdir(temp->data);
+	ret = chdir(temp->content);
 	if (ret == -1)
 		ft_printf("error: could not change directory\n");
 }

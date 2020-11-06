@@ -13,10 +13,10 @@
 #include "parser.h"
 
 t_node	*command()
-{	
+{
 	t_node	*cmd_node;
 	t_list	*saved_token;
-	
+
 	saved_token = g_current_tok;
 	cmd_node = command_greater();
 	if (cmd_node != NULL)
@@ -54,7 +54,7 @@ t_node	*command_greater()
 		return (set_error_node(error_token));
 	}
 	filename = malloc(sizeof(t_node));
-	filename->data = str;
+	filename->content = str;
 	attach_tree_node(filename, FILE_OUT, command(), cmd_node);
 	return (filename);
 }
@@ -79,7 +79,7 @@ t_node	*command_lesser()
 		return (set_error_node(error_token));
 	}
 	filename = malloc(sizeof(t_node));
-	filename->data = str;
+	filename->content = str;
 	attach_tree_node(filename, FILE_IN, command(), cmd_node);
 	return (filename);
 }

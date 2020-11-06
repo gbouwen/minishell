@@ -14,19 +14,19 @@
 
 void	command_loop(t_data *data)
 {
-	if (ft_strncmp(data->tree->data, "echo", 4) == 0)
+	if (ft_strncmp(data->tree->content, "echo", 4) == 0)
 		builtin_echo(data->tree);
-	else if (ft_strncmp(data->tree->data, "pwd", 3) == 0)
+	else if (ft_strncmp(data->tree->content, "pwd", 3) == 0)
 		builtin_pwd(data->tree);
-	else if (ft_strncmp(data->tree->data, "cd", 2) == 0)
+	else if (ft_strncmp(data->tree->content, "cd", 2) == 0)
 		builtin_cd(data->tree);
-	else if (ft_strncmp(data->tree->data, "export", 6) == 0)
+	else if (ft_strncmp(data->tree->content, "export", 6) == 0)
 		builtin_export(data);
-	/*else if (ft_strncmp(data.tree->data, "unset", 5) == 0)*/
+	/*else if (ft_strncmp(data.tree->content, "unset", 5) == 0)*/
 		/*builtin_unset(data.tree);*/
-	else if (ft_strncmp(data->tree->data, "env", 3) == 0)
+	else if (ft_strncmp(data->tree->content, "env", 3) == 0)
 		builtin_env(data->tree, data->env_variables);
-	else if (ft_strncmp(data->tree->data, "exit", 4) == 0)
+	else if (ft_strncmp(data->tree->content, "exit", 4) == 0)
 		builtin_exit(data->tree);
    /* else*/
 		/*exec_command*/

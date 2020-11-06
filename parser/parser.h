@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/06 10:56:21 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/06 15:18:27 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct s_node
 {
 	int				type;
-	char			*data;
+	char			*content;
 	struct s_node	*right;
 	struct s_node	*left;
 }				t_node;

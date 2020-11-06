@@ -42,7 +42,7 @@ void	builtin_export_variable(t_data *data)
 	while (temp)
 	{
 		data->env_variables = add_variable(data->env_variables,
-											temp->data);
+											temp->content);
 		temp = temp->right;
 	}
 }
