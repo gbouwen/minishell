@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 14:42:12 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 15:27:44 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	**add_variable(char **envp, char *var)
 	return (new_envp);
 }
 
-void	builtin_export_variable(t_data *data)
+void		builtin_export_variable(t_data *data)
 {
 	t_node *temp;
 

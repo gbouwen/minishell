@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 14:58:54 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 15:27:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	builtin_cd(t_node *node)
 {
 	t_node	*temp;
-	int	ret;
+	int		ret;
 
 	if (node->right)
 		temp = node->right;
