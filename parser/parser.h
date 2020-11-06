@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/04 16:44:08 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 10:56:21 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,27 @@ typedef struct s_node
 # define PIPE 5
 # define NODE_SEQUENCE 6
 
-t_list	*current_token;
+t_list	*g_current_tok;
 
 t_node	*simple_command_args();
 t_node 	*simple_command();
 t_node	*command_greater();
 t_node	*command_lesser();
 t_node	*command();
+t_node	*task_pipe();
+t_node	*tasks();
+t_node	*sequence_semicolon();
+t_node	*sequence();
 
 int		match(int type, char **str);
 
+int		check_parser_error(t_node *root);
 void	attach_tree_node(t_node *attach, int type, t_node *left,
 						t_node *right);
 void	delete_tree(t_node *node);
 t_node	*set_error_node(t_list *error_token);
 void	print_tree(t_node *root);
 void	print_tree_utils(t_node *root, int space);
-t_node	*check_parser_error(t_node *root);
 t_node	*parser(t_lexer *lexer_data);
 
 #endif

@@ -6,35 +6,41 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/05 12:57:25 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 15:07:21 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*check_parser_error(t_node *root)
+int		check_parser_error(t_node *root)
 {
-	t_node	*error_node;
-
-	error_node = root;
-	while (error_node)
+	int check;
+	
+	check = 1;
+	if (root)
 	{
-		if (error_node->type == 9)
-			return (error_node);
-		error_node = error_node->left;
+		if (root->type == 9)
+			return (0);
+		check = check_parser_error(root->left);
+		if (check == 0)
+			return (0);
+		check = check_parser_error(root->right);
+		if (check == 0)
+			return (0);
 	}
-	return (NULL);
+	return (check);
 }
 
 int		match(int type, char **str)
 {
-	if (!(current_token))
+	if (!(g_current_tok))
 		return (0);
-	if (current_token->type == type)
+	if (g_current_tok->type == type)
 	{
-		if (current_token->type == TOKEN)
-			*str = ft_strdup(current_token->content);
-		current_token = current_token->next;
+		if (g_current_tok->type == TOKEN)
+			*str = ft_strdup(g_current_tok->content);
+		if (g_current_tok->next)
+			g_current_tok = g_current_tok->next;
 		return (1);
 	}
 	return (0);
@@ -42,10 +48,10 @@ int		match(int type, char **str)
 
 void	print_tree_utils(t_node *root, int space)
 {
-   int count = 2;
-    if (root == NULL)
-        return;
-    space += count;
+   int count = 5;
+    if (root == NULL)  
+        return;  
+    space += count;  
 	print_tree_utils(root->left, space);
     printf("\n");
     for (int i = count; i < space; i++)

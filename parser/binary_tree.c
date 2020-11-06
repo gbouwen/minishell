@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:16:36 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/05 12:57:25 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 15:05:53 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ void	delete_tree(t_node *node)
 		free(node->data);
 	delete_tree(node->left);
 	delete_tree(node->right);
+	free(node);
 }
 
 t_node	*set_error_node(t_list *error_token)
 {
 	t_node *error_node;
 
-	current_token = error_token;
+	g_current_tok = error_token;
 	error_node = malloc(sizeof(t_node));
 	error_node->left = NULL;
 	error_node->right = NULL;
