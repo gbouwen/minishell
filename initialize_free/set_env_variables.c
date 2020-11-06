@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 16:11:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/05 17:21:23 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 10:46:37 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		set_env_variables(t_data *data, char **envp)
 	i = 0;
 	while (i < len)
 	{
-		data->env_variables[i] = ft_strdup(envp[i]);
+		data->env_variables[i] = envp[i];
 		i++;
 	}
 	data->env_variables[i] = NULL;

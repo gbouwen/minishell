@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/05 17:36:19 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 10:49:26 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static char	**add_variable(char **envp, char *var)
 	i = 0;
 	while (i < len)
 	{
-		new_envp[i] = ft_strdup(envp[i]);
+		new_envp[i] = envp[i];
 		i++;
 	}
-	new_envp[i] = ft_strdup(var);
+	new_envp[i] = var;
 	new_envp[i + 1] = NULL;
 	free(envp);
 	return (new_envp);
