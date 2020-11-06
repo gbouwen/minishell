@@ -6,13 +6,13 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/05 17:41:05 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/06 11:40:35 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		*check_parser_error(t_node *root)
+int		check_parser_error(t_node *root)
 {
 	int check;
 	
@@ -39,7 +39,8 @@ int		match(int type, char **str)
 	{
 		if (g_current_tok->type == TOKEN)
 			*str = ft_strdup(g_current_tok->content);
-		g_current_tok = g_current_tok->next;
+		if (g_current_tok->next)
+			g_current_tok = g_current_tok->next;
 		return (1);
 	}
 	return (0);

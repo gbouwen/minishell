@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/05 17:42:25 by tiemen        ########   odam.nl          #
+#    Updated: 2020/11/06 12:52:05 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SOURCE_C =	main.c \
 			parser/cmd_prod.c \
 			parser/simple_cmd_prod.c \
 			parser/task_prod.c \
+			parser/sequence_prod.c \
 			parser/parser_utils.c \
 			executer/executer.c \
 			executer/commands.c \

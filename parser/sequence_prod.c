@@ -1,51 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   task_prod.c                                        :+:    :+:            */
+/*   sequence_prod.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/06 12:48:21 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/06 12:43:45 by tiemen        #+#    #+#                 */
+/*   Updated: 2020/11/06 12:45:45 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*tasks()
+t_node	*sequence()
 {
-	t_node	*task_node;
-	t_list	*saved_token;
+	t_node *sequence;
+	t_list *saved_token;
 
 	saved_token = g_current_tok;
-	task_node = task_pipe();
-	if (task_node != NULL)
-		return (task_node);
+	sequence = sequence_semicolon();
+	if (sequence != NULL)
+		return (sequence);
 	g_current_tok = saved_token;
-	task_node = command();
-	if (task_node != NULL)
-		return(task_node);
+	sequence = tasks();
+	if (sequence != NULL)
+		return (sequence);
 	return (NULL);
 }
 
-t_node	*task_pipe()
+t_node	*sequence_semicolon()
 {
-	t_node	*task_node;
+	t_node	*seq_node;
 	t_list	*error_token;
-	t_node	*pipe_node;
+	t_node	*semicolon;
 
-	task_node = command();
-	if (check_parser_error(task_node) == 0)
+	seq_node = tasks();
+	if (check_parser_error(seq_node) == 0)
 		return (set_error_node(g_current_tok));
 	error_token = g_current_tok;
-	if (!match(CHAR_PIPE, NULL))
+	if (!match(CHAR_SEMICOLON, NULL))
 	{
-		delete_tree(task_node);
+		delete_tree(seq_node);
 		return (NULL);
 	}
-	if (g_current_tok->type != 1)
-		return (set_error_node(error_token));
-	pipe_node = malloc(sizeof(t_node));
-	attach_tree_node(pipe_node, PIPE, tasks(), task_node);
-	return (pipe_node);	
+	semicolon = malloc(sizeof(t_node));
+	attach_tree_node(semicolon, NODE_SEQUENCE, sequence(), seq_node);
+	return (semicolon);
 }

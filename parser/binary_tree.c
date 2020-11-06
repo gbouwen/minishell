@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:16:36 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/05 17:41:05 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/06 13:04:51 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	delete_tree(t_node *node)
 		free(node->data);
 	delete_tree(node->left);
 	delete_tree(node->right);
+	free(node);
 }
 
 t_node	*set_error_node(t_list *error_token)

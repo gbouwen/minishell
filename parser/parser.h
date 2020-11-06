@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/05 17:41:24 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/06 10:56:21 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ t_node	*command_lesser();
 t_node	*command();
 t_node	*task_pipe();
 t_node	*tasks();
+t_node	*sequence_semicolon();
+t_node	*sequence();
 
 int		match(int type, char **str);
 
-int		*check_parser_error(t_node *root);
+int		check_parser_error(t_node *root);
 void	attach_tree_node(t_node *attach, int type, t_node *left,
 						t_node *right);
 void	delete_tree(t_node *node);
