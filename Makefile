@@ -17,7 +17,7 @@ SOURCE_C =	main.c \
 			initialize_free/initialize_data.c \
 			initialize_free/initialize_lexer.c \
 			initialize_free/free_list_content.c \
-			initialize_free/free_struct_error.c \
+			initialize_free/free_struct.c \
 			initialize_free/set_env_variables.c \
 			initialize_free/free_env_variables.c \
 			read_cmdline/read_cmdline.c \
