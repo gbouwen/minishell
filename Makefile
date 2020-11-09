@@ -40,6 +40,7 @@ SOURCE_C =	main.c \
 			builtins/export.c \
 			builtins/export_no_arguments.c \
 			builtins/export_variable.c \
+			builtins/unset.c \
 			builtins/env.c \
 			builtins/exit.c \
 			helper_functions/get_env_len.c \
