@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   echo.c                                             :+:    :+:            */
+/*   helper_functions.h                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/05 14:37:50 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/06 12:58:27 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 13:03:38 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef HELPER_FUNCTIONS_H
+# define HELPER_FUNCTIONS_H
 
-void	builtin_echo(t_node *node)
-{
-	int	fd;
-	int	newline;
+# include <stddef.h>
 
-	fd = 1;
-	newline = 1;
-	if (node->right)
-	{
-		if (ft_strncmp(node->right->content, "-n", 2) == 0)
-		{
-			newline = 0;
-			node = node->right;
-		}
-	}
-	while (node->right)
-	{
-		node = node->right;
-		ft_putstr_fd(node->content, fd);
-		ft_putstr_fd(" ", fd);
-	}
-	if (newline)
-		ft_putstr_fd("\n", fd);
-}
+int	get_env_len(char **env);
+
+#endif

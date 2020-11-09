@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   echo.c                                             :+:    :+:            */
+/*   unset.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/05 14:37:50 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 14:08:52 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	builtin_echo(t_node *node)
+void	builtin_unset(t_node *command, char **envp)
 {
-	int	fd;
-	int	newline;
 
-	fd = 1;
-	newline = 1;
-	if (node->right)
-	{
-		if (ft_strncmp(node->right->content, "-n", 2) == 0)
-		{
-			newline = 0;
-			node = node->right;
-		}
-	}
-	while (node->right)
-	{
-		node = node->right;
-		ft_putstr_fd(node->content, fd);
-		ft_putstr_fd(" ", fd);
-	}
-	if (newline)
-		ft_putstr_fd("\n", fd);
 }

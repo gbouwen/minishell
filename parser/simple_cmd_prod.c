@@ -23,7 +23,7 @@ t_node *simple_command()
 	arguments = simple_command_args();
 	simple_cmd = malloc(sizeof(t_node));
 	attach_tree_node(simple_cmd, PATHNAME, NULL, arguments);
-	simple_cmd->data = str;
+	simple_cmd->content = str;
 	return (simple_cmd);
 }
 
@@ -37,7 +37,7 @@ t_node	*simple_command_args()
 		return(NULL);
 	list_args = simple_command_args();
 	argument = malloc(sizeof(t_node));
-	argument->data = str;
+	argument->content = str;
 	attach_tree_node(argument, ARGUMENT, NULL, list_args);
 	return (argument);
 }

@@ -23,8 +23,8 @@ void	delete_tree(t_node *node)
 {
 	if (node == NULL)
 		return;
-	if (node->data)
-		free(node->data);
+	if (node->content)
+		free(node->content);
 	delete_tree(node->left);
 	delete_tree(node->right);
 	free(node);
