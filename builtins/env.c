@@ -31,6 +31,7 @@ void		builtin_env(t_node *command, char **envp)
 	int	i;
 
 	i = 0;
+	(void)(command);
 	while (envp[i] != NULL)
 	{
 		if (check_for_equals_sign(envp[i]))

@@ -14,8 +14,6 @@
 
 void	builtin_export(t_data *data)
 {
-	int	len;
-
 	if (!data->tree->right)
 		builtin_export_no_arguments(data->env_variables);
 	else

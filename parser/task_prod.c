@@ -36,7 +36,7 @@ t_node	*task_pipe()
 
 	task_node = command();
 	if (check_parser_error(task_node) == 0)
-	{	
+	{
 		delete_tree(task_node);
 		return (set_error_node(g_current_tok));
 	}
@@ -47,12 +47,12 @@ t_node	*task_pipe()
 		return (NULL);
 	}
 	if (g_current_tok->type != 1)
-	{	
+	{
 		delete_tree(task_node);
 		return (set_error_node(error_token));
 	}
 	pipe_node = malloc(sizeof(t_node));
 	pipe_node->content = ft_strdup("|");
 	attach_tree_node(pipe_node, PIPE, tasks(), task_node);
-	return (pipe_node);	
+	return (pipe_node);
 }
