@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/06 12:00:36 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/09 11:48:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ static void	set_lexer(t_data *data)
 	data->lexer.state = GENERAL;
 	data->lexer.token_list = malloc(sizeof(t_list));
 	if (!data->lexer.token_list)
-	{
-		free_struct_error(data);
-		exit_error("Malloc failed.");
-	}
+		free_struct_error(data, "Malloc failed");
 	ft_bzero(data->lexer.token_list, sizeof(t_list));
 	data->lexer.line_length = ft_strlen(data->cmdline);
 }

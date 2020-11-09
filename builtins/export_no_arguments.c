@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:38:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 14:06:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/06 15:28:41 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	print_sorted(char **env, int sorted_indexes[], int len)
 		if (env[sorted_indexes[i]][x] != '_')
 		{
 			ft_printf("declare -x ");
-			while (env[sorted_indexes[i]][x] != '=' && env[sorted_indexes[i]][x] != '\0')
+			while (env[sorted_indexes[i]][x] != '=' &&
+						env[sorted_indexes[i]][x] != '\0')
 			{
 				ft_putchar_fd(env[sorted_indexes[i]][x], 1);
 				x++;
@@ -91,7 +92,7 @@ static void	sort_and_print(char **env, int len)
 	print_sorted(env, sorted_indexes, len);
 }
 
-void	builtin_export_no_arguments(char **env)
+void		builtin_export_no_arguments(char **env)
 {
 	int	len;
 
