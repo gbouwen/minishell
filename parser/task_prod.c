@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/09 11:49:40 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/09 12:10:53 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_node	*task_pipe()
 		return (set_error_node(error_token));
 	}
 	pipe_node = malloc(sizeof(t_node));
-	pipe_node->data = ft_strdup("|");
+	pipe_node->content = ft_strdup("|");
 	attach_tree_node(pipe_node, PIPE, tasks(), task_node);
 	return (pipe_node);	
 }
