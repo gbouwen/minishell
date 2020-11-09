@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:00:51 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 12:02:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/09 11:48:59 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ void	init_token(t_data *data, t_list *token, int length)
 {
 	token->content = malloc(length + 1);
 	if (!token->content)
-	{
-		free_struct_error(data);
-		exit_error("Malloc failed");
-	}
+		free_struct_error(data, "Malloc failed");
 	ft_bzero(token->content, length + 1);
 	token->current_char = 0;
 	token->type = 0;
@@ -41,10 +38,7 @@ void	set_special_token(t_data *data, t_list **token, int i)
 	{
 		(*token)->next = malloc(sizeof(t_list));
 		if (!(*token)->next)
-		{
-			free_struct_error(data);
-			exit_error("Malloc failed");
-		}
+			free_struct_error(data, "Malloc failed");
 		*token = (*token)->next;
 		init_token(data, *token, data->lexer.line_length - i);
 	}
@@ -56,10 +50,7 @@ void	end_token(t_data *data, t_list **token, int i)
 	{
 		(*token)->next = malloc(sizeof(t_list));
 		if (!(*token)->next)
-		{
-			free_struct_error(data);
-			exit_error("Malloc failed");
-		}
+			free_struct_error(data, "Malloc failed");
 		*token = (*token)->next;
 		init_token(data, *token, data->lexer.line_length - i);
 	}

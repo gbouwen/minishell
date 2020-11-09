@@ -19,6 +19,7 @@ SOURCE_C =	main.c \
 			initialize_free/free_list_content.c \
 			initialize_free/free_struct_error.c \
 			initialize_free/set_env_variables.c \
+			initialize_free/free_env_variables.c \
 			read_cmdline/read_cmdline.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
@@ -39,6 +40,7 @@ SOURCE_C =	main.c \
 			builtins/export.c \
 			builtins/export_no_arguments.c \
 			builtins/export_variable.c \
+			builtins/unset.c \
 			builtins/env.c \
 			builtins/exit.c \
 			helper_functions/get_env_len.c \
