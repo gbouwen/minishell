@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:25:43 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/09 12:08:49 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/09 14:04:33 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,32 @@ t_node	*command_lesser()
 	filename = malloc(sizeof(t_node));
 	filename->content = str;
 	attach_tree_node(filename, FILE_IN, command(), cmd_node);
+	return (filename);
+}
+
+t_node	*command_double_greater()
+{
+	char	*str;
+	t_node	*filename;
+	t_node	*cmd_node;
+	t_list	*error_token;
+
+	cmd_node = simple_command();
+	error_token = g_current_tok;
+	if (!match(CHAR_GREATER, NULL))
+	{
+		delete_tree(cmd_node);
+		return (NULL);
+	}
+	if (g_current_tok->type == 0)
+		return (set_error_node(error_token));
+	if (!match(TOKEN, &str))
+	{
+		delete_tree(cmd_node);
+		return (set_error_node(error_token));
+	}
+	filename = malloc(sizeof(t_node));
+	filename->content = str;
+	attach_tree_node(filename, FILE_OUT, command(), cmd_node);
 	return (filename);
 }
