@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/06 15:07:21 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/09 12:22:29 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	print_tree_utils(t_node *root, int space)
 	print_tree_utils(root->left, space);
     printf("\n");
     for (int i = count; i < space; i++)
-       	printf(" ");
+		printf(" ");
 	printf("%s, %d\n", root->content, root->type);
     print_tree_utils(root->right, space);
 }

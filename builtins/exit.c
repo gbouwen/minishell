@@ -14,5 +14,6 @@
 
 void	builtin_exit(t_node *command)
 {
+	(void)(command);
 	exit(0);
 }
