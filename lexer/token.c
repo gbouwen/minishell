@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:00:51 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/09 11:48:59 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/09 12:48:53 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,16 @@ void	end_token(t_data *data, t_list **token, int i)
 		*token = (*token)->next;
 		init_token(data, *token, data->lexer.line_length - i);
 	}
+}
+
+void	set_double_redirect(t_data *data, t_list **token, int i)
+{
+	(*token)->content[0] = '>';
+	(*token)->content[1] = '>';
+	(*token)->type = CHAR_DOUBLE_REDIRECT;
+	(*token)->next = malloc(sizeof(t_list));
+	if (!(*token)->next)
+		free_struct_error(data, "Malloc failed\n");
+	*token = (*token)->next;
+	init_token(data, *token, data->lexer.line_length - i);
 }

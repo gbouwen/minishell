@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/09 12:05:14 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/09 12:52:51 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ int	executer(t_data *data)
 	if (data->read_val == -1)
 		return (-1);
 	lexer(data);
+
+	t_list	*temp;
+
+	temp = data->lexer.token_list;
+	while (temp)
+	{
+		printf("|%s| |%d|\n", temp->content, temp->type);
+		temp = temp->next;
+	}
 	data->tree = parser(&data->lexer);
 	if (data->tree != NULL)
 	{

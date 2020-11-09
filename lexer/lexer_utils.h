@@ -28,6 +28,7 @@ typedef	struct		s_lexer
 # define CHAR_WHITESPACE ' '
 # define CHAR_GREATER '>'
 # define CHAR_LESSER '<'
+# define CHAR_DOUBLE_REDIRECT 94
 # define CHAR_QUOTE '\''
 # define CHAR_DOUBLE_QUOTE '\"'
 # define CHAR_PIPE '|'
