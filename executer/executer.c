@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:59 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/06 15:44:15 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	executer(t_data *data)
 	lexer(data);
 	data->tree = parser(&data->lexer);
 	if (data->tree != NULL)
+	{
 		command_loop(data);
+		delete_tree(data->tree);
+	}
 	free(data->cmdline);
 	ft_lstclear(&data->lexer.token_list, free_list_content);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:25:43 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/06 12:36:01 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/06 16:42:49 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_node	*command_lesser()
 		delete_tree(cmd_node);
 		return (NULL);
 	}
+	if (g_current_tok->type == 0)
+		return (set_error_node(error_token));
 	if (!match(TOKEN, &str))
 	{
 		delete_tree(cmd_node);

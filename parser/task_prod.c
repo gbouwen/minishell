@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/06 12:48:21 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/09 11:49:40 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ t_node	*task_pipe()
 
 	task_node = command();
 	if (check_parser_error(task_node) == 0)
+	{	
+		delete_tree(task_node);
 		return (set_error_node(g_current_tok));
+	}
 	error_token = g_current_tok;
 	if (!match(CHAR_PIPE, NULL))
 	{
@@ -44,8 +47,12 @@ t_node	*task_pipe()
 		return (NULL);
 	}
 	if (g_current_tok->type != 1)
+	{	
+		delete_tree(task_node);
 		return (set_error_node(error_token));
+	}
 	pipe_node = malloc(sizeof(t_node));
+	pipe_node->data = ft_strdup("|");
 	attach_tree_node(pipe_node, PIPE, tasks(), task_node);
 	return (pipe_node);	
 }
