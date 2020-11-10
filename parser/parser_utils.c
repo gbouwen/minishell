@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/10 11:10:01 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/10 15:40:23 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	print_tree_utils(t_node *root, int space)
     printf("\n");
     for (int i = count; i < space; i++)
 		printf(" ");
-	printf("%s, %d\n", root->content, root->type);
+	printf("%s, type: %d,\n", root->content, root->type);
+    for (int i = count; i < space; i++)
+		printf(" ");
+	printf("state: %d\n", root->state_type);
     print_tree_utils(root->right, space);
 }
 
@@ -66,14 +69,18 @@ void	print_tree(t_node *root)
 	print_tree_utils(root, 0);
 }
 
-int		set_node_type(int tokentype, int node_type)
+int		set_node_type(int tokentype, int node_type, t_node *node)
 {
 	if (tokentype == TOKEN)
+	{
+		node->state_type = tokentype;
 		return (node_type);
-	else if (tokentype == CHAR_QUOTE)
-		return (node_type + 1);
-	else if (tokentype == CHAR_DOUBLE_QUOTE)
-		return (node_type + 2);
+	}
+	else if (tokentype == CHAR_QUOTE || tokentype == CHAR_DOUBLE_QUOTE)
+	{
+		node->state_type = tokentype;
+		return (node_type);
+	}
 	return (20);
 }
 

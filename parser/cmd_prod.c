@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:25:43 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/10 11:09:52 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/10 15:34:46 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ t_node	*command_greater()
 		return (set_error_node(error_token));
 	filename = malloc(sizeof(t_node));
 	filename->content = str;
-	attach_tree_node(filename, set_node_type(prev_token->type, FILE_OUT),
-					command(), cmd_node);
+	attach_tree_node(filename, set_node_type
+	(prev_token->type, FILE_OUT, filename), command(), cmd_node);
 	return (filename);
 }
 
@@ -85,8 +85,8 @@ t_node	*command_lesser()
 		return (set_error_node(error_token));
 	filename = malloc(sizeof(t_node));
 	filename->content = str;
-	attach_tree_node(filename, set_node_type(prev_token->type, FILE_IN),
-					command(), cmd_node);
+	attach_tree_node(filename, set_node_type
+	(prev_token->type, FILE_IN, filename), command(), cmd_node);
 	return (filename);
 }
 
@@ -112,7 +112,7 @@ t_node	*command_double_greater()
 		return (set_error_node(error_token));
 	filename = malloc(sizeof(t_node));
 	filename->content = str;
-	attach_tree_node(filename, set_node_type(prev_token->type, FILE_OUT_APPEND)
-					, command(), cmd_node);
+	attach_tree_node(filename, set_node_type
+	(prev_token->type, FILE_OUT_APPEND, filename) , command(), cmd_node);
 	return (filename);
 }
