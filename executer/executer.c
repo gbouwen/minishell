@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 15:35:32 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/10 16:04:12 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	executer(t_data *data)
 {
+	data->expand_error = 0;
 	data->read_val = read_cmdline(&data->cmdline);
 	if (data->read_val == -1)
 		return (-1);
