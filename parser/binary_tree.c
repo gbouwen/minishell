@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:16:36 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:53 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/09 14:58:25 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ t_node	*set_error_node(t_list *error_token)
 	error_node = malloc(sizeof(t_node));
 	error_node->left = NULL;
 	error_node->right = NULL;
-	error_node->type = 9;
+	error_node->type = 20;
 	return (error_node);
 }
