@@ -21,7 +21,7 @@ t_node *parser(t_lexer *lexer_data)
 	nodes = &node;
 	node = sequence();
 	node = *nodes;
-	print_tree(node);
+//	print_tree(node);
 	if (!check_parser_error(*nodes) || node == NULL)
 	{
 //		delete_tree(node);

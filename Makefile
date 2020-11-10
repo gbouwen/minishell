@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/09 12:20:57 by tiemen        ########   odam.nl          #
+#    Updated: 2020/11/10 14:28:22 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ SOURCE_C =	main.c \
 			builtins/env.c \
 			builtins/exit.c \
 			helper_functions/get_env_len.c \
+			expander/expander.c \
+			expander/expand_env_variables.c \
+			expander/expand_files.c \
 			error/error.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)

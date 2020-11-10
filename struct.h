@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/04 16:36:29 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/10 15:36:25 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_data
 	int			read_val;
 	t_lexer		lexer;
 	t_node		*tree;
+	int			expand_error;
 }				t_data;
 
 #endif
