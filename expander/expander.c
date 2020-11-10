@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:41:50 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 12:19:08 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/10 14:18:12 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ void	expander(t_data *data)
 
 	temp = data->tree;
 	expand_env_variables(data->env_variables, temp);
+	expand_files(temp);
 }
