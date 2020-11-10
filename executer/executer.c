@@ -6,11 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 15:35:32 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/10 15:59:03 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
+
+
 
 int	executer(t_data *data)
 {

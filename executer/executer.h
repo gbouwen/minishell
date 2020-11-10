@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 15:42:38 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/10 16:12:28 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 
 int		executer(t_data *data);
 void	command_loop(t_data *data);
+void	builtin_checker(t_node *tree, char **argv, t_data *data);
+void	exec_simple_cmd(t_node *tree, t_data *data);
 
 #endif
