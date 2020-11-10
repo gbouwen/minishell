@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 12:05:49 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/10 12:28:54 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ void		expand_env_variables(char **env, t_node *node)
 			{
 				free(node->content);
 				node->content = env_var_value(env[i]);
-				break ;
+				return ;
 			}
 			i++;
 		}
+		free(node->content);
+		node->content = ft_strdup("");
 	}
 }
