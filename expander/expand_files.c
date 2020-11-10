@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 14:46:35 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/10 15:39:17 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static void	check_if_file_exists(char *filename)
+static void	check_if_file_exists(t_data *data, char *filename)
 {
 	int	fd;
 
@@ -20,13 +20,13 @@ static void	check_if_file_exists(char *filename)
 	if (fd == -1)
 	{
 		ft_printf("%s: no such file or directory.\n", filename);
-		// moet nog een error setten in struct zodat hij niet in command loop gaat
+		data->expand_error = 1;
 	}
 	else
 		close(fd);
 }
 
-static void	open_or_create_file(char *filename)
+static void	open_or_create_file(t_data *data, char *filename)
 {
 	int	fd;
 
@@ -36,21 +36,21 @@ static void	open_or_create_file(char *filename)
 		if (errno != EEXIST)
 		{
 			ft_printf("%s: could not create file.\n", filename);
-			// moet nog een error setten in struct zodat hij niet in command loop gaat
+			data->expand_error = 1;
 		}
 	}
 	else
 		close(fd);
 }
 
-void	expand_files(t_node *node)
+void	expand_files(t_data *data, t_node *node)
 {
 	if (node == NULL)
 		return ;
-	expand_files(node->left);
-	expand_files(node->right);
+	expand_files(data, node->left);
+	expand_files(data, node->right);
 	if (node->type == FILE_IN)
-		check_if_file_exists(node->content);
+		check_if_file_exists(data, node->content);
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND)
-		open_or_create_file(node->content);
+		open_or_create_file(data, node->content);
 }
