@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/09 14:06:12 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/09 14:24:25 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_node *parser(t_lexer *lexer_data)
 	print_tree(node);
 	if (!check_parser_error(*nodes) || node == NULL)
 	{
-		delete_tree(node);
+//		delete_tree(node);
 		ft_printf("Parser error near '%s'\n", g_current_tok->content);
 		return (NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:05:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 11:36:34 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/09 12:53:18 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static void	state_general(t_data *data, t_list **token, int i)
 {
-	if (data->lexer.char_type == CHAR_GENERAL)
+	if (data->cmdline[i] == '>' && data->cmdline[i + 1] == '>')
+		set_double_redirect(data, token, i);
+	else if (data->lexer.char_type == CHAR_GENERAL)
 		set_token_data(token, data->cmdline[i]);
 	else if (data->lexer.char_type == CHAR_ESCAPE)
 		set_token_data(token, data->cmdline[i]);

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:31:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/09 11:54:34 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/09 13:52:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	builtin_export_no_arguments(char **envp);
 void	builtin_export_variable(t_data *data);
 void	builtin_unset(t_data *data);
 void	builtin_env(t_node *command, char **envp);
-void	builtin_exit(t_node *command);
+void	builtin_exit(t_data *data);
 
 #endif

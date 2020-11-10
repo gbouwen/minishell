@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/09 12:22:29 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/10 11:10:01 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		check_parser_error(t_node *root)
 	check = 1;
 	if (root)
 	{
-		if (root->type == 9)
+		if (root->type == 20)
 			return (0);
 		check = check_parser_error(root->left);
 		if (check == 0)
@@ -37,7 +37,8 @@ int		match(int type, char **str)
 		return (0);
 	if (g_current_tok->type == type)
 	{
-		if (g_current_tok->type == TOKEN)
+		if (g_current_tok->type == TOKEN || g_current_tok-> type == CHAR_QUOTE
+			|| g_current_tok->type == CHAR_DOUBLE_QUOTE)
 			*str = ft_strdup(g_current_tok->content);
 		if (g_current_tok->next)
 			g_current_tok = g_current_tok->next;
@@ -63,4 +64,26 @@ void	print_tree_utils(t_node *root, int space)
 void	print_tree(t_node *root)
 {
 	print_tree_utils(root, 0);
+}
+
+int		set_node_type(int tokentype, int node_type)
+{
+	if (tokentype == TOKEN)
+		return (node_type);
+	else if (tokentype == CHAR_QUOTE)
+		return (node_type + 1);
+	else if (tokentype == CHAR_DOUBLE_QUOTE)
+		return (node_type + 2);
+	return (20);
+}
+
+int		token_check(t_node *cmd_node, char **str)
+{
+	if (!match(TOKEN, str) && !match(CHAR_DOUBLE_QUOTE, str) &&
+		!match(CHAR_QUOTE, str))
+	{
+		delete_tree(cmd_node);
+		return (0);
+	}
+	return (1);
 }

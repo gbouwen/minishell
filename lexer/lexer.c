@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/09 11:48:04 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/09 13:02:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void		lexer(t_data *data)
 	{
 		data->lexer.char_type = get_char_type(data->cmdline[i]);
 		state_check(data, &token, i);
-		i++;
+		if (data->cmdline[i] == '>' && data->cmdline[i + 1] == '>')
+			i += 2;
+		else
+			i++;
 	}
 	// always adding token of type 0
 	token->next = malloc(sizeof(t_list));
