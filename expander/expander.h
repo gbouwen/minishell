@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   executer.h                                         :+:    :+:            */
+/*   expander.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 11:59:34 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/10 12:19:00 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTER_H
-# define EXECUTER_H
+#ifndef EXPANDER_H
+# define EXPANDER_H
 
+# include "../libft/libft.h"
 # include "../struct.h"
-# include "../read_cmdline/read_cmdline.h"
-# include "../lexer/lexer.h"
-# include "../builtins/builtins.h"
-# include "../expander/expander.h"
+# include "../parser/parser.h"
 
-int		executer(t_data *data);
-void	command_loop(t_data *data);
+void	expander(t_data *data);
+void	expand_env_variables(char **env, t_node *node);
 
 #endif
