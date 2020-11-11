@@ -6,13 +6,39 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 16:25:43 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/10 16:58:57 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 #include <errno.h>
 #include <error.h>
+
+void	exec_with_file(t_node *tree, t_data *data)
+{
+	int		filedes[2];
+	pid_t	pid;
+	char	buf[4000];
+	int		i;
+	int		file;
+
+	pipe(filedes);
+	pid = fork();
+	file = open(tree->content, O_RDWR);
+	if (pid == 0)
+	{
+		dup2(filedes[1], STDOUT_FILENO);
+		close(filedes[1]);
+		close(filedes[2]);
+		exec_simple_cmd(tree->right, data);
+	}
+	else
+	{
+		close(filedes[1]);
+		i = read(filedes[0], buf, 4000);
+		write(file, buf, i);
+	}
+}
 
 void	exec_simple_cmd(t_node *tree, t_data *data)
 {
@@ -46,7 +72,6 @@ void	exec_simple_cmd(t_node *tree, t_data *data)
 
 void	builtin_checker(t_node *tree, char **argv, t_data *data)
 {
-//	int i;
 	tree = tree;
 	if (ft_strncmp(data->tree->content, "echo", 4) == 0)
 		builtin_echo(data->tree);
@@ -64,12 +89,14 @@ void	builtin_checker(t_node *tree, char **argv, t_data *data)
 		builtin_exit(data);
 	else
 	{
-		printf("bitchboy%s\n", argv[2]);
 		execve("/bin/cat", argv, data->env_variables);
 		printf("Oh dear, something went wrong with execve()! %d\n", errno);
 	}
 }
 void	command_loop(t_data *data)
 {
-	exec_simple_cmd(data->tree, data);
+	if (data->tree->type == FILE_OUT)
+		exec_with_file(data->tree, data);
+	else if (data->tree->type == PATHNAME)
+		exec_simple_cmd(data->tree, data);
 }
