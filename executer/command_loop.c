@@ -93,6 +93,7 @@ void	builtin_checker(t_node *tree, char **argv, t_data *data)
 		printf("Oh dear, something went wrong with execve()! %d\n", errno);
 	}
 }
+
 void	command_loop(t_data *data)
 {
 	if (data->tree->type == FILE_OUT)
