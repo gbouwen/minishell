@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/11 17:20:29 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/11 17:26:11 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-static int	count_arguments(t_node *node)
+static int	count_tree_arguments(t_node *node)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ static char	**create_arg_list(t_node *node, t_data *data)
 	char	**arg_list;
 	int		i;
 
-	arg_list = ft_calloc(count_arguments(node) + 1, sizeof(char *));
+	arg_list = ft_calloc(count_tree_arguments(node) + 1, sizeof(char *));
 	if (!arg_list)
 		free_struct_error(data, "Malloc failed");
 	node = data->tree;
