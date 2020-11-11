@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "executer.h"
-#include <wait.h>
 
 static int	count_arguments(t_node *node)
 {
