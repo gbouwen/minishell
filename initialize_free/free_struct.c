@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 10:52:24 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/09 14:05:58 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/11 14:30:54 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ void	free_struct_error(t_data *data, char *message)
 	free_env_variables(data->env_variables);
 	if (data->lexer.token_list != NULL)
 		ft_lstclear(&data->lexer.token_list, free_list_content);
+	if (data->tree != NULL)
+		delete_tree(data->tree);
 	exit_error(message);
 }
