@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/03 15:56:08 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/11 15:14:38 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "initialize_free/free.h"
 # include "struct.h"
 # include "executer/executer.h"
+# include <signal.h>
 
 # include <stdio.h> //
 

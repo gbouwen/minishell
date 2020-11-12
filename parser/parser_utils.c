@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/10 15:40:23 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/11 15:15:03 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		match(int type, char **str)
 	return (0);
 }
 
-void	print_tree_utils(t_node *root, int space)
+void	print_tree_utils(t_node *root, int space)//
 {
    int count = 5;
     if (root == NULL)
@@ -64,7 +64,7 @@ void	print_tree_utils(t_node *root, int space)
     print_tree_utils(root->right, space);
 }
 
-void	print_tree(t_node *root)
+void	print_tree(t_node *root)//
 {
 	print_tree_utils(root, 0);
 }
