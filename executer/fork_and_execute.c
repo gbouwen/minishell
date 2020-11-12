@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 13:56:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 14:10:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,25 @@ static char	*find_path_variable(char **env)
 
 static int	try_exec_path(char **args, char *path, t_data *data)
 {
-	int		i;
-	char	**try;
 	char	*correct_path;
+	char	**correct_command;
+	int		i;
 	int		val;
 
-	i = 1;
-	try = ft_calloc(get_str_array_len(args) + 1, sizeof(char *));
-	if (!try)
-		free_struct_error(data, "Malloc failed");
 	correct_path = ft_strjoin(path, "/");
-	try[0] = ft_strjoin(correct_path, args[0]);
+	correct_command = ft_calloc(get_str_array_len(args) + 1, sizeof(char *));
+	if (!correct_command)
+		free_struct_error(data, "Malloc failed");
+	correct_command[0] = ft_strjoin(correct_path, args[0]);
 	free(correct_path);
+	i = 1;
 	while (args[i] != NULL)
 	{
-		try[i] = ft_strdup(args[i]);
+		correct_command[i] = ft_strdup(args[i]);
 		i++;
 	}
-	try[i] = NULL;
-	val = execve(try[0], try, data->env_variables);
+	correct_command[i] = NULL;
+	val = execve(correct_command[0], correct_command, data->env_variables);
 	if (val == -1)
 		return (0);
 	return (1);
