@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/11 15:44:45 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/12 13:43:35 by tblanker      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int	executer(t_data *data)
 	delete_tree(data->tree);
 	free(data->cmdline);
 	ft_lstclear(&data->lexer.token_list, free_list_content);
+	g_prompt = 0;
 	return (1);
 }

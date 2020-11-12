@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/12 12:07:22 by tblanker      ########   odam.nl          #
+#    Updated: 2020/11/12 13:56:20 by tblanker      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SOURCE_C =	main.c \
 			initialize_free/set_env_variables.c \
 			initialize_free/free_env_variables.c \
 			read_cmdline/read_cmdline.c \
-			read_cmdline/exit_signal.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
 			lexer/state.c \
@@ -49,7 +48,9 @@ SOURCE_C =	main.c \
 			expander/expander.c \
 			expander/expand_env_variables.c \
 			expander/expand_files.c \
-			error/error.c
+			executer/execute_simple_command.c \
+			error/error.c \
+			error/signals.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf

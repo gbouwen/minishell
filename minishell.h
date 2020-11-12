@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 12:20:27 by tblanker      ########   odam.nl         */
+/*   Updated: 2020/11/12 13:55:24 by tblanker      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <signal.h>
 # include <stdio.h> //
 
-int		g_interrupt;
+int		g_prompt;
+
+void	prompt(void);
 
 #endif
