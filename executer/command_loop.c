@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/10 16:58:57 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/12 12:23:10 by tblanker      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 #include <errno.h>
-#include <error.h>
+#include "error/error.h"
 
 void	exec_with_file(t_node *tree, t_data *data)
 {

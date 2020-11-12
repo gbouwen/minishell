@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/11 15:14:38 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/12 12:20:27 by tblanker      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # include "struct.h"
 # include "executer/executer.h"
 # include <signal.h>
-
 # include <stdio.h> //
+
+int		g_interrupt;
 
 #endif
