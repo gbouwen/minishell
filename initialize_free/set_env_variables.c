@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 16:11:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 16:19:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 13:57:46 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		set_env_variables(t_data *data, char **envp)
 	int	len;
 	int	i;
 
-	len = get_env_len(envp);
+	len = get_str_array_len(envp);
 	data->env_variables = ft_calloc(len + 1, sizeof(char *));
 	if (!data->env_variables)
 		exit_error("Malloc failed");

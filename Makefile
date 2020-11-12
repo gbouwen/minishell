@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/11 15:18:59 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/12 13:59:36 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SOURCE_C =	main.c \
 			initialize_free/free_list_content.c \
 			initialize_free/free_struct.c \
 			initialize_free/set_env_variables.c \
-			initialize_free/free_env_variables.c \
+			initialize_free/free_str_array.c \
 			read_cmdline/read_cmdline.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
@@ -43,11 +43,13 @@ SOURCE_C =	main.c \
 			builtins/unset.c \
 			builtins/env.c \
 			builtins/exit.c \
-			helper_functions/get_env_len.c \
+			helper_functions/get_str_array_len.c \
+			helper_functions/count_tree_arguments.c \
 			expander/expander.c \
 			expander/expand_env_variables.c \
 			expander/expand_files.c \
 			executer/execute_simple_command.c \
+			executer/fork_and_execute.c \
 			error/error.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)

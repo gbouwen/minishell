@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 16:19:50 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 13:58:36 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	**add_variable(char **envp, char *var)
 	char	**new_envp;
 	int		i;
 
-	len = get_env_len(envp);
+	len = get_str_array_len(envp);
 	new_envp = ft_calloc(len + 2, sizeof(char *));
 	if (!new_envp)
 		exit_error("Malloc failed");
@@ -30,7 +30,7 @@ static char	**add_variable(char **envp, char *var)
 	}
 	new_envp[i] = ft_strdup(var);
 	new_envp[i + 1] = NULL;
-	free_env_variables(envp);
+	free_str_array(envp);
 	return (new_envp);
 }
 
