@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/11 17:26:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 11:27:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	count_tree_arguments(t_node *node)
 	int	i;
 
 	i = 0;
-	while (node->right != NULL)
+	while (node != NULL)
 	{
 		i++;
 		node = node->right;
@@ -83,6 +83,8 @@ static int	try_exec_path(char **args, char *path)
 	correct_path = ft_strjoin(path, "/");
 	try[0] = ft_strjoin(correct_path, args[0]);
 	free(correct_path);
+	printf("%s\n", try[0]);
+	printf("%s\n", args[0]);
 	while (args[i] != NULL)
 	{
 		try[i] = ft_strdup(args[i]);

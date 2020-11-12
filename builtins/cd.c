@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 16:22:40 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 11:15:01 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	builtin_cd(t_node *node, char **envp)
 	t_node	*temp;
 	int		ret;
 
+	temp = NULL;
 	if (node->right)
 		temp = node->right;
 	ret = chdir(temp->content);

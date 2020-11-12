@@ -6,14 +6,15 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/11 17:23:04 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 11:13:42 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTER_H
 # define EXECUTER_H
 
-# include <wait.h>
+// # include <wait.h> //
+# include <sys/wait.h> //
 # include "../struct.h"
 # include "../read_cmdline/read_cmdline.h"
 # include "../lexer/lexer.h"
