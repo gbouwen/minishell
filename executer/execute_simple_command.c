@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 12:22:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 12:44:59 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	get_arg_len(char **args)
 	return (i);
 }
 
-static int	try_exec_path(char **args, char *path)
+static int	try_exec_path(char **args, char *path, char **env)
 {
 	int		i;
 	char	**try;
@@ -89,13 +89,13 @@ static int	try_exec_path(char **args, char *path)
 		i++;
 	}
 	try[i] = NULL;
-	val = execve(try[0], try, NULL);
+	val = execve(try[0], try, env);
 	if (val == -1)
 		return (0);
 	return (1);
 }
 
-static void	try_paths(char **args, char *path_variable)
+static void	try_paths(char **args, char *path_variable, char **env)
 {
 	int		i;
 	char	**all_paths;
@@ -104,7 +104,7 @@ static void	try_paths(char **args, char *path_variable)
 	all_paths = ft_split(path_variable, ':');
 	while (all_paths[i] != NULL)
 	{
-		if (try_exec_path(args, all_paths[i]) == 0)
+		if (try_exec_path(args, all_paths[i], env) == 0)
 			i++;
 		else
 		{
@@ -127,9 +127,11 @@ static void	fork_and_execute(t_node *node, t_data *data)
 	{
 		args = create_arg_list(node, data);
 		val = execve(args[0], args, data->env_variables);
-		path_variable = find_path_variable(data->env_variables);
 		if (val == -1)
-			try_paths(args, path_variable);
+		{
+			path_variable = find_path_variable(data->env_variables);
+			try_paths(args, path_variable, data->env_variables);
+		}
 	}
 	else
 		wait(NULL);
