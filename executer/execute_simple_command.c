@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 11:31:06 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 12:11:25 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,17 @@ static void	fork_and_execute(t_node *node, t_data *data)
 	char	**args;
 	char	*path_variable;
 	pid_t	pid;
+	int		val;
 
 	args = create_arg_list(node, data);
 	path_variable = find_path_variable(data->env_variables);
 	pid = fork();
 	if (pid == 0)
-		try_paths(args, path_variable);
+	{
+		val = execve(args[0], args, NULL);
+		if (val == -1)
+			try_paths(args, path_variable);
+	}
 	else
 		wait(NULL);
 }
