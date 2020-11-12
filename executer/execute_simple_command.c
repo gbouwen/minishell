@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 11:27:47 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 11:31:06 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static int	try_exec_path(char **args, char *path)
 	correct_path = ft_strjoin(path, "/");
 	try[0] = ft_strjoin(correct_path, args[0]);
 	free(correct_path);
-	printf("%s\n", try[0]);
-	printf("%s\n", args[0]);
 	while (args[i] != NULL)
 	{
 		try[i] = ft_strdup(args[i]);
