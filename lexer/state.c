@@ -6,33 +6,11 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:05:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 17:16:58 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 17:29:41 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-static void	set_escape_char_double_quote(t_data *data, t_list **token, int i)
-{
-	if (data->cmdline[i + 1] == '\\' || data->cmdline[i + 1] == '"' ||
-										data->cmdline[i + 1] == '$')
-	{
-		data->lexer.skip_next = 1;
-		set_token_data(token, data->cmdline[i + 1]);
-		// token->escaped = 1; todo: variabele in node struct om te checken of $ ge-escaped is.
-	}
-	else
-		set_token_data(token, data->cmdline[i]);
-}
-
-static void	set_escape_char_general(t_data *data, t_list **token, int i)
-{
-	data->lexer.skip_next = 1;
-	set_token_data(token, data->cmdline[i + 1]);
-	// token->escaped = 1; todo: variabele in node struct om te checken of $ ge-escaped is.
-	if (data->cmdline[i + 1] == '\0')
-		data->lexer.error = 1;
-}
 
 static void	state_general(t_data *data, t_list **token, int i)
 {

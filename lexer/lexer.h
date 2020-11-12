@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:26:26 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/06 11:17:28 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 17:29:40 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ void	set_token_data(t_list **token, char c);
 void	set_special_token(t_data *data, t_list **token, int i);
 void	end_token(t_data *data, t_list **token, int i);
 void	set_double_redirect(t_data *data, t_list **token, int i);
+
+void	set_escape_char_double_quote(t_data *data, t_list **token, int i);
+void	set_escape_char_general(t_data *data, t_list **token, int i);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/12 13:59:36 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/12 17:30:07 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SOURCE_C =	main.c \
 			lexer/get_char_type.c \
 			lexer/state.c \
 			lexer/token.c \
+			lexer/escape_char.c \
 			parser/parser.c \
 			parser/binary_tree.c \
 			parser/cmd_prod.c \
