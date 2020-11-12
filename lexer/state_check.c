@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   state_check.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/28 17:14:18 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/10/28 16:04:46 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/10/29 10:42:55 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lexer.h"
 
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "ft_printf/libftprintf.h"
-# include "lexer/lexer.h"
-# include "error/error.h"
-
-# include <stdio.h> //
-
-#endif
+void	state_check(t_lexer *lexer_data, t_list **token, char *line, int i)
+{
+	if (lexer_data->state == GENERAL)
+		state_general(lexer_data, token, line, i);
+	else if (lexer_data->state == IN_QUOTE)
+		state_in_quote(lexer_data, token, line, i);
+	else if (lexer_data->state == IN_DOUBLE_QUOTE)
+		state_in_double_quote(lexer_data, token, line, i);
+}

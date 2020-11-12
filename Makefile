@@ -6,14 +6,24 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
+<<<<<<< HEAD
 #    Updated: 2020/10/28 15:46:01 by tiemen        ########   odam.nl          #
+=======
+#    Updated: 2020/10/28 17:04:50 by gbouwen       ########   odam.nl          #
+>>>>>>> 05ac120d3152d25eee79c3b5e2e9c9c96bf209c2
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS =
-SOURCE_C =	main.c lexer/lexer.c error.c
+FLAGS = -Wall -Wextra -Werror
+SOURCE_C =	main.c \
+			lexer/lexer.c \
+			lexer/get_char_type.c \
+			lexer/state_check.c \
+			lexer/state.c \
+			lexer/token.c \
+			error/error.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf
