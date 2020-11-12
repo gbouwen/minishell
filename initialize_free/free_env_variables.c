@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   free_env_variables.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/06 16:19:59 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 16:27:25 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "free.h"
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
+void	free_env_variables(char **envp)
+{
+	int	i;
 
-void	exit_error(char *message);
-
-#endif
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		free(envp[i]);
+		i++;
+	}
+	free(envp);
+}

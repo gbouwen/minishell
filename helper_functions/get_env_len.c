@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   get_env_len.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/06 12:57:25 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 12:57:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "helper_functions.h"
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
+int	get_env_len(char **env)
+{
+	int	i;
 
-void	exit_error(char *message);
-
-#endif
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	return (i);
+}

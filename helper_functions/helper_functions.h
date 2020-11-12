@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   helper_functions.h                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/06 12:58:27 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 13:03:38 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef HELPER_FUNCTIONS_H
+# define HELPER_FUNCTIONS_H
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
+# include <stddef.h>
 
-void	exit_error(char *message);
+int	get_env_len(char **env);
 
 #endif

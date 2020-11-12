@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   read_cmdline.h                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/03 10:36:21 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/11 16:16:21 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef READ_CMDLINE_H
+# define READ_CMDLINE_H
 
+# include <unistd.h>
 # include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
+# include "../libft/libft.h"
+# include "../struct.h"
+# include "../initialize_free/free.h"
 
-void	exit_error(char *message);
+int		read_cmdline(char **line, t_data *data);
+void	exit_signal_check(int read_value, t_data *data);
 
 #endif

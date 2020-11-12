@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   free_list_content.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/03 15:36:46 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/03 15:37:20 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "free.h"
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
-
-void	exit_error(char *message);
-
-#endif
+void	free_list_content(void *content)
+{
+	if (content)
+		free(content);
+}

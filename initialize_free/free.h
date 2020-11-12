@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   free.h                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/03 15:37:59 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/09 13:54:24 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef FREE_H
+# define FREE_H
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
+# include "../struct.h"
+# include "../error/error.h"
 
-void	exit_error(char *message);
+void	free_list_content(void *content);
+void	free_struct(t_data *data);
+void	free_struct_error(t_data *data, char *message);
+void	free_env_variables(char **envp);
 
 #endif

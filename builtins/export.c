@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   export.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
+/*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/05 10:35:41 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/05 17:36:18 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "builtins.h"
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
-
-void	exit_error(char *message);
-
-#endif
+void	builtin_export(t_data *data)
+{
+	if (!data->tree->right)
+		builtin_export_no_arguments(data->env_variables);
+	else
+		builtin_export_variable(data);
+}

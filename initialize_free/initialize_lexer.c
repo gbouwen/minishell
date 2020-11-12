@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   initialize_lexer.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/03 15:40:00 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 11:29:56 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "initialize.h"
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
-
-void	exit_error(char *message);
-
-#endif
+void	initialize_lexer(t_lexer *lexer)
+{
+	lexer->token_list = NULL;
+	lexer->char_type = 0;
+	lexer->state = 0;
+	lexer->line_length = 0;
+}

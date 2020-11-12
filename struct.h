@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   state_check.c                                      :+:    :+:            */
+/*   struct.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 16:04:46 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/29 10:42:55 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/10 15:36:25 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-void	state_check(t_lexer *lexer_data, t_list **token, char *line, int i)
+# include "lexer/lexer_utils.h"
+# include "parser/parser.h"
+
+typedef struct	s_data
 {
-	if (lexer_data->state == GENERAL)
-		state_general(lexer_data, token, line, i);
-	else if (lexer_data->state == IN_QUOTE)
-		state_in_quote(lexer_data, token, line, i);
-	else if (lexer_data->state == IN_DOUBLE_QUOTE)
-		state_in_double_quote(lexer_data, token, line, i);
-}
+	char		*cmdline;
+	char		**env_variables;
+	int			read_val;
+	t_lexer		lexer;
+	t_node		*tree;
+	int			expand_error;
+}				t_data;
+
+#endif

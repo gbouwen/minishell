@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   echo.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/05 14:37:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "builtins.h"
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
+void	builtin_echo(t_node *node)
+{
+	int	fd;
+	int	newline;
 
-void	exit_error(char *message);
-
-#endif
+	fd = 1;
+	newline = 1;
+	if (node->right)
+	{
+		if (ft_strncmp(node->right->content, "-n", 2) == 0)
+		{
+			newline = 0;
+			node = node->right;
+		}
+	}
+	while (node->right)
+	{
+		node = node->right;
+		ft_putstr_fd(node->content, fd);
+		ft_putstr_fd(" ", fd);
+	}
+	if (newline)
+		ft_putstr_fd("\n", fd);
+}

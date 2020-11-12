@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   expander.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/10 10:41:50 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/10 15:39:16 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "expander.h"
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
+void	expander(t_data *data)
+{
+	t_node	*temp;
 
-void	exit_error(char *message);
-
-#endif
+	temp = data->tree;
+	expand_env_variables(data->env_variables, temp);
+	expand_files(data, temp);
+}

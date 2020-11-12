@@ -6,37 +6,45 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/29 10:44:08 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/09 13:02:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-static void	init_lexer(t_lexer *lexer_data, int length)
+static void	set_lexer(t_data *data)
 {
-	lexer_data->state = GENERAL;
-	lexer_data->token_list = malloc(sizeof(t_list));
-	if (!lexer_data->token_list)
-		exit_error("Malloc failed.");
-	lexer_data->line_length = length;
+	data->lexer.state = GENERAL;
+	data->lexer.token_list = malloc(sizeof(t_list));
+	if (!data->lexer.token_list)
+		free_struct_error(data, "Malloc failed");
+	ft_bzero(data->lexer.token_list, sizeof(t_list));
+	data->lexer.line_length = ft_strlen(data->cmdline);
 }
 
-void	lexer(t_lexer *lexer_data, char *line, int length)
+void		lexer(t_data *data)
 {
 	t_list		*token;
 	int			i;
 
-	init_lexer(lexer_data, length);
-	token = lexer_data->token_list;
-	init_token(token, lexer_data->line_length);
+	set_lexer(data);
+	token = data->lexer.token_list;
+	init_token(data, token, data->lexer.line_length);
 	i = 0;
-	while (line[i] != '\0')
+	while (data->cmdline[i] != '\0')
 	{
-		lexer_data->char_type = get_char_type(line[i]);
-		state_check(lexer_data, &token, line, i);
-		if (lexer_data->char_type == CHAR_ESCAPE)
+		data->lexer.char_type = get_char_type(data->cmdline[i]);
+		state_check(data, &token, i);
+		if (data->cmdline[i] == '>' && data->cmdline[i + 1] == '>')
 			i += 2;
 		else
 			i++;
 	}
+	// always adding token of type 0
+	token->next = malloc(sizeof(t_list));
+	token = token->next;
+	init_token(data, token, 1);
+	// has to give multiline error
+	if (data->lexer.state != GENERAL)
+		printf("Error executing command\n");
 }

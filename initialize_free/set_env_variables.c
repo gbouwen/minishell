@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstclear.c                                      :+:    :+:            */
+/*   set_env_variables.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/06 14:56:24 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/30 11:04:38 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/11/05 16:11:59 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/06 16:19:11 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "initialize.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void		set_env_variables(t_data *data, char **envp)
 {
-	t_list	*temp;
+	int	len;
+	int	i;
 
-	if (!lst)
-		return ;
-	while (*lst != 0)
+	len = get_env_len(envp);
+	data->env_variables = ft_calloc(len + 1, sizeof(char *));
+	if (!data->env_variables)
+		exit_error("Malloc failed");
+	i = 0;
+	while (i < len)
 	{
-		temp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = temp;
+		data->env_variables[i] = ft_strdup(envp[i]);
+		i++;
 	}
+	data->env_variables[i] = NULL;
 }

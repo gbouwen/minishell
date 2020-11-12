@@ -6,23 +6,49 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-<<<<<<< HEAD
-#    Updated: 2020/10/28 15:46:01 by tiemen        ########   odam.nl          #
-=======
-#    Updated: 2020/10/28 17:04:50 by gbouwen       ########   odam.nl          #
->>>>>>> 05ac120d3152d25eee79c3b5e2e9c9c96bf209c2
+#    Updated: 2020/11/12 12:07:22 by tblanker      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
+
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Werror -Wextra
 SOURCE_C =	main.c \
+			initialize_free/initialize_data.c \
+			initialize_free/initialize_lexer.c \
+			initialize_free/free_list_content.c \
+			initialize_free/free_struct.c \
+			initialize_free/set_env_variables.c \
+			initialize_free/free_env_variables.c \
+			read_cmdline/read_cmdline.c \
+			read_cmdline/exit_signal.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
-			lexer/state_check.c \
 			lexer/state.c \
 			lexer/token.c \
+			parser/parser.c \
+			parser/binary_tree.c \
+			parser/cmd_prod.c \
+			parser/simple_cmd_prod.c \
+			parser/task_prod.c \
+			parser/sequence_prod.c \
+			parser/parser_utils.c \
+			executer/executer.c \
+			executer/command_loop.c \
+			builtins/echo.c \
+			builtins/cd.c \
+			builtins/pwd.c \
+			builtins/export.c \
+			builtins/export_no_arguments.c \
+			builtins/export_variable.c \
+			builtins/unset.c \
+			builtins/env.c \
+			builtins/exit.c \
+			helper_functions/get_env_len.c \
+			expander/expander.c \
+			expander/expand_env_variables.c \
+			expander/expand_files.c \
 			error/error.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)

@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error.h                                            :+:    :+:            */
+/*   initialize_data.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/06 15:05:33 by tiemen        ########   odam.nl         */
+/*   Created: 2020/11/03 15:35:21 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/11/10 15:36:37 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "initialize.h"
 
-# include <stdlib.h>
-# include "../ft_printf/libftprintf.h"
-
-void	exit_error(char *message);
-
-#endif
+void	initialize_data(t_data *data, char **envp)
+{
+	data->cmdline = NULL;
+	set_env_variables(data, envp);
+	data->read_val = 0;
+	initialize_lexer(&data->lexer);
+	data->expand_error = 0;
+}
