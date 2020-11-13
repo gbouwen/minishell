@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/13 15:11:32 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/13 15:16:18 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,14 @@ void	fork_and_execute(t_node *node, t_data *data)
 	{
 		args = create_arg_list(node, data);
 		val = execve(args[0], args, data->env_variables);
-		if (errno == 2)
-		{
-			printf("%s\n", strerror(errno));
-			free_struct(data);
-			exit(0);
-		}
 		if (val == -1)
 		{
+			if (args[0][0] == '/')
+			{
+				ft_printf("%s\n", strerror(errno));
+				free_struct(data);
+				exit(0);
+			}
 			path_variable = find_path_variable(data->env_variables);
 			try_paths(args, path_variable, data);
 			free_struct(data);
