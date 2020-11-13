@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/11 15:15:03 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/13 12:00:41 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void	print_tree_utils(t_node *root, int space)//
     for (int i = count; i < space; i++)
 		printf(" ");
 	printf("state: %d\n", root->state_type);
+    for (int i = count; i < space; i++)
+		printf(" ");
+	printf("escaped: %d\n", root->is_escaped);
     print_tree_utils(root->right, space);
 }
 

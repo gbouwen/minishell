@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/12 13:53:19 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/13 11:50:50 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_node
 {
 	int				type;
 	int				state_type;
+	int				is_escaped;
 	char			*content;
 	struct s_node	*right;
 	struct s_node	*left;

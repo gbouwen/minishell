@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:27:08 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/10 15:36:29 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/11/13 11:53:49 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_node *simple_command()
 		return (NULL);
 	arguments = simple_command_args();
 	simple_cmd = malloc(sizeof(t_node));
+	simple_cmd->is_escaped = prev_token->is_escaped;
 	attach_tree_node(simple_cmd, set_node_type
 	(prev_token->type, PATHNAME, simple_cmd), NULL, arguments);
 	simple_cmd->content = str;
@@ -43,6 +44,7 @@ t_node	*simple_command_args()
 	list_args = simple_command_args();
 	argument = malloc(sizeof(t_node));
 	argument->content = str;
+	argument->is_escaped = prev_token->is_escaped;
 	attach_tree_node(argument, set_node_type
 	(prev_token->type, ARGUMENT, argument), NULL, list_args);
 	return (argument);
