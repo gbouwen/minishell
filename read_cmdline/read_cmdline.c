@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/13 11:33:55 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/13 12:08:48 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ static int		found_newline(char **line)
 
 int			read_cmdline(char **line, t_data *data)
 {
-	data = data; //
 	int		val_read;
 	char	buff[1];
 
 	buff[0] = '\0';
 	val_read = read(0, buff, 1);
-//	exit_signal_check(val_read, data);
+	exit_signal_check(val_read, data);
 	if (val_read == -1)
 		read_fail(*line);
 	if (buff[0] == '\n')

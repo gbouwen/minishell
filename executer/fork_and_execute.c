@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/13 12:04:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/13 12:08:22 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	try_paths(char **args, char *path_variable, t_data *data)
 	}
 	free_str_array(args);
 	free_str_array(all_paths);
-	printf("could not execute\n");
+	ft_printf("could not execute\n");
 }
 
 void	fork_and_execute(t_node *node, t_data *data)
