@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 14:10:10 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/13 12:04:11 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,33 @@ static char	*find_path_variable(char **env)
 	return (NULL);
 }
 
-static int	try_exec_path(char **args, char *path, t_data *data)
+static int	try_exec_path(char **args, char **all_paths, int i, t_data *data)
 {
 	char	*correct_path;
 	char	**correct_command;
-	int		i;
-	int		val;
+	int		x;
 
-	correct_path = ft_strjoin(path, "/");
+	correct_path = ft_strjoin(all_paths[i], "/");
 	correct_command = ft_calloc(get_str_array_len(args) + 1, sizeof(char *));
 	if (!correct_command)
+	{
+		free_str_array(args);
+		free_str_array(all_paths);
+		free(correct_path);
 		free_struct_error(data, "Malloc failed");
+	}
 	correct_command[0] = ft_strjoin(correct_path, args[0]);
 	free(correct_path);
-	i = 1;
-	while (args[i] != NULL)
+	x = 1;
+	while (args[x] != NULL)
 	{
-		correct_command[i] = ft_strdup(args[i]);
-		i++;
+		correct_command[x] = ft_strdup(args[x]);
+		x++;
 	}
-	correct_command[i] = NULL;
-	val = execve(correct_command[0], correct_command, data->env_variables);
-	if (val == -1)
-		return (0);
-	return (1);
+	correct_command[x] = NULL;
+	execve(correct_command[0], correct_command, data->env_variables);
+	free_str_array(correct_command);
+	return (0);
 }
 
 static void	try_paths(char **args, char *path_variable, t_data *data)
@@ -81,7 +84,7 @@ static void	try_paths(char **args, char *path_variable, t_data *data)
 	all_paths = ft_split(path_variable, ':');
 	while (all_paths[i] != NULL)
 	{
-		if (try_exec_path(args, all_paths[i], data) == 0)
+		if (try_exec_path(args, all_paths, i, data) == 0)
 			i++;
 	}
 	free_str_array(args);
@@ -105,6 +108,8 @@ void	fork_and_execute(t_node *node, t_data *data)
 		{
 			path_variable = find_path_variable(data->env_variables);
 			try_paths(args, path_variable, data);
+			free_struct(data);
+			exit(0);
 		}
 	}
 	else
