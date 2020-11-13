@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/13 11:08:44 by tiemen        ########   odam.nl          #
+#    Updated: 2020/11/13 11:12:06 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ SOURCE_C =	main.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
 			error/error.c \
-			error/signal.c
+			error/signals.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf
