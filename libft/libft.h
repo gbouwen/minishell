@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/06 09:12:23 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/30 11:03:47 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/13 11:11:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct		s_list
 	char			*content;
 	int				current_char;
 	int				type;
+	int				is_escaped;
 	struct s_list	*next;
 }					t_list;
 
