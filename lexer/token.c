@@ -20,6 +20,7 @@ void	init_token(t_data *data, t_list *token, int length)
 	ft_bzero(token->content, length + 1);
 	token->current_char = 0;
 	token->type = 0;
+	token->is_escaped = 0;
 	token->next = NULL;
 }
 
