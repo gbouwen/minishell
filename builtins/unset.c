@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/09 12:02:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 13:59:54 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char **remove_var(t_data *data, int x)
 	char	**new_env;
 	int		i;
 
-	len = get_env_len(data->env_variables);
+	len = get_str_array_len(data->env_variables);
 	new_env = ft_calloc(len + 1, sizeof(char *));
 	if (!new_env)
 		free_struct_error(data, "Malloc failed");
@@ -30,7 +30,7 @@ static char **remove_var(t_data *data, int x)
 		i++;
 	}
 	new_env[i] = NULL;
-	free_env_variables(data->env_variables);
+	free_str_array(data->env_variables);
 	return (new_env);
 }
 
@@ -58,7 +58,6 @@ void		builtin_unset(t_data *data)
 	while (temp)
 	{
 		search_unset_variable(temp->content, data);
-		printf("lol\n");
 		temp = temp->right;
 	}
 }

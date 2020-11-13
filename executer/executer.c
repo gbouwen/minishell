@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 13:43:35 by tblanker      ########   odam.nl         */
+/*   Updated: 2020/11/13 11:08:03 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	executer(t_data *data)
 	if (data->read_val == -1)
 		return (-1);
 	lexer(data);
+	if (data->lexer.state != GENERAL || data->lexer.error == 1)
+		return (1);
 	data->tree = parser(&data->lexer);
 	expander(data);
 	print_tree(data->tree); //

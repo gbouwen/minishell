@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:52:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/04 16:32:04 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 16:55:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef	struct		s_lexer
 	int		char_type;
 	int		state;
 	int		line_length;
+	int		skip_next;
+	int		error;
 }					t_lexer;
 
 # define CHAR_GENERAL 1

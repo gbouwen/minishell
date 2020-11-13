@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/12 13:56:20 by tblanker      ########   odam.nl          #
+#    Updated: 2020/11/13 11:08:44 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,13 @@ SOURCE_C =	main.c \
 			initialize_free/free_list_content.c \
 			initialize_free/free_struct.c \
 			initialize_free/set_env_variables.c \
-			initialize_free/free_env_variables.c \
+			initialize_free/free_str_array.c \
 			read_cmdline/read_cmdline.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
 			lexer/state.c \
 			lexer/token.c \
+			lexer/escape_char.c \
 			parser/parser.c \
 			parser/binary_tree.c \
 			parser/cmd_prod.c \
@@ -44,13 +45,15 @@ SOURCE_C =	main.c \
 			builtins/unset.c \
 			builtins/env.c \
 			builtins/exit.c \
-			helper_functions/get_env_len.c \
+			helper_functions/get_str_array_len.c \
+			helper_functions/count_tree_arguments.c \
 			expander/expander.c \
 			expander/expand_env_variables.c \
 			expander/expand_files.c \
 			executer/execute_simple_command.c \
+			executer/fork_and_execute.c \
 			error/error.c \
-			error/signals.c
+			error/signal.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf

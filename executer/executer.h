@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 11:13:42 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 13:55:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		executer(t_data *data);
 void	command_loop(t_data *data);
 
 void	execute_simple_command(t_data *data);
+void	fork_and_execute(t_node *node, t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 11:15:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/12 14:19:37 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ void	builtin_cd(t_node *node, char **envp)
 	int		ret;
 
 	temp = NULL;
-	if (node->right)
+	ret = -1;
+	if (node->right != NULL)
 		temp = node->right;
-	ret = chdir(temp->content);
+	if (temp != NULL)
+		ret = chdir(temp->content);
 	if (ret == -1)
 		ft_printf("error: could not change directory\n");
-	change_pwd_env(envp);
+	else
+		change_pwd_env(envp);
 }
