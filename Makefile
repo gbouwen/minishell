@@ -6,9 +6,10 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/12 17:30:07 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/11/13 11:08:44 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = minishell
 CC = gcc
@@ -51,7 +52,8 @@ SOURCE_C =	main.c \
 			expander/expand_files.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
-			error/error.c
+			error/error.c \
+			error/signal.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
 LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf
