@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 17:12:51 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/11/13 12:19:40 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void		expand_env_variables(char **env, t_node *node)
 	expand_env_variables(env, node->left);
 	expand_env_variables(env, node->right);
 	i = 0;
-	if (node->content[0] == '$' && node->state_type != CHAR_QUOTE)
+	if (node->content[0] == '$' && node->state_type != CHAR_QUOTE
+											&& node->is_escaped == 0)
 	{
 		while (env[i] != NULL)
 		{
