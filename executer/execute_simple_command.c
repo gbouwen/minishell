@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 17:37:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/07 17:01:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-int	check_builtin(t_node *node, t_data *data)
+int	check_builtin(t_data *data, t_node *node)
 {
 	if (ft_strncmp(node->content, "echo", ft_strlen(node->content)) == 0)
 		builtin_echo(data->tree);
@@ -33,11 +33,8 @@ int	check_builtin(t_node *node, t_data *data)
 	return (1);
 }
 
-void	execute_simple_command(t_data *data)
+void	execute_simple_command(t_data *data, t_node *node)
 {
-	t_node	*node;
-
-	node = data->tree;
-	if (check_builtin(node, data) == 0)
-		fork_and_execute(node, data);
+	if (check_builtin(data, node) == 0)
+		fork_and_execute(data, node);
 }

@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/13 15:16:18 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/07 17:02:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-static char	**create_arg_list(t_node *node, t_data *data)
+static char	**create_arg_list(t_data *data, t_node *node)
 {
 	char	**arg_list;
 	int		i;
@@ -92,7 +92,7 @@ static void	try_paths(char **args, char *path_variable, t_data *data)
 	ft_printf("could not execute\n");
 }
 
-void	fork_and_execute(t_node *node, t_data *data)
+void	fork_and_execute(t_data *data, t_node *node)
 {
 	pid_t	pid;
 	char	**args;
@@ -102,7 +102,7 @@ void	fork_and_execute(t_node *node, t_data *data)
 	pid = fork();
 	if (pid == 0)
 	{
-		args = create_arg_list(node, data);
+		args = create_arg_list(data, node);
 		val = execve(args[0], args, data->env_variables);
 		if (val == -1)
 		{
