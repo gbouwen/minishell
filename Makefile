@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/12/15 14:52:35 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/12/15 15:11:30 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SOURCE_C =	main.c \
 			executer/fork_and_execute.c \
 			executer/redirect_out.c \
 			executer/redirect_append.c \
+			executer/redirect_in.c \
 			error/error.c \
 			error/signals.c
 

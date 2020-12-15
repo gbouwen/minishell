@@ -30,5 +30,6 @@ void	fork_and_execute(t_data *data, t_node *node);
 
 void	redirect_out(t_data *data, t_node *node);
 void	redirect_append(t_data *data, t_node *node);
+void	redirect_in(t_data *data, t_node *node);
 
 #endif

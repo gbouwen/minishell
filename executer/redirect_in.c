@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   command_loop.c                                     :+:    :+:            */
+/*   redirect_in.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/15 15:10:11 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/12/15 15:08:53 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/12/15 15:22:55 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-void	command_loop(t_data *data)
+void	redirect_in(t_data *data, t_node *node)
 {
-	t_node	*node;
+	int	save_in;
+	int	new_fd;
 
-	node = data->tree;
-	if (node->type == PATHNAME)
-		execute_simple_command(data, node);
-	if (node->type == FILE_OUT)
-		redirect_out(data, node);
-	if (node->type == FILE_OUT_APPEND)
-		redirect_append(data, node);
-	if (node->type == FILE_IN)
-		redirect_in(data, node);
+	save_in = dup(STDIN_FILENO);
+	while (node->left != NULL)
+		node = node->left;
+	new_fd = open(node->content, O_RDONLY);
+	new_fd = dup2(new_fd, STDIN_FILENO);
+	if (new_fd != -1)
+		execute_simple_command(data, data->tree->right);
+	close(STDIN_FILENO);
+	close(new_fd);
+	dup2(save_in, STDIN_FILENO);
 }

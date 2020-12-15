@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/07 17:02:10 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/15 15:25:02 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static char	**create_arg_list(t_data *data, t_node *node)
 	arg_list = ft_calloc(count_tree_arguments(node) + 1, sizeof(char *));
 	if (!arg_list)
 		free_struct_error(data, "Malloc failed");
-	node = data->tree;
 	i = 0;
 	while (node != NULL)
 	{
