@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/15 14:08:54 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/15 14:55:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,6 @@ void	command_loop(t_data *data)
 		execute_simple_command(data, node);
 	if (node->type == FILE_OUT)
 		redirect_out(data, node);
+	if (node->type == FILE_OUT_APPEND)
+		redirect_append(data, node);
 }
