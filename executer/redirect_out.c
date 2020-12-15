@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   command_loop.c                                     :+:    :+:            */
+/*   redirect_out.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/15 14:08:54 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/12/15 14:09:17 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/12/15 14:43:06 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-void	command_loop(t_data *data)
+void	redirect_out(t_data *data, t_node *node)
 {
-	t_node	*node;
+	int	save_out;
+	int	new_fd;
 
-	node = data->tree;
-	if (node->type == PATHNAME)
-		execute_simple_command(data, node);
-	if (node->type == FILE_OUT)
-		redirect_out(data, node);
+	save_out = dup(STDOUT_FILENO);
+	new_fd = open(node->content, O_RDWR);
+	new_fd = dup2(new_fd, STDOUT_FILENO);
+	if (new_fd != -1)
+		execute_simple_command(data, node->right);
+	close(STDOUT_FILENO);
+	close(new_fd);
+	dup2(save_out, STDOUT_FILENO);
 }
