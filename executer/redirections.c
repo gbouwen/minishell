@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   set_redirections.c                                 :+:    :+:            */
+/*   redirections.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/17 13:49:46 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/17 13:54:38 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/17 14:29:08 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
+
+void	redirections_loop(t_node *node)
+{
+	while (node != NULL)
+	{
+		set_redirections(node);
+		node = node->left;
+	}
+}
 
 void	set_redirections(t_node *node)
 {
