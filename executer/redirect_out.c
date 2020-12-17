@@ -6,25 +6,27 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/15 14:09:17 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/15 14:51:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/17 12:36:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-void	redirect_out(t_data *data, t_node *node)
+void	redirect_out(t_node *node)
 {
-	int	save_out;
+//	int	save_out;
 	int	new_fd;
 
-	save_out = dup(STDOUT_FILENO);
-	while (node->left != NULL)
-		node = node->left;
+   /* save_out = dup(STDOUT_FILENO);*/
+	/*if (save_out == -1)*/
+		/*return ;*/
 	new_fd = open(node->content, O_RDWR);
+	if (new_fd == -1)
+		return ;
 	new_fd = dup2(new_fd, STDOUT_FILENO);
-	if (new_fd != -1)
-		execute_simple_command(data, data->tree->right);
-	close(STDOUT_FILENO);
-	close(new_fd);
-	dup2(save_out, STDOUT_FILENO);
+   /* if (new_fd != -1)*/
+		/*execute_simple_command(data, data->tree->right);*/
+   /* close(STDOUT_FILENO);*/
+	/*close(new_fd);*/
+   /* dup2(save_out, STDOUT_FILENO);*/
 }
