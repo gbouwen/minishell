@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   initialize_data.c                                  :+:    :+:            */
+/*   expand_questionmark.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 15:35:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/18 11:00:35 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/12/18 11:07:50 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/12/18 11:19:37 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "initialize.h"
+#include "expander.h"
 
-void	initialize_data(t_data *data, char **envp)
+void	expand_questionmark(int value, t_node *node)
 {
-	data->cmdline = NULL;
-	set_env_variables(data, envp);
-	data->read_val = 0;
-	initialize_lexer(&data->lexer);
-	data->expand_error = 0;
-	data->questionmark = 0;
+	if (node == NULL)
+		return ;
+	expand_questionmark(value, node->left);
+	expand_questionmark(value, node->right);
+	if (ft_strncmp(node->content, "$?", 2) == 0)
+	{
+		free(node->content);
+		node->content = ft_itoa(value);
+	}
 }
