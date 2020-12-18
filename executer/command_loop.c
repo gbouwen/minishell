@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/18 11:08:27 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 14:03:46 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,18 @@ void	command_loop(t_data *data)
 				dup2(save_in, STDIN_FILENO);
 				close(save_in);
 			}
+			if (node->right->type == PIPE)
+			{
+				execute_pipe(data, node);
+				break ;
+			}
 			else
 				execute_simple_command(data, node->right);
+		}
+		if (node->type == PIPE)
+		{
+			execute_pipe(data, node);
+			break ;
 		}
 		if (node->type == PATHNAME)
 			execute_simple_command(data, node);

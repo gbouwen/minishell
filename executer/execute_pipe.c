@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/12/18 11:03:51 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 15:07:42 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	int	count_pipes(t_node *node)
 	int	i;
 
 	i = 0;
-	while (node->type == '|')
+	while (node->type == PIPE)
 	{
 		i++;
 		node = node->left;
@@ -42,8 +42,14 @@ static	void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 		close(pipe_switch->new_fds[READ]);
 		close(pipe_switch->new_fds[WRITE]);
 	}
-	execute_simple_command(node, data);
-	exit(1);	
+	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND
+		|| node->type == FILE_IN)
+	{
+		redirections_loop(node);
+		node = node->right;
+	}
+	execute_simple_command(data, node);
+	exit(1);
 }
 
 static	void	connect_pipes(t_pipe *pipe_switch, int i)
@@ -61,7 +67,7 @@ static	void	connect_pipes(t_pipe *pipe_switch, int i)
 	wait(NULL);
 }
 
-void	execute_pipe(t_node	*node, t_data *data)
+void			execute_pipe(t_data *data, t_node *node)
 {
 	t_pipe	*pipe_switch;
 	pid_t	pid;
@@ -73,7 +79,7 @@ void	execute_pipe(t_node	*node, t_data *data)
 	i = 0;
 	while (i < pipe_switch->num_pipes)
 	{
-		if (node->type == '|')
+		if (node->type == PIPE)
 			command_node = node->right;
 		else
 			command_node = node;
@@ -86,6 +92,12 @@ void	execute_pipe(t_node	*node, t_data *data)
 			connect_pipes(pipe_switch, i);
 		node = node->left;
 		i++;
+	}
+	if (pipe_switch->num_pipes > 2)
+	{
+		close(pipe_switch->old_fds[READ]);
+		close(pipe_switch->old_fds[WRITE]);
+		//close(pipe_switch->old_fds
 	}
 	free(pipe_switch);
 }

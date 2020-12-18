@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 13:55:24 by tblanker      ########   odam.nl         */
+/*   Updated: 2020/12/18 16:17:48 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include <stdio.h> //
 
 int		g_prompt;
-
-void	prompt(void);
+int		g_in_parent;
 
 #endif

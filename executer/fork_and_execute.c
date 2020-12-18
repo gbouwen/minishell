@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/18 11:12:18 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 16:38:09 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,11 @@ void	fork_and_execute(t_data *data, t_node *node)
 	char	*path_variable;
 
 	pid = fork();
+	g_prompt = 0;
 	if (pid == 0)
 	{
-<<<<<<< HEAD
-		g_prompt = 1;
-		signal(SIGCHLD, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		args = create_arg_list(node, data);
-=======
+		g_in_parent = 0;
 		args = create_arg_list(data, node);
->>>>>>> 85394c2aad4a66120b55f9e9d5475cc78b9d5aa6
 		val = execve(args[0], args, data->env_variables);
 		if (val == -1)
 		{
@@ -125,5 +120,7 @@ void	fork_and_execute(t_data *data, t_node *node)
 		}
 	}
 	else
+	{
 		wait(NULL);
+	}
 }

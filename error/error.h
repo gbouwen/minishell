@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 17:01:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/07 14:44:56 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 15:03:08 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../ft_printf/libftprintf.h"
 # include "../minishell.h"
 
+void	prompt(void);
 void	exit_error(char *message);
 void	interrupt_signal(int n);
 void	signal_in_fork(int n);

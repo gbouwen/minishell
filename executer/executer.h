@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/18 11:11:47 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 13:01:43 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ typedef	struct	s_pipe
 int		executer(t_data *data);
 void	command_loop(t_data *data);
 
+void	execute_pipe(t_data *data, t_node *node);
 void	execute_simple_command(t_data *data, t_node *node);
 void	fork_and_execute(t_data *data, t_node *node);
 
 void	set_redirections(t_node *node);
+void	redirections_loop(t_node *node);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/12/07 14:23:30 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 16:24:24 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 t_node *parser(t_lexer *lexer_data)
 {
@@ -26,6 +26,7 @@ t_node *parser(t_lexer *lexer_data)
 	{
 //		delete_tree(node);
 		ft_printf("Parser error near '%s'\n", g_current_tok->content);
+		g_prompt = 0;
 		return (NULL);
 	}
 	return (*nodes);

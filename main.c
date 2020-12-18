@@ -6,18 +6,11 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/12/18 11:07:57 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 16:22:48 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	prompt(void)
-{
-	if (g_prompt == 0)
-		ft_printf("> ");
-	g_prompt = 1;
-}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -31,10 +24,11 @@ int	main(int ac, char **av, char **envp)
 	}
 	ignore_signals();
 	status = 1;
+	g_in_parent = 1;
+	g_prompt = 0;
 	initialize_data(&data, envp);
 	while (status == 1)
 	{
-		g_prompt = 0;
 		prompt();
 		status = executer(&data);
 	}

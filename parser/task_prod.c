@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/12/07 14:32:15 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 11:33:29 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ t_node	*task_pipe()
 	pipe_node->is_escaped = error_token->is_escaped;
 	pipe_node->state_type = TOKEN;
 	pipe_node->content = ft_strdup("|");
-	attach_tree_node(pipe_node, error_token->type, tasks(), task_node);
+	attach_tree_node(pipe_node, PIPE, tasks(), task_node);
 	return (pipe_node);
 }
