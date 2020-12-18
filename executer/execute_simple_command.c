@@ -6,36 +6,35 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/17 17:16:14 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 11:11:02 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-int	check_builtin(t_node *node, t_data *data)
+int	check_builtin(t_data *data, t_node *node)
 {
-	if (ft_strncmp(node->content, "echo", ft_strlen(node->content)) == 0)
-		builtin_echo(data->tree);
-	else if (ft_strncmp(node->content, "pwd", ft_strlen(node->content)) == 0)
-		builtin_pwd(data->tree);
-	else if (ft_strncmp(node->content, "cd", ft_strlen(node->content)) == 0)
-		builtin_cd(data->tree, data->env_variables);
-	else if (ft_strncmp(node->content, "export", ft_strlen(node->content)) == 0)
+	if (ft_strncmp(node->content, "echo", ft_strlen("echo")) == 0)
+		builtin_echo(node);
+	else if (ft_strncmp(node->content, "pwd", ft_strlen("pwd")) == 0)
+		builtin_pwd(node);
+	else if (ft_strncmp(node->content, "cd", ft_strlen("cd")) == 0)
+		builtin_cd(node, data->env_variables);
+	else if (ft_strncmp(node->content, "export", ft_strlen("export")) == 0)
 		builtin_export(data);
-	else if (ft_strncmp(node->content, "unset", ft_strlen(node->content)) == 0)
+	else if (ft_strncmp(node->content, "unset", ft_strlen("unset")) == 0)
 		builtin_unset(data);
-	else if (ft_strncmp(node->content, "env", ft_strlen(node->content)) == 0)
+	else if (ft_strncmp(node->content, "env", ft_strlen("env")) == 0)
 		builtin_env(data->tree, data->env_variables);
-	else if (ft_strncmp(node->content, "exit", ft_strlen(node->content)) == 0)
+	else if (ft_strncmp(node->content, "exit", ft_strlen("exit")) == 0)
 		builtin_exit(data);
 	else
 		return (0);
 	return (1);
 }
 
-void	execute_simple_command(t_node *node, t_data *data)
+void	execute_simple_command(t_data *data, t_node *node)
 {
-	if (check_builtin(node, data) == 0)
-		fork_and_execute(node, data);
-	g_prompt = 0;
+	if (check_builtin(data, node) == 0)
+		fork_and_execute(data, node);
 }

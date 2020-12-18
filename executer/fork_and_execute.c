@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/17 10:34:46 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/18 11:12:18 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-static char	**create_arg_list(t_node *node, t_data *data)
+static char	**create_arg_list(t_data *data, t_node *node)
 {
 	char	**arg_list;
 	int		i;
@@ -20,7 +20,6 @@ static char	**create_arg_list(t_node *node, t_data *data)
 	arg_list = ft_calloc(count_tree_arguments(node) + 1, sizeof(char *));
 	if (!arg_list)
 		free_struct_error(data, "Malloc failed");
-//	node = data->tree;
 	i = 0;
 	while (node != NULL)
 	{
@@ -92,7 +91,7 @@ static void	try_paths(char **args, char *path_variable, t_data *data)
 	ft_printf("could not execute\n");
 }
 
-void	fork_and_execute(t_node *node, t_data *data)
+void	fork_and_execute(t_data *data, t_node *node)
 {
 	pid_t	pid;
 	char	**args;
@@ -102,13 +101,23 @@ void	fork_and_execute(t_node *node, t_data *data)
 	pid = fork();
 	if (pid == 0)
 	{
+<<<<<<< HEAD
 		g_prompt = 1;
 		signal(SIGCHLD, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		args = create_arg_list(node, data);
+=======
+		args = create_arg_list(data, node);
+>>>>>>> 85394c2aad4a66120b55f9e9d5475cc78b9d5aa6
 		val = execve(args[0], args, data->env_variables);
 		if (val == -1)
 		{
+			if (args[0][0] == '/')
+			{
+				ft_printf("%s\n", strerror(errno));
+				free_struct(data);
+				exit(0);
+			}
 			path_variable = find_path_variable(data->env_variables);
 			try_paths(args, path_variable, data);
 			free_struct(data);
