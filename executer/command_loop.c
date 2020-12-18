@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/18 14:30:42 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/18 15:25:12 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	command_loop(t_data *data)
 		{
 			if (node->right->type == FILE_OUT || node->right->type == FILE_OUT_APPEND || node->right->type == FILE_IN)
 			{
-				redirections_loop(node->right);
-				if (node->right->right)
+				redirections_loop(data, node->right);
+				if (node->right->right && data->expand_error != 1)
 					execute_simple_command(data, node->right->right);
 				restore_stdin_stdout(save_in, save_out);
 			}
@@ -47,8 +47,8 @@ void	command_loop(t_data *data)
 			execute_simple_command(data, node);
 		if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND || node->type == FILE_IN)
 		{
-			redirections_loop(node);
-			if (node->right)
+			redirections_loop(data, node);
+			if (node->right && data->expand_error != 1)
 				execute_simple_command(data, node->right);
 			restore_stdin_stdout(save_in, save_out);
 		}

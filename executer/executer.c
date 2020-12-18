@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/07 12:18:47 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/18 15:08:41 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	executer(t_data *data)
 	data->tree = parser(&data->lexer);
 	expander(data);
 	print_tree(data->tree); //
-	if (data->tree != NULL && data->expand_error == 0)
+	if (data->tree != NULL)
 		command_loop(data);
 	delete_tree(data->tree);
 	free(data->cmdline);

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/18 14:56:12 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/18 15:12:52 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void	expand_files(t_data *data, t_node *node)
 		check_if_file_exists(data, node->content);
 	if ((node->type == FILE_OUT || node->type == FILE_OUT_APPEND) && data->expand_error != 1)
 		open_or_create_file(data, node->content);
-	expand_files(data, node->left);
 	expand_files(data, node->right);
+	expand_files(data, node->left);
 }
