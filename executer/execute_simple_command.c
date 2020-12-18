@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 17:37:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2020/12/17 17:16:14 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ int	check_builtin(t_node *node, t_data *data)
 	return (1);
 }
 
-void	execute_simple_command(t_data *data)
+void	execute_simple_command(t_node *node, t_data *data)
 {
-	t_node	*node;
-
-	node = data->tree;
 	if (check_builtin(node, data) == 0)
 		fork_and_execute(node, data);
+	g_prompt = 0;
 }

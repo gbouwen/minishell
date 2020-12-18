@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:49:45 by tblanker      #+#    #+#                 */
-/*   Updated: 2020/11/13 11:35:10 by tiemen        ########   odam.nl         */
+/*   Updated: 2020/12/07 14:59:52 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	interrupt_signal(int n)
 
 	c = '\n';
 	(void)n;
-	g_prompt = 0;
 	write(2, &c, 1);
 	prompt();
 }

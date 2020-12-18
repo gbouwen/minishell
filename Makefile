@@ -6,14 +6,14 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/11/13 12:08:06 by gbouwen       ########   odam.nl          #
+#    Updated: 2020/12/10 12:55:08 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS =
 SOURCE_C =	main.c \
 			initialize_free/initialize_data.c \
 			initialize_free/initialize_lexer.c \
@@ -50,6 +50,7 @@ SOURCE_C =	main.c \
 			expander/expander.c \
 			expander/expand_env_variables.c \
 			expander/expand_files.c \
+			executer/execute_pipe.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
 			error/error.c \
