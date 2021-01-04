@@ -6,25 +6,32 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/17 13:49:46 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/18 16:25:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/04 14:05:22 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-void	redirections_loop(t_data *data, t_node *node)
+int		redirections_loop(t_data *data, t_node *node)
 {
+	int	current_fd;
+
+	current_fd = 0;
 	while (node != NULL)
 	{
-		set_redirections(data, node);
+		current_fd = set_redirections(data, node, current_fd);
 		node = node->left;
 	}
+	return (current_fd);
 }
 
-void	set_redirections(t_data *data, t_node *node)
+int		set_redirections(t_data *data, t_node *node, int current_fd)
 {
 	int	new_fd;
 
+	new_fd = 0;
+	if (current_fd != 0)
+		close(current_fd);
 	if (node->type == FILE_OUT)
 	{
 		new_fd = open(node->content, O_RDWR);
@@ -49,4 +56,5 @@ void	set_redirections(t_data *data, t_node *node)
 		else
 			data->expand_error = 1;
 	}
+	return (new_fd);
 }
