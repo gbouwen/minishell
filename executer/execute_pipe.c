@@ -77,7 +77,7 @@ void			execute_pipe(t_data *data, t_node *node)
 	t_pipe	*pipe_switch;
 	pid_t	pid;
 	int		i;
-	t_node	*command_node;		
+	t_node	*command_node;
 
 	pipe_switch = malloc(sizeof(t_pipe));
 	pipe_switch->num_cmds = count_cmds(node);

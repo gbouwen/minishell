@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/12/18 16:24:24 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/04 13:47:11 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_node *parser(t_lexer *lexer_data)
 	nodes = &node;
 	node = sequence();
 	node = *nodes;
-	print_tree(node);
+//	print_tree(node);
 	if (!check_parser_error(*nodes) || node == NULL)
 	{
 //		delete_tree(node);
