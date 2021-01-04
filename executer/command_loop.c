@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/04 14:08:24 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/04 14:23:52 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	command_loop(t_data *data)
 				current_fd = redirections_loop(data, node->right);
 				if (node->right->right && data->expand_error != 1)
 					execute_simple_command(data, node->right->right);
-				restore_stdin_stdout(save_in, save_out);
 				close(current_fd);
+				restore_stdin_stdout(save_in, save_out);
 			}
 			if (node->right->type == PIPE)
 			{
@@ -70,8 +70,8 @@ void	command_loop(t_data *data)
 			current_fd = redirections_loop(data, node);
 			if (node->right && data->expand_error != 1)
 				execute_simple_command(data, node->right);
-			restore_stdin_stdout(save_in, save_out);
 			close(current_fd);
+			restore_stdin_stdout(save_in, save_out);
 		}
 		node = node->left;
 	}
