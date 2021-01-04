@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:49:45 by tblanker      #+#    #+#                 */
-/*   Updated: 2020/12/18 16:17:18 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/04 14:08:47 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	interrupt_signal(int n)
 void	ignore_signals(void)
 {
 	signal(SIGINT, interrupt_signal);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, interrupt_signal);
 }
 
 void	exit_signal_check(int read_value, t_data *data)

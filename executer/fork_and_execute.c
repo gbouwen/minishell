@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/04 11:50:06 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/04 14:10:06 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	fork_and_execute(t_data *data, t_node *node)
 	char	*path_variable;
 
 	pid = fork();
-	g_prompt = 0;
 	if (pid == 0)
 	{
 		g_in_parent = 0;
