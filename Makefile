@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/12/18 11:08:07 by tiemen        ########   odam.nl          #
+#    Updated: 2021/01/04 11:48:40 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,12 +48,13 @@ SOURCE_C =	main.c \
 			helper_functions/get_str_array_len.c \
 			helper_functions/count_tree_arguments.c \
 			expander/expander.c \
+			expander/expand_questionmark.c \
 			expander/expand_env_variables.c \
 			expander/expand_files.c \
 			executer/execute_pipe.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
-			executer/set_redirections.c \
+			executer/redirections.c \
 			error/error.c \
 			error/signals.c
 

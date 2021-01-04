@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   set_redirections.c                                 :+:    :+:            */
+/*   expand_questionmark.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/12/17 13:49:46 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/17 13:54:38 by gbouwen       ########   odam.nl         */
+/*   Created: 2020/12/18 11:07:50 by gbouwen       #+#    #+#                 */
+/*   Updated: 2020/12/18 11:19:37 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executer.h"
+#include "expander.h"
 
-void	set_redirections(t_node *node)
+void	expand_questionmark(int value, t_node *node)
 {
-	int	new_fd;
-
-	if (node->type == FILE_OUT)
-		new_fd = open(node->content, O_RDWR);
-	if (node->type == FILE_OUT_APPEND)
-		new_fd = open(node->content, O_RDWR | O_APPEND);
-	if (node->type == FILE_IN)
-		new_fd = open(node->content, O_RDONLY);
-	if (new_fd == -1)
+	if (node == NULL)
 		return ;
-	new_fd = dup2(new_fd, STDOUT_FILENO);
+	expand_questionmark(value, node->left);
+	expand_questionmark(value, node->right);
+	if (ft_strncmp(node->content, "$?", 2) == 0)
+	{
+		free(node->content);
+		node->content = ft_itoa(value);
+	}
 }

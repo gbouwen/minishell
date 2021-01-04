@@ -6,44 +6,39 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/04 10:35:57 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/04 11:48:48 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-void	redirections_loop(t_node *node)
+void	restore_stdin_stdout(int save_out, int save_in)
 {
-	while (node != NULL)
-	{
-		set_redirections(node);
-		node = node->left;
-	}
+	dup2(save_in, STDIN_FILENO);
+	close(save_in);
+	dup2(save_out, STDOUT_FILENO);
+	close(save_out);
 }
 
 void	command_loop(t_data *data)
 {
-	int		save_out;
 	int		save_in;
+	int		save_out;
 	t_node	*node;
 
-	save_out = dup(STDOUT_FILENO);
-	save_in = dup(STDIN_FILENO);
 	node = data->tree;
 	while (node != NULL)
 	{
+		save_in = dup(STDIN_FILENO);
+		save_out = dup(STDOUT_FILENO);
 		if (node->type == NODE_SEQUENCE)
 		{
 			if (node->right->type == FILE_OUT || node->right->type == FILE_OUT_APPEND || node->right->type == FILE_IN)
 			{
-				save_out = dup(STDOUT_FILENO);
-				save_in = dup(STDIN_FILENO);
-				redirections_loop(node->right);
-				execute_simple_command(data, node->right->right);
-				dup2(save_out, STDOUT_FILENO);
-				close(save_out);
-				dup2(save_in, STDIN_FILENO);
-				close(save_in);
+				redirections_loop(data, node->right);
+				if (node->right->right && data->expand_error != 1)
+					execute_simple_command(data, node->right->right);
+				restore_stdin_stdout(save_in, save_out);
 			}
 			if (node->right->type == PIPE)
 			{
@@ -62,16 +57,11 @@ void	command_loop(t_data *data)
 			execute_simple_command(data, node);
 		if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND || node->type == FILE_IN)
 		{
-			save_out = dup(STDOUT_FILENO);
-			save_in = dup(STDIN_FILENO);
-			redirections_loop(node);
-			execute_simple_command(data, node->right);
-			break ;
+			redirections_loop(data, node);
+			if (node->right && data->expand_error != 1)
+				execute_simple_command(data, node->right);
+			restore_stdin_stdout(save_in, save_out);
 		}
 		node = node->left;
 	}
-	dup2(save_out, STDOUT_FILENO);
-	close(save_out);
-	dup2(save_in, STDIN_FILENO);
-	close(save_in);
 }
