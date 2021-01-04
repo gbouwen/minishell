@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/04 11:39:34 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/04 11:55:18 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static	void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND
 		|| node->type == FILE_IN)
 	{
-		redirections_loop(node);
+		redirections_loop(data, node);
 		node = node->right;
 	}
 	execute_simple_command(data, node);
@@ -79,10 +79,9 @@ void			execute_pipe(t_data *data, t_node *node)
 	i = 0;
 	while (i < pipe_switch->num_cmds)
 	{
+		command_node = node;
 		if (node->type == PIPE)
 			command_node = node->right;
-		else
-			command_node = node;
 		if (i < pipe_switch->num_cmds - 1)
 			pipe(pipe_switch->new_fds);
 		pid = fork();
