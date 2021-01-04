@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/13 12:19:40 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/04 16:33:30 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,40 @@ static char	*env_var_value(char *str)
 	return (ft_strdup(str + i));
 }
 
-void		expand_env_variables(char **env, t_node *node)
+void		expand_env_variables(char **env, t_list **head, t_list *list)
 {
-	int	i;
+	t_list	*prev;
+	int		i;
 
-	if (node == NULL)
-		return ;
-	expand_env_variables(env, node->left);
-	expand_env_variables(env, node->right);
-	i = 0;
-	if (node->content[0] == '$' && node->state_type != CHAR_QUOTE
-											&& node->is_escaped == 0)
+	prev = list;
+	while (list != NULL)
 	{
-		while (env[i] != NULL)
+		i = 0;
+		if (list->content[0] == '$' && list->type != CHAR_QUOTE
+											&& list->is_escaped == 0)
 		{
-			if (compare_env(node->content, env[i]) == 0)
+			while (env[i] != NULL)
 			{
-				free(node->content);
-				node->content = env_var_value(env[i]);
-				return ;
+				if (compare_env(list->content, env[i]) == 0)
+				{
+					free(list->content);
+					list->content = env_var_value(env[i]);
+					break ;
+				}
+				i++;
 			}
-			i++;
 		}
-		free(node->content);
-		node->content = ft_strdup("");
+		if (i == get_str_array_len(env))
+		{
+			free(list->content);
+			if (prev != list)
+				prev->next = list->next;
+			else
+			{
+				*head = list->next;
+				prev->next = NULL;
+			}
+		}
+		list = list->next;
 	}
 }

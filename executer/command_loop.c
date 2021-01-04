@@ -22,9 +22,9 @@ void	restore_stdin_stdout(int save_out, int save_in)
 
 void	init_fd_variables(int *save_in, int *save_out, int *current_fd)
 {
-	save_in = 0;
-	save_out = 0;
-	current_fd = 0;
+	*save_in = 0;
+	*save_out = 0;
+	*current_fd = 0;
 }
 
 void	command_loop(t_data *data)
