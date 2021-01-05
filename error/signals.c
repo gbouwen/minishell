@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:49:45 by tblanker      #+#    #+#                 */
-/*   Updated: 2021/01/04 14:08:47 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 10:59:34 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ void	ignore_signals(void)
 	signal(SIGQUIT, interrupt_signal);
 }
 
-void	exit_signal_check(int read_value, t_data *data)
+void	exit_signal(t_data *data)
 {
-	if (read_value == 0)
-	{
-		ft_printf("exit\n");
+	if (data->env_variables)
 		free_str_array(data->env_variables);
-		exit(1);
-	}
+	ft_printf("exit\n");
+	exit(1);
 }

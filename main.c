@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/04 14:08:07 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/04 15:53:25 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int ac, char **av, char **envp)
 	status = 1;
 	g_in_parent = 1;
 	g_prompt = 0;
+	g_exit = 0;
 	initialize_data(&data, envp);
 	while (status == 1)
 	{
