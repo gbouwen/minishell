@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/04 16:33:30 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/05 10:53:59 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	*env_var_value(char *str)
 	return (ft_strdup(str + i));
 }
 
-void		expand_env_variables(char **env, t_list **head, t_list *list)
+static void	expand_env_variables(char **env, t_list **head, t_list *list)
 {
 	t_list	*prev;
 	int		i;
@@ -81,4 +81,12 @@ void		expand_env_variables(char **env, t_list **head, t_list *list)
 		}
 		list = list->next;
 	}
+}
+
+void	expand_variables(t_data *data)
+{
+	t_list	*temp;
+
+	temp = data->lexer.token_list;
+	expand_env_variables(data->env_variables, &data->lexer.token_list, temp);
 }
