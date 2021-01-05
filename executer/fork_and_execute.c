@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 12:14:48 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 14:01:42 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static void	try_paths(char **args, char *path_variable, t_data *data)
 	free_str_array(args);
 	free_str_array(all_paths);
 	ft_printf("%s\n", strerror(errno));
+	g_exit_status = 127;
 }
 
 void	fork_and_execute(t_data *data, t_node *node)
@@ -97,6 +98,7 @@ void	fork_and_execute(t_data *data, t_node *node)
 	char	**args;
 	int		val;
 	char	*path_variable;
+	int		status;
 
 	g_exit_status = 0;
 	pid = fork();
@@ -121,9 +123,9 @@ void	fork_and_execute(t_data *data, t_node *node)
 	}
 	else
 	{
-		int i;
-		wait(&i);
-		data->questionmark = WEXITSTATUS(i);
-	//printf("exit: %d\n", g_exit_status);
+		wait(&status);
+		data->questionmark = WEXITSTATUS(status);
+		if (g_exit_status > 0)
+			data->questionmark = g_exit_status;
 	}
 }

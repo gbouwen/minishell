@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/12/18 11:33:29 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 15:41:04 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_node	*tasks()
 t_node	*task_pipe()
 {
 	t_node	*task_node;
-	t_list	*error_token;
+	t_list	*previous_token;
 	t_node	*pipe_node;
 
 	task_node = command();
@@ -40,19 +40,19 @@ t_node	*task_pipe()
 		delete_tree(task_node);
 		return (set_error_node(g_current_tok));
 	}
-	error_token = g_current_tok;
+	previous_token = g_current_tok;
 	if (!match(CHAR_PIPE, NULL))
 	{
 		delete_tree(task_node);
 		return (NULL);
 	}
-	if (g_current_tok->type == 0 || g_current_tok->type == ';')
+	if (g_current_tok->type == 0 || g_current_tok->type == ';' || g_current_tok->type == '|')
 	{
 		delete_tree(task_node);
 		return (NULL);
 	}
 	pipe_node = malloc(sizeof(t_node));
-	pipe_node->is_escaped = error_token->is_escaped;
+	pipe_node->is_escaped = previous_token->is_escaped;
 	pipe_node->state_type = TOKEN;
 	pipe_node->content = ft_strdup("|");
 	attach_tree_node(pipe_node, PIPE, tasks(), task_node);

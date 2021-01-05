@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 10:59:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/05 15:32:11 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,52 +27,51 @@ void	init_fd_variables(int *save_in, int *save_out, int *current_fd)
 	*current_fd = 0;
 }
 
+void	command_loop_3(t_data *data, t_node *node, 	int	current_fd)
+{
+	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND || node->type
+																	== FILE_IN)
+	{
+		current_fd = redirections_loop(data, node);
+		if (node->right && data->expand_error != 1)
+			execute_simple_command(data, node->right);
+		close(current_fd);
+	}
+	else
+		execute_simple_command(data, node);
+}
+
+void	command_loop_2(t_data *data, t_node	*node, int current_fd)
+{
+	if (node->type == PIPE)
+	{
+		execute_pipe(data, node);
+		return ;
+	}
+	command_loop_3(data, node, current_fd);
+}
+
 void	command_loop(t_data *data)
 {
 	int		save_in;
 	int		save_out;
-	int		current_fd;
 	t_node	*node;
+	int	current_fd;
 
 	init_fd_variables(&save_in, &save_out, &current_fd);
 	node = data->tree;
-	while (node != NULL)
+	g_prompt = 0;
+	save_in = dup(STDIN_FILENO);
+	save_out = dup(STDOUT_FILENO);
+	if (node->type == NODE_SEQUENCE)
 	{
-		save_in = dup(STDIN_FILENO);
-		save_out = dup(STDOUT_FILENO);
-		if (node->type == NODE_SEQUENCE)
+		while (node->type == NODE_SEQUENCE)
 		{
-			if (node->right->type == FILE_OUT || node->right->type == FILE_OUT_APPEND || node->right->type == FILE_IN)
-			{
-				current_fd = redirections_loop(data, node->right);
-				if (node->right->right && data->expand_error != 1)
-					execute_simple_command(data, node->right->right);
-				close(current_fd);
-				restore_stdin_stdout(save_in, save_out);
-			}
-			if (node->right->type == PIPE)
-			{
-				execute_pipe(data, node);
-				break ;
-			}
-			else
-				execute_simple_command(data, node->right);
-		}
-		if (node->type == PIPE)
-		{
-			execute_pipe(data, node);
-			break ;
-		}
-		if (node->type == PATHNAME)
-			execute_simple_command(data, node);
-		if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND || node->type == FILE_IN)
-		{
-			current_fd = redirections_loop(data, node);
-			if (node->right && data->expand_error != 1)
-				execute_simple_command(data, node->right);
-			close(current_fd);
+			command_loop_2(data, node->right, current_fd);
 			restore_stdin_stdout(save_in, save_out);
+			node = node->left;
 		}
-		node = node->left;
 	}
+	command_loop_2(data, node, current_fd);
+	restore_stdin_stdout(save_in, save_out);
 }

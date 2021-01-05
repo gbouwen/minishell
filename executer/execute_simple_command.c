@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 12:13:00 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 13:53:37 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	check_builtin(t_data *data, t_node *node)
 
 void	execute_simple_command(t_data *data, t_node *node)
 {
-	g_prompt = 0;
 	if (check_builtin(data, node) == 0)
 		fork_and_execute(data, node);
 //	if (g_exit_status > 0)
