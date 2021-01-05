@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/05 11:43:16 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 15:48:36 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,5 @@ void			execute_pipe(t_data *data, t_node *node)
 		node = node->left;
 		i++;
 	}
-	g_prompt = 0;
 	free(pipe_switch);
 }

@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 12:43:45 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/05 15:39:49 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 16:26:09 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,8 @@ t_node	*sequence_semicolon()
 		delete_tree(seq_node);
 		return (set_error_node(g_current_tok));
 	}
-	if (!match(CHAR_SEMICOLON, NULL))
-	{
-		delete_tree(seq_node);
+	if (!match(CHAR_SEMICOLON, NULL, seq_node))
 		return (NULL);
-	}
 	if (g_current_tok->type == 0 || g_current_tok->type == ';')
 	{
 		delete_tree(seq_node);

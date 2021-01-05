@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:25:43 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/10 15:34:46 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 16:32:25 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ t_node	*command_greater()
 
 	cmd_node = simple_command();
 	error_token = g_current_tok;
-	if (!match(CHAR_GREATER, NULL))
-	{
-		delete_tree(cmd_node);
+	if (!match(CHAR_GREATER, NULL, cmd_node))
 		return (NULL);
-	}
 	prev_token = g_current_tok;
 	if (g_current_tok->type == 0)
 		return (set_error_node(error_token));
@@ -73,11 +70,8 @@ t_node	*command_lesser()
 
 	cmd_node = simple_command();
 	error_token = g_current_tok;
-	if (!match(CHAR_LESSER, NULL))
-	{
-		delete_tree(cmd_node);
+	if (!match(CHAR_LESSER, NULL, cmd_node))
 		return (NULL);
-	}
 	prev_token = g_current_tok;
 	if (g_current_tok->type == 0)
 		return (set_error_node(error_token));
@@ -100,11 +94,8 @@ t_node	*command_double_greater()
 
 	cmd_node = simple_command();
 	error_token = g_current_tok;
-	if (!match(CHAR_DOUBLE_REDIRECT, NULL))
-	{
-		delete_tree(cmd_node);
+	if (!match(CHAR_DOUBLE_REDIRECT, NULL, cmd_node))
 		return (NULL);
-	}
 	prev_token = g_current_tok;
 	if (g_current_tok->type == 0)
 		return (set_error_node(error_token));

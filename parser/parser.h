@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/12/18 16:24:06 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 16:18:07 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_node	*tasks();
 t_node	*sequence_semicolon();
 t_node	*sequence();
 
-int		match(int type, char **str);
+int		match(int type, char **str, t_node *node);
 
 int		token_check(t_node *cmd_node, char **str);
 int		set_node_type(int tokentype, int node_type, t_node *node);
