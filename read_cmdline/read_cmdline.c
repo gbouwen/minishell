@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/04 14:12:32 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 11:00:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int		found_newline(char **line)
 int			read_cmdline(char **line, t_data *data)
 {
 	int		val_read;
-	char	prev_buff[1];
 	char	buff[1];
 	int		i;
 
