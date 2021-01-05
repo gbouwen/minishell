@@ -6,11 +6,23 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 11:28:22 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/05 11:46:40 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+static int	check_if_empty_variable(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '=' && str[i] != '\0')
+		i++;
+	if (i == (ft_strlen(str) - 1))
+		return (1);
+	return (0);
+}
 
 static int	compare_env(char *s1, char *s2)
 {
@@ -18,6 +30,8 @@ static int	compare_env(char *s1, char *s2)
 	int	x;
 	int	len;
 
+	if (check_if_empty_variable(s2) == 1)
+		return (-1);
 	i = 1;
 	x = 0;
 	len = ft_strlen(s1);
