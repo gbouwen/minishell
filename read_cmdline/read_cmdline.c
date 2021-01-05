@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 11:03:01 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 11:37:16 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int			read_cmdline(char **line, t_data *data)
 	{
 		val_read = read(0, buff, 1);
 		if (val_read == 0)
-		{	
+		{
 			val_read = 1;
 			continue ;
 		}

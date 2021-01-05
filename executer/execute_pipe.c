@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/04 14:13:02 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 11:42:22 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void			execute_pipe(t_data *data, t_node *node)
 	t_node	*command_node;
 
 	pipe_switch = malloc(sizeof(t_pipe));
+	if (!pipe_switch)
+		exit_error("Malloc fail.");
 	pipe_switch->num_cmds = count_cmds(node);
 	i = 0;
 	while (i < pipe_switch->num_cmds)
