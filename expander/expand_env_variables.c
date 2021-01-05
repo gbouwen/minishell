@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 11:46:40 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/05 16:37:39 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	compare_env(char *s1, char *s2)
 
 	if (check_if_empty_variable(s2) == 1)
 		return (-1);
-	i = 1;
+	i = 0;
 	x = 0;
 	len = ft_strlen(s1);
 	while (i < len)
@@ -45,7 +45,9 @@ static int	compare_env(char *s1, char *s2)
 		else
 			return (-1);
 	}
-	return (0);
+	if (s2[i] == '=')
+		return (0);
+	return (-1);
 }
 
 static char	*env_var_value(char *str)
@@ -56,42 +58,77 @@ static char	*env_var_value(char *str)
 	while (str[i] != '=')
 		i++;
 	i++;
-	return (ft_strdup(str + i));
+	return (str + i);
 }
 
-static void	expand_env_variables(char **env, t_list **head, t_list *list)
+static int	check_for_dollarsign(char *str)
 {
-	t_list	*prev;
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*copy_til_dollar(char *str)
+{
+	char	*new_str;
 	int		i;
 
-	prev = list;
+	i = 0;
+	new_str = malloc(ft_strlen(str));
+	while (str[i] != '$' && str[i] != '\0')
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	return (new_str);
+}
+
+static void	expand_env_variables(char **env, t_list *list)
+{
+	char	*new_str;
+	int		x;
+	char	**split_element;
+	int		i;
+
 	while (list != NULL)
 	{
-		i = 0;
-		if (list->content[0] == '$' && list->type != CHAR_QUOTE
-											&& list->is_escaped == 0)
+		if (list->content[0] != '$')
+			new_str = copy_til_dollar(list->content);
+		else
 		{
-			while (env[i] != NULL)
-			{
-				if (compare_env(list->content, env[i]) == 0)
-				{
-					free(list->content);
-					list->content = env_var_value(env[i]);
-					break ;
-				}
-				i++;
-			}
+			new_str = malloc(1);
+			ft_bzero(new_str, 1);
 		}
-		if (i == get_str_array_len(env))
+		x = 0;
+		if (list->type != CHAR_QUOTE && list->is_escaped == 0 && check_for_dollarsign(list->content) == 1)
 		{
-			free(list->content);
-			if (prev != list)
-				prev->next = list->next;
-			else
+			split_element = ft_split(list->content, '$');
+			/*if (split_element == NULL)*/
+				/*free_struct_error()*/
+			while (split_element[x] != NULL)
 			{
-				*head = list->next;
-				prev->next = NULL;
+				i = 0;
+				while (env[i] != NULL)
+				{
+					if (compare_env(split_element[x], env[i]) == 0)
+					{
+						new_str = ft_strjoin(new_str, env_var_value(env[i]));
+						free(list->content);
+						list->content = new_str;
+						break ;
+					}
+					i++;
+				}
+				x++;
 			}
+			free_str_array(split_element);
 		}
 		list = list->next;
 	}
@@ -103,5 +140,5 @@ void	expand_variables(t_data *data)
 
 	temp = data->lexer.token_list;
 	expand_questionmark(data->questionmark, temp);
-	expand_env_variables(data->env_variables, &data->lexer.token_list, temp);
+	expand_env_variables(data->env_variables, temp);
 }
