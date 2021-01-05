@@ -6,14 +6,14 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/01/04 11:48:40 by tiemen        ########   odam.nl          #
+#    Updated: 2021/01/05 10:55:12 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = minishell
 CC = gcc
-FLAGS =
+FLAGS = -Wall -Wextra -Werror
 SOURCE_C =	main.c \
 			initialize_free/initialize_data.c \
 			initialize_free/initialize_lexer.c \
@@ -47,7 +47,6 @@ SOURCE_C =	main.c \
 			builtins/exit.c \
 			helper_functions/get_str_array_len.c \
 			helper_functions/count_tree_arguments.c \
-			expander/expander.c \
 			expander/expand_questionmark.c \
 			expander/expand_env_variables.c \
 			expander/expand_files.c \
