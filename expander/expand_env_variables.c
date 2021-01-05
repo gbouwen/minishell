@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 10:53:59 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/05 11:28:22 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void	expand_variables(t_data *data)
 	t_list	*temp;
 
 	temp = data->lexer.token_list;
+	expand_questionmark(data->questionmark, temp);
 	expand_env_variables(data->env_variables, &data->lexer.token_list, temp);
 }

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 10:55:02 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/05 11:27:31 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 
 void	expand_variables(t_data *data);
 void	expand_files(t_data *data, t_node *node);
-void	expand_questionmark(int value, t_node *node);
+void	expand_questionmark(int value, t_list *list);
 
 #endif
