@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 16:46:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/06 14:57:39 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,10 @@ static void	try_paths(char **args, char *path_variable, t_data *data)
 		if (try_exec_path(args, all_paths, i, data) == 0)
 			i++;
 	}
+	ft_printf("%s: command not found\n", args[0]);
 	free_str_array(args);
 	free_str_array(all_paths);
-	ft_printf("%s\n", strerror(errno));
+//	ft_printf("%s\n", strerror(errno));
 }
 
 void	fork_and_execute(t_data *data, t_node *node)
