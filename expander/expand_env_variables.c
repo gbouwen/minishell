@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/06 15:25:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/06 15:56:36 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ void	env_loop(t_list *list, t_data *data, t_list **head, t_list *prev)
 			free_struct_error(data, "Malloc failed");
 		while (split_element[x] != NULL)
 		{
-			i = check_if_env(data->env_variables, split_element[x], new_str, list);
-			if (i == get_str_array_len(data->env_variables) && list->content[0] == '$'
-				&& check_for_dollarsign(list->content) == 1)
-				empty_var(new_str, list, head, prev);
-			if (i == get_str_array_len(data->env_variables) && x > 0)
-				new_man(split_element, list, x);
+			i = check_if_env(data->env_variables, split_element[x], &new_str, list);
+			if (i == get_str_array_len(data->env_variables) && list->content[0] == '$' && check_for_dollarsign(list->content) == 1)
+				skip_empty_var(new_str, list, head, prev);
 			x++;
 		}
+		free(new_str);
 		free_str_array(split_element);
 	}
 }

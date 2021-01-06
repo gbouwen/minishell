@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/06 15:12:16 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/06 15:21:22 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/06 15:46:30 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*copy_til_dollar(char *str)
 	return(new_str);
 }
 
-void	empty_var(char *new_str, t_list *list, t_list **head, t_list *prev)
+void	skip_empty_var(char *new_str, t_list *list, t_list **head, t_list *prev)
 {
 	free(new_str);
 	if (list == *head)
