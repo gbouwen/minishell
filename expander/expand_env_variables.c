@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 16:37:39 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/06 11:11:14 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,17 @@ static char	*env_var_value(char *str)
 static int	check_for_dollarsign(char *str)
 {
 	int	i;
+	int	found;
 
 	i = 0;
+	found = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '$')
-			return (1);
+			found++;
 		i++;
 	}
-	return (0);
+	return (found);
 }
 
 char	*copy_til_dollar(char *str)
@@ -90,25 +92,27 @@ char	*copy_til_dollar(char *str)
 	return (new_str);
 }
 
-static void	expand_env_variables(char **env, t_list *list)
+static void	expand_env_variables(char **env, t_list **head, t_list *list)
 {
+	t_list	*prev;
 	char	*new_str;
 	int		x;
 	char	**split_element;
 	int		i;
 
+	prev = list;
 	while (list != NULL)
 	{
-		if (list->content[0] != '$')
-			new_str = copy_til_dollar(list->content);
-		else
-		{
-			new_str = malloc(1);
-			ft_bzero(new_str, 1);
-		}
 		x = 0;
-		if (list->type != CHAR_QUOTE && list->is_escaped == 0 && check_for_dollarsign(list->content) == 1)
+		if (list->type != CHAR_QUOTE && list->is_escaped == 0 && check_for_dollarsign(list->content) > 0)
 		{
+			if (list->content[0] != '$')
+				new_str = copy_til_dollar(list->content);
+			else
+			{
+				new_str = malloc(1);
+				ft_bzero(new_str, 1);
+			}
 			split_element = ft_split(list->content, '$');
 			/*if (split_element == NULL)*/
 				/*free_struct_error()*/
@@ -126,10 +130,22 @@ static void	expand_env_variables(char **env, t_list *list)
 					}
 					i++;
 				}
+				if (i == get_str_array_len(env) && check_for_dollarsign(list->content) == 1)
+				{
+					if (list == *head)
+						*head = list->next;
+					else
+					{
+						prev->next = list->next;
+						list->next = NULL;
+						free(list->content);
+					}
+				}
 				x++;
 			}
 			free_str_array(split_element);
 		}
+		prev = list;
 		list = list->next;
 	}
 }
@@ -140,5 +156,5 @@ void	expand_variables(t_data *data)
 
 	temp = data->lexer.token_list;
 	expand_questionmark(data->questionmark, temp);
-	expand_env_variables(data->env_variables, temp);
+	expand_env_variables(data->env_variables, &data->lexer.token_list, temp);
 }
