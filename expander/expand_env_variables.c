@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/06 15:56:36 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/06 16:23:18 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-void	env_loop(t_list *list, t_data *data, t_list **head, t_list *prev)
+static void	env_loop(t_list *list, t_data *data, t_list **head)
 {
 	int		x;
 	char	**split_element;
@@ -31,7 +31,7 @@ void	env_loop(t_list *list, t_data *data, t_list **head, t_list *prev)
 		{
 			i = check_if_env(data->env_variables, split_element[x], &new_str, list);
 			if (i == get_str_array_len(data->env_variables) && list->content[0] == '$' && check_for_dollarsign(list->content) == 1)
-				skip_empty_var(new_str, list, head, prev);
+				skip_empty_var(list, head);
 			x++;
 		}
 		free(new_str);
@@ -41,13 +41,9 @@ void	env_loop(t_list *list, t_data *data, t_list **head, t_list *prev)
 
 static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
 {
-	t_list	*prev;
-
-	prev = list;
 	while (list != NULL)
 	{
-		env_loop(list, data, head, prev);
-		prev = list;
+		env_loop(list, data, head);
 		list = list->next;
 	}
 }
