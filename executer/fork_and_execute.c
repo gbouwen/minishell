@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 15:59:16 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/06 12:59:07 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ void	fork_and_execute(t_data *data, t_node *node)
 	else
 	{
 		wait(&status);
-		data->questionmark = WEXITSTATUS(status);
+		data->question_mark = status / 256;
 		if (g_exit_status > 0)
-			data->questionmark = g_exit_status;
+			data->question_mark = g_exit_status;
 	}
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_questionmark.c                              :+:    :+:            */
+/*   expand_question_mark.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -12,7 +12,7 @@
 
 #include "expander.h"
 
-void	expand_questionmark(int value, t_list *list)
+void	expand_question_mark(int value, t_list *list)
 {
 	while (list != NULL)
 	{

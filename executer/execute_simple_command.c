@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 13:53:37 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/06 12:43:04 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	check_builtin(t_data *data, t_node *node)
 		builtin_exit(data);
 	else
 		return (0);
+	data->question_mark = 0;
 	return (1);
 }
 
