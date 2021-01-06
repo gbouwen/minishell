@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   helper_functions.h                                 :+:    :+:            */
+/*   strjoin_free.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/06 12:58:27 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/06 11:21:27 by gbouwen       ########   odam.nl         */
+/*   Created: 2021/01/06 11:16:42 by gbouwen       #+#    #+#                 */
+/*   Updated: 2021/01/06 11:34:54 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HELPER_FUNCTIONS_H
-# define HELPER_FUNCTIONS_H
+#include "helper_functions.h"
 
-# include <stddef.h>
-# include "../parser/parser.h"
-# include "../libft/libft.h"
+char	*strjoin_free(char *s1, char *s2)
+{
+	char	*result;
+	int		i;
+	int		x;
 
-int		get_str_array_len(char **str_array);
-int		count_tree_arguments(t_node *node);
-char	*strjoin_free(char *s1, char *s2);
+	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!result)
+	{
+		free(s1);
+		return (NULL);
+	}
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		result[i] = s1[i];
+		i++;
+	}
+	x = 0;
+	while (s2[x] != '\0')
+	{
+		result[i + x] = s2[x];
+		x++;
+	}
+	result[i + x] = '\0';
+	free(s1);
+	return (result);
+}
 
-#endif

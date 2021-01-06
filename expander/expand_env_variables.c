@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/06 11:11:14 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/06 13:17:13 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,19 @@ char	*copy_til_dollar(char *str)
 	int		i;
 
 	i = 0;
-	new_str = malloc(ft_strlen(str));
+	new_str = malloc(ft_strlen(str) + 1);
+	if (!new_str)
+		return (NULL);
 	while (str[i] != '$' && str[i] != '\0')
 	{
 		new_str[i] = str[i];
 		i++;
 	}
+	new_str[i] = '\0';
 	return (new_str);
 }
 
-static void	expand_env_variables(char **env, t_list **head, t_list *list)
+static void	expand_env_variables(t_data *data, char **env, t_list **head, t_list *list)
 {
 	t_list	*prev;
 	char	*new_str;
@@ -114,8 +117,8 @@ static void	expand_env_variables(char **env, t_list **head, t_list *list)
 				ft_bzero(new_str, 1);
 			}
 			split_element = ft_split(list->content, '$');
-			/*if (split_element == NULL)*/
-				/*free_struct_error()*/
+			if (split_element == NULL)
+				free_struct_error(data, "Malloc failed");
 			while (split_element[x] != NULL)
 			{
 				i = 0;
@@ -123,22 +126,39 @@ static void	expand_env_variables(char **env, t_list **head, t_list *list)
 				{
 					if (compare_env(split_element[x], env[i]) == 0)
 					{
-						new_str = ft_strjoin(new_str, env_var_value(env[i]));
+						new_str = strjoin_free(new_str, env_var_value(env[i]));
 						free(list->content);
 						list->content = new_str;
 						break ;
 					}
 					i++;
 				}
-				if (i == get_str_array_len(env) && check_for_dollarsign(list->content) == 1)
+				if (i == get_str_array_len(env) && list->content[0] == '$' && check_for_dollarsign(list->content) == 1)
 				{
+					free(new_str);
 					if (list == *head)
+					{
+						free(list->content);
 						*head = list->next;
+					}
 					else
 					{
 						prev->next = list->next;
-						list->next = NULL;
 						free(list->content);
+					}
+				}
+				if (i == get_str_array_len(env) && x > 0)
+				{
+					int		y = 0;
+					char	*new_man;
+
+					new_man = malloc(1);
+					while (y < x)
+					{
+						new_man = strjoin_free(new_man, split_element[y]);
+						free(list->content);
+						list->content = new_man;
+						y++;
 					}
 				}
 				x++;
@@ -156,5 +176,5 @@ void	expand_variables(t_data *data)
 
 	temp = data->lexer.token_list;
 	expand_questionmark(data->questionmark, temp);
-	expand_env_variables(data->env_variables, &data->lexer.token_list, temp);
+	expand_env_variables(data, data->env_variables, &data->lexer.token_list, temp);
 }

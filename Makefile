@@ -47,6 +47,7 @@ SOURCE_C =	main.c \
 			builtins/exit.c \
 			helper_functions/get_str_array_len.c \
 			helper_functions/count_tree_arguments.c \
+			helper_functions/strjoin_free.c \
 			expander/expand_questionmark.c \
 			expander/expand_env_variables.c \
 			expander/expand_files.c \
