@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/06 15:12:16 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/06 17:35:41 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/07 10:41:48 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,4 @@ char	*copy_til_dollar(char *str)
 		ft_bzero(new_str, 1);
 	}
 	return (new_str);
-}
-
-/*int	skip_empty_var(t_list *list, t_list **head)*/
-/*{*/
-	/*t_list	*prev;*/
-
-	/*if (list == *head)*/
-		/**head = list->next;*/
-	/*else*/
-	/*{*/
-		/*prev = *head;*/
-		/*while (prev->next != list)*/
-			/*prev = prev->next;*/
-		/*prev->next = list->next;*/
-	/*}*/
-	/*return (1);*/
-/*}*/
-
-int		skip_empty_var(t_list *list, t_list **head)
-{
-	if (list == *head)
-		return (1);
-	else
-		return (2);
 }

@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/06 17:43:24 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/07 10:45:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static int	env_loop(t_list *list, t_data *data, t_list **head)
+static int	env_loop(t_list *list, t_data *data)
 {
 	int		remove_list_element;
 	int		x;
@@ -32,7 +32,7 @@ static int	env_loop(t_list *list, t_data *data, t_list **head)
 		{
 			i = check_if_env(data->env_variables, split_element[x], &new_str, list);
 			if (i == get_str_array_len(data->env_variables) && list->content[0] == '$' && check_for_dollarsign(list->content) == 1)
-				remove_list_element = skip_empty_var(list, head);
+				remove_list_element = 1;
 			x++;
 		}
 		free(new_str);
@@ -48,21 +48,18 @@ static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
 
 	while (list != NULL)
 	{
-		remove_list_element = env_loop(list, data, head);
+		remove_list_element = env_loop(list, data);
 		if (remove_list_element == 1)
 		{
-			*head = list->next;
-			temp = list;
-			list = list->next;
-			free(temp->content);
-			free(temp);
-		}
-		if (remove_list_element == 2)
-		{
-			temp = *head;
-			while (temp->next != list)
-				temp = temp->next;
-			temp->next = list->next;
+			if (list == *head)
+				*head = list->next;
+			else
+			{
+				temp = *head;
+				while (temp->next != list)
+					temp = temp->next;
+				temp->next = list->next;
+			}
 			temp = list;
 			list = list->next;
 			free(temp->content);

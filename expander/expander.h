@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/06 17:27:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/07 10:41:52 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int		check_if_empty_variable(char *str);
 char	*env_var_value(char *str);
 int		check_for_dollarsign(char *str);
 char	*copy_til_dollar(char *str);
-int		skip_empty_var(t_list *list, t_list **head);
 
 #endif
