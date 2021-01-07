@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/05 16:01:27 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/07 11:49:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int	main(int ac, char **av, char **envp)
 	status = 1;
 	g_in_parent = 1;
 	g_prompt = 0;
+	g_work_dir = NULL;
 	initialize_data(&data, envp);
 	while (status == 1)
 	{
+		g_work_dir = get_work_dir_prompt();
 		prompt();
 		status = executer(&data);
 	}

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 12:58:27 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/06 11:21:27 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/07 11:51:11 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define HELPER_FUNCTIONS_H
 
 # include <stddef.h>
+# include "../minishell.h"
 # include "../parser/parser.h"
 # include "../libft/libft.h"
 
 int		get_str_array_len(char **str_array);
 int		count_tree_arguments(t_node *node);
 char	*strjoin_free(char *s1, char *s2);
+char	*get_work_dir_prompt(void);
 
 #endif
