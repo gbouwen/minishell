@@ -13,6 +13,7 @@
 #ifndef FREE_H
 # define FREE_H
 
+# include "../minishell.h"
 # include "../struct.h"
 # include "../error/error.h"
 
