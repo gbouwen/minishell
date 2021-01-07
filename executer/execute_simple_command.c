@@ -6,27 +6,46 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 13:53:37 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/07 14:12:00 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
+static int	compare_builtins(char *content, char *builtin)
+{
+	int	i;
+	int	longest_word_len;
+
+	i = 0;
+	if (ft_strlen(content) > ft_strlen(builtin))
+		longest_word_len = ft_strlen(content);
+	else
+		longest_word_len = ft_strlen(builtin);
+	while (i < longest_word_len)
+	{
+		if (content[i] != builtin[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	check_builtin(t_data *data, t_node *node)
 {
-	if (ft_strncmp(node->content, "echo", ft_strlen(node->content)) == 0)
+	if (compare_builtins(node->content, "echo") == 0)
 		builtin_echo(node);
-	else if (ft_strncmp(node->content, "pwd", ft_strlen(node->content)) == 0)
+	else if (compare_builtins(node->content, "pwd") == 0)
 		builtin_pwd(node);
-	else if (ft_strncmp(node->content, "cd", ft_strlen(node->content)) == 0)
+	else if (compare_builtins(node->content, "cd") == 0)
 		builtin_cd(node, data->env_variables);
-	else if (ft_strncmp(node->content, "export", ft_strlen(node->content)) == 0)
+	else if (compare_builtins(node->content, "export") == 0)
 		builtin_export(data);
-	else if (ft_strncmp(node->content, "unset", ft_strlen(node->content)) == 0)
+	else if (compare_builtins(node->content, "unset") == 0)
 		builtin_unset(data);
-	else if (ft_strncmp(node->content, "env", ft_strlen(node->content)) == 0)
+	else if (compare_builtins(node->content, "env") == 0)
 		builtin_env(data->tree, data->env_variables);
-	else if (ft_strncmp(node->content, "exit", ft_strlen(node->content)) == 0)
+	else if (compare_builtins(node->content, "exit") == 0)
 		builtin_exit(data);
 	else
 		return (0);
