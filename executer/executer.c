@@ -24,7 +24,7 @@ int	executer(t_data *data)
 	expand_variables(data);
 	data->tree = parser(&data->lexer);
 	expand_files(data, data->tree);
-	print_tree(data->tree); //
+//	print_tree(data->tree); //
 	if (data->tree != NULL)
 		command_loop(data);
 	delete_tree(data->tree);
