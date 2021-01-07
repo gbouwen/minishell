@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
 # include "ft_printf/libftprintf.h"
 # include "read_cmdline/read_cmdline.h"
 # include "lexer/lexer_utils.h"
