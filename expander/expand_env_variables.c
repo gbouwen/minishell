@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/08 15:44:50 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/08 16:25:49 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static int		expand_env_loop(t_data *data, t_list *list)
 			free_str_array(split_element);
 			return (1);
 		}
-		free(original_string);
 		free_str_array(split_element);
 	}
+	free(original_string);
 	return (0);
 }
 
