@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/01/07 16:46:47 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/01/08 15:49:12 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,8 @@ SOURCE_C =	main.c \
 			helper_functions/strjoin_free.c \
 			helper_functions/get_work_dir_prompt.c \
 			expander/expand_questionmark.c \
-			expander/expand_env_variables.c \
 			expander/expand_files.c \
+			expander/expand_env_variables.c \
 			expander/expand_env_utils.c \
 			expander/expand_env_utils_2.c \
 			executer/execute_pipe.c \

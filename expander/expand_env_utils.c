@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_utils.c                                     :+:    :+:            */
+/*   expand_env_utils.c                                 :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
+/*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/06 15:12:16 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/07 10:41:48 by gbouwen       ########   odam.nl         */
+/*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
+/*   Updated: 2021/01/08 15:44:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+int		check_if_empty_variable(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '=' && str[i] != '\0')
+		i++;
+	if (i == (ft_strlen(str) - 1))
+		return (1);
+	return (0);
+}
 
 char	*env_var_value(char *str)
 {
@@ -23,44 +35,47 @@ char	*env_var_value(char *str)
 	return (str + i);
 }
 
-int	check_for_dollarsign(char *str)
+int		compare_env(char *s1, char *s2)
 {
 	int	i;
-	int	found;
+	int	x;
+	int	len;
 
+	if (check_if_empty_variable(s2) == 1)
+		return (-1);
 	i = 0;
-	found = 0;
-	while (str[i] != '\0')
+	x = 0;
+	len = ft_strlen(s1);
+	while (i < len)
 	{
-		if (str[i] == '$')
-			found++;
-		i++;
+		if (s1[i] == s2[x])
+		{
+			i++;
+			x++;
+		}
+		else
+			return (-1);
 	}
-	return (found);
+	if (s2[i] == '=')
+		return (0);
+	return (-1);
 }
 
-char	*copy_til_dollar(char *str)
+int		check_if_env_var(char **env, char *split_elem, char **new_str, t_list *list)
 {
-	char	*new_str;
-	int		i;
+	int i;
 
 	i = 0;
-	if (str[0] != '$')
+	while (env[i] != NULL)
 	{
-		new_str = malloc(ft_strlen(str) + 1);
-		if (!new_str)
-			return (NULL);
-		while (str[i] != '$' && str[i] != '\0')
+		if (compare_env(split_elem, env[i]) == 0)
 		{
-			new_str[i] = str[i];
-			i++;
+			*new_str = strjoin_free(*new_str, env_var_value(env[i]));
+			break ;
 		}
-		new_str[i] = '\0';
+		i++;
 	}
-	else
-	{
-		new_str = malloc(1);
-		ft_bzero(new_str, 1);
-	}
-	return (new_str);
+	free(list->content);
+	list->content = ft_strdup(*new_str);
+	return (i);
 }

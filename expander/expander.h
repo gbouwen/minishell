@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 10:41:52 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/08 15:48:38 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 void	expand_variables(t_data *data);
 void	expand_files(t_data *data, t_node *node);
 void	expand_questionmark(int value, t_list *list);
-int		check_if_env(char **env, char *split_elem,
-												char **new_str, t_list *list);
-void	remove_empty_from_word(char **split_element, t_list *list, int x);
-int		compare_env(char *s1, char *s2);
+
 int		check_if_empty_variable(char *str);
 char	*env_var_value(char *str);
+int		compare_env(char *s1, char *s2);
+int		check_if_env_var(char **env, char *split_elem,
+												char **new_str, t_list *list);
+char	*copy_til_dollarsign(char *str);
 int		check_for_dollarsign(char *str);
-char	*copy_til_dollar(char *str);
 
 #endif

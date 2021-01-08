@@ -1,44 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_env_variables.c                             :+:    :+:            */
+/*   expand_v2.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 10:45:10 by gbouwen       ########   odam.nl         */
+/*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
+/*   Updated: 2021/01/08 15:44:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static int	env_loop(t_list *list, t_data *data)
+static int		expand_env_loop(t_data *data, t_list *list)
 {
-	int		remove_list_element;
-	int		x;
-	char	**split_element;
-	char	*new_str;
 	int		i;
+	int		x;
+	int		invalid_amount;
+	char	*original_string;
+	char	*result;
+	char	**split_element;
 
-	x = 0;
-	remove_list_element = 0;
+	i = 0;
+	x = 1;
+	invalid_amount = 0;
+	original_string = ft_strdup(list->content);
+	result = NULL;
 	if (list->type != CHAR_QUOTE && list->is_escaped == 0 && check_for_dollarsign(list->content) > 0)
 	{
-		new_str = copy_til_dollar(list->content);
-		split_element = ft_split(list->content, '$');
-		if (split_element == NULL)
+		result = copy_til_dollarsign(list->content);
+		if (!result)
 			free_struct_error(data, "Malloc failed");
+		split_element = ft_split(list->content, '$');
+		if (!split_element)
+			free_struct_error(data, "Malloc failed");
+		if (list->content[0] == '$')
+		{
+			i = check_if_env_var(data->env_variables, split_element[0], &result, list);
+			if (i == get_str_array_len(data->env_variables))
+				invalid_amount++;
+		}
 		while (split_element[x] != NULL)
 		{
-			i = check_if_env(data->env_variables, split_element[x], &new_str, list);
-			if (i == get_str_array_len(data->env_variables) && list->content[0] == '$' && check_for_dollarsign(list->content) == 1)
-				remove_list_element = 1;
+			i = check_if_env_var(data->env_variables, split_element[x], &result, list);
+			if (i == get_str_array_len(data->env_variables))
+				invalid_amount++;
 			x++;
 		}
-		free(new_str);
+		free(result);
+		if (invalid_amount == check_for_dollarsign(original_string) && original_string[0] == '$')
+		{
+			free(original_string);
+			free_str_array(split_element);
+			return (1);
+		}
+		free(original_string);
 		free_str_array(split_element);
 	}
-	return (remove_list_element);
+	return (0);
 }
 
 static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
@@ -48,7 +67,7 @@ static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
 
 	while (list != NULL)
 	{
-		remove_list_element = env_loop(list, data);
+		remove_list_element = expand_env_loop(data, list);
 		if (remove_list_element == 1)
 		{
 			if (list == *head)
