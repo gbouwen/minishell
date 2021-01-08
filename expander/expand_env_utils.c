@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/08 15:44:28 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/08 17:13:16 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,21 @@ int		compare_env(char *s1, char *s2)
 	return (-1);
 }
 
-int		check_if_env_var(char **env, char *split_elem, char **new_str, t_list *list)
+int		check_if_env_var(char **env, t_env_expander *env_exp, t_list *list)
 {
 	int i;
 
 	i = 0;
 	while (env[i] != NULL)
 	{
-		if (compare_env(split_elem, env[i]) == 0)
+		if (compare_env(env_exp->split_element[env_exp->x], env[i]) == 0)
 		{
-			*new_str = strjoin_free(*new_str, env_var_value(env[i]));
+			env_exp->result = strjoin_free(env_exp->result, env_var_value(env[i]));
 			break ;
 		}
 		i++;
 	}
 	free(list->content);
-	list->content = ft_strdup(*new_str);
+	list->content = ft_strdup(env_exp->result);
 	return (i);
 }

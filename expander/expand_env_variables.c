@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/08 16:25:49 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/08 17:16:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,30 @@
 
 static int		expand_env_loop(t_data *data, t_list *list)
 {
-	int		i;
-	int		x;
-	int		invalid_amount;
-	char	*original_string;
-	char	*result;
-	char	**split_element;
+	t_env_expander	env_exp;
 
-	i = 0;
-	x = 1;
-	invalid_amount = 0;
-	original_string = ft_strdup(list->content);
-	result = NULL;
-	if (list->type != CHAR_QUOTE && list->is_escaped == 0 && check_for_dollarsign(list->content) > 0)
+	init_env_expander(&env_exp, list->content);
+	if (list->type != CHAR_QUOTE && list->is_escaped == 0 &&
+										check_for_dollarsign(list->content) > 0)
 	{
-		result = copy_til_dollarsign(list->content);
-		if (!result)
+		env_exp.result = copy_til_dollarsign(list->content);
+		if (!env_exp.result)
 			free_struct_error(data, "Malloc failed");
-		split_element = ft_split(list->content, '$');
-		if (!split_element)
+		env_exp.split_element = ft_split(list->content, '$');
+		if (!env_exp.split_element)
 			free_struct_error(data, "Malloc failed");
-		if (list->content[0] == '$')
+		check_first_element(data, &env_exp, list);
+		while (env_exp.split_element[env_exp.x] != NULL)
 		{
-			i = check_if_env_var(data->env_variables, split_element[0], &result, list);
-			if (i == get_str_array_len(data->env_variables))
-				invalid_amount++;
+			env_exp.i = check_if_env_var(data->env_variables, &env_exp, list);
+			if (env_exp.i == get_str_array_len(data->env_variables))
+				env_exp.invalid_amount++;
+			env_exp.x++;
 		}
-		while (split_element[x] != NULL)
-		{
-			i = check_if_env_var(data->env_variables, split_element[x], &result, list);
-			if (i == get_str_array_len(data->env_variables))
-				invalid_amount++;
-			x++;
-		}
-		free(result);
-		if (invalid_amount == check_for_dollarsign(original_string) && original_string[0] == '$')
-		{
-			free(original_string);
-			free_str_array(split_element);
-			return (1);
-		}
-		free_str_array(split_element);
+		free_and_correct_return_value(&env_exp);
 	}
-	free(original_string);
-	return (0);
+	free(env_exp.original_string);
+	return (env_exp.remove_list_element);
 }
 
 static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
