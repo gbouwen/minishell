@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/08 17:13:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/12 11:19:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		compare_env(char *s1, char *s2)
 	int	len;
 
 	if (check_if_empty_variable(s2) == 1)
+		return (-1);
+	if (s1 == NULL)
 		return (-1);
 	i = 0;
 	x = 0;
