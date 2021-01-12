@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/08 17:16:15 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/12 17:39:53 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		expand_env_loop(t_data *data, t_list *list)
 
 	init_env_expander(&env_exp, list->content);
 	if (list->type != CHAR_QUOTE && list->is_escaped == 0 &&
-										check_for_dollarsign(list->content) > 0)
+		check_for_dollarsign(list->content) > 0 && ft_strlen(list->content) > 1)
 	{
 		env_exp.result = copy_til_dollarsign(list->content);
 		if (!env_exp.result)
@@ -30,7 +30,7 @@ static int		expand_env_loop(t_data *data, t_list *list)
 		while (env_exp.split_element[env_exp.x] != NULL)
 		{
 			env_exp.i = check_if_env_var(data->env_variables, &env_exp, list);
-			if (env_exp.i == get_str_array_len(data->env_variables))
+			if (env_exp.i == get_str_array_len(data->env_variables) && env_exp.split_element[env_exp.x][0] != '?')
 				env_exp.invalid_amount++;
 			env_exp.x++;
 		}
@@ -74,6 +74,6 @@ void	expand_variables(t_data *data)
 	t_list	*temp;
 
 	temp = data->lexer.token_list;
-	expand_questionmark(data->questionmark, temp);
 	expand_env_variables(data, &data->lexer.token_list, temp);
+	expand_questionmark(data, temp);
 }

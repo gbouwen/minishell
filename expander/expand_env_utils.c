@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/12 11:19:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/12 15:47:09 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ int		check_if_env_var(char **env, t_env_expander *env_exp, t_list *list)
 	i = 0;
 	while (env[i] != NULL)
 	{
+		if (env_exp->split_element[env_exp->x][0] == '?')
+		{
+			env_exp->result = strjoin_free(env_exp->result, "$");
+			env_exp->result = strjoin_free(env_exp->result,
+								env_exp->split_element[env_exp->x]);
+			break ;
+		}
 		if (compare_env(env_exp->split_element[env_exp->x], env[i]) == 0)
 		{
 			env_exp->result = strjoin_free(env_exp->result, env_var_value(env[i]));
