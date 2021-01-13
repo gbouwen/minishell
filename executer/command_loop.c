@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/13 15:10:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/13 16:15:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	check_node_types(t_data *data, t_node *node, int current_fd)
 		execute_pipe(data, node);
 		return ;
 	}
-	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND || node->type
-																	== FILE_IN)
+	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND ||
+													node->type == FILE_IN)
 	{
 		current_fd = redirections_loop(data, node);
 		if (node->right && data->expand_error != 1)

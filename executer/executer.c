@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/13 11:22:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/13 16:19:59 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	executer(t_data *data)
 	lexer(data);
 	if (data->lexer.state != GENERAL || data->lexer.error == 1)
 	{
+		ft_printf("Multiline command doesn't work...\n");
+		g_prompt = 0;
 		free(data->cmdline);
 		ft_lstclear(&data->lexer.token_list, free_list_content);
 		return (1);
