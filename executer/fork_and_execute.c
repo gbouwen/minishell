@@ -38,7 +38,7 @@ static char	*find_path_variable(char **env)
 	i = 0;
 	while (env[i] != NULL)
 	{
-		if (ft_strncmp("PATH", env[i], 4) == 0)
+		if (ft_strncmp("PATH=", env[i], 5) == 0)
 			return (env[i]);
 		i++;
 	}
