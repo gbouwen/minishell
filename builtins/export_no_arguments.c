@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:38:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/13 10:44:33 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 15:47:05 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	sort_and_print(char **env, int len)
 		while (x < len)
 		{
 			if (ft_strncmp(env[sorted_indexes[min]], env[sorted_indexes[x]],
-							ft_strlen(env[sorted_indexes[min]])) > 0)
+									ft_strlen(env[sorted_indexes[min]])) > 0)
 				min = x;
 			x++;
 		}
