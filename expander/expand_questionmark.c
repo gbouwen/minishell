@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/12 13:54:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/12 17:47:36 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 13:59:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t	get_leftover_len(char *str, size_t i)
 	return (len);
 }
 
-static char	*add_leftovers(char *original, char *str, size_t i)
+static char	*add_leftovers(t_data *data, char *original, char *str, size_t i)
 {
 	size_t	leftover_len;
 	char	*result;
@@ -33,6 +33,9 @@ static char	*add_leftovers(char *original, char *str, size_t i)
 
 	leftover_len = get_leftover_len(str, i);
 	result = malloc(ft_strlen(original) + leftover_len + 1);
+	if (!result)
+		free_struct_error(data, "Malloc failed");
+	ft_bzero(result, ft_strlen(original) + leftover_len + 1);
 	x = 0;
 	while (original[x] != '\0')
 	{
@@ -70,7 +73,7 @@ static char	*replace_questionmark(t_data *data, char *content, size_t i)
 	}
 	result[x] = '\0';
 	result = strjoin_free(result, temp);
-	result = add_leftovers(result, content, i);
+	result = add_leftovers(data, result, content, i);
 	free(temp);
 	return (result);
 }
@@ -92,8 +95,7 @@ void	expand_questionmark(t_data *data, t_list *list)
 				{
 					result = replace_questionmark(data, list->content, i - 1);
 					free(list->content);
-					list->content = ft_strdup(result);
-					free(result);
+					list->content = result;
 				}
 				i++;
 			}
