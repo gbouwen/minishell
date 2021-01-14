@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_utils_2.c                                   :+:    :+:            */
+/*   expand_env_utils_2.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/06 15:13:41 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/06 16:00:00 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 12:21:50 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,17 @@ int		compare_env(char *s1, char *s2)
 int		check_if_env(char **env, char *split_elem, char **new_str, t_list *list)
 {
 	int i;
-
 	i = 0;
 	while (env[i] != NULL)
 	{
+		if (split_elem[0] == 26)
+		{
+			split_elem[0] = '$';
+			*new_str = strjoin_free(*new_str, split_elem);
+			free(list->content);
+			list->content = ft_strdup(*new_str);
+			break;
+		}
 		if (compare_env(split_elem, env[i]) == 0)
 		{
 			*new_str = strjoin_free(*new_str, env_var_value(env[i]));

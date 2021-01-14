@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/05 16:18:07 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/08 13:45:52 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ t_node	*tasks();
 t_node	*sequence_semicolon();
 t_node	*sequence();
 
-int		match(int type, char **str, t_node *node);
+int		match(int type, char **str);
 
-int		token_check(t_node *cmd_node, char **str);
+int		token_check();
 int		set_node_type(int tokentype, int node_type, t_node *node);
 int		check_parser_error(t_node *root);
 void	attach_tree_node(t_node *attach, int type, t_node *left,

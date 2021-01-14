@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:05:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 17:29:41 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 11:37:40 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ static void	state_single_quote(t_lexer *lexer, t_list **token, char c)
 		return ;
 	}
 	(*token)->content[(*token)->current_char] = c;
+	if (c == '$')
+	{
+		(*token)->current_char++;
+		(*token)->content[(*token)->current_char] = 26;
+	}
 	(*token)->current_char++;
 }
 

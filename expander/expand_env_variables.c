@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 10:45:10 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 12:21:56 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	env_loop(t_list *list, t_data *data)
 
 	x = 0;
 	remove_list_element = 0;
-	if (list->type != CHAR_QUOTE && list->is_escaped == 0 && check_for_dollarsign(list->content) > 0)
+	if (list->is_escaped == 0 && check_for_dollarsign(list->content) > 0)
 	{
 		new_str = copy_til_dollar(list->content);
 		split_element = ft_split(list->content, '$');
