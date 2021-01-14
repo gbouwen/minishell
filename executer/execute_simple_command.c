@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 14:12:00 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 12:03:13 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	compare_builtins(char *content, char *builtin)
 	return (0);
 }
 
-int	check_builtin(t_data *data, t_node *node)
+static int	check_builtin(t_data *data, t_node *node)
 {
 	if (compare_builtins(node->content, "echo") == 0)
 		builtin_echo(node);
@@ -40,7 +40,7 @@ int	check_builtin(t_data *data, t_node *node)
 	else if (compare_builtins(node->content, "cd") == 0)
 		builtin_cd(node, data->env_variables);
 	else if (compare_builtins(node->content, "export") == 0)
-		builtin_export(data);
+		builtin_export(data, node);
 	else if (compare_builtins(node->content, "unset") == 0)
 		builtin_unset(data);
 	else if (compare_builtins(node->content, "env") == 0)

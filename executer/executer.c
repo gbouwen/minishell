@@ -6,11 +6,20 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/13 16:19:59 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/13 16:29:36 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
+
+void	print_list(t_list *token) //
+{
+	while (token != NULL)
+	{
+		printf("-%s-\n", token->content);
+		token = token->next;
+	}
+}
 
 int	executer(t_data *data)
 {
@@ -27,6 +36,7 @@ int	executer(t_data *data)
 		ft_lstclear(&data->lexer.token_list, free_list_content);
 		return (1);
 	}
+	print_list(data->lexer.token_list);
 	expand_variables(data);
 	data->tree = parser(&data->lexer);
 	expand_files(data, data->tree);

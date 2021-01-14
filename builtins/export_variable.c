@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 12:47:30 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 12:05:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,8 @@ static char	**add_variable(t_data *data, char **envp, char *var)
 	return (new_envp);
 }
 
-void		builtin_export_variable(t_data *data)
+void		builtin_export_variable(t_data *data, t_node *node)
 {
-	t_node *temp;
-
-	temp = data->tree->right;
-	while (temp)
-	{
-		data->env_variables = add_variable(data, data->env_variables, temp->content);
-		temp = temp->right;
-	}
+	data->env_variables = add_variable(data, data->env_variables,
+											node->right->content);
 }
