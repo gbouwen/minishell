@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/05 15:48:36 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/06 13:01:34 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static	void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	int	open_file;
 
 	open_file = 0;
+	g_in_parent = 0;
 	if (i > 0)
 	{
 		dup2(pipe_switch->old_fds[READ], STDIN_FILENO);
@@ -54,11 +55,13 @@ static	void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	if (open_file)
 		close(open_file);
 	execute_simple_command(data, node);
-	exit(1);
+	exit(data->question_mark);
 }
 
-static	void	connect_pipes(t_pipe *pipe_switch, int i)
+static	void	connect_pipes(t_pipe *pipe_switch, int i, t_data *data)
 {
+	int	status;
+
 	if (i > 0)
 	{
 		close(pipe_switch->old_fds[READ]);
@@ -69,7 +72,10 @@ static	void	connect_pipes(t_pipe *pipe_switch, int i)
 		pipe_switch->old_fds[READ] = pipe_switch->new_fds[READ];
 		pipe_switch->old_fds[WRITE] = pipe_switch->new_fds[WRITE];
 	}
-	wait(NULL);
+	wait(&status);
+	data->question_mark = status / 256;
+	if (g_exit_status > 0)
+		data->question_mark = g_exit_status;
 }
 
 void			execute_pipe(t_data *data, t_node *node)
@@ -95,7 +101,7 @@ void			execute_pipe(t_data *data, t_node *node)
 		if (pid == 0)
 			redirect(pipe_switch, i, command_node, data);
 		else
-			connect_pipes(pipe_switch, i);
+			connect_pipes(pipe_switch, i, data);
 		node = node->left;
 		i++;
 	}
