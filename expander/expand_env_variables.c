@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/12 17:39:53 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:23:42 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static int		expand_env_loop(t_data *data, t_list *list)
+static int	expand_env_loop(t_data *data, t_list *list)
 {
 	t_env_expander	env_exp;
 
@@ -30,7 +30,8 @@ static int		expand_env_loop(t_data *data, t_list *list)
 		while (env_exp.split_element[env_exp.x] != NULL)
 		{
 			env_exp.i = check_if_env_var(data->env_variables, &env_exp, list);
-			if (env_exp.i == get_str_array_len(data->env_variables) && env_exp.split_element[env_exp.x][0] != '?')
+			if (env_exp.i == get_str_array_len(data->env_variables) &&
+								env_exp.split_element[env_exp.x][0] != '?')
 				env_exp.invalid_amount++;
 			env_exp.x++;
 		}
@@ -69,7 +70,7 @@ static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
 	}
 }
 
-void	expand_variables(t_data *data)
+void		expand_variables(t_data *data)
 {
 	t_list	*temp;
 

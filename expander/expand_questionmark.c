@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/12 13:54:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 13:59:04 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:21:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static size_t	get_leftover_len(char *str, size_t i)
 	return (len);
 }
 
-static char	*add_leftovers(t_data *data, char *original, char *str, size_t i)
+static char		*add_leftovers(t_data *data, char *original, char *str,
+																size_t i)
 {
 	size_t	leftover_len;
 	char	*result;
@@ -54,7 +55,7 @@ static char	*add_leftovers(t_data *data, char *original, char *str, size_t i)
 	return (result);
 }
 
-static char	*replace_questionmark(t_data *data, char *content, size_t i)
+static char		*replace_questionmark(t_data *data, char *content, size_t i)
 {
 	size_t	x;
 	char	*result;
@@ -78,7 +79,7 @@ static char	*replace_questionmark(t_data *data, char *content, size_t i)
 	return (result);
 }
 
-void	expand_questionmark(t_data *data, t_list *list)
+void			expand_questionmark(t_data *data, t_list *list)
 {
 	char	*result;
 	size_t	i;
@@ -87,7 +88,8 @@ void	expand_questionmark(t_data *data, t_list *list)
 	{
 		result = NULL;
 		i = 1;
-		if (list->type != CHAR_QUOTE && list->is_escaped == 0 && ft_strlen(list->content) > 1)
+		if (list->type != CHAR_QUOTE && list->is_escaped == 0 &&
+										ft_strlen(list->content) > 1)
 		{
 			while (list->content[i] != '\0')
 			{

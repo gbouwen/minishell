@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 16:02:35 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:14:07 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	**create_arg_list(t_data *data, t_node *node)
 	return (arg_list);
 }
 
-static void child_actions(t_data *data, t_node *node)
+static void	child_actions(t_data *data, t_node *node)
 {
 	char	**args;
 	int		val;
@@ -55,7 +55,7 @@ static void child_actions(t_data *data, t_node *node)
 	}
 }
 
-void	fork_and_execute(t_data *data, t_node *node)
+void		fork_and_execute(t_data *data, t_node *node)
 {
 	pid_t	pid;
 	int		status;

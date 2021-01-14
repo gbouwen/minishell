@@ -46,7 +46,7 @@ static void	check_node_types(t_data *data, t_node *node, int current_fd)
 		execute_simple_command(data, node);
 }
 
-void	command_loop(t_data *data)
+void		command_loop(t_data *data)
 {
 	int		save_in;
 	int		save_out;

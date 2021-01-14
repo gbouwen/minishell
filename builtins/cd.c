@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 14:42:36 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:18:55 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	correct_cd_error_message(t_node *temp)
 		ft_printf("too many arguments\n");
 }
 
-void	builtin_cd(t_node *node, char **envp)
+void		builtin_cd(t_node *node, char **envp)
 {
 	t_node	*temp;
 	int		ret;

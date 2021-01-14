@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 13:59:54 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:19:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static char **remove_var(t_data *data, int x)
+static char	**remove_var(t_data *data, int x)
 {
 	int		len;
 	char	**new_env;
