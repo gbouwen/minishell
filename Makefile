@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/01/12 12:27:45 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/01/14 15:29:09 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SOURCE_C =	main.c \
 			helper_functions/count_tree_arguments.c \
 			helper_functions/strjoin_free.c \
 			helper_functions/get_work_dir_prompt.c \
+			helper_functions/compare_both.c \
 			expander/expand_files.c \
 			expander/expand_env_variables.c \
 			expander/expand_env_utils.c \
