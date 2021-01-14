@@ -20,7 +20,7 @@ static void	change_pwd_env(char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		if (ft_strncmp(envp[i], "PWD", 3) == 0)
+		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
 		{
 			free(envp[i]);
 			getcwd(buff, 4096);
