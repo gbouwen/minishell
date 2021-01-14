@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/07 11:48:12 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 11:49:35 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:32:07 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ char	*get_work_dir_prompt(void)
 
 	getcwd(buff, 4096);
 	if (g_work_dir != NULL)
-		free (g_work_dir);
+		free(g_work_dir);
 	return (ft_strdup(buff));
 }
