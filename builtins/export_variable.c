@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 12:05:57 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 14:44:29 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ static char	**add_variable(t_data *data, char **envp, char *var)
 
 void		builtin_export_variable(t_data *data, t_node *node)
 {
+	if (node->right->right)
+	{
+		ft_printf("export: %s: not a valid identifier\n",
+								node->right->right->content);
+		return ;
+	}
 	data->env_variables = add_variable(data, data->env_variables,
 											node->right->content);
 }
