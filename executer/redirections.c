@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/17 13:49:46 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/04 14:14:38 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 15:55:16 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,22 @@ int		set_redirections(t_data *data, t_node *node, int current_fd)
 	new_fd = 0;
 	if (current_fd != 0)
 		close(current_fd);
-	if (node->type == FILE_OUT)
+	if (node->type == FILE_OUT || FILE_OUT_APPEND)
 	{
-		new_fd = open(node->content, O_RDWR);
+		if (node->type == FILE_OUT)
+			new_fd = open(node->content, O_RDWR);
+		if (node->type == FILE_OUT_APPEND)
+			new_fd = open(node->content, O_RDWR | O_APPEND);
 		if (new_fd != -1)
 			new_fd = dup2(new_fd, STDOUT_FILENO);
-		else
-			data->expand_error = 1;
-	}
-	if (node->type == FILE_OUT_APPEND)
-	{
-		new_fd = open(node->content, O_RDWR | O_APPEND);
-		if (new_fd != -1)
-			new_fd = dup2(new_fd, STDOUT_FILENO);
-		else
-			data->expand_error = 1;
 	}
 	if (node->type == FILE_IN)
 	{
 		new_fd = open(node->content, O_RDONLY);
 		if (new_fd != -1)
 			new_fd = dup2(new_fd, STDIN_FILENO);
-		else
-			data->expand_error = 1;
 	}
+	if (new_fd == 1)
+		data->expand_error = 1;
 	return (new_fd);
 }
