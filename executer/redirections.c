@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/17 13:49:46 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 15:55:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/15 10:53:16 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		set_redirections(t_data *data, t_node *node, int current_fd)
 		if (new_fd != -1)
 			new_fd = dup2(new_fd, STDIN_FILENO);
 	}
-	if (new_fd == 1)
+	if (new_fd == -1)
 		data->expand_error = 1;
 	return (new_fd);
 }
