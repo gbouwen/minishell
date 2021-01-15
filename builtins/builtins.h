@@ -18,6 +18,7 @@
 # include "../error/error.h"
 # include "../struct.h"
 # include "../parser/parser.h"
+# include "../expander/expander.h"
 
 void	builtin_echo(t_data *data, t_node *command);
 void	builtin_cd(t_node *command, char **envp);
