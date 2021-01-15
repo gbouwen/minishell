@@ -21,7 +21,7 @@
 
 void	builtin_echo(t_data *data, t_node *command);
 void	builtin_cd(t_node *command, char **envp);
-void	builtin_pwd(void);
+void	builtin_pwd(t_data *data);
 void	builtin_export(t_data *data, t_node *node);
 void	builtin_export_no_arguments(char **envp);
 void	builtin_export_variable(t_data *data, t_node *node);

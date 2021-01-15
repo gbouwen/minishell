@@ -17,7 +17,7 @@ void		execute_simple_command(t_data *data, t_node *node)
 	if (compare_both(node->content, "echo") == 0)
 		builtin_echo(data, node);
 	else if (compare_both(node->content, "pwd") == 0)
-		builtin_pwd();
+		builtin_pwd(data);
 	else if (compare_both(node->content, "cd") == 0)
 		builtin_cd(node, data->env_variables);
 	else if (compare_both(node->content, "export") == 0)
