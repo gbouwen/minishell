@@ -6,11 +6,20 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/08 15:24:34 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/14 12:34:13 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
+
+void	print_list(t_list *token) //
+{
+	while (token != NULL)
+	{
+		printf("-%s-\n", token->content);
+		token = token->next;
+	}
+}
 
 int	executer(t_data *data)
 {
@@ -20,7 +29,14 @@ int	executer(t_data *data)
 		return (-1);
 	lexer(data);
 	if (data->lexer.state != GENERAL || data->lexer.error == 1)
+	{
+		ft_printf("Multiline command doesn't work...\n");
+		g_prompt = 0;
+		free(data->cmdline);
+		ft_lstclear(&data->lexer.token_list, free_list_content);
 		return (1);
+	}
+	print_list(data->lexer.token_list);
 	expand_variables(data);
 	data->tree = parser(&data->lexer);
 	if (data->tree == NULL)

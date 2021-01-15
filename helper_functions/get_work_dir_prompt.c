@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   free.h                                             :+:    :+:            */
+/*   get_work_dir_prompt.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/03 15:37:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 13:39:19 by gbouwen       ########   odam.nl         */
+/*   Created: 2021/01/07 11:48:12 by gbouwen       #+#    #+#                 */
+/*   Updated: 2021/01/07 11:49:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#include "helper_functions.h"
 
-# include "../minishell.h"
-# include "../struct.h"
-# include "../error/error.h"
+char	*get_work_dir_prompt(void)
+{
+	char	buff[4096];
 
-void	free_list_content(void *content);
-void	free_struct(t_data *data);
-void	free_struct_error(t_data *data, char *message);
-void	free_str_array(char **str_array);
-
-#endif
+	getcwd(buff, 4096);
+	if (g_work_dir != NULL)
+		free (g_work_dir);
+	return (ft_strdup(buff));
+}

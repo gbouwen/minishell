@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 10:52:24 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/06 14:09:52 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/07 12:50:54 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	free_struct(t_data *data)
 {
+	free(g_work_dir);
 	free(data->cmdline);
 	free_str_array(data->env_variables);
 	if (data->lexer.token_list != NULL)
@@ -23,6 +24,7 @@ void	free_struct(t_data *data)
 
 void	free_struct_error(t_data *data, char *message)
 {
+	free(g_work_dir);
 	free(data->cmdline);
 	free_str_array(data->env_variables);
 	if (data->lexer.token_list != NULL)

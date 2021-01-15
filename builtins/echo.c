@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/12/18 11:12:14 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/07 12:37:23 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	builtin_echo(t_node *node)
 {
-	int	fd;
 	int	newline;
 
-	fd = 1;
 	newline = 1;
 	if (node->right)
 	{
@@ -30,9 +28,8 @@ void	builtin_echo(t_node *node)
 	while (node->right)
 	{
 		node = node->right;
-		ft_putstr_fd(node->content, fd);
-		ft_putstr_fd(" ", fd);
+		ft_printf("%s ", node->content);
 	}
 	if (newline)
-		ft_putstr_fd("\n", fd);
+		ft_printf("\n");
 }

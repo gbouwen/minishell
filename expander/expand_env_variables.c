@@ -5,40 +5,37 @@
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/10 11:43:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 12:32:26 by tiemen        ########   odam.nl         */
+/*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
+/*   Updated: 2021/01/15 12:58:27 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static int	env_loop(t_list *list, t_data *data)
+static int		expand_env_loop(t_data *data, t_list *list)
 {
-	int		remove_list_element;
-	int		x;
-	char	**split_element;
-	char	*new_str;
-	int		i;
+	t_env_expander	env_exp;
 
-	x = 0;
-	remove_list_element = 0;
-	if (list->is_escaped == 0 && check_for_dollarsign(list->content) > 0)
+	init_env_expander(&env_exp, list->content);
+	if (list->is_escaped == 0 &&
+		check_for_dollarsign(list->content) > 0 && ft_strlen(list->content) > 1)
 	{
-		new_str = copy_til_dollar(list->content);
-		split_element = ft_split(list->content, '$');
-		if (split_element == NULL)
+		env_exp.result = copy_til_dollarsign(list->content);
+		if (!env_exp.result)
 			free_struct_error(data, "Malloc failed");
-		while (split_element[x] != NULL)
-		{
-			i = check_if_env(data->env_variables, split_element[x], &new_str, list);
-			if (i == get_str_array_len(data->env_variables) && list->content[0] == '$' && check_for_dollarsign(list->content) == 1)
-				remove_list_element = 1;
-			x++;
-		}
-		free(new_str);
-		free_str_array(split_element);
+		env_exp.split_element = ft_split(list->content, '$');
+		if (!env_exp.split_element)
+			free_struct_error(data, "Malloc failed");
+		env_exp.quote_split = ft_split(env_exp.split_element[env_exp.x], 26);
+		if (!env_exp.quote_split)
+			free_struct_error(data, "Malloc failed");
+		check_first_element(data, &env_exp, list);
+		evaluate_dollartoken(env_exp, data, list);
+		free_and_correct_return_value(&env_exp);
 	}
-	return (remove_list_element);
+	remove_quote_seperators(list, &env_exp);
+	free(env_exp.original_string);
+	return (env_exp.remove_list_element);
 }
 
 static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
@@ -48,7 +45,7 @@ static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
 
 	while (list != NULL)
 	{
-		remove_list_element = env_loop(list, data);
+		remove_list_element = expand_env_loop(data, list);
 		if (remove_list_element == 1)
 		{
 			if (list == *head)
@@ -75,6 +72,6 @@ void	expand_variables(t_data *data)
 	t_list	*temp;
 
 	temp = data->lexer.token_list;
-	expand_question_mark(data->question_mark, temp);
-	expand_env_variables(data->env_variables, &data->lexer.token_list, temp);
+	expand_env_variables(data, &data->lexer.token_list, temp);
+	expand_questionmark(data, temp);
 }

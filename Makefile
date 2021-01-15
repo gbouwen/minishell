@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/01/14 12:26:12 by tiemen        ########   odam.nl          #
+#    Updated: 2021/01/14 12:33:54 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,13 @@ SOURCE_C =	main.c \
 			builtins/exit.c \
 			helper_functions/get_str_array_len.c \
 			helper_functions/count_tree_arguments.c \
-			expander/expand_question_mark.c \
-			expander/expand_env_variables.c \
+			helper_functions/strjoin_free.c \
+			helper_functions/get_work_dir_prompt.c \
 			expander/expand_files.c \
+			expander/expand_env_variables.c \
 			expander/expand_env_utils.c \
 			expander/expand_env_utils_2.c \
+			expander/expand_questionmark.c \
 			executer/execute_pipe.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
@@ -60,7 +62,7 @@ SOURCE_C =	main.c \
 			error/signals.c
 
 OBJECT_FILES = $(SOURCE_C:.c=.o)
-LIBRARIES = -Llibft -lft -Lget_next_line -lgnl -Lft_printf -lftprintf
+LIBRARIES = -Llibft -lft -Lft_printf -lftprintf
 
 GREEN = \033[0;38;5;114m
 RED = \033[38;5;124m
@@ -78,9 +80,6 @@ $(NAME): $(OBJECT_FILES)
 	@echo "$(GREEN)Compiling libft:$(NORMAL)"
 	@make bonus -C libft
 	@echo "-----------------------------------"
-	@echo "$(GREEN)Compiling get_next_line:$(NORMAL)"
-	@make -C get_next_line
-	@echo "-----------------------------------"
 	@echo "$(GREEN)Compiling ft_printf:$(NORMAL)"
 	@make -C ft_printf
 	@echo "-----------------------------------"
@@ -92,7 +91,6 @@ clean:
 	@echo "$(RED)Removed all .o files$(NORMAL)"
 	@echo "-----------------------------------"
 	@make clean -C libft
-	@make clean -C get_next_line
 	@make clean -C ft_printf
 	@/bin/rm -f $(OBJECT_FILES)
 
@@ -100,7 +98,6 @@ fclean: clean
 	@echo "$(RED)Removed executable:$(NORMAL)	$(NAME)"
 	@echo "-----------------------------------"
 	@make fclean -C libft
-	@make fclean -C get_next_line
 	@make fclean -C ft_printf
 	@/bin/rm -f $(NAME)
 

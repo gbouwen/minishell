@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:05:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 11:37:40 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/15 11:33:40 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ static void	state_general(t_data *data, t_list **token, int i)
 	else if (data->lexer.char_type == CHAR_ESCAPE)
 		set_escape_char_general(data, token, i);
 	else if (data->lexer.char_type == CHAR_QUOTE)
+	{
+		(*token)->content[(*token)->current_char] = 26;
+		(*token)->current_char++;
 		data->lexer.state = IN_QUOTE;
+	}
 	else if (data->lexer.char_type == CHAR_DOUBLE_QUOTE)
 		data->lexer.state = IN_DOUBLE_QUOTE;
 	else if (data->lexer.char_type == CHAR_WHITESPACE)
@@ -43,10 +47,7 @@ static void	state_single_quote(t_lexer *lexer, t_list **token, char c)
 	}
 	(*token)->content[(*token)->current_char] = c;
 	if (c == '$')
-	{
-		(*token)->current_char++;
-		(*token)->content[(*token)->current_char] = 26;
-	}
+		(*token)->content[(*token)->current_char] = 31;
 	(*token)->current_char++;
 }
 
