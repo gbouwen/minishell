@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 15:29:41 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/15 12:27:33 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	builtin_echo(t_node *node)
+void	builtin_echo(t_data *data, t_node *node)
 {
 	int	newline;
 
@@ -32,4 +32,5 @@ void	builtin_echo(t_node *node)
 	}
 	if (newline)
 		ft_printf("\n");
+	data->questionmark = 0;
 }

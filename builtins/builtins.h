@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:31:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 15:15:42 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/15 12:28:00 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../struct.h"
 # include "../parser/parser.h"
 
-void	builtin_echo(t_node *command);
+void	builtin_echo(t_data *data, t_node *command);
 void	builtin_cd(t_node *command, char **envp);
 void	builtin_pwd(void);
 void	builtin_export(t_data *data, t_node *node);
