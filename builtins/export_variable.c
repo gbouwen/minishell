@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 14:43:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/15 15:41:05 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,5 @@ void		builtin_export_variable(t_data *data, t_node *node)
 			ft_printf("export: %s: not a valid identifier\n", node->content);
 		node = node->right;
 	}
+	data->questionmark = 0;
 }
