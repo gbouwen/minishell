@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/05 15:48:36 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/18 15:08:30 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define READ 0
 #define WRITE 1
 
-static	int	count_cmds(t_node *node)
+static int	count_cmds(t_node *node)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ static	int	count_cmds(t_node *node)
 	return (i + 1);
 }
 
-static	void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
+static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 {
 	int	open_file;
 
@@ -57,7 +57,7 @@ static	void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	exit(1);
 }
 
-static	void	connect_pipes(t_pipe *pipe_switch, int i)
+static void	connect_pipes(t_pipe *pipe_switch, int i)
 {
 	if (i > 0)
 	{
@@ -69,10 +69,18 @@ static	void	connect_pipes(t_pipe *pipe_switch, int i)
 		pipe_switch->old_fds[READ] = pipe_switch->new_fds[READ];
 		pipe_switch->old_fds[WRITE] = pipe_switch->new_fds[WRITE];
 	}
-	wait(NULL);
 }
 
-void			execute_pipe(t_data *data, t_node *node)
+void		wait_for_children(void)
+{
+	pid_t	wait_pid;
+
+	wait_pid = 1;
+	while (wait_pid > 0)
+		wait_pid = wait(NULL);
+}
+
+void		execute_pipe(t_data *data, t_node *node)
 {
 	t_pipe	*pipe_switch;
 	pid_t	pid;
@@ -99,5 +107,6 @@ void			execute_pipe(t_data *data, t_node *node)
 		node = node->left;
 		i++;
 	}
+	wait_for_children();
 	free(pipe_switch);
 }
