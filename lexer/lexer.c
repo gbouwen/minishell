@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:30:28 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/13 16:17:37 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:32:53 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void		lexer(t_data *data)
 		else
 			i++;
 	}
-	// always adding token of type 0
 	token->next = malloc(sizeof(t_list));
 	token = token->next;
 	init_token(data, token, 1);

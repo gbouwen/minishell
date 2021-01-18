@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/05 13:37:07 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:22:53 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	open_or_create_file(t_data *data, char *filename)
 {
 	int	fd;
 
-	fd = open(filename, O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	fd = open(filename, O_CREAT | O_WRONLY | O_EXCL,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (fd == -1)
 	{
 		if (errno != EEXIST)
@@ -43,13 +44,14 @@ static void	open_or_create_file(t_data *data, char *filename)
 		close(fd);
 }
 
-void	expand_files(t_data *data, t_node *node)
+void		expand_files(t_data *data, t_node *node)
 {
 	if (node == NULL)
 		return ;
 	if (node->type == FILE_IN && data->expand_error != 1)
 		check_if_file_exists(data, node->content);
-	if ((node->type == FILE_OUT || node->type == FILE_OUT_APPEND) && data->expand_error != 1)
+	if ((node->type == FILE_OUT || node->type == FILE_OUT_APPEND) &&
+												data->expand_error != 1)
 		open_or_create_file(data, node->content);
 	expand_files(data, node->right);
 	expand_files(data, node->left);

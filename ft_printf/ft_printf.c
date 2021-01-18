@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 14:32:04 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/30 11:23:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:12:31 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	first_struct(t_stats *data)
 	data->error = 0;
 }
 
-int	ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		i;

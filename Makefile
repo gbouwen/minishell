@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/01/18 14:08:20 by tiemen        ########   odam.nl          #
+#    Updated: 2021/01/18 15:33:41 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SOURCE_C =	main.c \
 			helper_functions/count_tree_arguments.c \
 			helper_functions/strjoin_free.c \
 			helper_functions/get_work_dir_prompt.c \
+			helper_functions/compare_both.c \
 			expander/expand_files.c \
 			expander/expand_env_variables.c \
 			expander/expand_env_utils.c \
@@ -57,6 +58,7 @@ SOURCE_C =	main.c \
 			executer/execute_pipe.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
+			executer/path_variables.c \
 			executer/redirections.c \
 			error/error.c \
 			error/signals.c

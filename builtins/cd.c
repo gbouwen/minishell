@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 14:42:36 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/15 15:05:55 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	change_pwd_env(char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		if (ft_strncmp(envp[i], "PWD", 3) == 0)
+		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
 		{
 			free(envp[i]);
 			getcwd(buff, 4096);
@@ -59,27 +59,25 @@ static char	*get_home_var(char **envp)
 	return (NULL);
 }
 
-static void	correct_cd_error_message(t_node *temp)
+static void	correct_cd_error_message(t_node *node)
 {
 	ft_printf("bash: cd: ");
-	if (temp->right == NULL)
-		ft_printf("%s: No such file or directory\n", temp->content);
+	if (node->right == NULL)
+		ft_printf("%s: No such file or directory\n", node->content);
 	else
 		ft_printf("too many arguments\n");
 }
 
-void	builtin_cd(t_node *node, char **envp)
+void		builtin_cd(t_data *data, t_node *node, char **envp)
 {
-	t_node	*temp;
 	int		ret;
 	char	*home;
 
-	temp = NULL;
 	ret = -1;
 	if (node->right != NULL)
-		temp = node->right;
-	if (temp != NULL)
-		ret = chdir(temp->content);
+		node = node->right;
+	if (node != NULL)
+		ret = chdir(node->content);
 	if (ret == -1 && node->right == NULL && check_home(envp) == 1)
 	{
 		home = get_home_var(envp);
@@ -89,7 +87,10 @@ void	builtin_cd(t_node *node, char **envp)
 	if (ret == -1 && node->right == NULL && check_home(envp) == 0)
 		ft_printf("bash: cd: HOME not set\n");
 	else if (ret == -1)
-		correct_cd_error_message(temp);
+		correct_cd_error_message(node);
 	else
+	{
 		change_pwd_env(envp);
+		data->questionmark = 0;
+	}
 }

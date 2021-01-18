@@ -6,7 +6,11 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2021/01/06 13:01:34 by tiemen        ########   odam.nl         */
+=======
+/*   Updated: 2021/01/18 15:08:30 by gbouwen       ########   odam.nl         */
+>>>>>>> 89fd09104001cdebb0e5915b2c8cd76841248d8f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +19,7 @@
 #define READ 0
 #define WRITE 1
 
-static	int	count_cmds(t_node *node)
+static int	count_cmds(t_node *node)
 {
 	int	i;
 
@@ -28,7 +32,7 @@ static	int	count_cmds(t_node *node)
 	return (i + 1);
 }
 
-static	void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
+static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 {
 	int	open_file;
 
@@ -58,7 +62,7 @@ static	void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	exit(data->question_mark);
 }
 
-static	void	connect_pipes(t_pipe *pipe_switch, int i, t_data *data)
+static void	connect_pipes(t_pipe *pipe_switch, int i)
 {
 	int	status;
 
@@ -72,13 +76,25 @@ static	void	connect_pipes(t_pipe *pipe_switch, int i, t_data *data)
 		pipe_switch->old_fds[READ] = pipe_switch->new_fds[READ];
 		pipe_switch->old_fds[WRITE] = pipe_switch->new_fds[WRITE];
 	}
+<<<<<<< HEAD
 	wait(&status);
 	data->question_mark = status / 256;
 	if (g_exit_status > 0)
 		data->question_mark = g_exit_status;
+=======
+>>>>>>> 89fd09104001cdebb0e5915b2c8cd76841248d8f
 }
 
-void			execute_pipe(t_data *data, t_node *node)
+void		wait_for_children(void)
+{
+	pid_t	wait_pid;
+
+	wait_pid = 1;
+	while (wait_pid > 0)
+		wait_pid = wait(NULL);
+}
+
+void		execute_pipe(t_data *data, t_node *node)
 {
 	t_pipe	*pipe_switch;
 	pid_t	pid;
@@ -105,5 +121,6 @@ void			execute_pipe(t_data *data, t_node *node)
 		node = node->left;
 		i++;
 	}
+	wait_for_children();
 	free(pipe_switch);
 }

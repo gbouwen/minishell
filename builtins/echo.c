@@ -6,20 +6,20 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/07 12:37:23 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/15 12:27:33 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	builtin_echo(t_node *node)
+void	builtin_echo(t_data *data, t_node *node)
 {
 	int	newline;
 
 	newline = 1;
 	if (node->right)
 	{
-		if (ft_strncmp(node->right->content, "-n", 2) == 0)
+		if (compare_both(node->right->content, "-n") == 0)
 		{
 			newline = 0;
 			node = node->right;
@@ -32,4 +32,5 @@ void	builtin_echo(t_node *node)
 	}
 	if (newline)
 		ft_printf("\n");
+	data->questionmark = 0;
 }

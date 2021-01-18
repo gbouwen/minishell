@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/18 15:24:12 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/18 15:34:25 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int		check_if_env_var(char **env, t_env_expander *env_exp, t_list *list)
 		}
 		if (compare_env(env_exp->quote_split[env_exp->y], env[i]) == 0)
 		{
-			env_exp->result = strjoin_free(env_exp->result, env_var_value(env[i]));
+			env_exp->result = strjoin_free(env_exp->result,
+										env_var_value(env[i]));
 			break ;
 		}
 		i++;

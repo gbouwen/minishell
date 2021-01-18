@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 12:58:27 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/18 15:34:51 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static int		expand_env_loop(t_data *data, t_list *list)
+static int	expand_env_loop(t_data *data, t_list *list)
 {
 	t_env_expander	env_exp;
 
@@ -67,7 +67,7 @@ static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
 	}
 }
 
-void	expand_variables(t_data *data)
+void		expand_variables(t_data *data)
 {
 	t_list	*temp;
 
