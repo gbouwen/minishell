@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 13:08:46 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/18 15:24:12 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	remove_quote_seperators(t_list *list, t_env_expander *env_exp)
 	int i;
 
 	i = 0;
-	if (list->type == CHAR_QUOTE && check_for_dollarsign(list->content) == 0)
+	if (ft_strchr(list->content, 26) != NULL && check_for_dollarsign(list->content) == 0)
 	{
 		env_exp->quote_split = ft_split(list->content, 26);
 		while (env_exp->quote_split[i] != NULL)
