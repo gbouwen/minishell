@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 15:05:55 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/20 12:22:59 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static void	change_pwd_env(char **envp)
+static void	change_pwd_env(t_data *data, char **envp)
 {
 	int		i;
 	char	buff[4096];
@@ -29,6 +29,7 @@ static void	change_pwd_env(char **envp)
 		}
 		i++;
 	}
+	data->question_mark = 0;
 }
 
 static int	check_home(char **envp)
@@ -59,13 +60,14 @@ static char	*get_home_var(char **envp)
 	return (NULL);
 }
 
-static void	correct_cd_error_message(t_node *node)
+static void	correct_cd_error_message(t_data *data, t_node *node)
 {
 	ft_printf("bash: cd: ");
 	if (node->right == NULL)
 		ft_printf("%s: No such file or directory\n", node->content);
 	else
 		ft_printf("too many arguments\n");
+	data->question_mark = 1;
 }
 
 void		builtin_cd(t_data *data, t_node *node, char **envp)
@@ -87,10 +89,10 @@ void		builtin_cd(t_data *data, t_node *node, char **envp)
 	if (ret == -1 && node->right == NULL && check_home(envp) == 0)
 		ft_printf("bash: cd: HOME not set\n");
 	else if (ret == -1)
-		correct_cd_error_message(node);
-	else
 	{
-		change_pwd_env(envp);
-		data->question_mark = 0;
+		correct_cd_error_message(data, node);
+		return ;
 	}
+	else
+		change_pwd_env(data, envp);
 }
