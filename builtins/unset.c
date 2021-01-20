@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 15:41:49 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/20 16:41:40 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,24 @@ static char	**remove_var(t_data *data, int x)
 	int		len;
 	char	**new_env;
 	int		i;
+	int		v;
 
 	len = get_str_array_len(data->env_variables);
 	new_env = ft_calloc(len + 1, sizeof(char *));
 	if (!new_env)
 		free_struct_error(data, "Malloc failed");
 	i = 0;
-	while (data->env_variables[i] != NULL)
+	v = 0;
+	while (data->env_variables[v] != NULL)
 	{
-		if (i != x)
-			new_env[i] = ft_strdup(data->env_variables[i]);
-		i++;
+		if (v != x)
+		{
+			new_env[i] = ft_strdup(data->env_variables[v]);
+			i++;
+			v++;
+		}
+		else
+			v++;
 	}
 	new_env[i] = NULL;
 	free_str_array(data->env_variables);
@@ -55,7 +62,7 @@ void		builtin_unset(t_data *data)
 	t_node *temp;
 
 	temp = data->tree->right;
-	while (temp)
+	while (temp != NULL)
 	{
 		search_unset_variable(temp->content, data);
 		temp = temp->right;
