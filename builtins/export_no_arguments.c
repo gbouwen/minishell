@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:38:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 15:40:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/20 12:52:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static void	initialize_indexes_array(int *sorted_indexes, int len)
 
 static void	print_value(char *env_variable, int x)
 {
-	ft_putstr_fd("=\"", 1);
+	ft_printf("=\"");
 	x++;
 	while (env_variable[x] != '\0')
 	{
 		ft_putchar_fd(env_variable[x], 1);
 		x++;
 	}
-	ft_putstr_fd("\"\n", 1);
+	ft_printf("\"\n");
 }
 
 static void	print_sorted(char **env, int sorted_indexes[], int len)
@@ -59,7 +59,7 @@ static void	print_sorted(char **env, int sorted_indexes[], int len)
 			if (env[sorted_indexes[i]][x] == '=')
 				print_value(env[sorted_indexes[i]], x);
 			else
-				ft_putstr_fd("\n", 1);
+				ft_printf("\n");
 			i++;
 		}
 	}
