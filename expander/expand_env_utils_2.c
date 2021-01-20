@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:45:19 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/18 15:34:19 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/20 12:10:45 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	check_first_element(t_data *data, t_env_expander *env_exp, t_list *list)
 
 void	free_and_correct_return_value(t_env_expander *env_exp)
 {
-	printf("%d\n", 12345);
 	free(env_exp->result);
 	if (env_exp->quote_split)
 		free(env_exp->quote_split);
