@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:25:43 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/08 14:58:46 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/05 16:32:25 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,49 +38,47 @@ t_node	*command()
 
 t_node	*command_greater()
 {
+	char	*str;
 	t_node	*filename;
 	t_node	*cmd_node;
+	t_list	*error_token;
 	t_list	*prev_token;
 
 	cmd_node = simple_command();
-	prev_token = g_current_tok;
-	if (!match(CHAR_GREATER, NULL))
-	{
-		delete_tree(cmd_node);
+	error_token = g_current_tok;
+	if (!match(CHAR_GREATER, NULL, cmd_node))
 		return (NULL);
-	}
-	if (!token_check() || g_current_tok->type == 0)
-	{
-		g_current_tok = prev_token;
-		return (set_error_node(prev_token));
-	}
 	prev_token = g_current_tok;
+	if (g_current_tok->type == 0)
+		return (set_error_node(error_token));
+	if (!token_check(cmd_node, &str))
+		return (set_error_node(error_token));
 	filename = malloc(sizeof(t_node));
-	filename->content = ft_strdup(g_current_tok->content);
-	g_current_tok = g_current_tok->next;
-	attach_tree_node(filename, set_node_type (prev_token->type, 
-						FILE_OUT, filename), command(), cmd_node);
+	filename->content = str;
+	attach_tree_node(filename, set_node_type
+	(prev_token->type, FILE_OUT, filename), command(), cmd_node);
 	return (filename);
 }
 
 t_node	*command_lesser()
 {
+	char	*str;
 	t_node	*filename;
 	t_node	*cmd_node;
+	t_list	*error_token;
 	t_list	*prev_token;
 
 	cmd_node = simple_command();
-	if (!match(CHAR_LESSER, NULL))
-	{
-		delete_tree(cmd_node);
+	error_token = g_current_tok;
+	if (!match(CHAR_LESSER, NULL, cmd_node))
 		return (NULL);
-	}
 	prev_token = g_current_tok;
-	if (!token_check() || g_current_tok->type == 0)
-		return (set_error_node(prev_token));
+	if (g_current_tok->type == 0)
+		return (set_error_node(error_token));
+	if (!token_check(cmd_node, &str))
+		return (set_error_node(error_token));
 	filename = malloc(sizeof(t_node));
-	filename->content = ft_strdup(g_current_tok->content);
-	g_current_tok = g_current_tok->next;
+	filename->content = str;
 	attach_tree_node(filename, set_node_type
 	(prev_token->type, FILE_IN, filename), command(), cmd_node);
 	return (filename);
@@ -88,22 +86,23 @@ t_node	*command_lesser()
 
 t_node	*command_double_greater()
 {
+	char	*str;
 	t_node	*filename;
 	t_node	*cmd_node;
+	t_list	*error_token;
 	t_list	*prev_token;
 
 	cmd_node = simple_command();
-	if (!match(CHAR_DOUBLE_REDIRECT, NULL))
-	{
-		delete_tree(cmd_node);
+	error_token = g_current_tok;
+	if (!match(CHAR_DOUBLE_REDIRECT, NULL, cmd_node))
 		return (NULL);
-	}
 	prev_token = g_current_tok;
-	if (!token_check() || g_current_tok->type == 0)
-		return (set_error_node(prev_token));
+	if (g_current_tok->type == 0)
+		return (set_error_node(error_token));
+	if (!token_check(cmd_node, &str))
+		return (set_error_node(error_token));
 	filename = malloc(sizeof(t_node));
-	filename->content = ft_strdup(g_current_tok->content);
-	g_current_tok = g_current_tok->next;
+	filename->content = str;
 	attach_tree_node(filename, set_node_type
 	(prev_token->type, FILE_OUT_APPEND, filename) , command(), cmd_node);
 	return (filename);

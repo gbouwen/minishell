@@ -18,5 +18,5 @@ void	builtin_pwd(t_data *data)
 
 	getcwd(buff, 4096);
 	ft_printf("%s\n", buff);
-	data->questionmark = 0;
+	data->question_mark = 0;
 }

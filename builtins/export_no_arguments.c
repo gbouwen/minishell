@@ -100,5 +100,5 @@ void		builtin_export_no_arguments(t_data *data, char **env)
 
 	len = get_str_array_len(env);
 	sort_and_print(env, len);
-	data->questionmark = 0;
+	data->question_mark = 0;
 }

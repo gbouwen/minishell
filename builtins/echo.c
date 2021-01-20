@@ -32,5 +32,5 @@ void	builtin_echo(t_data *data, t_node *node)
 	}
 	if (newline)
 		ft_printf("\n");
-	data->questionmark = 0;
+	data->question_mark = 0;
 }

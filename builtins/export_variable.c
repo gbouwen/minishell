@@ -94,5 +94,5 @@ void		builtin_export_variable(t_data *data, t_node *node)
 			ft_printf("export: %s: not a valid identifier\n", node->content);
 		node = node->right;
 	}
-	data->questionmark = 0;
+	data->question_mark = 0;
 }

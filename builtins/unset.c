@@ -60,5 +60,5 @@ void		builtin_unset(t_data *data)
 		search_unset_variable(temp->content, data);
 		temp = temp->right;
 	}
-	data->questionmark = 0;
+	data->question_mark = 0;
 }

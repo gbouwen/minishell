@@ -91,6 +91,6 @@ void		builtin_cd(t_data *data, t_node *node, char **envp)
 	else
 	{
 		change_pwd_env(envp);
-		data->questionmark = 0;
+		data->question_mark = 0;
 	}
 }

@@ -38,5 +38,5 @@ void		builtin_env(t_data *data, t_node *command, char **envp)
 			ft_printf("%s\n", envp[i]);
 		i++;
 	}
-	data->questionmark = 0;
+	data->question_mark = 0;
 }

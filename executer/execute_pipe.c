@@ -6,11 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2021/01/06 13:01:34 by tiemen        ########   odam.nl         */
-=======
-/*   Updated: 2021/01/18 15:08:30 by gbouwen       ########   odam.nl         */
->>>>>>> 89fd09104001cdebb0e5915b2c8cd76841248d8f
+/*   Updated: 2021/01/20 11:26:24 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +58,7 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	exit(data->question_mark);
 }
 
-static void	connect_pipes(t_pipe *pipe_switch, int i)
+static void	connect_pipes(t_pipe *pipe_switch, int i, t_data *data)
 {
 	int	status;
 
@@ -76,13 +72,10 @@ static void	connect_pipes(t_pipe *pipe_switch, int i)
 		pipe_switch->old_fds[READ] = pipe_switch->new_fds[READ];
 		pipe_switch->old_fds[WRITE] = pipe_switch->new_fds[WRITE];
 	}
-<<<<<<< HEAD
 	wait(&status);
 	data->question_mark = status / 256;
 	if (g_exit_status > 0)
 		data->question_mark = g_exit_status;
-=======
->>>>>>> 89fd09104001cdebb0e5915b2c8cd76841248d8f
 }
 
 void		wait_for_children(void)
