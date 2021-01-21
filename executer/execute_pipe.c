@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/20 11:26:24 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/21 14:04:03 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	exit(data->question_mark);
 }
 
-static void	connect_pipes(t_pipe *pipe_switch, int i, t_data *data)
+static void	connect_pipes(t_pipe *pipe_switch, int i)
 {
-	int	status;
-
 	if (i > 0)
 	{
 		close(pipe_switch->old_fds[READ]);
@@ -72,19 +70,19 @@ static void	connect_pipes(t_pipe *pipe_switch, int i, t_data *data)
 		pipe_switch->old_fds[READ] = pipe_switch->new_fds[READ];
 		pipe_switch->old_fds[WRITE] = pipe_switch->new_fds[WRITE];
 	}
-	wait(&status);
-	data->question_mark = status / 256;
-	if (g_exit_status > 0)
-		data->question_mark = g_exit_status;
 }
 
-void		wait_for_children(void)
+void		wait_for_children(t_data *data)
 {
+	int		status;
 	pid_t	wait_pid;
 
 	wait_pid = 1;
 	while (wait_pid > 0)
-		wait_pid = wait(NULL);
+		wait_pid = wait(&status);
+	data->question_mark = status / 256;
+	if (g_exit_status > 0)
+		data->question_mark = g_exit_status;
 }
 
 void		execute_pipe(t_data *data, t_node *node)
@@ -110,10 +108,10 @@ void		execute_pipe(t_data *data, t_node *node)
 		if (pid == 0)
 			redirect(pipe_switch, i, command_node, data);
 		else
-			connect_pipes(pipe_switch, i, data);
+			connect_pipes(pipe_switch, i);
 		node = node->left;
 		i++;
 	}
-	wait_for_children();
+	wait_for_children(data);
 	free(pipe_switch);
 }

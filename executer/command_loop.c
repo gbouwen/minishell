@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/18 15:33:46 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/20 16:51:56 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,12 @@ void		command_loop(t_data *data)
 	g_prompt = 0;
 	while (node->type == NODE_SEQUENCE)
 	{
-		expand_variables(data);
-		expand_files(data, data->tree);
 		save_in = dup(STDIN_FILENO);
 		save_out = dup(STDOUT_FILENO);
 		check_node_types(data, node->right, current_fd);
 		restore_stdin_stdout(save_in, save_out);
 		node = node->left;
 	}
-	expand_variables(data);
-	expand_files(data, data->tree);
 	save_in = dup(STDIN_FILENO);
 	save_out = dup(STDOUT_FILENO);
 	check_node_types(data, node, current_fd);
