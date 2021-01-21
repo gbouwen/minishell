@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:45:19 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/20 12:10:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/21 16:37:14 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ void	check_first_element(t_data *data, t_env_expander *env_exp, t_list *list)
 void	free_and_correct_return_value(t_env_expander *env_exp)
 {
 	free(env_exp->result);
-	if (env_exp->quote_split)
-		free(env_exp->quote_split);
 	free_str_array(env_exp->split_element);
+	free_str_array(env_exp->quote_split);
 	if (env_exp->invalid_amount ==
 							check_for_dollarsign(env_exp->original_string) &&
 											env_exp->original_string[0] == '$')

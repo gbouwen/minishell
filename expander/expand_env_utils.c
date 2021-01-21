@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/18 15:34:25 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/21 16:40:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,11 @@ void	remove_quote_seperators(t_list *list, t_env_expander *env_exp)
 		if (i == 1)
 		{
 			replace_dollar_in_quote(env_exp, 0);
-			list->content = env_exp->quote_split[0];
+			free(list->content);
+			list->content = ft_strdup(env_exp->quote_split[0]);
 		}
 		i = 0;
-		free(env_exp->quote_split);
+		free_str_array(env_exp->quote_split);
 	}
 }
 
@@ -147,6 +148,7 @@ void	evaluate_dollartoken(t_env_expander env_exp, t_data *data, t_list *list)
 		}
 		env_exp.y = 0;
 		env_exp.x++;
+		free_str_array(env_exp.quote_split);
 	}
 }
 
@@ -154,10 +156,11 @@ int		append_quoted_part(t_env_expander *env_exp, t_list *list)
 {
 	if (env_exp->y > 0)
 	{
-		env_exp->result = ft_strjoin(env_exp->result,
+		env_exp->result = strjoin_free(env_exp->result,
 								env_exp->quote_split[env_exp->y]);
 		free(list->content);
 		list->content = ft_strdup(env_exp->result);
+		free(env_exp->result);
 		return (0);
 	}
 	return (1);

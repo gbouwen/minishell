@@ -6,7 +6,7 @@
 #    By: gbouwen <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/28 13:23:35 by gbouwen       #+#    #+#                  #
-#    Updated: 2020/10/29 14:32:04 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/01/21 14:57:59 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ all: $(NAME)
 
 %.o: %.c
 	@echo "$(GREEN)Created object file:$(NORMAL)	$@"
-	@$(CC) $(FLAGS) -c $< -o $@
+	@gcc -Wall -Wextra -Werror -c $< -o $@
 
 $(NAME): $(SOURCE_O)
 	@echo "$(BLUE)Adding to library...$(NORMAL)"
