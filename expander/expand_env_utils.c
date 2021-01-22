@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/21 16:40:47 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/15 14:11:43 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,37 +63,21 @@ int		compare_env(char *s1, char *s2)
 	return (-1);
 }
 
-void	replace_dollar_in_quote(t_env_expander *env_exp, int y)
-{
-	int i;
-
-	i = 0;
-	while(env_exp->quote_split[y][i] != '\0')
-	{
-		if (env_exp->quote_split[y][i] == 31)
-			env_exp->quote_split[y][i] = '$';
-		i++;
-	}
-}
-
 int		check_if_env_var(char **env, t_env_expander *env_exp, t_list *list)
 {
 	int i;
 
-	replace_dollar_in_quote(env_exp, env_exp->y);
-	if (append_quoted_part(env_exp, list) == 0)
-		return (0);
 	i = 0;
 	while (env[i] != NULL)
 	{
-		if (env_exp->quote_split[env_exp->y][0] == '?')
+		if (env_exp->split_element[env_exp->x][0] == '?')
 		{
 			env_exp->result = strjoin_free(env_exp->result, "$");
 			env_exp->result = strjoin_free(env_exp->result,
-								env_exp->quote_split[env_exp->y]);
+								env_exp->split_element[env_exp->x]);
 			break ;
 		}
-		if (compare_env(env_exp->quote_split[env_exp->y], env[i]) == 0)
+		if (compare_env(env_exp->split_element[env_exp->x], env[i]) == 0)
 		{
 			env_exp->result = strjoin_free(env_exp->result,
 										env_var_value(env[i]));
@@ -104,64 +88,4 @@ int		check_if_env_var(char **env, t_env_expander *env_exp, t_list *list)
 	free(list->content);
 	list->content = ft_strdup(env_exp->result);
 	return (i);
-}
-
-void	remove_quote_seperators(t_list *list, t_env_expander *env_exp)
-{
-	int i;
-
-	i = 0;
-	if (ft_strchr(list->content, 26) != NULL && check_for_dollarsign(list->content) == 0)
-	{
-		env_exp->quote_split = ft_split(list->content, 26);
-		while (env_exp->quote_split[i] != NULL)
-		{
-			replace_dollar_in_quote(env_exp, i);
-			if (env_exp->quote_split[i + 1] != NULL)
-				list->content = strjoin_free(env_exp->quote_split[i], env_exp->quote_split[i + 1]);
-			i++;
-		}
-		if (i == 1)
-		{
-			replace_dollar_in_quote(env_exp, 0);
-			free(list->content);
-			list->content = ft_strdup(env_exp->quote_split[0]);
-		}
-		i = 0;
-		free_str_array(env_exp->quote_split);
-	}
-}
-
-void	evaluate_dollartoken(t_env_expander env_exp, t_data *data, t_list *list)
-{
-	while (env_exp.split_element[env_exp.x] != NULL)
-	{
-		env_exp.quote_split = ft_split(env_exp.split_element[env_exp.x], 26);
-		if (!env_exp.quote_split)
-			free_struct_error(data, "Malloc failed");
-		while (env_exp.quote_split[env_exp.y] != NULL)
-		{
-			env_exp.i = check_if_env_var(data->env_variables, &env_exp, list);
-			if (env_exp.i == get_str_array_len(data->env_variables) && env_exp.quote_split[env_exp.y][0] != '?')
-				env_exp.invalid_amount++;
-			env_exp.y++;
-		}
-		env_exp.y = 0;
-		env_exp.x++;
-		free_str_array(env_exp.quote_split);
-	}
-}
-
-int		append_quoted_part(t_env_expander *env_exp, t_list *list)
-{
-	if (env_exp->y > 0)
-	{
-		env_exp->result = strjoin_free(env_exp->result,
-								env_exp->quote_split[env_exp->y]);
-		free(list->content);
-		list->content = ft_strdup(env_exp->result);
-		free(env_exp->result);
-		return (0);
-	}
-	return (1);
 }

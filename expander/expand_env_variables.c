@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_env_variables.c                             :+:    :+:            */
+/*   expand_v2.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/21 14:49:57 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/14 16:23:42 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	expand_env_loop(t_data *data, t_list *list)
 	t_env_expander	env_exp;
 
 	init_env_expander(&env_exp, list->content);
-	if (list->is_escaped == 0 &&
+	if (list->type != CHAR_QUOTE && list->is_escaped == 0 &&
 		check_for_dollarsign(list->content) > 0 && ft_strlen(list->content) > 1)
 	{
 		env_exp.result = copy_til_dollarsign(list->content);
@@ -26,14 +26,17 @@ static int	expand_env_loop(t_data *data, t_list *list)
 		env_exp.split_element = ft_split(list->content, '$');
 		if (!env_exp.split_element)
 			free_struct_error(data, "Malloc failed");
-		env_exp.quote_split = ft_split(env_exp.split_element[env_exp.x], 26);
-		if (!env_exp.quote_split)
-			free_struct_error(data, "Malloc failed");
 		check_first_element(data, &env_exp, list);
-		evaluate_dollartoken(env_exp, data, list);
+		while (env_exp.split_element[env_exp.x] != NULL)
+		{
+			env_exp.i = check_if_env_var(data->env_variables, &env_exp, list);
+			if (env_exp.i == get_str_array_len(data->env_variables) &&
+								env_exp.split_element[env_exp.x][0] != '?')
+				env_exp.invalid_amount++;
+			env_exp.x++;
+		}
 		free_and_correct_return_value(&env_exp);
 	}
-	remove_quote_seperators(list, &env_exp);
 	free(env_exp.original_string);
 	return (env_exp.remove_list_element);
 }
