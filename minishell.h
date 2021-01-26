@@ -31,6 +31,7 @@
 int		g_prompt;
 int		g_in_parent;
 int		g_exit_status;
+int		g_c_signal;
 char	*g_work_dir;
 
 #endif
