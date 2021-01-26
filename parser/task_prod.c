@@ -24,7 +24,7 @@ t_node	*tasks()
 	g_current_tok = saved_token;
 	task_node = command();
 	if (task_node != NULL)
-		return(task_node);
+		return (task_node);
 	return (NULL);
 }
 

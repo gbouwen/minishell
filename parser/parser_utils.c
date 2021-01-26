@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:22:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/05 16:33:25 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/25 12:44:39 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int		match(int type, char **str, t_node *node)
 	}
 	if (g_current_tok->type == type)
 	{
-		if (g_current_tok->type == TOKEN || g_current_tok-> type == CHAR_QUOTE
-			|| g_current_tok->type == CHAR_DOUBLE_QUOTE)
+		if (g_current_tok->type == TOKEN || g_current_tok->type == CHAR_QUOTE
+									|| g_current_tok->type == CHAR_DOUBLE_QUOTE)
 			*str = ft_strdup(g_current_tok->content);
 		if (g_current_tok->next)
 			g_current_tok = g_current_tok->next;
@@ -94,8 +94,8 @@ int		set_node_type(int tokentype, int node_type, t_node *node)
 
 int		token_check(t_node *cmd_node, char **str)
 {
-	if (!match(TOKEN, str, cmd_node) && !match(CHAR_DOUBLE_QUOTE, str, 
-		cmd_node) && !match(CHAR_QUOTE, str, cmd_node))
+	if (!match(TOKEN, str, cmd_node) && !match(CHAR_DOUBLE_QUOTE, str, cmd_node)
+										&& !match(CHAR_QUOTE, str, cmd_node))
 		return (0);
 	return (1);
 }

@@ -40,6 +40,7 @@ void	exit_signal(t_data *data)
 {
 	if (data->env_variables)
 		free_str_array(data->env_variables);
+	free(g_work_dir);
 	ft_printf("exit\n");
 	exit(1);
 }
