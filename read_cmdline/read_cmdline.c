@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/26 16:10:47 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/26 16:23:00 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static char	*first_read(char *buff)
 	new_line = malloc(2);
 	if (!new_line)
 		return (NULL);
-	new_line[0] = buff[0];
+	if (buff[0] != '\n')
+		new_line[0] = buff[0];
+	else
+		new_line[0] = '\0';
 	new_line[1] = '\0';
 	return (new_line);
 }
@@ -88,8 +91,6 @@ int			read_cmdline(char **line, t_data *data)
 		}
 		if (val_read == -1)
 			read_fail(*line);
-		if (buff[0] == '\n')
-			return (1);
 		if (g_c_signal == 1)
 		{
 			free(*line);
@@ -100,6 +101,8 @@ int			read_cmdline(char **line, t_data *data)
 			*line = concat_buff(*line, buff);
 		if (*line == NULL)
 			return (-1);
+		if (buff[0] == '\n')
+			return (1);
 	}
 	return (1);
 }
