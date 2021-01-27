@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/27 14:47:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/27 16:46:53 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,27 +92,27 @@ int			read_cmdline(char **line, t_data *data)
 	{
 		buff[0] = '\0';
 		val_read = read(0, buff, 1);
-		if (val_read == 0 && buff[0] == '\0')
-			exit_signal(data);
-		if (val_read == 0 && *line != NULL)
+		if (g_c_signal == 1)
 		{
-			val_read = 1;
-			continue ;
+			free(*line);
+			*line = NULL;
+			g_c_signal = 0;
 		}
+		if (val_read == 0 && buff[0] == '\0' && *line == NULL)
+			exit_signal(data);
 		if (val_read == -1)
 			read_fail(*line);
 		if (buff[0] == '\n')
 			return (1);
-		if (g_c_signal == 1)
-		{
-			free(*line);
+		if (val_read == 1 && *line == NULL)
 			*line = add_first_read(buff);
-			g_c_signal = 0;
-		}
 		else
+		{
 			*line = concat_buff(*line, buff);
-		if (*line == NULL)
-			return (-1);
+			if (*line == NULL)
+				return (-1);
+		}
+		val_read = 1;
 	}
 	return (1);
 }
