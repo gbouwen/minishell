@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/26 16:01:02 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/27 13:49:56 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	executer(t_data *data)
 	}
 	print_list(data->lexer.token_list);
 	builtin_export_variable(data, data->lexer.token_list);
-	print_list(data->lexer.token_list);
 	expand_variables(data);
 	data->tree = parser(&data->lexer);
 	if (data->tree == NULL)
