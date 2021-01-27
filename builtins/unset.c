@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 15:41:49 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/18 15:35:58 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void		builtin_unset(t_data *data)
 		search_unset_variable(temp->content, data);
 		temp = temp->right;
 	}
-	data->questionmark = 0;
+	data->question_mark = 0;
 }

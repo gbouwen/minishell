@@ -6,11 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2021/01/15 12:52:30 by tiemen        ########   odam.nl         */
-=======
-/*   Updated: 2021/01/14 16:20:46 by gbouwen       ########   odam.nl         */
->>>>>>> 89fd09104001cdebb0e5915b2c8cd76841248d8f
+/*   Updated: 2021/01/18 15:35:58 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +36,7 @@ typedef struct	s_env_expander
 
 void			expand_variables(t_data *data);
 void			expand_files(t_data *data, t_node *node);
-void			expand_questionmark(t_data *data, t_list *list);
+void			expand_question_mark(t_data *data, t_list *list);
 
 int		check_if_empty_variable(char *str);
 char	*env_var_value(char *str);

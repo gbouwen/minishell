@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:38:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 15:40:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/18 15:35:58 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void		builtin_export_no_arguments(t_data *data, char **env)
 
 	len = get_str_array_len(env);
 	sort_and_print(env, len);
-	data->questionmark = 0;
+	data->question_mark = 0;
 }

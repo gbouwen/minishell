@@ -55,7 +55,7 @@ static char		*add_leftovers(t_data *data, char *original, char *str,
 	return (result);
 }
 
-static char		*replace_questionmark(t_data *data, char *content, size_t i)
+static char		*replace_question_mark(t_data *data, char *content, size_t i)
 {
 	size_t	x;
 	char	*result;
@@ -79,7 +79,7 @@ static char		*replace_questionmark(t_data *data, char *content, size_t i)
 	return (result);
 }
 
-void			expand_questionmark(t_data *data, t_list *list)
+void			expand_question_mark(t_data *data, t_list *list)
 {
 	char	*result;
 	size_t	i;
@@ -95,7 +95,7 @@ void			expand_questionmark(t_data *data, t_list *list)
 			{
 				if (list->content[i - 1] == '$' && list->content[i] == '?')
 				{
-					result = replace_questionmark(data, list->content, i - 1);
+					result = replace_question_mark(data, list->content, i - 1);
 					free(list->content);
 					list->content = result;
 				}

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/15 15:05:55 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/18 15:35:58 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void		builtin_cd(t_data *data, t_node *node, char **envp)
 	else
 	{
 		change_pwd_env(envp);
-		data->questionmark = 0;
+		data->question_mark = 0;
 	}
 }
