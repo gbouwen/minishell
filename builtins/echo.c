@@ -6,11 +6,22 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/18 15:35:58 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/27 14:24:43 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+static int	print_nodes(t_node *node)
+{
+	while (node->right)
+	{
+		node = node->right;
+		if (ft_printf("%s ", node->content) == -1)
+			return (-1);
+	}
+	return (1);
+}
 
 void	builtin_echo(t_data *data, t_node *node)
 {
@@ -25,12 +36,18 @@ void	builtin_echo(t_data *data, t_node *node)
 			node = node->right;
 		}
 	}
-	while (node->right)
+	if (print_nodes(node) == -1)
 	{
-		node = node->right;
-		ft_printf("%s ", node->content);
+		data->question_mark = 1;
+		return ;
 	}
 	if (newline)
-		ft_printf("\n");
+	{
+		if (ft_printf("\n") == -1)
+		{
+			data->question_mark = 1;
+			return ;
+		}
+	}
 	data->question_mark = 0;
 }

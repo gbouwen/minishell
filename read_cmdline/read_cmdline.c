@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/26 14:12:08 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/27 14:19:37 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static char	*first_read(char *buff)
 	new_line = malloc(2);
 	if (!new_line)
 		return (NULL);
-	new_line[0] = buff[0];
+	if (buff[0] != '\n')
+		new_line[0] = buff[0];
+	else
+		new_line[0] = '\0';
 	new_line[1] = '\0';
 	return (new_line);
 }
@@ -27,7 +30,7 @@ static char	*first_read(char *buff)
 static char	*concat_buff(char *line, char *buff)
 {
 	char	*new_line;
-	int		i;
+	size_t	i;
 
 	new_line = malloc(ft_strlen(line) + 2);
 	if (!new_line)
@@ -67,30 +70,42 @@ int			read_cmdline(char **line, t_data *data)
 
 	buff[0] = '\0';
 	val_read = read(0, buff, 1);
-	if (buff[0] == '\0')
+	if (val_read == 0 && buff[0] == '\0')
 		exit_signal(data);
 	if (val_read == -1)
 		read_fail(*line);
 	if (buff[0] == '\n')
 		return (found_newline(line));
 	*line = first_read(buff);
+	if (g_c_signal == 1)
+		g_c_signal = 0;
 	if (*line == NULL)
 		return (-1);
 	while (val_read == 1)
 	{
+		buff[0] = '\0';
 		val_read = read(0, buff, 1);
-		if (val_read == 0)
+		if (val_read == 0 && buff[0] == '\0')
+			exit_signal(data);
+		if (val_read == 0 && line != NULL)
 		{
 			val_read = 1;
 			continue ;
 		}
 		if (val_read == -1)
 			read_fail(*line);
-		if (buff[0] == '\n')
-			return (1);
-		*line = concat_buff(*line, buff);
+		if (g_c_signal == 1)
+		{
+			free(*line);
+			*line = first_read(buff);
+			g_c_signal = 0;
+		}
+		else
+			*line = concat_buff(*line, buff);
 		if (*line == NULL)
 			return (-1);
+		if (buff[0] == '\n')
+			return (1);
 	}
 	return (1);
 }

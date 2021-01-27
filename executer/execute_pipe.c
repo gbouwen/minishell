@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/18 15:36:48 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/27 14:24:05 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,17 @@ static void	connect_pipes(t_pipe *pipe_switch, int i)
 	}
 }
 
-void		wait_for_children(void)
+void		wait_for_children(t_data *data)
 {
+	int		status;
 	pid_t	wait_pid;
 
 	wait_pid = 1;
 	while (wait_pid > 0)
-		wait_pid = wait(NULL);
+		wait_pid = wait(&status);
+	data->question_mark = status / 256;
+	if (g_exit_status > 0)
+		data->question_mark = g_exit_status;
 }
 
 void		execute_pipe(t_data *data, t_node *node)
@@ -108,6 +112,6 @@ void		execute_pipe(t_data *data, t_node *node)
 		node = node->left;
 		i++;
 	}
-	wait_for_children();
+	wait_for_children(data);
 	free(pipe_switch);
 }
