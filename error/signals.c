@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:49:45 by tblanker      #+#    #+#                 */
-/*   Updated: 2021/01/27 16:11:02 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/28 14:34:53 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 void	prompt(void)
 {
 	if (g_prompt == 0 && g_in_parent)
-		ft_printf("\033[1m\033[38;5;206m%s -> \033[0m", g_work_dir);
+	{
+		ft_putstr_fd("\033[1m\033[38;5;206m", 2);
+		ft_putstr_fd(g_work_dir, 2);
+		ft_putstr_fd(" -> \33[0m", 2);
+	}
 	g_prompt = 1;
 }
 
