@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/20 12:16:42 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/28 14:42:13 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ static int	print_nodes(t_node *node)
 	while (node->right)
 	{
 		node = node->right;
-		if (ft_printf("%s ", node->content) == -1)
-			return (-1);
+		if (node->right != NULL)
+		{
+			if (ft_printf("%s ", node->content) == -1)
+				return (-1);
+		}
+		else
+		{
+			if (ft_printf("%s", node->content) == -1)
+				return (-1);
+		}
 	}
 	return (1);
 }
@@ -30,7 +38,7 @@ void	builtin_echo(t_data *data, t_node *node)
 	newline = 1;
 	if (node->right)
 	{
-		if (compare_both(node->right->content, "-n") == 0)
+		while (compare_both(node->right->content, "-n") == 0)
 		{
 			newline = 0;
 			node = node->right;
