@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_v2.c                                        :+:    :+:            */
+/*   expand_env_variables.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 16:23:42 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/01/27 14:23:44 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void		expand_variables(t_data *data)
 
 	temp = data->lexer.token_list;
 	expand_env_variables(data, &data->lexer.token_list, temp);
-	expand_questionmark(data, temp);
+	expand_question_mark(data, temp);
 }

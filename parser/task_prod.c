@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/05 16:17:48 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/08 15:27:02 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_node	*tasks()
 	g_current_tok = saved_token;
 	task_node = command();
 	if (task_node != NULL)
-		return (task_node);
+		return(task_node);
 	return (NULL);
 }
 
@@ -36,18 +36,18 @@ t_node	*task_pipe()
 
 	task_node = command();
 	if (check_parser_error(task_node) == 0)
-	{
-		delete_tree(task_node);
-		return (set_error_node(g_current_tok));
-	}
+		return (task_node);
 	previous_token = g_current_tok;
-	if (!match(CHAR_PIPE, NULL, task_node))
-		return (NULL);
-	if (g_current_tok->type == 0 || g_current_tok->type == ';' ||
-		g_current_tok->type == '|')
+	if (!match(CHAR_PIPE, NULL))
 	{
 		delete_tree(task_node);
 		return (NULL);
+	}
+	if (g_current_tok->type == CHAR_SEMICOLON || g_current_tok->type == 
+		CHAR_PIPE || g_current_tok->type == 0)
+	{
+		g_current_tok = previous_token;
+		return (set_error_node(previous_token));
 	}
 	pipe_node = malloc(sizeof(t_node));
 	pipe_node->is_escaped = previous_token->is_escaped;
