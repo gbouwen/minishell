@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/08 15:27:02 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/29 14:50:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_node	*task_pipe()
 		return (NULL);
 	}
 	if (g_current_tok->type == CHAR_SEMICOLON || g_current_tok->type == 
-		CHAR_PIPE || g_current_tok->type == 0)
+		CHAR_PIPE || g_current_tok->type == 0 || !task_node)
 	{
 		g_current_tok = previous_token;
 		return (set_error_node(previous_token));

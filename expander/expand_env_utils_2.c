@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 15:45:19 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/27 14:23:48 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/26 14:24:27 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_env_expander(t_env_expander *env_exp, char *content)
 {
 	env_exp->i = 0;
+	env_exp->y = 0;
 	env_exp->x = 0;
 	env_exp->invalid_amount = 0;
 	env_exp->remove_list_element = 0;
@@ -31,13 +32,15 @@ void	check_first_element(t_data *data, t_env_expander *env_exp, t_list *list)
 		if (env_exp->i == get_str_array_len(data->env_variables) &&
 							env_exp->split_element[env_exp->x][0] != '?')
 			env_exp->invalid_amount++;
-		env_exp->x++;
+		env_exp->y++;
 	}
 }
 
 void	free_and_correct_return_value(t_env_expander *env_exp)
 {
 	free(env_exp->result);
+	if (env_exp->quote_split)
+		free(env_exp->quote_split);
 	free_str_array(env_exp->split_element);
 	if (env_exp->invalid_amount ==
 							check_for_dollarsign(env_exp->original_string) &&
