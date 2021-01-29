@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 12:43:45 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/27 14:17:36 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/29 14:25:31 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ t_node	*sequence()
 	saved_token = g_current_tok;
 	sequence = sequence_semicolon();
 	if (sequence != NULL)
+	{
+		printf("test%s\n", sequence->content);
 		return (sequence);
+	}
 	g_current_tok = saved_token;
 	sequence = tasks();
 	if (sequence != NULL)

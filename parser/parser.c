@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/27 15:21:35 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/27 15:46:28 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ t_node *parser(t_lexer *lexer_data)
 	node = sequence();
 	find_file_in_tree(*nodes);
 	node = *nodes;
-	print_tree(node);
-	printf("%d\n", 123345);
+//	print_tree(node);
 	if (!check_parser_error(*nodes) || node == NULL)
 	{
 		if (node)
@@ -86,6 +85,5 @@ t_node *parser(t_lexer *lexer_data)
 		g_prompt = 0;
 		return (NULL);
 	}
-	printf("%d\n", 123345);
 	return (*nodes);
 }
