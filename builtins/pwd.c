@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 16:36:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/18 15:35:58 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/01/27 14:24:20 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 void	builtin_pwd(t_data *data)
 {
 	char	buff[4096];
+	char	*result;
 
-	getcwd(buff, 4096);
+	result = getcwd(buff, 4096);
+	if (result == NULL)
+	{
+		data->question_mark = 1;
+		return ;
+	}
 	ft_printf("%s\n", buff);
 	data->question_mark = 0;
 }
