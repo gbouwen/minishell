@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/27 15:44:39 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/01 14:16:18 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		builtin_export_variable(t_data *data, t_list *list)
 
 	while (list && list->next != NULL)
 	{
-		if (!(ft_strncmp(list->content, "export", 6)) && list->next->type == TOKEN)
+		if (compare_both(list->content, "export") == 0 && list->next->type == TOKEN)
 		{
 			arg = list->next;
 			new_var = check_if_new_var(data->env_variables, arg->content);
