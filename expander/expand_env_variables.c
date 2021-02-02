@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/02 11:37:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/02 11:52:27 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,29 @@ static int	expand_env_loop(t_data *data, t_list *list)
 	return (env_exp.remove_list_element);
 }
 
-static void	remove_list_element(t_list *temp, t_list **head, t_list *list)
-{
-	if (list == *head)
-		*head = list->next;
-	else
-	{
-		temp = *head;
-		while (temp->next != list)
-			temp = temp->next;
-		temp->next = list->next;
-	}
-	temp = list;
-	list = list->next;
-	free(temp->content);
-	free(temp);
-}
-
 static void	expand_env_variables(t_data *data, t_list **head, t_list *list)
 {
-	int		remove;
 	t_list	*temp;
 
-	remove = 0;
 	temp = NULL;
 	while (list != NULL)
 	{
-		remove = expand_env_loop(data, list);
-		if (remove == 1)
-			remove_list_element(temp, head, list);
+		if (expand_env_loop(data, list) == 1)
+		{
+			if (list == *head)
+				*head = list->next;
+			else
+			{
+				temp = *head;
+				while (temp->next != list)
+					temp = temp->next;
+				temp->next = list->next;
+			}
+			temp = list;
+			list = list->next;
+			free(temp->content);
+			free(temp);
+		}
 		else
 			list = list->next;
 	}
