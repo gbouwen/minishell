@@ -5,45 +5,33 @@
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/02/02 11:15:08 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/02 15:18:58 by gbouwen       ########   odam.nl         */
+/*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
+/*   Updated: 2021/02/02 15:09:12 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static void	expand_env_loop(t_data *data, t_list **head, t_list *list)
+static int	check_for_env_variables(t_list *list)
+{
+	int	count;
+
+	count = 0;
+	while (list != NULL)
+	{
+		if (dollarsign_in_content(list->content) > 0)
+			count++;
+		list = list->next;
+	}
+	return (count);
+}
+
+void		expand_variables(t_data *data)
 {
 	t_list	*temp;
 
-	temp = NULL;
-	while (list != NULL)
-	{
-		if (expand_list_element(data, list) == 0)
-		{
-			if (list == *head)
-				*head = list->next;
-			else
-			{
-				temp = *head;
-				while (temp->next != list)
-					temp = temp->next;
-				temp->next = list->next;
-			}
-			temp = list;
-			list = list->next;
-			free(temp->content);
-			free(temp);
-		}
-		else
-			list = list->next;
-	}
-}
-
-void	expand_env_variables(t_data *data)
-{
-	t_list *list;
-
-	list = data->lexer.token_list;
-	expand_env_loop(data, &data->lexer.token_list, list);
+	temp = data->lexer.token_list;
+	if (check_for_env_variables(temp) > 0)
+		expand_env_variables(data);
+	strip_quotes_from_list(data, temp);
 }

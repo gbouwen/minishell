@@ -5,12 +5,34 @@
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/08 15:43:22 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/18 15:34:25 by tiemen        ########   odam.nl         */
+/*   Created: 2021/02/02 14:25:58 by gbouwen       #+#    #+#                 */
+/*   Updated: 2021/02/03 14:45:07 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+int	dollarsign_in_content(char *content)
+{
+	int	i;
+	int	count;
+	int	single_quote;
+
+	i = 0;
+	count = 0;
+	single_quote = 0;
+	while (content[i] != '\0')
+	{
+		if (content[i] == '\'' && single_quote == 0)
+			single_quote = 1;
+		else if (content[i] == '\'' && single_quote == 1)
+			single_quote = 0;
+		if (content[i] == '$' && single_quote == 0)
+			count++;
+		i++;
+	}
+	return (count);
+}
 
 int		check_if_empty_variable(char *str)
 {
@@ -32,25 +54,25 @@ char	*env_var_value(char *str)
 	while (str[i] != '=')
 		i++;
 	i++;
-	return (str + i);
+	return (ft_strdup(str + i));
 }
 
-int		compare_env(char *s1, char *s2)
+int		compare_env(char *split, char *env)
 {
 	int	i;
 	int	x;
 	int	len;
 
-	if (check_if_empty_variable(s2) == 1)
+	if (check_if_empty_variable(env) == 1)
 		return (-1);
-	if (s1 == NULL)
+	if (split == NULL)
 		return (-1);
 	i = 0;
 	x = 0;
-	len = ft_strlen(s1);
+	len = ft_strlen(split);
 	while (i < len)
 	{
-		if (s1[i] == s2[x])
+		if (split[i] == env[x])
 		{
 			i++;
 			x++;
@@ -58,107 +80,21 @@ int		compare_env(char *s1, char *s2)
 		else
 			return (-1);
 	}
-	if (s2[i] == '=')
+	if (env[i] == '=')
 		return (0);
 	return (-1);
 }
 
-void	replace_dollar_in_quote(t_env_expander *env_exp, int y)
+char	*check_if_env_var(char **env, char *word)
 {
-	int i;
+	int 	i;
 
-	i = 0;
-	while(env_exp->quote_split[y][i] != '\0')
-	{
-		if (env_exp->quote_split[y][i] == 31)
-			env_exp->quote_split[y][i] = '$';
-		i++;
-	}
-}
-
-int		check_if_env_var(char **env, t_env_expander *env_exp, t_list *list)
-{
-	int i;
-
-	replace_dollar_in_quote(env_exp, env_exp->y);
-	if (append_quoted_part(env_exp, list) == 0)
-		return (0);
 	i = 0;
 	while (env[i] != NULL)
 	{
-		if (env_exp->quote_split[env_exp->y][0] == '?')
-		{
-			env_exp->result = strjoin_free(env_exp->result, "$");
-			env_exp->result = strjoin_free(env_exp->result,
-								env_exp->quote_split[env_exp->y]);
-			break ;
-		}
-		if (compare_env(env_exp->quote_split[env_exp->y], env[i]) == 0)
-		{
-			env_exp->result = strjoin_free(env_exp->result,
-										env_var_value(env[i]));
-			break ;
-		}
+		if (compare_env(word, env[i]) == 0)
+			return (env_var_value(env[i]));
 		i++;
 	}
-	free(list->content);
-	list->content = ft_strdup(env_exp->result);
-	return (i);
-}
-
-void	remove_quote_seperators(t_list *list, t_env_expander *env_exp)
-{
-	int i;
-
-	i = 0;
-	if (ft_strchr(list->content, 26) != NULL && check_for_dollarsign(list->content) == 0)
-	{
-		env_exp->quote_split = ft_split(list->content, 26);
-		while (env_exp->quote_split[i] != NULL)
-		{
-			replace_dollar_in_quote(env_exp, i);
-			if (env_exp->quote_split[i + 1] != NULL)
-				list->content = strjoin_free(env_exp->quote_split[i], env_exp->quote_split[i + 1]);
-			i++;
-		}
-		if (i == 1)
-		{
-			replace_dollar_in_quote(env_exp, 0);
-			list->content = env_exp->quote_split[0];
-		}
-		i = 0;
-		free(env_exp->quote_split);
-	}
-}
-
-void	evaluate_dollartoken(t_env_expander env_exp, t_data *data, t_list *list)
-{
-	while (env_exp.split_element[env_exp.x] != NULL)
-	{
-		env_exp.quote_split = ft_split(env_exp.split_element[env_exp.x], 26);
-		if (!env_exp.quote_split)
-			free_struct_error(data, "Malloc failed");
-		while (env_exp.quote_split[env_exp.y] != NULL)
-		{
-			env_exp.i = check_if_env_var(data->env_variables, &env_exp, list);
-			if (env_exp.i == get_str_array_len(data->env_variables) && env_exp.quote_split[env_exp.y][0] != '?')
-				env_exp.invalid_amount++;
-			env_exp.y++;
-		}
-		env_exp.y = 0;
-		env_exp.x++;
-	}
-}
-
-int		append_quoted_part(t_env_expander *env_exp, t_list *list)
-{
-	if (env_exp->y > 0)
-	{
-		env_exp->result = ft_strjoin(env_exp->result,
-								env_exp->quote_split[env_exp->y]);
-		free(list->content);
-		list->content = ft_strdup(env_exp->result);
-		return (0);
-	}
-	return (1);
+	return (NULL);
 }
