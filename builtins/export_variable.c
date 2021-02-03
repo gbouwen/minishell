@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
-/*   Updated: 2021/02/03 15:24:07 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 16:23:00 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ void		builtin_export_variable(t_data *data, t_list *list)
 
 	while (list && list->next != NULL)
 	{
-		if (compare_both(list->content, "export") == 0 && list->next->type == TOKEN)
+		if (compare_both(list->content, "export") == 0)
 		{
 			arg = list->next;
 			new_var = check_if_new_var(data->env_variables, arg->content);
+			arg->content = remove_quotes(data, arg->content);
 			if (is_alpha_or_underscore(arg->content[0]) == 1 && new_var == 1)
 				data->env_variables = add_variable(data, data->env_variables,
 																arg->content);
