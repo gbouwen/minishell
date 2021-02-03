@@ -6,23 +6,45 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/29 14:37:18 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 15:19:56 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+static int	skip_option(char *str)
+{
+	int option_skip;
+
+	option_skip = 0;
+	if (ft_strncmp(str, "-n", 2) == 0)
+	{
+		option_skip = 1;
+		int i = 2;
+		while (str[i])
+		{
+			if (str[i] != 'n')
+				option_skip = 0;
+			i++;
+		}
+	}
+	return (option_skip);
+}
+
 static int	print_nodes(t_node *node)
 {
+	int	option_skip;
+
 	while (node->right)
 	{
 		node = node->right;
-		if (node->right != NULL)
+		option_skip = skip_option(node->content);
+		if (node->right != NULL && option_skip == 0)
 		{
 			if (ft_printf("%s ", node->content) == -1)
 				return (-1);
 		}
-		else
+		else if (option_skip == 0)
 		{
 			if (ft_printf("%s", node->content) == -1)
 				return (-1);

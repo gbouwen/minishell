@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:52:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 16:55:35 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 14:57:21 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef	struct		s_lexer
 # define CHAR_GENERAL 1
 # define CHAR_SEMICOLON ';'
 # define CHAR_WHITESPACE ' '
+# define CHAR_TAB '\t'
 # define CHAR_GREATER '>'
 # define CHAR_LESSER '<'
 # define CHAR_DOUBLE_REDIRECT 94

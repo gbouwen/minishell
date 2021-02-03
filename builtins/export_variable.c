@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/27 15:44:39 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/03 13:22:57 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,4 @@ void		builtin_export_variable(t_data *data, t_list *list)
 		}
 		list = list->next;
 	}
-	data->question_mark = 0;
 }

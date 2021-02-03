@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:04:08 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/10/28 16:04:29 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 14:59:22 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		get_char_type(char c)
 {
 	if (c == ';')
 		return (CHAR_SEMICOLON);
-	if (c == ' ')
+	if (c == ' ' || c == '	')
 		return (CHAR_WHITESPACE);
 	if (c == '>')
 		return (CHAR_GREATER);
