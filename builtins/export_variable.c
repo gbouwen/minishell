@@ -94,7 +94,7 @@ void		builtin_export_variable(t_data *data, t_list *list)
 			if (ft_isalpha(arg->content[0]) == 1 && new_var == 1)
 				data->env_variables = add_variable(data, data->env_variables,
 																arg->content);
-			if (ft_isalpha(arg->content[0]) == 0)
+			if (is_alpha_or_underscore(arg->content[0]) == 0)
 				ft_printf("export: %s: not a valid identifier\n", arg->content);
 			list = arg;
 		}
