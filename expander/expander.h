@@ -34,6 +34,8 @@ void	strip_quotes_from_list(t_data *data, t_list *list);
 void	expand_env_variables(t_data *data);
 int		expand_list_element(t_data *data, t_list *list);
 void	expand_files(t_data *data, t_node *node);
+
+void	add_questionmark(char *content, t_expander *expander);
 void	expand_question_mark(t_data *data, t_list *list);
 
 int		dollarsign_in_content(char *content);

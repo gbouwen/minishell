@@ -6,11 +6,19 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 16:22:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 16:46:25 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+static void	found_quote(t_data *data, char *content, t_expander *expander)
+{
+	if (content[expander->i] == '\'')
+		found_single_quote(content, expander);
+	if (content[expander->i] == '\"')
+		found_double_quote(data, content, expander);
+}
 
 void	found_single_quote(char *content, t_expander *expander)
 {
@@ -49,16 +57,14 @@ void	found_dollarsign(t_data *data, char *content, t_expander *expander)
 		add_char_to_result(content, expander);
 		copy_until_dollarsign(content, expander);
 	}
-	else if (content[expander->i + 1] == '\'')
+	else if (content[expander->i + 1] == '\'' ||
+									content[expander->i + 1] == '\"')
 	{
 		expander->i++;
-		found_single_quote(content, expander);
+		found_quote(data, content, expander);
 	}
-	else if (content[expander->i + 1] == '\"')
-	{
-		expander->i++;
-		found_double_quote(data, content, expander);
-	}
+	else if (content[expander->i + 1] == '?')
+		add_questionmark(content, expander);
 }
 
 int		expand_list_element(t_data *data, t_list *list)

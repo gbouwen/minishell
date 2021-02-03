@@ -6,11 +6,22 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/12 13:54:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 16:21:47 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 16:49:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+void	add_questionmark(char *content, t_expander *expander)
+{
+	expander->result[expander->x] = content[expander->i];
+	expander->x++;
+	expander->i++;
+	expander->result[expander->x] = content[expander->i];
+	expander->x++;
+	expander->i++;
+	expander->result[expander->x + 1] = '\0';
+}
 
 static size_t	get_leftover_len(char *str, size_t i)
 {
