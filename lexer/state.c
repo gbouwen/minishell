@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:05:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/18 15:23:06 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/02 12:30:14 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ static void	state_general(t_data *data, t_list **token, int i)
 		set_escape_char_general(data, token, i);
 	else if (data->lexer.char_type == CHAR_QUOTE)
 	{
-		(*token)->content[(*token)->current_char] = 26;
+		(*token)->content[(*token)->current_char] = '\'';
 		(*token)->current_char++;
 		data->lexer.state = IN_QUOTE;
 	}
 	else if (data->lexer.char_type == CHAR_DOUBLE_QUOTE)
+	{
+		(*token)->content[(*token)->current_char] = '\"';
+		(*token)->current_char++;
 		data->lexer.state = IN_DOUBLE_QUOTE;
+	}
 	else if (data->lexer.char_type == CHAR_WHITESPACE)
 		end_token(data, token, i);
 	else
@@ -41,13 +45,13 @@ static void	state_single_quote(t_lexer *lexer, t_list **token, char c)
 {
 	if (c == CHAR_QUOTE)
 	{
+		(*token)->content[(*token)->current_char] = '\'';
+		(*token)->current_char++;
 		lexer->state = GENERAL;
 		(*token)->type = CHAR_QUOTE;
 		return ;
 	}
 	(*token)->content[(*token)->current_char] = c;
-	if (c == '$')
-		(*token)->content[(*token)->current_char] = 31;
 	(*token)->current_char++;
 }
 
@@ -60,6 +64,8 @@ static void	state_double_quote(t_data *data, t_list **token, int i)
 	}
 	if (data->cmdline[i] == CHAR_DOUBLE_QUOTE)
 	{
+		(*token)->content[(*token)->current_char] = '\"';
+		(*token)->current_char++;
 		data->lexer.state = GENERAL;
 		(*token)->type = CHAR_DOUBLE_QUOTE;
 		return ;
