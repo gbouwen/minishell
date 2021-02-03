@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 16:46:25 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 16:54:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		expand_list_element(t_data *data, t_list *list)
 			add_char_to_result(list->content, &expander);
 	}
 	expander.result[expander.x] = '\0';
-	if (expander.result == NULL)
+	if (expander.result == NULL || ft_strlen(expander.result) == 0)
 		return (0);
 	free(list->content);
 	list->content = expander.result;
