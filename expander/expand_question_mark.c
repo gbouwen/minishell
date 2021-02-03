@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/12 13:54:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 16:49:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 17:22:27 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_questionmark(char *content, t_expander *expander)
 	expander->result[expander->x] = content[expander->i];
 	expander->x++;
 	expander->i++;
-	expander->result[expander->x + 1] = '\0';
+	expander->result[expander->x] = '\0';
 }
 
 static size_t	get_leftover_len(char *str, size_t i)
