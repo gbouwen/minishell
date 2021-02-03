@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 11:47:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 14:28:41 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 16:21:14 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	initialize_expander(t_data *data, t_list *list, t_expander *expander)
 
 void	add_char_to_result(char *content, t_expander *expander)
 {
+	expander->result[expander->x + 1] = '\0';
 	expander->result[expander->x] = content[expander->i];
 	expander->i++;
 	expander->x++;

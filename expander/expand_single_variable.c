@@ -6,11 +6,39 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 14:30:24 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 15:09:50 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 16:20:46 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+static char	*add_to_result(t_data *data, char *expander_result, char *value,
+																char *content)
+{
+	char	*new_result;
+	int		i;
+	int		x;
+
+	new_result = malloc(ft_strlen(expander_result) + ft_strlen(value) +
+													ft_strlen(content));
+	if (!new_result)
+		free_struct_error(data, "Malloc failed");
+	i = 0;
+	x = 0;
+	while (expander_result[i] != '\0')
+	{
+		new_result[i] = expander_result[i];
+		i++;
+	}
+	while (value[x] != '\0')
+	{
+		new_result[i + x] = value[x];
+		x++;
+	}
+	new_result[i + x] = '\0';
+	free(expander_result);
+	return (new_result);
+}
 
 static char	*find_variable(t_data *data, char *content, t_expander *expander)
 {
@@ -30,6 +58,7 @@ static char	*find_variable(t_data *data, char *content, t_expander *expander)
 		expander->i++;
 		index++;
 	}
+	variable[index] = '\0';
 	return (variable);
 }
 
@@ -44,7 +73,7 @@ void	expand_single_variable(t_data *data, char *content, t_expander *expander)
 	free(variable);
 	if (value != NULL)
 	{
-		expander->result = strjoin_free(expander->result, value);
+		expander->result = add_to_result(data, expander->result, value, content);
 		expander->x += ft_strlen(value);
 		free(value);
 	}
