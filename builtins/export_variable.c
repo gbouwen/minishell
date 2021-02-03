@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/05 15:47:40 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/01 14:16:18 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 15:23:01 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		builtin_export_variable(t_data *data, t_list *list)
 		{
 			arg = list->next;
 			new_var = check_if_new_var(data->env_variables, arg->content);
-			if (ft_isalpha(arg->content[0]) == 1 && new_var == 1)
+			if (ft_isalpha_or_underscore(arg->content[0]) == 1 && new_var == 1)
 				data->env_variables = add_variable(data, data->env_variables,
 																arg->content);
 			if (is_alpha_or_underscore(arg->content[0]) == 0)
@@ -100,5 +100,4 @@ void		builtin_export_variable(t_data *data, t_list *list)
 		}
 		list = list->next;
 	}
-	data->question_mark = 0;
 }
