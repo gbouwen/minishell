@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 16:54:35 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 17:19:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	found_dollarsign(t_data *data, char *content, t_expander *expander)
 	else if (is_punctuation_mark(content[expander->i + 1]) == 1)
 	{
 		add_char_to_result(content, expander);
+		if (content[expander->i] == '$')
+			add_char_to_result(content, expander);
 		copy_until_dollarsign(content, expander);
 	}
 	else if (content[expander->i + 1] == '\'' ||
