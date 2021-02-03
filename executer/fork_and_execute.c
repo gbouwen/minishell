@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 13:24:21 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/03 16:38:56 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ static void	child_actions(t_data *data, t_node *node)
 		}
 		path_variable = find_path_variable(data->env_variables);
 		try_paths(args, path_variable, data);
+		if (ft_strncmp(node->content, "./", 2) == 0)
+		{
+			ft_printf("%s: Permission denied\n", node->content);
+			free_struct(data);
+			exit(126);
+		}
 		free_struct(data);
 		exit(127);
 	}

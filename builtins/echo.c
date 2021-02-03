@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 15:19:56 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/03 16:03:26 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,25 @@ static int	skip_option(char *str)
 static int	print_nodes(t_node *node)
 {
 	int	option_skip;
+	int	no_more_skip;
 
+	no_more_skip = 0;
 	while (node->right)
 	{
 		node = node->right;
-		option_skip = skip_option(node->content);
+		if (no_more_skip == 0)
+			option_skip = skip_option(node->content);
 		if (node->right != NULL && option_skip == 0)
 		{
 			if (ft_printf("%s ", node->content) == -1)
 				return (-1);
+			no_more_skip = 1;
 		}
 		else if (option_skip == 0)
 		{
 			if (ft_printf("%s", node->content) == -1)
 				return (-1);
+			no_more_skip = 1;
 		}
 	}
 	return (1);
