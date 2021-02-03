@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 11:47:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 16:21:14 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 16:58:24 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	is_punctuation_mark(char c)
 	if (c == '\'' || c == '\"')
 		return (0);
 	if (c >= 35 && c <= 38)
+		return (1);
+	if (c >= 40 && c <= 47)
 		return (1);
 	if (c == 33 || c == 58 || c == 61 || c == 64)
 		return (1);
