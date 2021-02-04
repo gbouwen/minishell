@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 16:04:09 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 16:14:17 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	compare_with_env_variable(char *var, char *env_variable)
 	int	i;
 
 	i = 0;
-	while (var[i] == env_variable[i])
+	while (var[i] == env_variable[i] && var[i] != '\0' && env_variable[i] != '\0')
 		i++;
 	if (var[i] == '\0' && (env_variable[i] == '=' || env_variable[i] == '\0'))
 		return (0);
@@ -69,11 +69,11 @@ static void	search_unset_variable(char *var, t_data *data)
 	}
 }
 
-void		builtin_unset(t_data *data)
+void		builtin_unset(t_data *data, t_node *node)
 {
 	t_node *temp;
 
-	temp = data->tree->right;
+	temp = node;
 	while (temp != NULL)
 	{
 		search_unset_variable(temp->content, data);
