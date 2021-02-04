@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 14:14:53 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/04 14:32:35 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	change_pwd_env(t_data *data, char **envp)
 	data->question_mark = 0;
 }
 
-static int	check_home(char **envp)
+static int	is_home_set(char **envp)
 {
 	int	i;
 
@@ -46,7 +46,7 @@ static int	check_home(char **envp)
 	return (0);
 }
 
-static char	*get_home_var(char **envp)
+static char	*get_home_value(char **envp)
 {
 	int	i;
 
@@ -60,24 +60,44 @@ static char	*get_home_var(char **envp)
 	return (NULL);
 }
 
-void		builtin_cd(t_data *data, t_node *node, char **envp)
+static int	home_variable_check(t_data *data, t_node *node, char **envp)
 {
-	int		ret;
 	char	*home;
+	int		ret;
 
+	home = NULL;
 	ret = 1;
-	node = node->right;
-	if (node == NULL && check_home(envp) == 0)
-		ft_printf("bash: cd: HOME not set\n");
-	if (node == NULL && check_home(envp) == 1)
+	if (node == NULL && is_home_set(envp) == 0)
 	{
-		home = get_home_var(envp);
+		ft_printf("bash: cd: HOME not set\n");
+		data->question_mark = 1;
+		return (-1);
+	}
+	else if (node == NULL && is_home_set(envp) == 1)
+	{
+		home = get_home_value(envp);
 		if (home != NULL)
 			ret = chdir(home);
 	}
+	return (ret);
+}
+
+void		builtin_cd(t_data *data, t_node *node, char **envp)
+{
+	int		ret;
+
+	ret = 1;
+	node = node->right;
+	ret = home_variable_check(data, node, envp);
+	if (ret == -1)
+		return ;
 	if (node != NULL && node->right != NULL)
+	{
 		ft_printf("bash: cd: too many arguments\n");
-	if (node != NULL && node->right == NULL)
+		data->question_mark = 1;
+		return ;
+	}
+	else if (node != NULL && node->right == NULL)
 		ret = chdir(node->content);
 	if (ret == -1)
 	{
