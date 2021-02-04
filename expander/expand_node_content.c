@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_list_element.c                              :+:    :+:            */
+/*   expand_node_content.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 17:19:04 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 15:10:02 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,28 @@ void	found_dollarsign(t_data *data, char *content, t_expander *expander)
 		add_questionmark(content, expander);
 }
 
-int		expand_list_element(t_data *data, t_list *list)
+int		expand_node_content(t_data *data, t_node *node)
 {
 	t_expander	expander;
 
-	if (dollarsign_in_content(list->content) == 0)
+	if (dollarsign_in_content(node->content) == 0)
 		return (1);
-	initialize_expander(data, list, &expander);
-	while (list->content[expander.i] != '\0')
+	initialize_expander(data, node, &expander);
+	while (node->content[expander.i] != '\0')
 	{
-		if (list->content[expander.i] == '$')
-			found_dollarsign(data, list->content, &expander);
-		else if (list->content[expander.i] == '\'')
-			found_single_quote(list->content, &expander);
-		else if (list->content[expander.i] == '\"')
-			found_double_quote(data, list->content, &expander);
+		if (node->content[expander.i] == '$')
+			found_dollarsign(data, node->content, &expander);
+		else if (node->content[expander.i] == '\'')
+			found_single_quote(node->content, &expander);
+		else if (node->content[expander.i] == '\"')
+			found_double_quote(data, node->content, &expander);
 		else
-			add_char_to_result(list->content, &expander);
+			add_char_to_result(node->content, &expander);
 	}
 	expander.result[expander.x] = '\0';
 	if (expander.result == NULL || ft_strlen(expander.result) == 0)
 		return (0);
-	free(list->content);
-	list->content = expander.result;
+	free(node->content);
+	node->content = expander.result;
 	return (1);
 }

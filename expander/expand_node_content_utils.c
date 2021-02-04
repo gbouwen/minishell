@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_list_element_utils.c                        :+:    :+:            */
+/*   expand_node_content_utils.c                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 11:47:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 16:58:24 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 15:10:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-void	initialize_expander(t_data *data, t_list *list, t_expander *expander)
+void	initialize_expander(t_data *data, t_node *node, t_expander *expander)
 {
-	expander->result = malloc(ft_strlen(list->content) + 1);
+	expander->result = malloc(ft_strlen(node->content) + 1);
 	if (!expander->result)
 		free_struct_error(data, "Malloc failed");
-	ft_bzero(expander->result, ft_strlen(list->content) + 1);
+	ft_bzero(expander->result, ft_strlen(node->content) + 1);
 	expander->i = 0;
 	expander->x = 0;
 }

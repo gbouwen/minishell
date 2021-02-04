@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/29 14:35:44 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/04 14:57:11 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_fd_variables(int *save_in, int *save_out, int *current_fd)
 
 static void	check_node_types(t_data *data, t_node *node, int current_fd)
 {
+	expand_variables(data, node);
 	if (node->type == PIPE)
 	{
 		execute_pipe(data, node);

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/12 13:54:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 17:22:27 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 15:11:39 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,29 +90,29 @@ static char		*replace_question_mark(t_data *data, char *content, size_t i)
 	return (result);
 }
 
-void			expand_question_mark(t_data *data, t_list *list)
+void			expand_question_mark(t_data *data, t_node *node)
 {
 	char	*result;
 	size_t	i;
 
-	while (list != NULL)
+	while (node != NULL)
 	{
 		result = NULL;
 		i = 1;
-		if (list->type != CHAR_QUOTE && list->is_escaped == 0 &&
-										ft_strlen(list->content) > 1)
+		if (node->type != CHAR_QUOTE && node->is_escaped == 0 &&
+										ft_strlen(node->content) > 1)
 		{
-			while (list->content[i] != '\0')
+			while (node->content[i] != '\0')
 			{
-				if (list->content[i - 1] == '$' && list->content[i] == '?')
+				if (node->content[i - 1] == '$' && node->content[i] == '?')
 				{
-					result = replace_question_mark(data, list->content, i - 1);
-					free(list->content);
-					list->content = result;
+					result = replace_question_mark(data, node->content, i - 1);
+					free(node->content);
+					node->content = result;
 				}
 				i++;
 			}
 		}
-		list = list->next;
+		node = node->right;
 	}
 }

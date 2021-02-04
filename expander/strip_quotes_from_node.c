@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   strip_quotes_from_list.c                           :+:    :+:            */
+/*   strip_quotes_from_node.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 10:32:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 11:38:09 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 15:07:25 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ char *remove_quotes(t_data *data, char *content)
 	return (result);
 }
 
-void	strip_quotes_from_list(t_data *data, t_list *list)
+void	strip_quotes_from_node(t_data *data, t_node *node)
 {
-	while (list != NULL)
+	while (node != NULL)
 	{
-		if (has_quotes(list->content) == 1)
-			list->content = remove_quotes(data, list->content);
-		list = list->next;
+		if (has_quotes(node->content) == 1)
+			node->content = remove_quotes(data, node->content);
+		node = node->right;
 	}
 }

@@ -6,32 +6,32 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/02 15:09:12 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 15:13:01 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static int	check_for_env_variables(t_list *list)
+static int	check_for_env_variables(t_node *node)
 {
 	int	count;
 
 	count = 0;
-	while (list != NULL)
+	while (node != NULL)
 	{
-		if (dollarsign_in_content(list->content) > 0)
+		if (dollarsign_in_content(node->content) > 0)
 			count++;
-		list = list->next;
+		node = node->right;
 	}
 	return (count);
 }
 
-void		expand_variables(t_data *data)
+void		expand_variables(t_data *data, t_node *node)
 {
-	t_list	*temp;
+	t_node *temp;
 
-	temp = data->lexer.token_list;
+	temp = node;
 	if (check_for_env_variables(temp) > 0)
-		expand_env_variables(data);
-	strip_quotes_from_list(data, temp);
+		expand_env_variables(data, temp);
+	strip_quotes_from_node(data, temp);
 }

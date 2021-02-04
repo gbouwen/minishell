@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 15:40:36 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 15:11:06 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,17 @@ typedef struct	s_expander
 	int		x;
 }				t_expander;
 
-void	expand_variables(t_data *data);
+void	expand_variables(t_data *data, t_node *node);
+
 char 	*remove_quotes(t_data *data, char *content);
-void	strip_quotes_from_list(t_data *data, t_list *list);
-void	expand_env_variables(t_data *data);
-int		expand_list_element(t_data *data, t_list *list);
+void	strip_quotes_from_node(t_data *data, t_node *node);
+
+void	expand_env_variables(t_data *data, t_node *node);
+int		expand_node_content(t_data *data, t_node *node);
 void	expand_files(t_data *data, t_node *node);
 
 void	add_questionmark(char *content, t_expander *expander);
-void	expand_question_mark(t_data *data, t_list *list);
+void	expand_question_mark(t_data *data, t_node *node);
 
 int		dollarsign_in_content(char *content);
 int		check_if_empty_variable(char *str);
@@ -44,7 +46,7 @@ char	*env_var_value(char *str);
 int		compare_env(char *s1, char *s2);
 char	*check_if_env_var(char **env, char *split);
 
-void	initialize_expander(t_data *data, t_list *list, t_expander *expander);
+void	initialize_expander(t_data *data, t_node *node, t_expander *expander);
 void	add_char_to_result(char *content, t_expander *expander);
 void	copy_until_dollarsign(char *content, t_expander *expander);
 int		is_alpha_or_underscore(char c);
