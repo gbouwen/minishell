@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:25:43 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/08 14:58:46 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/04 13:42:16 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,14 @@ t_node	*command_greater()
 	t_list	*prev_token;
 
 	cmd_node = simple_command();
-	prev_token = g_current_tok;
 	if (!match(CHAR_GREATER, NULL))
 	{
 		delete_tree(cmd_node);
 		return (NULL);
 	}
-	if (!token_check() || g_current_tok->type == 0)
-	{
-		g_current_tok = prev_token;
-		return (set_error_node(prev_token));
-	}
 	prev_token = g_current_tok;
+	if (!token_check() || g_current_tok->type == 0)
+		return (set_error_node(g_current_tok));
 	filename = malloc(sizeof(t_node));
 	filename->content = ft_strdup(g_current_tok->content);
 	g_current_tok = g_current_tok->next;

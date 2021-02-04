@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/29 16:01:46 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/04 13:39:02 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ t_node *parser(t_lexer *lexer_data)
 	{
 		if (node)
 			delete_tree(node);
-		ft_printf("Parser error near '%s'\n", g_current_tok->content);
+		if (g_current_tok->type == 0)
+			ft_printf("minishell: syntax error near unexpected token `newline'\n");
+		else
+			ft_printf("minishell: syntax error near unexpected token `%s'\n", g_current_tok->content);
 		g_prompt = 0;
 		return (NULL);
 	}
