@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/04 14:08:25 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/04 14:11:13 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	print_list_parser(t_list *token) //
 		token = token->next;
 	}
 }
-
 
 static	void	rearrange_arguments(t_node *root)
 {
@@ -65,7 +64,7 @@ static	void	find_file_in_tree(t_node *root)
 	return ;
 }
 
-t_node *parser(t_lexer *lexer_data)
+t_node *parser(t_lexer *lexer_data, t_data *data)
 {
 	t_node	**nodes;
 	t_node	*node;
@@ -82,6 +81,7 @@ t_node *parser(t_lexer *lexer_data)
 			ft_printf("minishell: syntax error near unexpected token `newline'\n");
 		else
 			ft_printf("minishell: syntax error near unexpected token `%s'\n", g_current_tok->content);
+		data->question_mark = 2;
 		g_prompt = 0;
 		return (NULL);
 	}

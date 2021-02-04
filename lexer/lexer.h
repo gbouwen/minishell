@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:26:26 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/11/12 17:29:40 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 14:27:04 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXER_H
 
 # include <stdlib.h>
+# include "../struct.h"
 # include "lexer_utils.h"
 # include "../initialize_free/free.h"
 # include "../error/error.h"
