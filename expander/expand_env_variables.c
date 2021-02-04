@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:15:08 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 15:34:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/04 16:32:17 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@
 
 void	expand_env_variables(t_data *data, t_node *node)
 {
-   /* while (node != NULL)*/
-	/*{*/
-		/*expand_node_content(data, node);*/
-		/*node = node->right;*/
-	/*}*/
-	expand_question_mark(data, node);
+	t_node *temp;
+
+	temp = node;
+	while (temp != NULL)
+	{
+		expand_node_content(data, temp);
+		temp = temp->right;
+	}
+	temp = node;
+	expand_question_mark(data, temp);
 }
