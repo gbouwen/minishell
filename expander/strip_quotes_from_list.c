@@ -50,7 +50,7 @@ static void	in_double_quotes(char *result, char *content, int *x, int *i)
 	(*x)++;
 }
 
-static char *remove_quotes(t_data *data, char *content)
+char *remove_quotes(t_data *data, char *content)
 {
 	char	*result;
 	int		i;

@@ -6,11 +6,19 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 15:07:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/03 17:19:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+static void	found_quote(t_data *data, char *content, t_expander *expander)
+{
+	if (content[expander->i] == '\'')
+		found_single_quote(content, expander);
+	if (content[expander->i] == '\"')
+		found_double_quote(data, content, expander);
+}
 
 void	found_single_quote(char *content, t_expander *expander)
 {
@@ -47,18 +55,18 @@ void	found_dollarsign(t_data *data, char *content, t_expander *expander)
 	else if (is_punctuation_mark(content[expander->i + 1]) == 1)
 	{
 		add_char_to_result(content, expander);
+		if (content[expander->i] == '$')
+			add_char_to_result(content, expander);
 		copy_until_dollarsign(content, expander);
 	}
-	else if (content[expander->i + 1] == '\'')
+	else if (content[expander->i + 1] == '\'' ||
+									content[expander->i + 1] == '\"')
 	{
 		expander->i++;
-		found_single_quote(content, expander);
+		found_quote(data, content, expander);
 	}
-	else if (content[expander->i + 1] == '\"')
-	{
-		expander->i++;
-		found_double_quote(data, content, expander);
-	}
+	else if (content[expander->i + 1] == '?')
+		add_questionmark(content, expander);
 }
 
 int		expand_list_element(t_data *data, t_list *list)
@@ -80,7 +88,7 @@ int		expand_list_element(t_data *data, t_list *list)
 			add_char_to_result(list->content, &expander);
 	}
 	expander.result[expander.x] = '\0';
-	if (expander.result == NULL)
+	if (expander.result == NULL || ft_strlen(expander.result) == 0)
 		return (0);
 	free(list->content);
 	list->content = expander.result;
