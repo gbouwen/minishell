@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/27 14:24:15 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/04 16:04:09 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ static char	**remove_var(t_data *data, int x)
 	return (new_env);
 }
 
+static int	compare_with_env_variable(char *var, char *env_variable)
+{
+	int	i;
+
+	i = 0;
+	while (var[i] == env_variable[i])
+		i++;
+	if (var[i] == '\0' && (env_variable[i] == '=' || env_variable[i] == '\0'))
+		return (0);
+	return (-1);
+}
+
 static void	search_unset_variable(char *var, t_data *data)
 {
 	int	i;
@@ -48,7 +60,7 @@ static void	search_unset_variable(char *var, t_data *data)
 	i = 0;
 	while (data->env_variables[i] != NULL)
 	{
-		if (ft_strncmp(var, data->env_variables[i], ft_strlen(var)) == 0)
+		if (compare_with_env_variable(var, data->env_variables[i]) == 0)
 		{
 			data->env_variables = remove_var(data, i);
 			break ;
