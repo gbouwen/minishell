@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/14 15:55:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 16:15:39 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/05 11:43:03 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ void	try_paths(char **args, char *path_variable, t_data *data)
 		if (try_exec_path(args, all_paths, i, data) == 0)
 			i++;
 	}
-	printf("hierin\n");
-	if (ft_strncmp(args[0], "./", 2) != 0)
-		ft_printf("%s: command not found\n", args[0]);
 	free_str_array(args);
 	free_str_array(all_paths);
 }
