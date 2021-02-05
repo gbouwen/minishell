@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/29 15:15:43 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 14:51:45 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	check_if_file_exists(t_data *data, char *filename)
 	{
 		ft_printf("%s: no such file or directory.\n", filename);
 		data->expand_error = 1;
+		data->question_mark = 1;
 	}
 	else
 		close(fd);
@@ -38,6 +39,7 @@ static void	open_or_create_file(t_data *data, char *filename)
 		{
 			ft_printf("%s: could not create file.\n", filename);
 			data->expand_error = 1;
+			data->question_mark = 1;
 		}
 	}
 	else
