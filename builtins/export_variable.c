@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
-/*   Updated: 2021/02/05 11:21:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 11:30:22 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,27 +89,22 @@ static int	check_if_new_var(char **envp, char *content)
 void		builtin_export_variable(t_data *data, t_node *node)
 {
 	int		new_var;
-	t_node	*arg;
 
-	while (node && node->right != NULL)
+	node = node->right;
+	while (node != NULL)
 	{
-		if (compare_both(node->content, "export") == 0)
+		new_var = check_if_new_var(data->env_variables, node->content);
+		node->content = remove_quotes(data, node->content);
+		if (is_alpha_or_underscore(node->content[0]) == 1 && new_var == 1)
 		{
-			arg = node->right;
-			new_var = check_if_new_var(data->env_variables, arg->content);
-			arg->content = remove_quotes(data, arg->content);
-			if (is_alpha_or_underscore(arg->content[0]) == 1 && new_var == 1)
-			{
-				data->env_variables = add_variable(data, data->env_variables,
-																arg->content);
-				data->question_mark = 0;
-			}
-			else if (is_alpha_or_underscore(arg->content[0]) == 0)
-			{
-				ft_printf("export: %s: not a valid identifier\n", arg->content);
-				data->question_mark = 1;
-			}
-			node = arg;
+			data->env_variables = add_variable(data, data->env_variables,
+															node->content);
+			data->question_mark = 0;
+		}
+		else if (is_alpha_or_underscore(node->content[0]) == 0)
+		{
+			ft_printf("export: %s: not a valid identifier\n", node->content);
+			data->question_mark = 1;
 		}
 		node = node->right;
 	}
