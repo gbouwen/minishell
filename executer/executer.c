@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 11:03:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 14:38:26 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	executer(t_data *data)
 {
 	data->expand_error = 0;
 	data->read_val = read_cmdline(&data->cmdline, data);
+	if (ft_strlen(data->cmdline) == 0)
+	{
+		free(data->cmdline);
+		g_prompt = 0;
+		return (1);
+	}
 	if (data->read_val == -1)
 		return (-1);
 	lexer(data);
