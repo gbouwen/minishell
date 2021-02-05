@@ -6,16 +6,16 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 10:35:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/27 13:26:41 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/05 10:57:41 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	builtin_export(t_data *data)
+void	builtin_export(t_data *data, t_node *node)
 {
-	if (!data->tree->right)
+	if (node->right == NULL)
 		builtin_export_no_arguments(data, data->env_variables);
 	else
-		return ;
+		builtin_export_variable(data, node);
 }
