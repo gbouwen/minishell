@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 11:46:03 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 13:01:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ static void	correct_error(t_data *data, t_node *node)
 {
 	if (ft_strncmp(node->content, "./", 2) == 0)
 	{
-		ft_printf("%s: Permission denied\n", node->content);
+		ft_printf("minishell: %s: Permission denied\n", node->content);
 		free_struct(data);
 		exit(126);
 	}
 	else if (compare_both(node->content, ".") == 0)
 	{
-		ft_printf("bash: %s: filename argument required\n", node->content);
+		ft_printf("minishell: %s: filename argument required\n", node->content);
 		free_struct(data);
 		exit(2);
 	}
 	else
 	{
-		ft_printf("bash: %s: command not found\n", node->content);
+		ft_printf("minishell: %s: command not found\n", node->content);
 		free_struct(data);
 		exit(127);
 	}
@@ -66,14 +66,15 @@ static void	child_actions(t_data *data, t_node *node)
 	{
 		if (args[0][0] == '/')
 		{
-			ft_printf("bash: %s: %s\n", node->content, strerror(errno));
+			ft_printf("minishell: %s: %s\n", node->content, strerror(errno));
 			free_struct(data);
 			exit(127);
 		}
 		path_variable = find_path_variable(data->env_variables);
 		if (path_variable == NULL)
 		{
-			ft_printf("bash: %s: No such file or directory\n", node->content);
+			ft_printf("minishell: %s: No such file or directory\n",
+															node->content);
 			free_struct(data);
 			exit(127);
 		}
