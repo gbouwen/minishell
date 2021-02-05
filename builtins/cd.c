@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 14:32:35 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 14:44:48 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	home_variable_check(t_data *data, t_node *node, char **envp)
 	ret = 1;
 	if (node == NULL && is_home_set(envp) == 0)
 	{
-		ft_printf("bash: cd: HOME not set\n");
+		ft_printf("minishell: cd: HOME not set\n");
 		data->question_mark = 1;
 		return (-1);
 	}
@@ -93,7 +93,7 @@ void		builtin_cd(t_data *data, t_node *node, char **envp)
 		return ;
 	if (node != NULL && node->right != NULL)
 	{
-		ft_printf("bash: cd: too many arguments\n");
+		ft_printf("minishell: cd: too many arguments\n");
 		data->question_mark = 1;
 		return ;
 	}
@@ -101,7 +101,7 @@ void		builtin_cd(t_data *data, t_node *node, char **envp)
 		ret = chdir(node->content);
 	if (ret == -1)
 	{
-		ft_printf("bash: cd: %s: No such file or directory\n", node->content);
+		ft_printf("minishell: cd: %s: No such file or directory\n", node->content);
 		data->question_mark = 1;
 		return ;
 	}
