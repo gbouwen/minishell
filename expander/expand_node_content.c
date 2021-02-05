@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 15:10:02 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 16:19:13 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	found_dollarsign(t_data *data, char *content, t_expander *expander)
 int		expand_node_content(t_data *data, t_node *node)
 {
 	t_expander	expander;
-
 	if (dollarsign_in_content(node->content) == 0)
 		return (1);
 	initialize_expander(data, node, &expander);

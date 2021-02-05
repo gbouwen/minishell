@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 15:11:06 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 16:29:46 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ typedef struct	s_expander
 	int		x;
 }				t_expander;
 
-void	expand_variables(t_data *data, t_node *node);
+int		expand_variables(t_data *data, t_node *node);
 
 char 	*remove_quotes(t_data *data, char *content);
 void	strip_quotes_from_node(t_data *data, t_node *node);
 
-void	expand_env_variables(t_data *data, t_node *node);
+int		expand_env_variables(t_data *data, t_node *node);
 int		expand_node_content(t_data *data, t_node *node);
 void	expand_files(t_data *data, t_node *node);
 

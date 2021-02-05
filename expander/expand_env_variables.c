@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:15:08 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 15:23:49 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 16:58:50 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,33 @@
 			/*list = list->next;*/
 	/*}*/
 /*}*/
+static void	remove_node(t_node *node)
+{
+	if (node->right)
+	{
+		free(node->content);
+	 	node->content = ft_strdup(node->right->content);
+		free(node->right->content);
+		free(node->right);
+		node->right = node->right->right;
+	}
+}
 
-void	expand_env_variables(t_data *data, t_node *node)
+int	expand_env_variables(t_data *data, t_node *node)
 {
 	while (node != NULL)
 	{
-		expand_node_content(data, node);
+		if (expand_node_content(data, node) == 0)
+		{
+			if (node->type > 2 && node->type < 6)
+			{
+				expand_question_mark(data, node);
+				return (0);
+			}
+			remove_node(node);
+		}	
 		node = node->right;
 	}
 	expand_question_mark(data, node);
+	return (1);
 }
