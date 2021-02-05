@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/14 15:55:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 11:43:03 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 14:52:36 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*find_path_variable(char **env)
 	return (NULL);
 }
 
-int		try_exec_path(char **args, char **all_paths, int i, t_data *data)
+static int		try_exec_path(char **args, char **all_paths, int i, t_data *data)
 {
 	char	*correct_path;
 	char	**correct_command;
