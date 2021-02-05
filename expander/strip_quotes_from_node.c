@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 10:32:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 13:00:19 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 16:30:03 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,58 @@ char *remove_quotes(t_data *data, char *content)
 	return (result);
 }
 
+char	*trim_spaces(t_data *data, char *content)
+{
+	char	*trimmed;
+	char	*result;
+	int		i;
+	int		x;
+
+	trimmed = ft_strtrim(content, " ");
+	if (!trimmed)
+		free_struct_error(data, "Malloc failed");
+	result = malloc(ft_strlen(trimmed) + 1);
+	if (!result)
+		free_struct_error(data, "Malloc failed");
+	i = 0;
+	x = 0;
+	while (trimmed[i] != '\0')
+	{
+		if (trimmed[i] == ' ')
+		{
+			result[x] = trimmed[i];
+			x++;
+			i++;
+			while (trimmed[i] == ' ')
+				i++;
+		}
+		else
+		{
+			result[x] = trimmed[i];
+			x++;
+			i++;
+		}
+	}
+	result[x] = '\0';
+	free(trimmed);
+	return (result);
+}
+
 void	strip_quotes_from_node(t_data *data, t_node *node)
 {
+	char	*temp;
+
+	temp = NULL;
 	while (node != NULL)
 	{
 		if (has_quotes(node->content) == 1)
 			node->content = remove_quotes(data, node->content);
+		else
+		{
+			temp = trim_spaces(data, node->content);
+			free(node->content);
+			node->content = temp;
+		}
 		node = node->right;
 	}
 }
