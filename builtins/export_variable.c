@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
-/*   Updated: 2021/02/05 11:01:38 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 11:21:16 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ static int	new_var_value(char *var, char *env)
 			return (1);
 		i++;
 	}
+	if (env[i] == '\0')
+		return (1);
 	return (0);
 }
 
-void	add_last(char **new_envp, char *var, int i, int already_added)
+static void	add_last(char **new_envp, char *var, int i, int already_added)
 {
 	if (already_added == 0)
 	{
@@ -69,11 +71,15 @@ static char	**add_variable(t_data *data, char **envp, char *var)
 static int	check_if_new_var(char **envp, char *content)
 {
 	int	i;
+	int	x;
 
 	i = 0;
+	x = 0;
 	while (envp[i] != NULL)
 	{
-		if (compare_both(content, envp[i]) == 0)
+		while ((envp[i][x] != '\0' || envp[i][x] != '=') && envp[i][x] == content[x])
+			x++;
+		if (envp[i][x] == '=')
 			return (0);
 		i++;
 	}
