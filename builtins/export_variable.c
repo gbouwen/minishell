@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
-/*   Updated: 2021/02/03 16:23:00 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 11:01:38 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,31 @@ static int	check_if_new_var(char **envp, char *content)
 	return (1);
 }
 
-void		builtin_export_variable(t_data *data, t_list *list)
+void		builtin_export_variable(t_data *data, t_node *node)
 {
 	int		new_var;
-	t_list	*arg;
+	t_node	*arg;
 
-	while (list && list->next != NULL)
+	while (node && node->right != NULL)
 	{
-		if (compare_both(list->content, "export") == 0)
+		if (compare_both(node->content, "export") == 0)
 		{
-			arg = list->next;
+			arg = node->right;
 			new_var = check_if_new_var(data->env_variables, arg->content);
 			arg->content = remove_quotes(data, arg->content);
 			if (is_alpha_or_underscore(arg->content[0]) == 1 && new_var == 1)
+			{
 				data->env_variables = add_variable(data, data->env_variables,
 																arg->content);
-			if (is_alpha_or_underscore(arg->content[0]) == 0)
+				data->question_mark = 0;
+			}
+			else if (is_alpha_or_underscore(arg->content[0]) == 0)
+			{
 				ft_printf("export: %s: not a valid identifier\n", arg->content);
-			list = arg;
+				data->question_mark = 1;
+			}
+			node = arg;
 		}
-		list = list->next;
+		node = node->right;
 	}
 }
