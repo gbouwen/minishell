@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 16:57:49 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/07 18:08:53 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static void	init_fd_variables(int *save_in, int *save_out, int *current_fd)
 static void	check_node_types(t_data *data, t_node *node,
 														int current_fd)
 {
+	if (node->type == AMBIGUOUS_REDIRECT)
+	{
+		ambiguous_error(node);
+		return ;
+	}
 	if (node->type == PIPE)
 	{
 		execute_pipe(data, node);
@@ -38,11 +43,7 @@ static void	check_node_types(t_data *data, t_node *node,
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND ||
 													node->type == FILE_IN)
 	{
-		if (expand_variables(data, node) == 0)
-		{
-			ft_printf("Minishell: %s: ambiguous redirect\n", node->content);
-			return ;
-		}
+		expand_variables(data, node);
 		current_fd = redirections_loop(data, node);
 		if (node->right && data->expand_error != 1)
 			execute_simple_command(data, node->right);
@@ -68,8 +69,6 @@ void		command_loop(t_data *data)
 		save_out = dup(STDOUT_FILENO);
 		check_node_types(data, node->right, current_fd);
 		restore_stdin_stdout(save_in, save_out);
-		if (data->expand_error == 2)
-			ft_printf("Minishell: %s: ambiguous redirect\n", node->content);
 		if (!node->left)
 			break ;
 		node = node->left;
@@ -79,6 +78,4 @@ void		command_loop(t_data *data)
 	if (node->type != NODE_SEQUENCE)
 		check_node_types(data, node, current_fd);
 	restore_stdin_stdout(save_in, save_out);
-	// if (data->expand_error == 2)
-	// 	ft_printf("Minishell: %s: ambiguous redirect\n", node->content);
 }

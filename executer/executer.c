@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 17:02:55 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/07 17:52:04 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	print_list(t_list *token) //
 int	executer(t_data *data)
 {
 	data->expand_error = 0;
+	data->ambiguous_redirect = 0;
 	data->read_val = read_cmdline(&data->cmdline, data);
 	if (data->read_val == -1)
 		return (-1);
@@ -41,7 +42,7 @@ int	executer(t_data *data)
 	if (data->tree == NULL)
 		return (1);
 	expand_files(data, data->tree);
-//	print_tree(data->tree); //
+	print_tree(data->tree);
 	command_loop(data);
 	delete_tree(data->tree);
 	free(data->cmdline);

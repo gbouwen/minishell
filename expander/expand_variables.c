@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 16:30:47 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/07 17:51:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ static int	check_for_env_variables(t_node *node)
 	return (count);
 }
 
-int		expand_variables(t_data *data, t_node *node)
+void		expand_variables(t_data *data, t_node *node)
 {
-	int	ambiguous_redirect;
-	
 	if (check_for_env_variables(node) > 0)
-		ambiguous_redirect = expand_env_variables(data, node);
+		expand_env_variables(data, node);
 	strip_quotes_from_node(data, node);
-	return (ambiguous_redirect);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 12:16:41 by tiemen        #+#    #+#                 */
-/*   Updated: 2020/10/28 17:03:19 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/07 18:07:47 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,18 @@ void	exit_error(char *message)
 {
 	ft_printf("Error: %s\n", message);
 	exit(1);
+}
+
+void	ambiguous_error(t_node *node)
+{
+	t_node *remember;
+
+	remember = node;
+	node = node->left;
+	while (node != NULL && node->type != AMBIGUOUS_REDIRECT)
+		node = node->left;
+	if (node->type == AMBIGUOUS_REDIRECT)
+		ft_printf("Minishell: %s: ambiguous redirect\n", node->content);
+	else
+		ft_printf("Minishell: %s: ambiguous redirect\n", remember->content);
 }
