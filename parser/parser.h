@@ -6,28 +6,19 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/07 17:57:33 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 13:21:17 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "../struct.h"
 # include <stdio.h> //
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include "../lexer/lexer_utils.h"
 # include "../ft_printf/libftprintf.h"
-
-typedef struct s_node
-{
-	int				type;
-	int				state_type;
-	int				is_escaped;
-	char			*content;
-	struct s_node	*right;
-	struct s_node	*left;
-}				t_node;
 
 # define ARGUMENT 1
 # define PATHNAME 2
@@ -62,6 +53,7 @@ void	delete_tree(t_node *node);
 t_node	*set_error_node(t_list *error_token);
 void	print_tree(t_node *root);
 void	print_tree_utils(t_node *root, int space);
-t_node	*parser(t_lexer *lexer_data);
+t_node *parser(t_lexer *lexer_data, t_data *data);
+
 
 #endif

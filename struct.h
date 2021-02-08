@@ -6,15 +6,34 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 23:51:14 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 13:21:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "lexer/lexer_utils.h"
-# include "parser/parser.h"
+# include "libft/libft.h"
+
+typedef	struct		s_lexer
+{
+	t_list	*token_list;
+	int		char_type;
+	int		state;
+	int		line_length;
+	int		skip_next;
+	int		error;
+}					t_lexer;
+
+typedef struct s_node
+{
+	int				type;
+	int				state_type;
+	int				is_escaped;
+	char			*content;
+	struct s_node	*right;
+	struct s_node	*left;
+}				t_node;
 
 typedef struct	s_data
 {

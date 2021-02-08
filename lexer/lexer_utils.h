@@ -6,24 +6,12 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:52:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 14:57:21 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/04 14:26:29 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_UTILS_H
 # define LEXER_UTILS_H
-
-# include "../libft/libft.h"
-
-typedef	struct		s_lexer
-{
-	t_list	*token_list;
-	int		char_type;
-	int		state;
-	int		line_length;
-	int		skip_next;
-	int		error;
-}					t_lexer;
 
 # define CHAR_GENERAL 1
 # define CHAR_SEMICOLON ';'
