@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 13:15:39 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 13:24:41 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	env_variables_files(t_node *node)
 	return (count);
 }
 
-static void	check_if_file_exists(t_data *data, char *filename)
+static void	check_if_file_exists(t_data *data, t_node *node)
 {
 	int	fd;
 
@@ -96,10 +96,10 @@ int		check_ambiguous_redirect(t_data *data, t_node *node)
 			return (0);
 		}
 		if (node->type == FILE_IN && data->expand_error != 1)
-			check_if_file_exists(data, node->content);
+			check_if_file_exists(data, node);
 		if ((node->type == FILE_OUT || node->type == FILE_OUT_APPEND) &&
 												data->expand_error != 1)
-			open_or_create_file(data, node->content);
+			open_or_create_file(data, node);
 		node = node->left;
 	}
 	return (1);
