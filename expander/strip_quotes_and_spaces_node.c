@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 10:32:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:03:03 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 16:12:39 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char *remove_quotes(t_data *data, char *content)
 	return (result);
 }
 
-char	*trim_spaces(t_data *data, char *content)
+char	*trim_spaces_and_remove_quotes(t_data *data, char *content)
 {
 	char	*trimmed;
 	char	*result;
@@ -113,7 +113,7 @@ void	strip_quotes_and_spaces_node(t_data *data, t_node *node)
 	temp = NULL;
 	while (node != NULL)
 	{
-		temp = trim_spaces(data, node->content);
+		temp = trim_spaces_and_remove_quotes(data, node->content);
 		free(node->content);
 		node->content = temp;
 		node = node->right;
