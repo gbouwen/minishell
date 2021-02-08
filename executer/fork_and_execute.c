@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:24:06 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 16:45:11 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void		fork_and_execute(t_data *data, t_node *node)
 	else
 	{
 		wait(&status);
-		data->question_mark = status / 256;
+		g_question_mark = status / 256;
 		if (g_exit_status > 0)
-			data->question_mark = g_exit_status;
+			g_question_mark = g_exit_status;
 	}
 }

@@ -77,7 +77,7 @@ static char		*replace_question_mark(t_data *data, char *content, size_t i)
 	if (!result)
 		free_struct_error(data, "Malloc failed");
 	ft_bzero(result, ft_strlen(content));
-	temp = ft_itoa(data->question_mark);
+	temp = ft_itoa(g_question_mark);
 	while (x < i)
 	{
 		result[x] = content[x];

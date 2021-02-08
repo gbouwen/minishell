@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 10:48:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/29 14:40:44 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 16:00:06 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_for_equals_sign(char *var)
 	return (0);
 }
 
-void		builtin_env(t_data *data, char **envp)
+void		builtin_env(char **envp)
 {
 	int	i;
 
@@ -37,11 +37,11 @@ void		builtin_env(t_data *data, char **envp)
 		{
 			if (ft_printf("%s\n", envp[i]) == -1)
 			{
-				data->question_mark = 1;
+				g_question_mark = 1;
 				return ;
 			}
 		}
 		i++;
 	}
-	data->question_mark = 0;
+	g_question_mark = 0;
 }

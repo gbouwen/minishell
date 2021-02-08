@@ -6,7 +6,11 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2021/02/08 14:16:11 by gbouwen       ########   odam.nl         */
+=======
+/*   Updated: 2021/02/08 15:54:36 by tiemen        ########   odam.nl         */
+>>>>>>> b87bd587eb74431499ae569edebc414b8e33237c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +32,7 @@
 # define PIPE 6
 # define NODE_SEQUENCE 7
 # define AMBIGUOUS_REDIRECT 8
+# define EMPTY_COMMAND 9
 
 t_list	*g_current_tok;
 
@@ -53,7 +58,7 @@ void	delete_tree(t_node *node);
 t_node	*set_error_node(t_list *error_token);
 void	print_tree(t_node *root);
 void	print_tree_utils(t_node *root, int space);
-t_node *parser(t_lexer *lexer_data, t_data *data);
+t_node *parser(t_lexer *lexer_data);
 
 
 #endif

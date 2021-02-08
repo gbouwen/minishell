@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 13:23:07 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 16:50:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	search_unset_variable(t_data *data, char *var)
 		ft_strlen(var) < 1)
 	{
 		ft_printf("bash: unset: '%s': not a valid identifier\n");
-		data->question_mark = 1;
+		g_question_mark = 1;
 		return ;
 	}
 	while (data->env_variables[i] != NULL)
@@ -74,7 +74,7 @@ static void	search_unset_variable(t_data *data, char *var)
 		}
 		i++;
 	}
-	data->question_mark = 0;
+	g_question_mark = 0;
 }
 
 void		builtin_unset(t_data *data, t_node *node)

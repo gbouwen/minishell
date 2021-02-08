@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 16:36:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/27 14:24:20 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 15:58:38 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	builtin_pwd(t_data *data)
+void	builtin_pwd()
 {
 	char	buff[4096];
 	char	*result;
@@ -20,9 +20,9 @@ void	builtin_pwd(t_data *data)
 	result = getcwd(buff, 4096);
 	if (result == NULL)
 	{
-		data->question_mark = 1;
+		g_question_mark = 1;
 		return ;
 	}
 	ft_printf("%s\n", buff);
-	data->question_mark = 0;
+	g_question_mark = 0;
 }
