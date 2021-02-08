@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:49:45 by tblanker      #+#    #+#                 */
-/*   Updated: 2021/01/28 14:34:53 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 16:02:37 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	interrupt_signal(int n)
 	g_c_signal = 1;
 	if (n == 2 && g_in_parent != 0)
 	{
+		g_question_mark = 128 + n;
 		ft_printf("\n");
 		prompt();
 	}

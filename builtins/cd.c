@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 14:32:35 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 16:36:28 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static void	change_pwd_env(t_data *data, char **envp)
+static void	change_pwd_env(char **envp)
 {
 	int		i;
 	char	buff[4096];
@@ -23,13 +23,16 @@ static void	change_pwd_env(t_data *data, char **envp)
 		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
 		{
 			free(envp[i]);
-			getcwd(buff, 4096);
+			if (getcwd(buff, 4096) == NULL)
+			{
+			//	printf("%s\n", errno);
+			}
 			envp[i] = ft_strjoin("PWD=", buff);
 			break ;
 		}
 		i++;
 	}
-	data->question_mark = 0;
+	g_question_mark = 0;
 }
 
 static int	is_home_set(char **envp)
@@ -60,7 +63,7 @@ static char	*get_home_value(char **envp)
 	return (NULL);
 }
 
-static int	home_variable_check(t_data *data, t_node *node, char **envp)
+static int	home_variable_check(t_node *node, char **envp)
 {
 	char	*home;
 	int		ret;
@@ -70,7 +73,7 @@ static int	home_variable_check(t_data *data, t_node *node, char **envp)
 	if (node == NULL && is_home_set(envp) == 0)
 	{
 		ft_printf("bash: cd: HOME not set\n");
-		data->question_mark = 1;
+		g_question_mark = 1;
 		return (-1);
 	}
 	else if (node == NULL && is_home_set(envp) == 1)
@@ -82,19 +85,19 @@ static int	home_variable_check(t_data *data, t_node *node, char **envp)
 	return (ret);
 }
 
-void		builtin_cd(t_data *data, t_node *node, char **envp)
+void		builtin_cd(t_node *node, char **envp)
 {
 	int		ret;
 
 	ret = 1;
 	node = node->right;
-	ret = home_variable_check(data, node, envp);
+	ret = home_variable_check(node, envp);
 	if (ret == -1)
 		return ;
 	if (node != NULL && node->right != NULL)
 	{
 		ft_printf("bash: cd: too many arguments\n");
-		data->question_mark = 1;
+		g_question_mark = 1;
 		return ;
 	}
 	else if (node != NULL && node->right == NULL)
@@ -102,9 +105,12 @@ void		builtin_cd(t_data *data, t_node *node, char **envp)
 	if (ret == -1)
 	{
 		ft_printf("bash: cd: %s: No such file or directory\n", node->content);
-		data->question_mark = 1;
+		g_question_mark = 1;
 		return ;
 	}
 	else
-		change_pwd_env(data, envp);
+	{
+		printf("%d\n", 123456);
+		change_pwd_env(envp);
+	}
 }

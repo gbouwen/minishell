@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/07 18:08:53 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 15:53:47 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	check_node_types(t_data *data, t_node *node,
 {
 	if (node->type == AMBIGUOUS_REDIRECT)
 	{
+		g_question_mark = 1;
 		ambiguous_error(node);
 		return ;
 	}

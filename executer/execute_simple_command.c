@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 23:47:33 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 16:01:05 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 void		execute_simple_command(t_data *data, t_node *node)
 {
 	expand_variables(data, node);
+	if (node->type == EMPTY_COMMAND)
+		return ;
 	if (compare_both(node->content, "echo") == 0)
-		builtin_echo(data, node);
+		builtin_echo(node);
 	else if (compare_both(node->content, "pwd") == 0)
 		builtin_pwd(data);
 	else if (compare_both(node->content, "cd") == 0)
-		builtin_cd(data, node, data->env_variables);
+		builtin_cd(node, data->env_variables);
 	else if (compare_both(node->content, "export") == 0)
 		builtin_export(data);
 	else if (compare_both(node->content, "unset") == 0)
 		builtin_unset(data);
 	else if (compare_both(node->content, "env") == 0)
-		builtin_env(data, data->env_variables);
+		builtin_env(data->env_variables);
 	else if (compare_both(node->content, "exit") == 0)
 		builtin_exit(data);
 	else

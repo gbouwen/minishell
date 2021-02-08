@@ -6,25 +6,11 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/07 17:59:08 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 16:40:31 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
-
-static int	env_variables_files(t_node *node)
-{
-	int	count;
-
-	count = 0;
-	while (node != NULL)
-	{
-		if (dollarsign_in_content(node->content) > 0)
-			count++;
-		node = node->left;
-	}
-	return (count);
-}
 
 static void	check_if_file_exists(t_data *data, char *filename)
 {
@@ -64,11 +50,8 @@ void	expand_files(t_data *data, t_node *node)
 		return ;
 	if (node->type > 2 && node->type < 6)
 	{
-		if (env_variables_files(node) > 0)
-		{
 			if (check_ambiguous_redirect(data, node) == 0)
 				node->type = AMBIGUOUS_REDIRECT;
-		}
 		strip_quotes_from_node(data, node);
 		return ;
 	}
@@ -76,12 +59,36 @@ void	expand_files(t_data *data, t_node *node)
 	expand_files(data, node->right);
 }
 
+int	check_for_spaces(char *str)
+{
+	int i;
+	
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int		check_ambiguous_redirect(t_data *data, t_node *node)
 {
+	char *save;
+
 	while (node != NULL)
 	{
+		save = ft_strdup(node->content);
 		if (expand_node_content(data, node) == 0)
 		{
+			node->type = AMBIGUOUS_REDIRECT;
+			return (0);
+		}
+		else if (check_for_spaces(node->content) == 0)
+		{
+			free(node->content);
+			node->content = save;
 			node->type = AMBIGUOUS_REDIRECT;
 			return (0);
 		}

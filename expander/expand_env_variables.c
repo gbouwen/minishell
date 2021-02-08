@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:15:08 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 14:08:15 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 15:44:59 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 static void	remove_node_right(t_node *node, t_node *previous)
 {
-	t_node *temp;
-
 	if (!node->right)
 	{
+		if (previous == node)
+		{
+			node->type = EMPTY_COMMAND;
+			return ;
+		}
 		previous->right = NULL;
 		free(node->content);
 		free(node);
 	}
 	else if (previous == node)
 	{
-		temp = node->right;
+		previous = node->right;
 		free(node->content);
-		node->content = ft_strdup(temp->content);
-		node->right = temp->right;
-		free(temp);
+		node->content = ft_strdup(previous->content);
+		free(previous->content);
+		node->right = previous->right;
+		free(previous);
 	}
 	else
 	{
@@ -54,6 +58,5 @@ void	expand_env_variables(t_data *data, t_node *node)
 		previous = node;
 		node = node->right;
 	}
-	return ;
 }
 

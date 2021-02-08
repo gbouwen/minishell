@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/27 14:24:05 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 16:00:42 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	if (open_file)
 		close(open_file);
 	execute_simple_command(data, node);
-	exit(data->question_mark);
+	exit(g_question_mark);
 }
 
 static void	connect_pipes(t_pipe *pipe_switch, int i)
@@ -72,7 +72,7 @@ static void	connect_pipes(t_pipe *pipe_switch, int i)
 	}
 }
 
-void		wait_for_children(t_data *data)
+void		wait_for_children()
 {
 	int		status;
 	pid_t	wait_pid;
@@ -80,9 +80,9 @@ void		wait_for_children(t_data *data)
 	wait_pid = 1;
 	while (wait_pid > 0)
 		wait_pid = wait(&status);
-	data->question_mark = status / 256;
+	g_question_mark = status / 256;
 	if (g_exit_status > 0)
-		data->question_mark = g_exit_status;
+		g_question_mark = g_exit_status;
 }
 
 void		execute_pipe(t_data *data, t_node *node)
@@ -112,6 +112,6 @@ void		execute_pipe(t_data *data, t_node *node)
 		node = node->left;
 		i++;
 	}
-	wait_for_children(data);
+	wait_for_children();
 	free(pipe_switch);
 }
