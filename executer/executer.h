@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 16:17:23 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 14:52:52 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int				redirections_loop(t_data *data, t_node *node);
 int				set_redirections(t_data *data, t_node *node, int current_fd);
 
 char			*find_path_variable(char **env);
-int				try_exec_path(char **args, char **all_paths, int i,
-														t_data *data);
+
 void			try_paths(char **args, char *path_variable, t_data *data);
 
 #endif
