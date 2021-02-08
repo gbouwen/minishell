@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 15:16:36 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 15:21:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int		expand_node_content(t_data *data, t_node *node)
 	initialize_expander(data, node, &expander);
 	while (node->content[expander.i] != '\0')
 	{
-		printf("|%c|\n", node->content[expander.i]);
 		if (node->content[expander.i] == '$')
 			found_dollarsign(data, node->content, &expander);
 		else if (node->content[expander.i] == '\'')

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 13:24:41 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 15:20:12 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	expand_files(t_data *data, t_node *node)
 			if (check_ambiguous_redirect(data, node) == 0)
 				node->type = AMBIGUOUS_REDIRECT;
 		}
-		strip_quotes_from_node(data, node);
+		strip_quotes_and_spaces_node(data, node);
 		return ;
 	}
 	expand_files(data, node->left);

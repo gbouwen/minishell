@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/08 14:14:24 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/02/08 15:19:03 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SOURCE_C =	main.c \
 			helper_functions/compare_both.c \
 			expander/expand_files.c \
 			expander/expand_variables.c \
-			expander/strip_quotes_from_node.c \
+			expander/strip_quotes_and_spaces_node.c \
 			expander/expand_env_variables.c \
 			expander/expand_node_content.c \
 			expander/expand_node_content_utils.c \
