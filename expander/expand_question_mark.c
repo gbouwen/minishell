@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/12 13:54:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 16:32:28 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 14:21:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void			expand_question_mark(t_data *data, t_node *node)
 	char	*result;
 	size_t	i;
 
-	printf("hoi\n");
 	while (node != NULL)
 	{
 		result = NULL;
