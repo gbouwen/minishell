@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/08 13:45:52 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/07 17:57:33 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_node
 # define FILE_IN 5
 # define PIPE 6
 # define NODE_SEQUENCE 7
+# define AMBIGUOUS_REDIRECT 8
 
 t_list	*g_current_tok;
 

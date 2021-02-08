@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 15:11:06 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/07 17:39:20 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	expand_variables(t_data *data, t_node *node);
 char 	*remove_quotes(t_data *data, char *content);
 void	strip_quotes_from_node(t_data *data, t_node *node);
 
-void	expand_env_variables(t_data *data, t_node *node);
 int		expand_node_content(t_data *data, t_node *node);
 void	expand_files(t_data *data, t_node *node);
+int		check_ambiguous_redirect(t_data *data, t_node *node);
+void	expand_env_variables(t_data *data, t_node *node);
 
 void	add_questionmark(char *content, t_expander *expander);
 void	expand_question_mark(t_data *data, t_node *node);

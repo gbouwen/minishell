@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_env_variables.c                             :+:    :+:            */
+/*   expand_variables.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 15:13:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/07 17:51:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ static int	check_for_env_variables(t_node *node)
 
 void		expand_variables(t_data *data, t_node *node)
 {
-	t_node *temp;
-
-	temp = node;
-	if (check_for_env_variables(temp) > 0)
-		expand_env_variables(data, temp);
-	strip_quotes_from_node(data, temp);
+	if (check_for_env_variables(node) > 0)
+		expand_env_variables(data, node);
+	strip_quotes_from_node(data, node);
+	return ;
 }
