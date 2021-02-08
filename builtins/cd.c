@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:36:28 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 16:44:32 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	change_pwd_env(char **envp)
 			free(envp[i]);
 			if (getcwd(buff, 4096) == NULL)
 			{
-			//	printf("%s\n", errno);
+				printf("%d\n", errno);
 			}
 			envp[i] = ft_strjoin("PWD=", buff);
 			break ;
