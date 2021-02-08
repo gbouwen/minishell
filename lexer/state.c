@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:05:34 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 15:22:30 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 14:09:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void	state_general(t_data *data, t_list **token, int i)
 		set_double_redirect(data, token, i);
 	else if (data->lexer.char_type == CHAR_GENERAL)
 		set_token_data(token, data->cmdline[i]);
-	else if (data->lexer.char_type == CHAR_ESCAPE)
-		set_escape_char_general(data, token, i);
 	else if (data->lexer.char_type == CHAR_QUOTE)
 	{
 		(*token)->content[(*token)->current_char] = '\'';
@@ -57,11 +55,6 @@ static void	state_single_quote(t_lexer *lexer, t_list **token, char c)
 
 static void	state_double_quote(t_data *data, t_list **token, int i)
 {
-	if (data->cmdline[i] == '\\')
-	{
-		set_escape_char_double_quote(data, token, i);
-		return ;
-	}
 	if (data->cmdline[i] == CHAR_DOUBLE_QUOTE)
 	{
 		(*token)->content[(*token)->current_char] = '\"';
