@@ -95,6 +95,7 @@ void			expand_question_mark(t_data *data, t_node *node)
 	char	*result;
 	size_t	i;
 
+	printf("hoi\n");
 	while (node != NULL)
 	{
 		result = NULL;

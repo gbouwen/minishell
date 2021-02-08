@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 13:21:04 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 14:13:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef	struct		s_lexer
 	int		char_type;
 	int		state;
 	int		line_length;
-	int		skip_next;
 	int		error;
 }					t_lexer;
 

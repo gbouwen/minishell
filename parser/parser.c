@@ -87,6 +87,6 @@ t_node *parser(t_lexer *lexer_data, t_data *data)
 	}
 	find_file_in_tree(*nodes);
 	node = *nodes;
-	print_tree(node);
+//	print_tree(node);
 	return (*nodes);
 }

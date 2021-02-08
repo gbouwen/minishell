@@ -28,8 +28,6 @@ int		get_char_type(char c)
 		return (CHAR_DOUBLE_QUOTE);
 	if (c == '|')
 		return (CHAR_PIPE);
-	if (c == '\\')
-		return (CHAR_ESCAPE);
 	if (c == '\n')
 		return (CHAR_NEWLINE);
 	return (CHAR_GENERAL);
