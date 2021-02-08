@@ -6,7 +6,11 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2021/02/04 14:51:07 by tiemen        ########   odam.nl         */
+=======
+/*   Updated: 2021/02/07 17:52:04 by tiemen        ########   odam.nl         */
+>>>>>>> 9f7b97d5e1c3591f105387ec7b7807eb367e049a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +28,7 @@ void	print_list(t_list *token) //
 int	executer(t_data *data)
 {
 	data->expand_error = 0;
+	data->ambiguous_redirect = 0;
 	data->read_val = read_cmdline(&data->cmdline, data);
 	if (data->read_val == -1)
 		return (-1);
@@ -36,14 +41,12 @@ int	executer(t_data *data)
 		ft_lstclear(&data->lexer.token_list, free_list_content);
 		return (1);
 	}
-	print_list(data->lexer.token_list);
-//	builtin_export_variable(data, data->lexer.token_list);
-	expand_variables(data);
-	data->tree = parser(&data->lexer, data);
+	builtin_export_variable(data, data->lexer.token_list);
+	data->tree = parser(&data->lexer);
 	if (data->tree == NULL)
 		return (1);
 	expand_files(data, data->tree);
-//	print_tree(data->tree); //
+	print_tree(data->tree);
 	command_loop(data);
 	delete_tree(data->tree);
 	free(data->cmdline);

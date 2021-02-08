@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/29 14:35:44 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/07 18:08:53 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ static void	init_fd_variables(int *save_in, int *save_out, int *current_fd)
 	*current_fd = 0;
 }
 
-static void	check_node_types(t_data *data, t_node *node, int current_fd)
+static void	check_node_types(t_data *data, t_node *node,
+														int current_fd)
 {
+	if (node->type == AMBIGUOUS_REDIRECT)
+	{
+		ambiguous_error(node);
+		return ;
+	}
 	if (node->type == PIPE)
 	{
 		execute_pipe(data, node);
@@ -37,6 +43,7 @@ static void	check_node_types(t_data *data, t_node *node, int current_fd)
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND ||
 													node->type == FILE_IN)
 	{
+		expand_variables(data, node);
 		current_fd = redirections_loop(data, node);
 		if (node->right && data->expand_error != 1)
 			execute_simple_command(data, node->right);

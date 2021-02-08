@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/04 14:27:15 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 13:15:10 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define FILE_IN 5
 # define PIPE 6
 # define NODE_SEQUENCE 7
+# define AMBIGUOUS_REDIRECT 8
 
 t_list	*g_current_tok;
 
