@@ -6,11 +6,18 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:16:36 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/01/29 16:05:34 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/09 16:43:50 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	malloc_node(t_node *node, char *str)
+{
+	node = malloc(sizeof(t_node));
+	node->content = ft_strdup(str);
+	
+}
 
 void	attach_tree_node(t_node *attach, int type, t_node *left, t_node *right)
 {

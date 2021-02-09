@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/05 16:19:13 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 15:21:15 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ void	found_single_quote(char *content, t_expander *expander)
 void	found_double_quote(t_data *data, char *content, t_expander *expander)
 {
 	add_char_to_result(content, expander);
-	if (content[expander->i] == '$')
-		found_dollarsign(data, content, expander);
-	else
+	while (content[expander->i] != '\"' && content[expander->i] != '\0')
 	{
-		while (content[expander->i] != '\"' && content[expander->i] != '\0')
-			add_char_to_result(content, expander);
+		if (content[expander->i] == '$')
+			found_dollarsign(data, content, expander);
 		add_char_to_result(content, expander);
 	}
+	add_char_to_result(content, expander);
 }
 
 void	found_dollarsign(t_data *data, char *content, t_expander *expander)
@@ -72,6 +71,7 @@ void	found_dollarsign(t_data *data, char *content, t_expander *expander)
 int		expand_node_content(t_data *data, t_node *node)
 {
 	t_expander	expander;
+
 	if (dollarsign_in_content(node->content) == 0)
 		return (1);
 	initialize_expander(data, node, &expander);

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 15:53:47 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/09 16:26:24 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,29 @@ static char	**create_arg_list(t_data *data, t_node *node)
 	return (arg_list);
 }
 
-static void	child_actions(t_data *data, t_node *node)
+static void	correct_error(t_data *data, t_node *node)
+{
+	if (ft_strncmp(node->content, "./", 2) == 0)
+	{
+		ft_printf("minishell: %s: Permission denied\n", node->content);
+		free_struct(data);
+		exit(126);
+	}
+	else if (compare_both(node->content, ".") == 0)
+	{
+		ft_printf("minishell: %s: filename argument required\n", node->content);
+		free_struct(data);
+		exit(2);
+	}
+	else
+	{
+		ft_printf("minishell: %s: command not found\n", node->content);
+		free_struct(data);
+		exit(127);
+	}
+}
+
+void	child_actions(t_data *data, t_node *node)
 {
 	char	**args;
 	int		val;
@@ -44,20 +66,20 @@ static void	child_actions(t_data *data, t_node *node)
 	{
 		if (args[0][0] == '/')
 		{
-			ft_printf("%s\n", strerror(errno));
+			ft_printf("minishell: %s: %s\n", node->content, strerror(errno));
 			free_struct(data);
 			exit(127);
 		}
 		path_variable = find_path_variable(data->env_variables);
-		try_paths(args, path_variable, data);
-		if (ft_strncmp(node->content, "./", 2) == 0)
+		if (path_variable == NULL)
 		{
-			ft_printf("%s: Permission denied\n", node->content);
+			ft_printf("minishell: %s: No such file or directory\n",
+															node->content);
 			free_struct(data);
-			exit(126);
+			exit(127);
 		}
-		free_struct(data);
-		exit(127);
+		try_paths(args, path_variable, data);
+		correct_error(data, node);
 	}
 }
 
@@ -66,7 +88,6 @@ void		fork_and_execute(t_data *data, t_node *node)
 	pid_t	pid;
 	int		status;
 
-	g_exit_status = 0;
 	pid = fork();
 	if (pid == 0)
 		child_actions(data, node);
@@ -74,7 +95,5 @@ void		fork_and_execute(t_data *data, t_node *node)
 	{
 		wait(&status);
 		g_question_mark = status / 256;
-		if (g_exit_status > 0)
-			g_question_mark = g_exit_status;
 	}
 }

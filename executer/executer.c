@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:44:51 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 16:59:48 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	executer(t_data *data)
 	data->expand_error = 0;
 	data->ambiguous_redirect = 0;
 	data->read_val = read_cmdline(&data->cmdline, data);
+	if (ft_strlen(data->cmdline) == 0)
+	{
+		free(data->cmdline);
+		g_prompt = 0;
+		return (1);
+	}
 	if (data->read_val == -1)
 		return (-1);
 	lexer(data);
@@ -37,7 +43,6 @@ int	executer(t_data *data)
 		ft_lstclear(&data->lexer.token_list, free_list_content);
 		return (1);
 	}
-	builtin_export_variable(data, data->lexer.token_list);
 	data->tree = parser(&data->lexer);
 	if (data->tree == NULL)
 		return (1);

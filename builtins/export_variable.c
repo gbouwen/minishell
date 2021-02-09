@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
-/*   Updated: 2021/02/03 16:23:00 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/05 14:41:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ static int	new_var_value(char *var, char *env)
 			return (1);
 		i++;
 	}
+	if (env[i] == '\0')
+		return (1);
 	return (0);
 }
 
-void	add_last(char **new_envp, char *var, int i, int already_added)
+static void	add_last(char **new_envp, char *var, int i, int already_added)
 {
 	if (already_added == 0)
 	{
@@ -69,36 +71,41 @@ static char	**add_variable(t_data *data, char **envp, char *var)
 static int	check_if_new_var(char **envp, char *content)
 {
 	int	i;
+	int	x;
 
 	i = 0;
+	x = 0;
 	while (envp[i] != NULL)
 	{
-		if (compare_both(content, envp[i]) == 0)
+		while ((envp[i][x] != '\0' || envp[i][x] != '=') && envp[i][x] == content[x])
+			x++;
+		if (envp[i][x] == '=')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void		builtin_export_variable(t_data *data, t_list *list)
+void		builtin_export_variable(t_data *data, t_node *node)
 {
 	int		new_var;
-	t_list	*arg;
 
-	while (list && list->next != NULL)
+	node = node->right;
+	while (node != NULL)
 	{
-		if (compare_both(list->content, "export") == 0)
+		new_var = check_if_new_var(data->env_variables, node->content);
+		node->content = remove_quotes(data, node->content);
+		if (is_alpha_or_underscore(node->content[0]) == 1 && new_var == 1)
 		{
-			arg = list->next;
-			new_var = check_if_new_var(data->env_variables, arg->content);
-			arg->content = remove_quotes(data, arg->content);
-			if (is_alpha_or_underscore(arg->content[0]) == 1 && new_var == 1)
-				data->env_variables = add_variable(data, data->env_variables,
-																arg->content);
-			if (is_alpha_or_underscore(arg->content[0]) == 0)
-				ft_printf("export: %s: not a valid identifier\n", arg->content);
-			list = arg;
+			data->env_variables = add_variable(data, data->env_variables,
+															node->content);
+			data->question_mark = 0;
 		}
-		list = list->next;
+		else if (is_alpha_or_underscore(node->content[0]) == 0)
+		{
+			ft_printf("export: '%s': not a valid identifier\n", node->content);
+			data->question_mark = 1;
+		}
+		node = node->right;
 	}
 }

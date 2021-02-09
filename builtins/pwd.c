@@ -12,7 +12,7 @@
 
 #include "builtins.h"
 
-void	builtin_pwd()
+void	builtin_pwd(void)
 {
 	char	buff[4096];
 	char	*result;

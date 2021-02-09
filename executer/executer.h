@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 16:17:23 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 15:19:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void			execute_pipe(t_data *data, t_node *node);
 void			execute_simple_command(t_data *data, t_node *node);
 void			fork_and_execute(t_data *data, t_node *node);
 
+void	child_actions(t_data *data, t_node *node);
+
 int				redirections_loop(t_data *data, t_node *node);
 int				set_redirections(t_data *data, t_node *node, int current_fd);
 
 char			*find_path_variable(char **env);
-int				try_exec_path(char **args, char **all_paths, int i,
-														t_data *data);
+
 void			try_paths(char **args, char *path_variable, t_data *data);
 
 #endif

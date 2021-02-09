@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/04 15:13:12 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/02/09 16:45:23 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SOURCE_C =	main.c \
 			lexer/get_char_type.c \
 			lexer/state.c \
 			lexer/token.c \
-			lexer/escape_char.c \
 			parser/parser.c \
 			parser/binary_tree.c \
 			parser/cmd_prod.c \
@@ -52,7 +51,7 @@ SOURCE_C =	main.c \
 			helper_functions/compare_both.c \
 			expander/expand_files.c \
 			expander/expand_variables.c \
-			expander/strip_quotes_from_node.c \
+			expander/strip_quotes_and_spaces_node.c \
 			expander/expand_env_variables.c \
 			expander/expand_node_content.c \
 			expander/expand_node_content_utils.c \

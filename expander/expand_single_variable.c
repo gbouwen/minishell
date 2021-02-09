@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 14:30:24 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 16:20:46 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/08 16:08:33 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static char	*find_variable(t_data *data, char *content, t_expander *expander)
 	index = 0;
 	while (content[expander->i] != '\0' && content[expander->i] != '\''
 		&& content[expander->i] != '\"' && content[expander->i] != '$'
-		&& is_punctuation_mark(content[expander->i]) == 0)
+		&& content[expander->i] != ' ' &&
+						is_punctuation_mark(content[expander->i]) == 0)
 	{
 		variable[index] = content[expander->i];
 		expander->i++;

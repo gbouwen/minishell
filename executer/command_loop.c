@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 15:53:47 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/08 16:47:02 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	check_node_types(t_data *data, t_node *node,
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND ||
 													node->type == FILE_IN)
 	{
-		expand_variables(data, node);
 		current_fd = redirections_loop(data, node);
 		if (node->right && data->expand_error != 1)
 			execute_simple_command(data, node->right);
