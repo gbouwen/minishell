@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
-/*   Updated: 2021/02/09 14:38:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:52:18 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	check_if_new_var(char **envp, char *content)
 	{
 		while ((envp[i][x] != '\0' || envp[i][x] != '=') && envp[i][x] == content[x])
 			x++;
-		if (envp[i][x] == '=')
+		if (envp[i][x] == '=' && envp[i][x] == content[x])
 			return (0);
 		i++;
 	}
@@ -95,6 +95,8 @@ void		builtin_export_variable(t_data *data, t_node *node)
 	{
 		new_var = check_if_new_var(data->env_variables, node->content);
 		node->content = remove_quotes(data, node->content);
+		printf("new_var: %d\n", new_var);
+		printf("oelie: %d\n", is_alpha_or_underscore(node->content[0]));
 		if (is_alpha_or_underscore(node->content[0]) == 1 && new_var == 1)
 		{
 			data->env_variables = add_variable(data, data->env_variables,
