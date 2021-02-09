@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/09 14:39:46 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 14:46:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-static void	restore_stdin_stdout(int save_in, int save_out)
+void	restore_stdin_stdout(int save_in, int save_out)
 {
 	dup2(save_in, STDIN_FILENO);
 	close(save_in);
@@ -55,27 +55,25 @@ static void	check_node_types(t_data *data, t_node *node,
 
 void		command_loop(t_data *data)
 {
-	int		save_in;
-	int		save_out;
 	int		current_fd;
 	t_node	*node;
 
-	init_fd_variables(&save_in, &save_out, &current_fd);
+	init_fd_variables(&data->save_in, &data->save_out, &current_fd);
 	node = data->tree;
 	g_prompt = 0;
 	while (node->type == NODE_SEQUENCE)
 	{
-		save_in = dup(STDIN_FILENO);
-		save_out = dup(STDOUT_FILENO);
+		data->save_in = dup(STDIN_FILENO);
+		data->save_out = dup(STDOUT_FILENO);
 		check_node_types(data, node->right, current_fd);
-		restore_stdin_stdout(save_in, save_out);
+		restore_stdin_stdout(data->save_in, data->save_out);
 		if (!node->left)
 			break ;
 		node = node->left;
 	}
-	save_in = dup(STDIN_FILENO);
-	save_out = dup(STDOUT_FILENO);
+	data->save_in = dup(STDIN_FILENO);
+	data->save_out = dup(STDOUT_FILENO);
 	if (node->type != NODE_SEQUENCE)
 		check_node_types(data, node, current_fd);
-	restore_stdin_stdout(save_in, save_out);
+	restore_stdin_stdout(data->save_in, data->save_out);
 }
