@@ -49,7 +49,7 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND
 		|| node->type == FILE_IN)
 	{
-		open_file = redirections_loop(data, node);
+		open_file = redirections_loop(node);
 		node = node->right;
 	}
 	if (open_file)

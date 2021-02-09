@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
-/*   Updated: 2021/02/05 14:41:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 13:39:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ void		builtin_export_variable(t_data *data, t_node *node)
 		{
 			data->env_variables = add_variable(data, data->env_variables,
 															node->content);
-			data->question_mark = 0;
+			g_question_mark = 0;
 		}
 		else if (is_alpha_or_underscore(node->content[0]) == 0)
 		{
 			ft_printf("export: '%s': not a valid identifier\n", node->content);
-			data->question_mark = 1;
+			g_question_mark = 1;
 		}
 		node = node->right;
 	}

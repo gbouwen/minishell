@@ -44,7 +44,7 @@ static void	check_node_types(t_data *data, t_node *node,
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND ||
 													node->type == FILE_IN)
 	{
-		current_fd = redirections_loop(data, node);
+		current_fd = redirections_loop(node);
 		if (node->right && data->expand_error != 1)
 			execute_simple_command(data, node->right);
 		close(current_fd);

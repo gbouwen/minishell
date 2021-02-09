@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/09 11:30:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 13:39:52 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	check_if_file_exists(t_data *data, t_node *node)
 	{
 		ft_printf("minishell: %s: No such file or directory.\n", node->content);
 		data->expand_error = 1;
-		data->question_mark = 1;
+		g_question_mark = 1;
 	}
 	else
 		close(fd);
@@ -47,7 +47,7 @@ static void	open_or_create_file(t_data *data, t_node *node)
 		{
 			ft_printf("minishell: %s: Could not create file.\n", node->content);
 			data->expand_error = 1;
-			data->question_mark = 1;
+			g_question_mark = 1;
 		}
 	}
 	else
