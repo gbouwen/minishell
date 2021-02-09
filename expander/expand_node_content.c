@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 15:21:15 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:33:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	found_double_quote(t_data *data, char *content, t_expander *expander)
 	add_char_to_result(content, expander);
 	while (content[expander->i] != '\"' && content[expander->i] != '\0')
 	{
-		if (content[expander->i] == '$')
+		if (content[expander->i] == '$' && content[expander->i + 1] == '\"')
+			add_char_to_result(content, expander);
+		else if (content[expander->i] == '$')
 			found_dollarsign(data, content, expander);
 		add_char_to_result(content, expander);
 	}
