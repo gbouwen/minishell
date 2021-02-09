@@ -37,7 +37,7 @@ void			execute_simple_command(t_data *data, t_node *node);
 void			fork_and_execute(t_data *data, t_node *node);
 
 int				redirections_loop(t_data *data, t_node *node);
-int				set_redirections(t_data *data, t_node *node, int current_fd);
+int				set_redirections(t_data *data, t_node *node);
 
 char			*find_path_variable(char **env);
 
