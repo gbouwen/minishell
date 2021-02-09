@@ -6,25 +6,18 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:47:02 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 13:46:38 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-static void	restore_stdin_stdout(int save_out, int save_in)
+void	restore_stdin_stdout(t_data *data)
 {
-	dup2(save_in, STDIN_FILENO);
-	close(save_in);
-	dup2(save_out, STDOUT_FILENO);
-	close(save_out);
-}
-
-static void	init_fd_variables(int *save_in, int *save_out, int *current_fd)
-{
-	*save_in = 0;
-	*save_out = 0;
-	*current_fd = 0;
+	dup2(data->save_in, STDIN_FILENO);
+	close(data->save_in);
+	dup2(data->save_out, STDOUT_FILENO);
+	close(data->save_out);
 }
 
 static void	check_node_types(t_data *data, t_node *node,
@@ -55,27 +48,25 @@ static void	check_node_types(t_data *data, t_node *node,
 
 void		command_loop(t_data *data)
 {
-	int		save_in;
-	int		save_out;
 	int		current_fd;
 	t_node	*node;
 
-	init_fd_variables(&save_in, &save_out, &current_fd);
+	current_fd = 0;
 	node = data->tree;
 	g_prompt = 0;
 	while (node->type == NODE_SEQUENCE)
 	{
-		save_in = dup(STDIN_FILENO);
-		save_out = dup(STDOUT_FILENO);
+		data->save_in = dup(STDIN_FILENO);
+		data->save_out = dup(STDOUT_FILENO);
 		check_node_types(data, node->right, current_fd);
-		restore_stdin_stdout(save_in, save_out);
+		restore_stdin_stdout(data);
 		if (!node->left)
 			break ;
 		node = node->left;
 	}
-	save_in = dup(STDIN_FILENO);
-	save_out = dup(STDOUT_FILENO);
+	data->save_in = dup(STDIN_FILENO);
+	data->save_out = dup(STDOUT_FILENO);
 	if (node->type != NODE_SEQUENCE)
 		check_node_types(data, node, current_fd);
-	restore_stdin_stdout(save_in, save_out);
+	restore_stdin_stdout(data);
 }

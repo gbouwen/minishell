@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:45:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 13:47:48 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static char	**create_arg_list(t_data *data, t_node *node)
 
 static void	correct_error(t_data *data, t_node *node)
 {
+	restore_stdin_stdout(data);
 	if (ft_strncmp(node->content, "./", 2) == 0)
 	{
 		ft_printf("minishell: %s: Permission denied\n", node->content);
@@ -66,6 +67,7 @@ static void	child_actions(t_data *data, t_node *node)
 	{
 		if (args[0][0] == '/')
 		{
+			restore_stdin_stdout(data);
 			ft_printf("minishell: %s: %s\n", node->content, strerror(errno));
 			free_struct(data);
 			exit(127);
@@ -73,6 +75,7 @@ static void	child_actions(t_data *data, t_node *node)
 		path_variable = find_path_variable(data->env_variables);
 		if (path_variable == NULL)
 		{
+			restore_stdin_stdout(data);
 			ft_printf("minishell: %s: No such file or directory\n",
 															node->content);
 			free_struct(data);

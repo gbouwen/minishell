@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:35:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:42:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 13:43:55 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,8 @@ void	initialize_data(t_data *data, char **envp)
 	data->read_val = 0;
 	initialize_lexer(&data->lexer);
 	data->expand_error = 0;
+	data->ambiguous_redirect = 0;
+	data->save_in = 0;
+	data->save_out = 0;
 	g_question_mark = 0;
 }
