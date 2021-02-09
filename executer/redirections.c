@@ -6,28 +6,22 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/17 13:49:46 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/09 14:41:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 15:58:42 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-int		redirections_loop(t_data *data, t_node *node)
+void	redirections_loop(t_data *data, t_node *node, int *current_fds)
 {
-	int	current_fd;
-
-	current_fd = -1;
 	while (node != NULL)
 	{
-		if (current_fd != -1)
-			close(current_fd);
-		current_fd = set_redirections(data, node);
+		set_redirections(data, node, current_fds);
 		node = node->left;
 	}
-	return (current_fd);
 }
 
-int		set_redirections(t_data *data, t_node *node)
+void	set_redirections(t_data *data, t_node *node, int *current_fds)
 {
 	int	new_fd;
 
@@ -36,18 +30,27 @@ int		set_redirections(t_data *data, t_node *node)
 	{
 		if (node->type == FILE_OUT)
 			new_fd = open(node->content, O_RDWR);
-		if (node->type == FILE_OUT_APPEND)
+		else if (node->type == FILE_OUT_APPEND)
 			new_fd = open(node->content, O_RDWR | O_APPEND);
 		if (new_fd != -1)
+		{
+			if (current_fds[1] != -1)
+				close(current_fds[1]);
 			new_fd = dup2(new_fd, STDOUT_FILENO);
+			current_fds[1] = new_fd;
+		}
 	}
 	if (node->type == FILE_IN)
 	{
 		new_fd = open(node->content, O_RDWR);
 		if (new_fd != -1)
+		{
+			if (current_fds[0] != -1)
+				close(current_fds[0]);
 			new_fd = dup2(new_fd, STDIN_FILENO);
+			current_fds[0] = new_fd;
+		}
 	}
 	if (new_fd == -1)
 		data->expand_error = 1;
-	return (new_fd);
 }

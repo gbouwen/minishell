@@ -45,6 +45,7 @@ typedef struct	s_data
 	int			ambiguous_redirect;
 	int			save_in;
 	int			save_out;
+	int			current_fds[2];
 }				t_data;
 
 #endif

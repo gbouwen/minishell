@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/08 16:00:42 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/09 16:14:06 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ static int	count_cmds(t_node *node)
 
 static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 {
-	int	open_file;
-
-	open_file = 0;
 	g_in_parent = 0;
 	if (i > 0)
 	{
@@ -49,12 +46,14 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND
 		|| node->type == FILE_IN)
 	{
-		open_file = redirections_loop(data, node);
+		redirections_loop(data, node, data->current_fds);
 		node = node->right;
 	}
-	if (open_file)
-		close(open_file);
 	execute_simple_command(data, node);
+	if (data->current_fds[0] != -1)
+		close(data->current_fds[0]);
+	if (data->current_fds[1] != -1)
+		close(data->current_fds[1]);
 	exit(g_question_mark);
 }
 
