@@ -22,7 +22,7 @@ void		execute_simple_command(t_data *data, t_node *node)
 	else if (compare_both(node->content, "pwd") == 0)
 		builtin_pwd();
 	else if (compare_both(node->content, "cd") == 0)
-		builtin_cd(node, data->env_variables);
+		builtin_cd(node->right, data->env_variables);
 	else if (compare_both(node->content, "export") == 0)
 		builtin_export(data, node);
 	else if (compare_both(node->content, "unset") == 0)
