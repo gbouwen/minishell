@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Updated: 2021/02/03 15:22:57 by gbouwen       ########   odam.nl         */
-/*   Updated: 2021/02/09 16:54:10 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/10 15:29:17 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ static int	check_if_new_var(char **envp, char *content)
 	x = 0;
 	while (envp[i] != NULL)
 	{
-		while ((envp[i][x] != '\0' || envp[i][x] != '=') && envp[i][x] == content[x])
+		while ((envp[i][x] != '=' || envp[i][x] != '\0') && envp[i][x] == content[x])
 			x++;
-		if (envp[i][x] == '=' && envp[i][x] == content[x])
+		if ((envp[i][x] == '=' || envp[i][x] == content[x]) && content[x] == '\0')
 			return (0);
 		i++;
 	}
