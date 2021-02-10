@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:00:51 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 15:23:02 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:55:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_token(t_data *data, t_list *token, int length)
 	ft_bzero(token->content, length + 1);
 	token->current_char = 0;
 	token->type = 0;
-	token->is_escaped = 0;
 	token->next = NULL;
 }
 

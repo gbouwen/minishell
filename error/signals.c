@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:49:45 by tblanker      #+#    #+#                 */
-/*   Updated: 2021/02/08 16:47:19 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:24:56 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	prompt(void)
 void	interrupt_signal(int n)
 {
 	g_prompt = 0;
-	g_exit_status = 128 + n;
 	g_c_signal = 1;
 	if (n == 2 && g_in_parent != 0)
 	{

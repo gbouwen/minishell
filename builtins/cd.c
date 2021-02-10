@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/09 17:07:59 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/10 13:00:26 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static void	change_pwd_env(char **envp)
 			free(envp[i]);
 			if (getcwd(buff, 4096) == NULL)
 			{
-			//	printf("%s\n", errno);
+				ft_printf("cd: error retrieving current directory: ");
+				ft_printf("getcwd: cannot access parent directories: No such");
+				ft_printf(" file or directory");
 			}
 			envp[i] = ft_strjoin("PWD=", buff);
 			break ;

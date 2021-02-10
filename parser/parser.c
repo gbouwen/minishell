@@ -6,19 +6,11 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/08 15:54:26 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/09 23:57:37 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-void	print_list_parser(t_list *token) //
-{
-	while (token != NULL)
-	{
-		printf("-%s-%d-\n", token->content, token->type);
-		token = token->next;
-	}
-}
 
 static	void	rearrange_arguments(t_node *root)
 {
@@ -64,15 +56,14 @@ static	void	find_file_in_tree(t_node *root)
 	return ;
 }
 
-t_node *parser(t_lexer *lexer_data)
+t_node *parser(t_lexer *lexer_data, t_data *data)
 {
 	t_node	**nodes;
 	t_node	*node;
 
 	g_current_tok = lexer_data->token_list;
 	nodes = &node;
-	print_list_parser(lexer_data->token_list);
-	node = sequence();
+	node = sequence(data);
 	if (!check_parser_error(*nodes) || node == NULL)
 	{
 		if (node)
@@ -87,6 +78,5 @@ t_node *parser(t_lexer *lexer_data)
 	}
 	find_file_in_tree(*nodes);
 	node = *nodes;
-//	print_tree(node);
 	return (*nodes);
 }

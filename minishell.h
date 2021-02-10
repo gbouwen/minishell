@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 15:53:58 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/09 16:26:28 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 
 int		g_prompt;
 int		g_in_parent;
-int		g_exit_status;
 int		g_question_mark;
 int		g_c_signal;
 char	*g_work_dir;
