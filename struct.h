@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 14:20:29 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:55:49 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ typedef	struct		s_lexer
 typedef struct s_node
 {
 	int				type;
-	int				state_type;
-	int				is_escaped;
 	char			*content;
 	struct s_node	*right;
 	struct s_node	*left;

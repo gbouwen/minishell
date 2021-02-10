@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/08 15:54:36 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/10 00:47:33 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libft/libft.h"
 # include "../lexer/lexer_utils.h"
 # include "../ft_printf/libftprintf.h"
+# include "../initialize_free/free.h"
 
 # define ARGUMENT 1
 # define PATHNAME 2
@@ -32,29 +33,32 @@
 
 t_list	*g_current_tok;
 
-t_node	*simple_command_args();
-t_node 	*simple_command();
-t_node	*command_greater();
-t_node	*command_lesser();
-t_node	*command_double_greater();
-t_node	*command();
-t_node	*task_pipe();
-t_node	*tasks();
-t_node	*sequence_semicolon();
-t_node	*sequence();
+t_node	*simple_command_args(t_data *data);
+t_node 	*simple_command(t_data *data);
+t_node	*command_greater(t_data *data);
+t_node	*command_lesser(t_data *data);
+t_node	*command_double_greater(t_data *data);
+t_node	*command(t_data *data);
+t_node	*task_pipe(t_data *data);
+t_node	*tasks(t_data *data);
+t_node	*sequence_semicolon(t_data *data);
+t_node	*sequence(t_data *data);
+
+t_node	*malloc_node(char *str, t_data *data);
+t_node	*set_error_node(t_list *error_token, t_data *data);
+
+t_node *parser(t_lexer *lexer_data, t_data *data);
 
 int		match(int type, char **str);
-
 int		token_check();
-int		set_node_type(int tokentype, int node_type, t_node *node);
+
 int		check_parser_error(t_node *root);
 void	attach_tree_node(t_node *attach, int type, t_node *left,
 						t_node *right);
 void	delete_tree(t_node *node);
-t_node	*set_error_node(t_list *error_token);
+
 void	print_tree(t_node *root);
 void	print_tree_utils(t_node *root, int space);
-t_node *parser(t_lexer *lexer_data);
 
 
 #endif

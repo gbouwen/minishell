@@ -99,8 +99,7 @@ void			expand_question_mark(t_data *data, t_node *node)
 	{
 		result = NULL;
 		i = 1;
-		if (node->type != CHAR_QUOTE && node->is_escaped == 0 &&
-										ft_strlen(node->content) > 1)
+		if (node->type != CHAR_QUOTE && ft_strlen(node->content) > 1)
 		{
 			while (node->content[i] != '\0')
 			{
