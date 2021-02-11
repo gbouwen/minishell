@@ -31,6 +31,7 @@ void	open_or_create_file(t_data *data, t_node *node)
 {
 	int	fd;
 
+	fd = -1;
 	if (node->type == FILE_OUT)
 	{
 		fd = open(node->content, O_CREAT | O_WRONLY | O_TRUNC,

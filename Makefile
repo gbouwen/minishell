@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/11 12:26:45 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/02/11 14:30:45 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SOURCE_C =	main.c \
 			expander/expand_single_variable.c \
 			expander/expand_env_utils.c \
 			expander/expand_question_mark.c \
+			expander/split_on_spaces.c \
 			executer/execute_pipe.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \

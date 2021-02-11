@@ -30,6 +30,8 @@ typedef struct	s_expander
 
 void	expand_variables(t_data *data, t_node *node);
 
+void	split_on_spaces(t_data *data, t_node *node);
+
 char 	*remove_quotes(t_data *data, char *content);
 void	strip_quotes_and_spaces_node(t_data *data, t_node *node);
 
