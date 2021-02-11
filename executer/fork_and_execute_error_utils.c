@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/10 14:31:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/10 14:33:45 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 10:32:07 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	check_executable(t_data *data, t_node *node)
 	int	fd;
 
 	fd = open(node->content + 2, O_RDWR);
-	if (fd == -1 && errno == EACCES)
+	if (fd != -1 && errno == EACCES)
 	{
+		close(fd);
 		restore_stdin_stdout(data->save_in, data->save_out);
 		ft_printf("minishell: %s: %s\n", node->content, strerror(errno));
 		free_struct(data);
