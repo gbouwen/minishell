@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/11 11:28:44 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 11:43:29 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	connect_pipes(t_pipe *pipe_switch, int i)
 	}
 }
 
-void		wait_for_children()
+void		wait_for_children(void)
 {
 	int		status;
 	pid_t	wait_pid;
