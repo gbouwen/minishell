@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/09 14:39:02 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 12:43:29 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	expand_files(t_data *data, t_node *node)
 		return ;
 	if (node->type > 2 && node->type < 6)
 	{
-			if (check_ambiguous_redirect(data, node) == 0)
-				node->type = AMBIGUOUS_REDIRECT;
+		if (check_ambiguous_redirect(data, node) == 0)
+			node->type = AMBIGUOUS_REDIRECT;
 		strip_quotes_and_spaces_node(data, node);
 		return ;
 	}
@@ -85,17 +85,19 @@ int	check_for_spaces(char *str)
 
 int		check_ambiguous_redirect(t_data *data, t_node *node)
 {
-	char *save;
+	char	*save;
+	int		ret;
 
 	while (node != NULL)
 	{
 		save = ft_strdup(node->content);
-		if (expand_node_content(data, node) == 0)
+		ret = expand_node_content(data, node);
+		if (ret == 0)
 		{
 			node->type = AMBIGUOUS_REDIRECT;
 			return (0);
 		}
-		else if (check_for_spaces(node->content) == 0)
+		else if (ret == 1 && check_for_spaces(node->content) == 0)
 		{
 			free(node->content);
 			node->content = save;

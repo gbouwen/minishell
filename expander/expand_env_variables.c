@@ -6,39 +6,35 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:15:08 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/10 13:18:27 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/10 19:30:00 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static void	remove_node_right(t_node *node, t_node *previous, t_data *data)
+static void	remove_node_right(t_node *node, t_node *first, t_data *data, t_node *previous)
 {
-	if (!node->right)
+	t_node *temp;
+
+	if (node == first)
 	{
-		if (previous == node)
+		if (node->right != NULL)
 		{
-			node->type = EMPTY_COMMAND;
-			return ;
+			temp = node->right;
+			node->right = temp->right;
+			node->content = ft_strdup(temp->content);
+			if (!node->content)
+				free_struct_error(data, "Malloc fail.");
+			free(temp->content);
+			free(temp);
 		}
-		previous->right = NULL;
-		free(node->content);
-		free(node);
-	}
-	else if (previous == node)
-	{
-		previous = node->right;
-		free(node->content);
-		node->content = ft_strdup(previous->content);
-		if (node->content == NULL)
-			free_struct_error(data, "Malloc fail.");
-		free(previous->content);
-		node->right = previous->right;
-		free(previous);
+		else
+			node->type = EMPTY_COMMAND;
 	}
 	else
 	{
-		previous->right = node->right;
+		temp = node;
+		previous->right = temp->right;
 		free(node->content);
 		free(node);
 	}
@@ -46,17 +42,21 @@ static void	remove_node_right(t_node *node, t_node *previous, t_data *data)
 
 void	expand_env_variables(t_data *data, t_node *node)
 {
-	t_node *previous;
+	t_node	*previous;
+	t_node	*first;
 
+	first = node;
 	previous = node;
 	while (node != NULL)
 	{
 		if (expand_node_content(data, node) == 0)
 		{
-			remove_node_right(node, previous, data);
-			if (node->type == EMPTY_COMMAND)
+			remove_node_right(node, first, data, previous);
+			if (first->type == EMPTY_COMMAND)
 				break ;
-			continue;
+			previous = first;
+			node = first;
+			continue ;
 		}
 		previous = node;
 		node = node->right;
