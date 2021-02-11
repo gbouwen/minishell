@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fork_and_execute_error_utils.c                     :+:    :+:            */
+/*   fork_and_execute_utils.c                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/10 14:31:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 10:32:07 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 11:27:34 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,12 @@ void	correct_error(t_data *data, t_node *node)
 		free_struct(data);
 		exit(127);
 	}
+}
+
+void	close_fds(int *current_fds)
+{
+	if (current_fds[0] != -1)
+		close(current_fds[0]);
+	if (current_fds[1] != -1)
+		close(current_fds[1]);
 }
