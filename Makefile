@@ -6,10 +6,9 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/11 14:30:45 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/02/11 15:56:16 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = minishell
 CC = gcc

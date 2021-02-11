@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 12:54:03 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 15:58:04 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	open_or_create_file(t_data *data, t_node *node)
 	int	fd;
 
 	fd = -1;
+	node->content = remove_quotes(data, node->content);
 	if (node->type == FILE_OUT)
 	{
 		fd = open(node->content, O_CREAT | O_WRONLY | O_TRUNC,
