@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/10 13:02:07 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 11:26:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,25 @@
 # include "../builtins/builtins.h"
 # include "../expander/expander.h"
 
-typedef	struct	s_pipe
-{
-	int		new_fds[2];
-	int		old_fds[2];
-	int		num_cmds;
-}				t_pipe;
+int		executer(t_data *data);
+void	command_loop(t_data *data);
+void	restore_stdin_stdout(int save_in, int save_out);
 
-int				executer(t_data *data);
-void			command_loop(t_data *data);
-void			restore_stdin_stdout(int save_in, int save_out);
+void	execute_pipe(t_data *data, t_node *node);
+void	execute_simple_command(t_data *data, t_node *node);
+void	fork_and_execute(t_data *data, t_node *node);
 
-void			execute_pipe(t_data *data, t_node *node);
-void			execute_simple_command(t_data *data, t_node *node);
-void			fork_and_execute(t_data *data, t_node *node);
+void	empty_path_variable(t_data *data, t_node *node);
+void	absolute_path_error(t_data *data, t_node *node);
+void	check_executable(t_data *data, t_node *node);
+void	correct_error(t_data *data, t_node *node);
+void	close_fds(int *current_fds);
 
-void			redirections_loop(t_data *data, t_node *node, int *current_fds);
-void			set_redirections(t_data *data, t_node *node, int *current_fds);
+void	redirections_loop(t_data *data, t_node *node, int *current_fds);
+void	set_redirections(t_data *data, t_node *node, int *current_fds);
 
-char			*find_path_variable(char **env);
+char	*find_path_variable(char **env);
 
-void			try_paths(char **args, char *path_variable, t_data *data);
+void	try_paths(char **args, char *path_variable, t_data *data);
 
 #endif

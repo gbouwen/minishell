@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/11 15:56:15 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/11 15:57:04 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/11 16:01:37 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	check_if_new_var(char **envp, char *content)
 		while ((envp[i][x] != '\0' || envp[i][x] != '=')
 				&& envp[i][x] == content[x])
 			x++;
-		if (envp[i][x] == '=' && envp[i][x] == content[x])
+		if ((envp[i][x] == '=' || envp[i][x] == content[x]) && content[x] == '\0')
 			return (0);
 		i++;
 	}

@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 15:50:08 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/11 16:00:05 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static void	check_if_file_exists(t_data *data, t_node *node)
+void	check_if_file_exists(t_data *data, t_node *node)
 {
 	int	fd;
 
@@ -27,10 +27,12 @@ static void	check_if_file_exists(t_data *data, t_node *node)
 		close(fd);
 }
 
-static void	open_or_create_file(t_data *data, t_node *node)
+void	open_or_create_file(t_data *data, t_node *node)
 {
 	int	fd;
 
+	fd = -1;
+	node->content = remove_quotes(data, node->content);
 	if (node->type == FILE_OUT)
 	{
 		fd = open(node->content, O_CREAT | O_WRONLY | O_TRUNC,
@@ -54,21 +56,6 @@ static void	open_or_create_file(t_data *data, t_node *node)
 		close(fd);
 }
 
-void	expand_files(t_data *data, t_node *node)
-{
-	if (node == NULL)
-		return ;
-	if (node->type > 2 && node->type < 6)
-	{
-		if (check_ambiguous_redirect(data, node) == 0)
-			node->type = AMBIGUOUS_REDIRECT;
-		strip_quotes_and_spaces_node(data, node);
-		return ;
-	}
-	expand_files(data, node->left);
-	expand_files(data, node->right);
-}
-
 int	check_for_spaces(char *str)
 {
 	int i;
@@ -83,7 +70,7 @@ int	check_for_spaces(char *str)
 	return (1);
 }
 
-int		check_ambiguous_redirect(t_data *data, t_node *node)
+static int		check_ambiguous_redirect(t_data *data, t_node *node)
 {
 	char	*save;
 
@@ -105,9 +92,24 @@ int		check_ambiguous_redirect(t_data *data, t_node *node)
 		if (node->type == FILE_IN && data->expand_error != 1)
 			check_if_file_exists(data, node);
 		if ((node->type == FILE_OUT || node->type == FILE_OUT_APPEND) &&
-												data->expand_error != 1)
+													data->expand_error != 1)
 			open_or_create_file(data, node);
 		node = node->left;
 	}
 	return (1);
+}
+
+void	expand_files(t_data *data, t_node *node)
+{
+	if (node == NULL)
+		return ;
+	if (node->type > 2 && node->type < 6)
+	{
+		if (check_ambiguous_redirect(data, node) == 0)
+			node->type = AMBIGUOUS_REDIRECT;
+		strip_quotes_and_spaces_node(data, node);
+		return ;
+	}
+	expand_files(data, node->left);
+	expand_files(data, node->right);
 }
