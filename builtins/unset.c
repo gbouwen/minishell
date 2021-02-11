@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:50:10 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 15:57:24 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static int	compare_with_env_variable(char *var, char *env_variable)
 	int	i;
 
 	i = 0;
-	while (var[i] == env_variable[i] && var[i] != '\0' && env_variable[i] != '\0')
+	while (var[i] == env_variable[i] && var[i] != '\0'
+			&& env_variable[i] != '\0')
 		i++;
 	if (var[i] == '\0' && (env_variable[i] == '=' || env_variable[i] == '\0'))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:50:31 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 15:54:14 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 static int	skip_option(char *str)
 {
 	int option_skip;
+	int	i;
 
+	i = 2;
 	option_skip = 0;
 	if (ft_strncmp(str, "-n", 2) == 0)
 	{
 		option_skip = 1;
-		int i = 2;
 		while (str[i])
 		{
 			if (str[i] != 'n')
@@ -58,7 +59,7 @@ static int	print_nodes(t_node *node)
 	return (1);
 }
 
-void	builtin_echo(t_node *node)
+void		builtin_echo(t_node *node)
 {
 	int	newline;
 

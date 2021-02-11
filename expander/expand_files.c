@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 12:43:29 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/11 15:50:08 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,21 @@ int	check_for_spaces(char *str)
 int		check_ambiguous_redirect(t_data *data, t_node *node)
 {
 	char	*save;
-	int		ret;
 
 	while (node != NULL)
 	{
 		save = ft_strdup(node->content);
-		ret = expand_node_content(data, node);
-		if (ret == 0)
+		if (save == NULL)
+			free_struct_error(data, "Malloc fail.");
+		if (dollarsign_in_content(node->content))
 		{
-			node->type = AMBIGUOUS_REDIRECT;
-			return (0);
-		}
-		else if (ret == 1 && check_for_spaces(node->content) == 0)
-		{
-			free(node->content);
-			node->content = save;
-			node->type = AMBIGUOUS_REDIRECT;
-			return (0);
+			if (expand_node_content(data, node) == 0 || check_for_spaces(node->content) == 0)
+			{
+				free(node->content);
+				node->content = save;
+				node->type = AMBIGUOUS_REDIRECT;
+				return (0);
+			}
 		}
 		if (node->type == FILE_IN && data->expand_error != 1)
 			check_if_file_exists(data, node);

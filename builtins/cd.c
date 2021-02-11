@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/10 13:00:26 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 15:46:41 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ void		builtin_cd(t_node *node, char **envp)
 		ret = chdir(node->content);
 	if (ret == -1)
 	{
-		ft_printf("minishell: cd: %s: No such file or directory\n", node->content);
+		ft_printf("minishell: cd: %s: \n", node->content);
+		ft_printf("No such file or directory");
 		g_question_mark = 1;
 		return ;
 	}
