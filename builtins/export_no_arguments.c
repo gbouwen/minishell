@@ -61,7 +61,7 @@ static int	equals_sign(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '=')
-			return (i);
+			return (i - 1);
 		i++;
 	}
 	return (i);
