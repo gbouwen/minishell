@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 11:47:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/04 15:10:15 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 13:48:50 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	copy_until_dollarsign(char *content, t_expander *expander)
 		add_char_to_result(content, expander);
 }
 
-int	is_alpha_or_underscore(char c)
+int		is_alpha_or_underscore(char c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (1);
@@ -47,7 +47,7 @@ int	is_alpha_or_underscore(char c)
 	return (0);
 }
 
-int	is_punctuation_mark(char c)
+int		is_punctuation_mark(char c)
 {
 	if (c == '\'' || c == '\"')
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 15:50:08 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 13:48:16 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	open_or_create_file(t_data *data, t_node *node)
 		close(fd);
 }
 
-void	expand_files(t_data *data, t_node *node)
+void		expand_files(t_data *data, t_node *node)
 {
 	if (node == NULL)
 		return ;
@@ -69,7 +69,7 @@ void	expand_files(t_data *data, t_node *node)
 	expand_files(data, node->right);
 }
 
-int	check_for_spaces(char *str)
+int			spaces(char *str)
 {
 	int i;
 
@@ -83,7 +83,7 @@ int	check_for_spaces(char *str)
 	return (1);
 }
 
-int		check_ambiguous_redirect(t_data *data, t_node *node)
+int			check_ambiguous_redirect(t_data *data, t_node *node)
 {
 	char	*save;
 
@@ -94,7 +94,7 @@ int		check_ambiguous_redirect(t_data *data, t_node *node)
 			free_struct_error(data, "Malloc fail.");
 		if (dollarsign_in_content(node->content))
 		{
-			if (expand_node_content(data, node) == 0 || check_for_spaces(node->content) == 0)
+			if (expand_node_content(data, node) == 0 || !spaces(node->content))
 			{
 				free(node->content);
 				node->content = save;

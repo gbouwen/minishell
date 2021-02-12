@@ -1,0 +1,28 @@
+static int		try_exec_path(char **args, char **paths, int i, t_data *data)
+{
+	char	*correct_path;
+	char	**correct_command;
+	int		x;
+
+	correct_path = ft_strjoin(paths[i], "/");
+	correct_command = ft_calloc(get_str_array_len(args) + 1, sizeof(char *));
+	if (!correct_command)
+	{
+		free_str_array(args);
+		free_str_array(paths);
+		free(correct_path);
+		free_struct_error(data, "Malloc failed");
+	}
+	correct_command[0] = ft_strjoin(correct_path, args[0]);
+	free(correct_path);
+	x = 1;
+	while (args[x] != NULL)
+	{
+		correct_command[x] = ft_strdup(args[x]);
+		x++;
+	}
+	correct_command[x] = NULL;
+	execve(correct_command[0], correct_command, data->env_variables);
+	free_str_array(correct_command);
+	return (0);
+}
