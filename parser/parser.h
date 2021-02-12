@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/10 00:47:33 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:18:38 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_node	*set_error_node(t_list *error_token, t_data *data);
 t_node *parser(t_lexer *lexer_data, t_data *data);
 
 int		match(int type, char **str);
-int		token_check();
+int		token_check(void);
 
 int		check_parser_error(t_node *root);
 void	attach_tree_node(t_node *attach, int type, t_node *left,

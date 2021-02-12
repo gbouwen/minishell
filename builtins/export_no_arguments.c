@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:38:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 15:59:01 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/10 15:42:54 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,6 @@ static void	initialize_indexes_array(int *sorted_indexes, int len)
 		sorted_indexes[i] = i;
 		i++;
 	}
-}
-
-static void	print_value(char *env_variable, int x)
-{
-	ft_printf("=\"");
-	x++;
-	while (env_variable[x] != '\0')
-	{
-		ft_putchar_fd(env_variable[x], 1);
-		x++;
-	}
-	ft_printf("\"\n");
 }
 
 static void	print_sorted(char **env, int sorted_indexes[], int len)
@@ -57,12 +45,26 @@ static void	print_sorted(char **env, int sorted_indexes[], int len)
 				x++;
 			}
 			if (env[sorted_indexes[i]][x] == '=')
-				print_value(env[sorted_indexes[i]], x);
+				ft_printf("=\"%s\"\n", env_var_value(env[sorted_indexes[i]]));
 			else
 				ft_printf("\n");
 			i++;
 		}
 	}
+}
+
+static int	equals_sign(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '=')
+			return (i);
+		i++;
+	}
+	return (i);
 }
 
 static void	sort_and_print(char **env, int len)
@@ -82,7 +84,7 @@ static void	sort_and_print(char **env, int len)
 		while (x < len)
 		{
 			if (ft_strncmp(env[sorted_indexes[min]], env[sorted_indexes[x]],
-									ft_strlen(env[sorted_indexes[min]])) > 0)
+									equals_sign(env[sorted_indexes[min]])) > 0)
 				min = x;
 			x++;
 		}

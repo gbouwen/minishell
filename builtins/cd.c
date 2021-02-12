@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 15:46:41 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/11 16:02:06 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	change_pwd_env(char **envp)
 			{
 				ft_printf("cd: error retrieving current directory: ");
 				ft_printf("getcwd: cannot access parent directories: No such");
-				ft_printf(" file or directory");
+				ft_printf(" file or directory\n");
 			}
 			envp[i] = ft_strjoin("PWD=", buff);
 			break ;
@@ -72,13 +72,15 @@ static int	home_variable_check(t_node *node, char **envp)
 
 	home = NULL;
 	ret = 1;
-	if (node == NULL && is_home_set(envp) == 0)
+	if ((node == NULL || compare_both(node->content, "~") == 0) &&
+												is_home_set(envp) == 0)
 	{
 		ft_printf("minishell: cd: HOME not set\n");
 		g_question_mark = 1;
 		return (-1);
 	}
-	else if (node == NULL && is_home_set(envp) == 1)
+	else if ((node == NULL || compare_both(node->content, "~") == 0) &&
+													is_home_set(envp) == 1)
 	{
 		home = get_home_value(envp);
 		if (home != NULL)
@@ -92,7 +94,6 @@ void		builtin_cd(t_node *node, char **envp)
 	int		ret;
 
 	ret = 1;
-	node = node->right;
 	ret = home_variable_check(node, envp);
 	if (ret == -1)
 		return ;
@@ -102,12 +103,12 @@ void		builtin_cd(t_node *node, char **envp)
 		g_question_mark = 1;
 		return ;
 	}
-	else if (node != NULL && node->right == NULL)
+	else if (node != NULL && compare_both(node->content, "~") != 0 &&
+													node->right == NULL)
 		ret = chdir(node->content);
 	if (ret == -1)
 	{
-		ft_printf("minishell: cd: %s: \n", node->content);
-		ft_printf("No such file or directory");
+		ft_printf("minishell: cd: %s: %s\n", node->content, strerror(errno));
 		g_question_mark = 1;
 		return ;
 	}

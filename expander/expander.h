@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 15:20:50 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/11 12:27:58 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,20 @@ typedef struct	s_expander
 
 void	expand_variables(t_data *data, t_node *node);
 
+void	split_on_spaces(t_data *data, t_node *node);
+
 char 	*remove_quotes(t_data *data, char *content);
 void	strip_quotes_and_spaces_node(t_data *data, t_node *node);
 
 int		expand_node_content(t_data *data, t_node *node);
+
 void	expand_files(t_data *data, t_node *node);
-int		check_ambiguous_redirect(t_data *data, t_node *node);
+void	check_if_file_exists(t_data *data, t_node *node);
+void	open_or_create_file(t_data *data, t_node *node);
+int		check_for_spaces(char *str);
+
+void	expand_files_pipe(t_data *data, t_node *node);
+
 void	expand_env_variables(t_data *data, t_node *node);
 
 void	add_questionmark(char *content, t_expander *expander);

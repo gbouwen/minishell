@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/10 12:59:47 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/10 14:38:58 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,12 @@ typedef struct	s_data
 	int			save_out;
 	int			current_fds[2];
 }				t_data;
+
+typedef	struct	s_pipe
+{
+	int		new_fds[2];
+	int		old_fds[2];
+	int		num_cmds;
+}				t_pipe;
 
 #endif

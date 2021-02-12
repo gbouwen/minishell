@@ -6,10 +6,9 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/09 16:45:23 by tiemen        ########   odam.nl          #
+#    Updated: 2021/02/12 14:15:14 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = minishell
 CC = gcc
@@ -22,6 +21,7 @@ SOURCE_C =	main.c \
 			initialize_free/set_env_variables.c \
 			initialize_free/free_str_array.c \
 			read_cmdline/read_cmdline.c \
+			read_cmdline/read_cmdline_utils.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
 			lexer/state.c \
@@ -50,6 +50,7 @@ SOURCE_C =	main.c \
 			helper_functions/get_work_dir_prompt.c \
 			helper_functions/compare_both.c \
 			expander/expand_files.c \
+			expander/expand_files_pipe.c \
 			expander/expand_variables.c \
 			expander/strip_quotes_and_spaces_node.c \
 			expander/expand_env_variables.c \
@@ -58,9 +59,11 @@ SOURCE_C =	main.c \
 			expander/expand_single_variable.c \
 			expander/expand_env_utils.c \
 			expander/expand_question_mark.c \
+			expander/split_on_spaces.c \
 			executer/execute_pipe.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
+			executer/fork_and_execute_utils.c \
 			executer/path_variables.c \
 			executer/redirections.c \
 			error/error.c \

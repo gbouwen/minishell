@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:16:36 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/10 00:52:26 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:16:35 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	attach_tree_node(t_node *attach, int type, t_node *left, t_node *right)
 void	delete_tree(t_node *node)
 {
 	if (node == NULL)
-		return;
+		return ;
 	if (node->content)
 		free(node->content);
 	delete_tree(node->left);
