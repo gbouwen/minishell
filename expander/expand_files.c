@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 14:28:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:30:01 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-void	check_if_file_exists(t_data *data, t_node *node)
+void		check_if_file_exists(t_data *data, t_node *node)
 {
 	int	fd;
 
@@ -27,7 +27,7 @@ void	check_if_file_exists(t_data *data, t_node *node)
 		close(fd);
 }
 
-void	open_or_create_file(t_data *data, t_node *node)
+void		open_or_create_file(t_data *data, t_node *node)
 {
 	int	fd;
 
@@ -56,7 +56,7 @@ void	open_or_create_file(t_data *data, t_node *node)
 		close(fd);
 }
 
-int	check_for_spaces(char *str)
+int			check_for_spaces(char *str)
 {
 	int i;
 
@@ -99,7 +99,7 @@ static int		check_ambiguous_redirect(t_data *data, t_node *node)
 	return (1);
 }
 
-void	expand_files(t_data *data, t_node *node)
+void		expand_files(t_data *data, t_node *node)
 {
 	if (node == NULL)
 		return ;

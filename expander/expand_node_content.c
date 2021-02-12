@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 13:49:47 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:29:46 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		found_single_quote(char *content, t_expander *expander)
 }
 
 void		found_double_quote(t_data *data, char *content,
-								t_expander *expander)
+														t_expander *expander)
 {
 	add_char_to_result(content, expander);
 	while (content[expander->i] != '\"' && content[expander->i] != '\0')

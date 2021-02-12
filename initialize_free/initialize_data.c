@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:35:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:42:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:06:06 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	increment_shlvl(char **env)
 	}
 }
 
-void	initialize_data(t_data *data, char **envp)
+void		initialize_data(t_data *data, char **envp)
 {
 	data->cmdline = NULL;
 	set_env_variables(data, envp);

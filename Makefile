@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/11 15:56:16 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/02/12 11:54:40 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,11 @@ SOURCE_C =	main.c \
 			expander/expand_env_utils.c \
 			expander/expand_question_mark.c \
 			expander/split_on_spaces.c \
+			expander/ambiguous_redirect.c \
+			expander/node_add_back.c \
+			expander/remove_quotes.c \
 			executer/execute_pipe.c \
+			executer/execute_pipe_utils.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
 			executer/fork_and_execute_utils.c \

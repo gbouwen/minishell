@@ -12,7 +12,7 @@
 
 #include "executer.h"
 
-void	restore_stdin_stdout(int save_in, int save_out)
+void		restore_stdin_stdout(int save_in, int save_out)
 {
 	dup2(save_in, STDIN_FILENO);
 	close(save_in);

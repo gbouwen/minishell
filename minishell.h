@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 14:10:37 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/09 16:26:28 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:06:46 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include "executer/executer.h"
 # include "helper_functions/helper_functions.h"
 # include <signal.h>
-# include <stdio.h> //
 
 int		g_prompt;
 int		g_in_parent;

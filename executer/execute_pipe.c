@@ -6,27 +6,11 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/11 11:43:29 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 11:06:16 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
-
-#define READ 0
-#define WRITE 1
-
-static int	count_cmds(t_node *node)
-{
-	int	i;
-
-	i = 0;
-	while (node->type == PIPE)
-	{
-		i++;
-		node = node->left;
-	}
-	return (i + 1);
-}
 
 static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 {
@@ -51,6 +35,8 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 	}
 	execute_simple_command(data, node);
 	close_fds(data->current_fds);
+	free_struct(data);
+	free(pipe_switch);
 	exit(g_question_mark);
 }
 
@@ -92,10 +78,7 @@ void		execute_pipe(t_data *data, t_node *node)
 	int		i;
 	t_node	*command_node;
 
-	pipe_switch = malloc(sizeof(t_pipe));
-	if (!pipe_switch)
-		exit_error("Malloc fail.");
-	pipe_switch->num_cmds = count_cmds(node);
+	pipe_switch = init_pipe_switch(data, node);
 	i = 0;
 	while (i < pipe_switch->num_cmds)
 	{

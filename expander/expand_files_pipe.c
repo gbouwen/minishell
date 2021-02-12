@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/11 12:20:55 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 12:55:50 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:03:25 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static int		check_ambiguous_redirect_pipe(t_data *data, t_node *node)
+static int	check_ambiguous_redirect_pipe(t_data *data, t_node *node)
 {
 	char *save;
 
@@ -40,7 +40,7 @@ static int		check_ambiguous_redirect_pipe(t_data *data, t_node *node)
 	return (1);
 }
 
-void	expand_files_pipe(t_data *data, t_node *node)
+void		expand_files_pipe(t_data *data, t_node *node)
 {
 	if (node == NULL)
 		return ;

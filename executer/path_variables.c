@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/14 15:55:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 14:28:30 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:32:42 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-char			*find_path_variable(char **env)
+char		*find_path_variable(char **env)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ char			*find_path_variable(char **env)
 	return (NULL);
 }
 
-static int		try_exec_path(char **args, char **paths, int i, t_data *data)
+static int	try_exec_path(char **args, char **all_paths, int i, t_data *data)
 {
 	char	*correct_path;
 	char	**correct_command;
@@ -55,7 +55,7 @@ static int		try_exec_path(char **args, char **paths, int i, t_data *data)
 	return (0);
 }
 
-void			try_paths(char **args, char *path_variable, t_data *data)
+void		try_paths(char **args, char *path_variable, t_data *data)
 {
 	int		i;
 	char	**all_paths;
