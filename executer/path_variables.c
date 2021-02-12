@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/14 15:55:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 14:38:14 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:42:19 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static int	try_exec_path(char **args, char **all_paths, int i, t_data *data)
 	char	**correct_command;
 	int		x;
 
-	correct_path = ft_strjoin(paths[i], "/");
+	correct_path = ft_strjoin(all_paths[i], "/");
 	correct_command = ft_calloc(get_str_array_len(args) + 1, sizeof(char *));
 	if (!correct_command)
 	{
 		free_str_array(args);
-		free_str_array(paths);
+		free_str_array(all_paths);
 		free(correct_path);
 		free_struct_error(data, "Malloc failed");
 	}
