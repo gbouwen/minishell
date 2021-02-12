@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 11:03:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 11:05:47 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 11:34:55 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	count_cmds(t_node *node)
 	return (i + 1);
 }
 
-t_pipe	*init_pipe_switch(t_data *data, t_node *node)
+t_pipe		*init_pipe_switch(t_data *data, t_node *node)
 {
 	t_pipe	*pipe_switch;
 
@@ -35,4 +35,3 @@ t_pipe	*init_pipe_switch(t_data *data, t_node *node)
 	pipe_switch->num_cmds = count_cmds(node);
 	return (pipe_switch);
 }
-
