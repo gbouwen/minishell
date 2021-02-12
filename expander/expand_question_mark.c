@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_question_mark.c                              :+:    :+:            */
+/*   expand_question_mark.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/12 13:54:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 14:21:50 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 11:38:16 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-void	add_questionmark(char *content, t_expander *expander)
+void			add_questionmark(char *content, t_expander *expander)
 {
 	expander->result[expander->x] = content[expander->i];
 	expander->x++;
