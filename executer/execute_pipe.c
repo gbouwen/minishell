@@ -6,10 +6,11 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/12 11:06:16 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 16:01:46 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "executer.h"
 
 static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
@@ -28,7 +29,7 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 		close(pipe_switch->new_fds[WRITE]);
 	}
 	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND
-		|| node->type == FILE_IN)
+		|| node->type == FILE_IN || node->type == AMBIGUOUS_REDIRECT)
 	{
 		redirections_loop(data, node, data->current_fds);
 		node = node->right;
@@ -67,8 +68,27 @@ void		wait_for_children(void)
 		wait_pid = wait(&status);
 		count++;
 		if (count == 1)
+		{
 			g_question_mark = status / 256;
+			if (g_exit_status > 0)
+				g_question_mark = g_exit_status;
+		}
 	}
+}
+
+t_node		*check_node(t_node *node)
+{
+	t_node *command_node;
+
+	command_node = node;
+	if (node->type == PIPE)
+		command_node = node->right;
+	if (command_node->type == AMBIGUOUS_REDIRECT)
+	{
+		g_question_mark = 1;
+		ambiguous_error(command_node);
+	}
+	return (command_node);
 }
 
 void		execute_pipe(t_data *data, t_node *node)
@@ -82,9 +102,7 @@ void		execute_pipe(t_data *data, t_node *node)
 	i = 0;
 	while (i < pipe_switch->num_cmds)
 	{
-		command_node = node;
-		if (node->type == PIPE)
-			command_node = node->right;
+		command_node = check_node(node);
 		if (i < pipe_switch->num_cmds - 1)
 			pipe(pipe_switch->new_fds);
 		pid = fork();

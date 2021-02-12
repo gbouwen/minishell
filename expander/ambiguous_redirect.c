@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 11:52:12 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 11:56:23 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 15:08:33 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int			check_ambiguous_redirect(t_data *data, t_node *node)
 		if (dollarsign_in_content(node->content))
 		{
 			if (expand_node_content(data, node) == 0 ||
-					check_for_spaces(node->content) == 0)
-				found_ambiguous_redirect(node, save);
+					check_for_spaces(node->content))
+				return (found_ambiguous_redirect(node, save));
 		}
 		if (node->type == FILE_IN && data->expand_error != 1)
 			check_if_file_exists(data, node);

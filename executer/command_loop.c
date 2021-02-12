@@ -6,10 +6,11 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 16:19:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 12:40:38 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 15:33:34 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "executer.h"
 
 void		restore_stdin_stdout(int save_in, int save_out)
@@ -30,12 +31,7 @@ static void	init_fd_variables(int *save_in, int *save_out, int *current_fds)
 
 static void	check_node_types(t_data *data, t_node *node, int *current_fds)
 {
-	if (node->type == AMBIGUOUS_REDIRECT)
-	{
-		g_question_mark = 1;
-		ambiguous_error(node);
-	}
-	else if (node->type == PIPE)
+	if (node->type == PIPE)
 	{
 		expand_files_pipe(data, node);
 		execute_pipe(data, node);
@@ -44,6 +40,11 @@ static void	check_node_types(t_data *data, t_node *node, int *current_fds)
 													node->type == FILE_IN)
 	{
 		expand_files(data, node);
+		if (node->type == AMBIGUOUS_REDIRECT)
+		{
+			g_question_mark = 1;
+			ambiguous_error(node);
+		}
 		redirections_loop(data, node, current_fds);
 		if (node->right && data->expand_error != 1)
 			execute_simple_command(data, node->right);
