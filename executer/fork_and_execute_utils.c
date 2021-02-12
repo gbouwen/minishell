@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/10 14:31:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 15:21:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 16:48:36 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,27 @@ void	check_executable(t_data *data, t_node *node)
 		free_struct(data);
 		exit(126);
 	}
+	if (fd == -1 && errno == EISDIR)
+	{
+		close(fd);
+		restore_stdin_stdout(data->save_in, data->save_out);
+		ft_printf("minishell: %s: Is a directory\n", node->content);
+		free_struct(data);
+		exit(126);
+	}
 	else if (fd == -1 && errno == ENOENT)
 	{
 		restore_stdin_stdout(data->save_in, data->save_out);
 		ft_printf("minishell: %s: %s\n", node->content, strerror(errno));
 		free_struct(data);
 		exit(127);
+	}
+	else
+	{
+		restore_stdin_stdout(data->save_in, data->save_out);
+		ft_printf("minishell: %s: %s\n", node->content, strerror(errno));
+		free_struct(data);
+		exit(126);
 	}
 }
 
