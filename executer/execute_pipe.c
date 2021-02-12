@@ -6,11 +6,10 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/12 16:01:46 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 20:17:20 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "executer.h"
 
 static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
@@ -59,20 +58,19 @@ void		wait_for_children(void)
 {
 	int		status;
 	pid_t	wait_pid;
-	int		count;
+	int		fail;
 
 	wait_pid = 1;
-	count = 0;
+	fail = 0;
 	while (wait_pid > 0)
 	{
 		wait_pid = wait(&status);
-		count++;
-		if (count == 1)
-		{
+		if (fail == 0)
 			g_question_mark = status / 256;
-			if (g_exit_status > 0)
-				g_question_mark = g_exit_status;
-		}
+		if (g_question_mark != 0)
+			fail = 1;
+		if (g_exit_status > 0)
+			g_question_mark = g_exit_status;
 	}
 }
 
