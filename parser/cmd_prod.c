@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:25:43 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/10 00:50:39 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:16:18 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ t_node	*command_double_greater(t_data *data)
 		return (set_error_node(g_current_tok, data));
 	filename = malloc_node(g_current_tok->content, data);
 	g_current_tok = g_current_tok->next;
-	attach_tree_node(filename, FILE_OUT_APPEND , command(data), cmd_node);
+	attach_tree_node(filename, FILE_OUT_APPEND, command(data), cmd_node);
 	return (filename);
 }

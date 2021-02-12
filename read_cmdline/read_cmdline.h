@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/11/12 13:54:38 by tblanker      ########   odam.nl         */
+/*   Updated: 2021/02/12 14:14:51 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 # include "../minishell.h"
 
 int		read_cmdline(char **line, t_data *data);
+void	read_fail(char *line);
+int		found_newline(char **line);
 
 #endif

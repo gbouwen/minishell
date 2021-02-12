@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/10 12:33:31 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:22:23 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_node	*tasks(t_data *data)
 	g_current_tok = saved_token;
 	task_node = command(data);
 	if (task_node != NULL)
-		return(task_node);
+		return (task_node);
 	return (NULL);
 }
 
@@ -46,7 +46,7 @@ t_node	*task_pipe(t_data *data)
 	}
 	if (!task_node)
 		return (set_error_node(previous, data));
-	if (g_current_tok->type == CHAR_SEMICOLON || g_current_tok->type == 
+	if (g_current_tok->type == CHAR_SEMICOLON || g_current_tok->type ==
 		CHAR_PIPE || g_current_tok->type == 0 || !task_node)
 		return (set_error_node(g_current_tok, data));
 	pipe_node = malloc_node("|", data);

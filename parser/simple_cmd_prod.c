@@ -6,13 +6,13 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:27:08 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/10 00:52:03 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:21:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node *simple_command(t_data *data)
+t_node	*simple_command(t_data *data)
 {
 	t_node		*simple_cmd;
 	t_node		*arguments;

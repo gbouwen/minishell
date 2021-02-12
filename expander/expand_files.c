@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 14:34:12 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:37:41 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-void		check_if_file_exists(t_data *data, t_node *node)
+void	check_if_file_exists(t_data *data, t_node *node)
 {
 	int	fd;
 
@@ -27,7 +27,7 @@ void		check_if_file_exists(t_data *data, t_node *node)
 		close(fd);
 }
 
-void		open_or_create_file(t_data *data, t_node *node)
+void	open_or_create_file(t_data *data, t_node *node)
 {
 	int	fd;
 
@@ -56,7 +56,7 @@ void		open_or_create_file(t_data *data, t_node *node)
 		close(fd);
 }
 
-int			check_for_spaces(char *str)
+int		check_for_spaces(char *str)
 {
 	int i;
 
@@ -70,36 +70,7 @@ int			check_for_spaces(char *str)
 	return (1);
 }
 
-static int	check_ambiguous_redirect(t_data *data, t_node *node)
-{
-	char	*save;
-
-	while (node != NULL)
-	{
-		save = ft_strdup(node->content);
-		if (save == NULL)
-			free_struct_error(data, "Malloc fail.");
-		if (dollarsign_in_content(node->content))
-		{
-			if (expand_node_content(data, node) == 0 || !spaces(node->content))
-			{
-				free(node->content);
-				node->content = save;
-				node->type = AMBIGUOUS_REDIRECT;
-				return (0);
-			}
-		}
-		if (node->type == FILE_IN && data->expand_error != 1)
-			check_if_file_exists(data, node);
-		if ((node->type == FILE_OUT || node->type == FILE_OUT_APPEND) &&
-													data->expand_error != 1)
-			open_or_create_file(data, node);
-		node = node->left;
-	}
-	return (1);
-}
-
-void		expand_files(t_data *data, t_node *node)
+void	expand_files(t_data *data, t_node *node)
 {
 	if (node == NULL)
 		return ;

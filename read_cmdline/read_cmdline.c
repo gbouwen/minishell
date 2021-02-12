@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 10:36:03 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/29 14:36:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:13:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,8 @@ static char	*concat_buff(char *line, char *buff)
 	return (new_line);
 }
 
-static void		read_fail(char *line)
-{
-	if (line != NULL)
-		free(line);
-	exit(0);
-}
-
-static int		found_newline(char **line)
-{
-	*line = ft_strdup("");
-	return (1);
-}
-
-static int	check_first_read(t_data *data, int val_read, char *buff, char **line)
+static int	check_first_read(t_data *data, int val_read, char *buff,
+																char **line)
 {
 	if (val_read == 0 && buff[0] == '\0')
 		exit_signal(data);
@@ -79,6 +67,34 @@ static int	check_first_read(t_data *data, int val_read, char *buff, char **line)
 	return (0);
 }
 
+int			read_cmd_char(char **line, t_data *data, char *buff, int val_read)
+{
+	buff[0] = '\0';
+	val_read = read(0, buff, 1);
+	if (g_c_signal == 1)
+	{
+		free(*line);
+		*line = NULL;
+		g_c_signal = 0;
+	}
+	if (val_read == 0 && buff[0] == '\0' && *line == NULL)
+		exit_signal(data);
+	if (val_read == -1)
+		read_fail(*line);
+	if (buff[0] == '\n')
+		return (-2);
+	if (val_read == 1 && *line == NULL)
+		*line = add_first_read(buff);
+	else
+	{
+		*line = concat_buff(*line, buff);
+		if (*line == NULL)
+			return (-1);
+	}
+	val_read = 1;
+	return (val_read);
+}
+
 int			read_cmdline(char **line, t_data *data)
 {
 	int		val_read;
@@ -90,29 +106,11 @@ int			read_cmdline(char **line, t_data *data)
 		return (1);
 	while (val_read == 1)
 	{
-		buff[0] = '\0';
-		val_read = read(0, buff, 1);
-		if (g_c_signal == 1)
-		{
-			free(*line);
-			*line = NULL;
-			g_c_signal = 0;
-		}
-		if (val_read == 0 && buff[0] == '\0' && *line == NULL)
-			exit_signal(data);
+		val_read = read_cmd_char(line, data, buff, val_read);
 		if (val_read == -1)
-			read_fail(*line);
-		if (buff[0] == '\n')
+			return (-1);
+		if (val_read == -2)
 			return (1);
-		if (val_read == 1 && *line == NULL)
-			*line = add_first_read(buff);
-		else
-		{
-			*line = concat_buff(*line, buff);
-			if (*line == NULL)
-				return (-1);
-		}
-		val_read = 1;
 	}
 	return (1);
 }

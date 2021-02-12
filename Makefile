@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/12 11:54:40 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/02/12 14:15:14 by tiemen        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SOURCE_C =	main.c \
 			initialize_free/set_env_variables.c \
 			initialize_free/free_str_array.c \
 			read_cmdline/read_cmdline.c \
+			read_cmdline/read_cmdline_utils.c \
 			lexer/lexer.c \
 			lexer/get_char_type.c \
 			lexer/state.c \

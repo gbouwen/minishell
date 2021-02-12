@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/10 00:47:33 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:24:29 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PARSER_H
 
 # include "../struct.h"
-# include <stdio.h> //
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include "../lexer/lexer_utils.h"
@@ -34,7 +33,7 @@
 t_list	*g_current_tok;
 
 t_node	*simple_command_args(t_data *data);
-t_node 	*simple_command(t_data *data);
+t_node	*simple_command(t_data *data);
 t_node	*command_greater(t_data *data);
 t_node	*command_lesser(t_data *data);
 t_node	*command_double_greater(t_data *data);
@@ -47,10 +46,10 @@ t_node	*sequence(t_data *data);
 t_node	*malloc_node(char *str, t_data *data);
 t_node	*set_error_node(t_list *error_token, t_data *data);
 
-t_node *parser(t_lexer *lexer_data, t_data *data);
+t_node	*parser(t_lexer *lexer_data, t_data *data);
 
 int		match(int type, char **str);
-int		token_check();
+int		token_check(void);
 
 int		check_parser_error(t_node *root);
 void	attach_tree_node(t_node *attach, int type, t_node *left,
@@ -59,6 +58,5 @@ void	delete_tree(t_node *node);
 
 void	print_tree(t_node *root);
 void	print_tree_utils(t_node *root, int space);
-
 
 #endif
