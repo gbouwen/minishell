@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 14:30:01 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:34:12 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int			check_for_spaces(char *str)
 	return (1);
 }
 
-static int		check_ambiguous_redirect(t_data *data, t_node *node)
+static int	check_ambiguous_redirect(t_data *data, t_node *node)
 {
 	char	*save;
 
