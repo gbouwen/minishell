@@ -6,13 +6,13 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 14:25:58 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/03 14:45:07 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 11:40:18 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-int	dollarsign_in_content(char *content)
+int		dollarsign_in_content(char *content)
 {
 	int	i;
 	int	count;
@@ -87,7 +87,7 @@ int		compare_env(char *split, char *env)
 
 char	*check_if_env_var(char **env, char *word)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (env[i] != NULL)
