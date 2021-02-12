@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:55:21 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/10 14:38:58 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:07:05 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 # include "libft/libft.h"
 
-typedef	struct		s_lexer
+typedef	struct	s_lexer
 {
 	t_list	*token_list;
 	int		char_type;
 	int		state;
 	int		line_length;
 	int		error;
-}					t_lexer;
+}				t_lexer;
 
-typedef struct s_node
+typedef struct	s_node
 {
 	int				type;
 	char			*content;
