@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 16:00:05 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:28:01 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int		check_ambiguous_redirect(t_data *data, t_node *node)
 			free_struct_error(data, "Malloc fail.");
 		if (dollarsign_in_content(node->content))
 		{
-			if (expand_node_content(data, node) == 0 || check_for_spaces(node->content) == 0)
+			if (expand_node_content(data, node) == 0 || !spaces(node->content))
 			{
 				free(node->content);
 				node->content = save;

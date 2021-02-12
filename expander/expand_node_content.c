@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/09 16:33:04 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 13:49:47 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	found_quote(t_data *data, char *content, t_expander *expander)
 		found_double_quote(data, content, expander);
 }
 
-void	found_single_quote(char *content, t_expander *expander)
+void		found_single_quote(char *content, t_expander *expander)
 {
 	add_char_to_result(content, expander);
 	while (content[expander->i] != '\'' && content[expander->i] != '\0')
@@ -28,7 +28,8 @@ void	found_single_quote(char *content, t_expander *expander)
 	add_char_to_result(content, expander);
 }
 
-void	found_double_quote(t_data *data, char *content, t_expander *expander)
+void		found_double_quote(t_data *data, char *content,
+								t_expander *expander)
 {
 	add_char_to_result(content, expander);
 	while (content[expander->i] != '\"' && content[expander->i] != '\0')
@@ -42,7 +43,7 @@ void	found_double_quote(t_data *data, char *content, t_expander *expander)
 	add_char_to_result(content, expander);
 }
 
-void	found_dollarsign(t_data *data, char *content, t_expander *expander)
+void		found_dollarsign(t_data *data, char *content, t_expander *expander)
 {
 	if (content[expander->i + 1] == '\0')
 		add_char_to_result(content, expander);
@@ -70,7 +71,7 @@ void	found_dollarsign(t_data *data, char *content, t_expander *expander)
 		add_questionmark(content, expander);
 }
 
-int		expand_node_content(t_data *data, t_node *node)
+int			expand_node_content(t_data *data, t_node *node)
 {
 	t_expander	expander;
 
