@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 11:37:29 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 11:53:03 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ void			found_dollarsign(t_data *data, char *content,
 
 void			expand_single_variable(t_data *data, char *content,
 														t_expander *expander);
+
+int				check_ambiguous_redirect(t_data *data, t_node *node);
 
 #endif
