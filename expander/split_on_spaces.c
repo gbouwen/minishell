@@ -6,11 +6,18 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/11 14:19:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 16:29:42 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 12:58:21 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+static void	in_quote(char *str, int *i, char c)
+{
+	(*i)++;
+	while (str[*i] != c && str[*i] != '\0')
+		(*i)++;
+}
 
 static int	has_spaces(char *str)
 {
@@ -19,9 +26,14 @@ static int	has_spaces(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == ' ')
+		if (str[i] == '\"')
+			in_quote(str, &i, '\"');
+		else if (str[i] == '\'')
+			in_quote(str, &i, '\'');
+		else if (str[i] == ' ')
 			return (1);
-		i++;
+		else
+			i++;
 	}
 	return (0);
 }
