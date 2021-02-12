@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 14:30:24 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:08:33 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 14:04:06 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static char	*find_variable(t_data *data, char *content, t_expander *expander)
 	return (variable);
 }
 
-void	expand_single_variable(t_data *data, char *content, t_expander *expander)
+void		expand_single_variable(t_data *data, char *content,
+														t_expander *expander)
 {
 	char	*variable;
 	char	*value;
@@ -74,7 +75,8 @@ void	expand_single_variable(t_data *data, char *content, t_expander *expander)
 	free(variable);
 	if (value != NULL)
 	{
-		expander->result = add_to_result(data, expander->result, value, content);
+		expander->result = add_to_result(data, expander->result, value,
+																	content);
 		expander->x += ft_strlen(value);
 		free(value);
 	}

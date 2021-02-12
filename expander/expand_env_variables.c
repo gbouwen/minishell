@@ -6,13 +6,14 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:15:08 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/10 19:30:00 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 14:02:52 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-static void	remove_node_right(t_node *node, t_node *first, t_data *data, t_node *previous)
+static void	remove_node_right(t_node *node, t_node *first, t_data *data,
+															t_node *previous)
 {
 	t_node *temp;
 
@@ -40,7 +41,7 @@ static void	remove_node_right(t_node *node, t_node *first, t_data *data, t_node 
 	}
 }
 
-void	expand_env_variables(t_data *data, t_node *node)
+void		expand_env_variables(t_data *data, t_node *node)
 {
 	t_node	*previous;
 	t_node	*first;
@@ -62,4 +63,3 @@ void	expand_env_variables(t_data *data, t_node *node)
 		node = node->right;
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/11 14:19:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 12:58:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 13:45:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	in_quote(char *str, int *i, char c)
 		(*i)++;
 }
 
-static int	has_spaces(char *str)
+static int	needs_to_be_split(char *str)
 {
 	int	i;
 
@@ -38,78 +38,11 @@ static int	has_spaces(char *str)
 	return (0);
 }
 
-static void	add_everything_back(t_data *data, t_node *node, char **split)
-{
-	int		i;
-	t_node	*new;
-
-	i = 1;
-	new = NULL;
-	free(node->content);
-	node->content = ft_strdup(split[0]);
-	if (!node->content)
-		free_struct_error(data, "Malloc failed");
-	while (split[i] != NULL)
-	{
-		new = malloc(sizeof(t_node));
-		new->right = NULL;
-		new->left = NULL;
-		new->content = ft_strdup(split[i]);
-		if (!new->content)
-			free_struct_error(data, "Malloc failed");
-		node->right = new;
-		node = node->right;
-		i++;
-	}
-}
-
-static void	add_in_between(t_data *data, t_node *node, char **split)
-{
-	int		i;
-	t_node	*new;
-	t_node	*temp;
-
-	i = 1;
-	new = NULL;
-	free(node->content);
-	node->content = ft_strdup(split[0]);
-	temp = node->right;
-	if (!node->content)
-		free_struct_error(data, "Malloc failed");
-	while (split[i] != NULL)
-	{
-		new = malloc(sizeof(t_node));
-		new->right = NULL;
-		new->left = NULL;
-		new->content = ft_strdup(split[i]);
-		if (!new->content)
-			free_struct_error(data, "Malloc failed");
-		node->right = new;
-		node = node->right;
-		i++;
-	}
-	node->right = temp;
-}
-
-static void	node_add_back(t_data *data, t_node *node)
-{
-	char	**split;
-
-	split = ft_split(node->content, ' ');
-	if (!split)
-		free_struct_error(data, "Malloc failed");
-	if (node->right == NULL)
-		add_everything_back(data, node, split);
-	else
-		add_in_between(data, node, split);
-	free_str_array(split);
-}
-
 void		split_on_spaces(t_data *data, t_node *node)
 {
 	while (node != NULL)
 	{
-		if (has_spaces(node->content) == 1)
+		if (needs_to_be_split(node->content) == 1)
 			node_add_back(data, node);
 		node = node->right;
 	}
