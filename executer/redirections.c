@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/17 13:49:46 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 14:38:02 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/15 15:08:32 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		set_redirections(t_data *data, t_node *node, int *current_fds)
 	int	new_fd;
 
 	new_fd = -1;
-	if (node->type == FILE_OUT || FILE_OUT_APPEND)
+	if (node->type == FILE_OUT || node->type == FILE_OUT_APPEND)
 		new_fd = file_out_or_file_out_append(node, current_fds);
 	if (node->type == FILE_IN)
 		new_fd = file_in(node, current_fds);

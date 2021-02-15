@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/15 13:33:42 by tiemen        ########   odam.nl          #
+#    Updated: 2021/02/15 14:16:06 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SOURCE_C =	main.c \
 			executer/execute_simple_command.c \
 			executer/fork_and_execute.c \
 			executer/fork_and_execute_utils.c \
+			executer/check_executable.c \
 			executer/path_variables.c \
 			executer/redirections.c \
 			error/error.c \
