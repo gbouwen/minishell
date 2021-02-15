@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 14:29:46 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/15 11:50:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,13 @@ int			expand_node_content(t_data *data, t_node *node)
 		else
 			add_char_to_result(node->content, &expander);
 	}
-	expander.result[expander.x] = '\0';
 	if (expander.result == NULL || ft_strlen(expander.result) == 0)
+	{
+		free(expander.result);
 		return (0);
+	}
 	free(node->content);
-	node->content = expander.result;
+	node->content = ft_strdup(expander.result);
+	free(expander.result);
 	return (1);
 }
