@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 12:50:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 15:15:45 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/12 20:10:52 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,21 @@ void	open_or_create_file(t_data *data, t_node *node)
 		close(fd);
 }
 
-int		check_for_spaces(char *str)
+int		check_for_spaces(char *str, char *var_str)
 {
 	int i;
+	int spaces;
 
+	spaces = 0;
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == ' ')
-			return (0);
+			spaces = 1;
 		i++;
 	}
+	if (spaces > 0 && var_str[0] != '\"')
+		return (0);
 	return (1);
 }
 

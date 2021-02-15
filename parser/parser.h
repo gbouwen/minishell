@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/12 14:24:29 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/15 13:24:24 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ t_list	*g_current_tok;
 
 t_node	*simple_command_args(t_data *data);
 t_node	*simple_command(t_data *data);
-t_node	*command_greater(t_data *data);
-t_node	*command_lesser(t_data *data);
-t_node	*command_double_greater(t_data *data);
 t_node	*command(t_data *data);
 t_node	*task_pipe(t_data *data);
 t_node	*tasks(t_data *data);

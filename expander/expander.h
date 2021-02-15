@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/10 10:42:01 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 13:58:13 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/12 20:09:07 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				expand_node_content(t_data *data, t_node *node);
 void			expand_files(t_data *data, t_node *node);
 void			check_if_file_exists(t_data *data, t_node *node);
 void			open_or_create_file(t_data *data, t_node *node);
-int				check_for_spaces(char *str);
+int				check_for_spaces(char *str, char *var_str);
 
 void			expand_files_pipe(t_data *data, t_node *node);
 
