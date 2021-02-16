@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/15 14:11:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/15 14:15:26 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 15:25:59 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ static void	no_access_or_is_directory(t_data *data, t_node *node, int fd)
 	}
 }
 
-void		check_executable(t_data *data, t_node *node)
+void		check_executable(t_data *data, t_node *node, char **args)
 {
 	int	fd;
 
 	fd = open(node->content + 2, O_RDWR);
+	free_str_array(args);
 	no_access_or_is_directory(data, node, fd);
 	if (fd == -1 && errno == ENOENT)
 	{
