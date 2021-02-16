@@ -6,7 +6,7 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/16 13:24:58 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/02/16 15:51:53 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SOURCE_C =	main.c \
 			builtins/pwd.c \
 			builtins/export.c \
 			builtins/export_no_arguments.c \
+			builtins/print_export.c \
 			builtins/export_variable.c \
 			builtins/unset.c \
 			builtins/env.c \
