@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/14 15:55:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 14:42:19 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 12:43:20 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void		try_paths(char **args, char *path_variable, t_data *data)
 	char	**all_paths;
 
 	i = 0;
+	path_variable += 5;
 	all_paths = ft_split(path_variable, ':');
 	while (all_paths[i] != NULL)
 	{
