@@ -3,14 +3,15 @@
 /*                                                        ::::::::            */
 /*   echo.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
+/*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/02 15:29:35 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 15:54:14 by tiemen        ########   odam.nl         */
+/*   Created: 2021/02/16 14:50:04 by tiemen        #+#    #+#                 */
+/*   Updated: 2021/02/16 14:50:05 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include <stdio.h>
 
 static int	skip_option(char *str)
 {
@@ -59,19 +60,34 @@ static int	print_nodes(t_node *node)
 	return (1);
 }
 
+int			set_newline(t_node *node)
+{
+	int i;
+	int	newline;
+
+	newline = 1;
+	if (node == NULL)
+		return (newline);
+	while (node && ft_strncmp(node->content, "-n", 2) == 0)
+	{
+		i = 2;
+		while (node->content[i])
+		{
+			if (node->content[i] != 'n')
+				return (newline);
+			i++;
+		}
+		newline = 0;
+		node = node->right;
+	}
+	return (newline);
+}
+
 void		builtin_echo(t_node *node)
 {
 	int	newline;
 
-	newline = 1;
-	if (node->right)
-	{
-		while (compare_both(node->right->content, "-n") == 0)
-		{
-			newline = 0;
-			node = node->right;
-		}
-	}
+	newline = set_newline(node->right);
 	if (print_nodes(node) == -1)
 	{
 		g_question_mark = 1;
