@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 17:03:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/16 11:33:33 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 12:12:00 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	correct_exit(t_data *data, t_node *node)
 		{
 			ft_printf("exit\n");
 			ft_printf("minishell: exit: too many arguments\n");
+			g_question_mark = 1;
 		}
 		else
 		{
