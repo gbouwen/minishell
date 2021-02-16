@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 17:03:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/15 13:04:26 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/16 11:33:33 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	check_if_number(char *str)
 
 static void	correct_exit(t_data *data, t_node *node)
 {
+	int	exit_status;
+
 	if (check_if_number(node->content) == 0)
 	{
 		ft_printf("exit\n");
@@ -44,8 +46,9 @@ static void	correct_exit(t_data *data, t_node *node)
 		else
 		{
 			ft_printf("exit\n");
+			exit_status = ft_atoi(node->content);
 			free_struct(data);
-			exit(ft_atoi(node->content));
+			exit(exit_status);
 		}
 	}
 }
