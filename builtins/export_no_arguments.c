@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 15:38:42 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/10 15:42:54 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 14:54:29 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	equals_sign(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '=')
-			return (i - 1);
+			return (i);
 		i++;
 	}
 	return (i);
