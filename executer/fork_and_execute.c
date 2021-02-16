@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 16:00:41 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/16 15:25:28 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void		child_actions(t_data *data, t_node *node)
 	if (val == -1)
 	{
 		if (args[0][0] == '/')
-			absolute_path_error(data, node);
+			absolute_path_error(data, node, args);
 		if (ft_strncmp(args[0], "./", 2) == 0)
-			check_executable(data, node);
+			check_executable(data, node, args);
 		path_variable = find_path_variable(data->env_variables);
 		if (path_variable == NULL)
-			empty_path_variable(data, node);
+			empty_path_variable(data, node, args);
 		try_paths(args, path_variable, data);
 		correct_error(data, node);
 	}

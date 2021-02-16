@@ -6,13 +6,13 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/16 16:58:44 by tiemen        ########   odam.nl          #
+#    Updated: 2021/02/16 16:59:45 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS =-Wall -Werror -Wextra -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 SOURCE_C =	main.c \
 			initialize_free/initialize_data.c \
 			initialize_free/initialize_lexer.c \
@@ -39,6 +39,7 @@ SOURCE_C =	main.c \
 			builtins/pwd.c \
 			builtins/export.c \
 			builtins/export_no_arguments.c \
+			builtins/print_export.c \
 			builtins/export_variable.c \
 			builtins/unset.c \
 			builtins/env.c \

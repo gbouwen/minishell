@@ -6,22 +6,24 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/10 14:31:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/15 14:14:10 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 15:26:50 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executer.h"
 
-void	empty_path_variable(t_data *data, t_node *node)
+void	empty_path_variable(t_data *data, t_node *node, char **args)
 {
+	free_str_array(args);
 	restore_stdin_stdout(data->save_in, data->save_out);
 	ft_printf("minishell: %s: No such file or directory\n", node->content);
 	free_struct(data);
 	exit(127);
 }
 
-void	absolute_path_error(t_data *data, t_node *node)
+void	absolute_path_error(t_data *data, t_node *node, char **args)
 {
+	free_str_array(args);
 	restore_stdin_stdout(data->save_in, data->save_out);
 	ft_printf("minishell: %s: %s\n", node->content, strerror(errno));
 	free_struct(data);

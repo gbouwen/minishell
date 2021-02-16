@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 11:06:11 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 15:27:59 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_pipe	*init_pipe_switch(t_data *data, t_node *node);
 void	execute_simple_command(t_data *data, t_node *node);
 void	fork_and_execute(t_data *data, t_node *node);
 
-void	empty_path_variable(t_data *data, t_node *node);
-void	absolute_path_error(t_data *data, t_node *node);
-void	check_executable(t_data *data, t_node *node);
+void	empty_path_variable(t_data *data, t_node *node, char **args);
+void	absolute_path_error(t_data *data, t_node *node, char **args);
+void	check_executable(t_data *data, t_node *node, char **args);
 void	correct_error(t_data *data, t_node *node);
 void	close_fds(int *current_fds);
 

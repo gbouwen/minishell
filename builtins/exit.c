@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 17:03:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/16 12:12:00 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 16:02:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ static void	correct_exit(t_data *data, t_node *node)
 	if (check_if_number(node->content) == 0)
 	{
 		ft_printf("exit\n");
+		ft_printf("minishell: exit:");
+		ft_printf(" %s: numeric argument required\n", node->content);
 		free_struct(data);
-		exit(0);
+		exit(2);
 	}
 	else
 	{
