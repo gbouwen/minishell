@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 11:31:59 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/15 11:50:50 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 12:07:42 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void		found_double_quote(t_data *data, char *content,
 			found_dollarsign(data, content, expander);
 		add_char_to_result(content, expander);
 	}
-	add_char_to_result(content, expander);
+	if (content[expander->i] != '\0')
+		add_char_to_result(content, expander);
 }
 
 void		found_dollarsign(t_data *data, char *content, t_expander *expander)
