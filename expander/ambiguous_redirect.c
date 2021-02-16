@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 11:52:12 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 20:11:04 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/16 16:56:27 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 static int	found_ambiguous_redirect(t_node *node, char *save)
 {
 	free(node->content);
-	node->content = save;
+	node->content = ft_strdup(save);
 	node->type = AMBIGUOUS_REDIRECT;
+	free(save);
 	return (0);
 }
 
@@ -41,6 +42,7 @@ int			check_ambiguous_redirect(t_data *data, t_node *node)
 													data->expand_error != 1)
 			open_or_create_file(data, node);
 		node = node->left;
+		free(save);
 	}
 	return (1);
 }
