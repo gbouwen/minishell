@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/12 14:21:11 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/16 16:51:17 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ static	void	find_file_in_tree(t_node *root)
 	return ;
 }
 
+static	void	free_after_parsing_err(t_node *node, t_data *data)
+{
+	if (node)
+		delete_tree(node);
+	if (data->lexer.token_list != NULL)
+		ft_lstclear(&data->lexer.token_list, free_list_content);
+	if (data->cmdline != NULL)
+		free(data->cmdline);
+}
+
 t_node			*parser(t_lexer *lexer_data, t_data *data)
 {
 	t_node	**nodes;
@@ -66,14 +76,13 @@ t_node			*parser(t_lexer *lexer_data, t_data *data)
 	node = sequence(data);
 	if (!check_parser_error(*nodes) || node == NULL)
 	{
-		if (node)
-			delete_tree(node);
 		if (g_current_tok->type == 0)
 			ft_printf("minishell: syntax error near unexpected token \
 `newline'\n");
 		else
 			ft_printf("minishell: syntax error near unexpected token \
 `%s'\n", g_current_tok->content);
+		free_after_parsing_err(node, data);
 		g_question_mark = 2;
 		g_prompt = 0;
 		return (NULL);

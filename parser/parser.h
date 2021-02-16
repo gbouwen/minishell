@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 23:08:33 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/15 13:24:24 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/16 16:02:29 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ t_node	*task_pipe(t_data *data);
 t_node	*tasks(t_data *data);
 t_node	*sequence_semicolon(t_data *data);
 t_node	*sequence(t_data *data);
+t_node	*command_func(t_data *data);
 
 t_node	*malloc_node(char *str, t_data *data);
-t_node	*set_error_node(t_list *error_token, t_data *data);
+t_node	*set_error_node(t_list *error_token, t_data *data, t_node *node);
 
 t_node	*parser(t_lexer *lexer_data, t_data *data);
 

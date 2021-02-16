@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:16:36 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/16 12:03:18 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/16 16:03:24 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void	delete_tree(t_node *node)
 	free(node);
 }
 
-t_node	*set_error_node(t_list *error_token, t_data *data)
+t_node	*set_error_node(t_list *error_token, t_data *data, t_node *node)
 {
 	t_node *error_node;
 
+	if (node)
+		delete_tree(node);
 	error_node = NULL;
 	g_current_tok = error_token;
 	error_node = malloc_node(error_token->content, data);

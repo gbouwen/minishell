@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 17:39:17 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/12 14:22:23 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/16 16:03:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_node	*task_pipe(t_data *data)
 		return (NULL);
 	}
 	if (!task_node)
-		return (set_error_node(previous, data));
+		return (set_error_node(previous, data, task_node));
 	if (g_current_tok->type == CHAR_SEMICOLON || g_current_tok->type ==
-		CHAR_PIPE || g_current_tok->type == 0 || !task_node)
-		return (set_error_node(g_current_tok, data));
+		CHAR_PIPE || g_current_tok->type == 0)
+		return (set_error_node(g_current_tok, data, task_node));
 	pipe_node = malloc_node("|", data);
 	attach_tree_node(pipe_node, PIPE, tasks(data), task_node);
 	return (pipe_node);

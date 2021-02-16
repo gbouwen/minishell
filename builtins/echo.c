@@ -6,12 +6,11 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/16 14:50:04 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/16 14:50:05 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/16 16:57:41 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include <stdio.h>
 
 static int	skip_option(char *str)
 {
