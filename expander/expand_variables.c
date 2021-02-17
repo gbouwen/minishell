@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/08 14:23:28 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 12:58:08 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 11:57:30 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,22 @@ static int	check_for_env_variables(t_node *node)
 static int	has_question_mark(t_node *node)
 {
 	int	count;
+	int	in_quote;
 	int	i;
 
 	count = 0;
+	in_quote = 0;
 	while (node != NULL)
 	{
 		i = 0;
 		while (node->content[i] != '\0')
 		{
-			if (node->content[i] == '$' && node->content[i + 1] == '?')
+			if (node->content[i] == '\'' && in_quote == 0)
+				in_quote = 1;
+			else if (node->content[i] == '\'' && in_quote == 1)
+				in_quote = 0;
+			else if (node->content[i] == '$' && node->content[i + 1] == '?'
+															&& in_quote == 0)
 				count++;
 			i++;
 		}
