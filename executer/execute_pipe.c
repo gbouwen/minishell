@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/16 16:57:57 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/17 16:12:29 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 		redirections_loop(data, node, data->current_fds);
 		node = node->right;
 	}
-	execute_simple_command(data, node);
+	if (node != NULL)
+		execute_simple_command(data, node);
 	close_fds(data->current_fds);
 	free_struct(data);
 	free(pipe_switch);
