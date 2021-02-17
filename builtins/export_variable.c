@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/11 15:56:15 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/12 10:45:49 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 14:58:11 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void		builtin_export_variable(t_data *data, t_node *node)
 		}
 		else if (is_alpha_or_underscore(node->content[0]) == 0)
 		{
-			ft_printf("export: '%s': not a valid identifier\n", node->content);
+			ft_printf(2, "export: '%s': not a valid identifier\n",
+														node->content);
 			g_question_mark = 1;
 		}
 		node = node->right;

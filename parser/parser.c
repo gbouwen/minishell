@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:09:49 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/16 16:51:17 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/17 14:56:47 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ t_node			*parser(t_lexer *lexer_data, t_data *data)
 	if (!check_parser_error(*nodes) || node == NULL)
 	{
 		if (g_current_tok->type == 0)
-			ft_printf("minishell: syntax error near unexpected token \
-`newline'\n");
+			ft_printf(2, "minishell: syntax error near unexpected token \
+																`newline'\n");
 		else
-			ft_printf("minishell: syntax error near unexpected token \
-`%s'\n", g_current_tok->content);
+			ft_printf(2, "minishell: syntax error near unexpected token \
+											`%s'\n", g_current_tok->content);
 		free_after_parsing_err(node, data);
 		g_question_mark = 2;
 		g_prompt = 0;

@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 10:48:45 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/08 16:00:06 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/17 14:54:48 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		builtin_env(char **envp)
 	{
 		if (check_for_equals_sign(envp[i]) == 1)
 		{
-			if (ft_printf("%s\n", envp[i]) == -1)
+			if (ft_printf(1, "%s\n", envp[i]) == -1)
 			{
 				g_question_mark = 1;
 				return ;

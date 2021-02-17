@@ -6,13 +6,13 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 14:32:04 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/01/14 16:12:31 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 14:48:39 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	first_struct(t_stats *data)
+void	first_struct(t_stats *data, int fd)
 {
 	data->conversion = 0;
 	data->is_minus = 0;
@@ -21,15 +21,16 @@ void	first_struct(t_stats *data)
 	data->precision = 0;
 	data->len = 0;
 	data->error = 0;
+	data->fd = fd;
 }
 
-int		ft_printf(const char *str, ...)
+int		ft_printf(int fd, const char *str, ...)
 {
 	va_list	args;
 	int		i;
 	t_stats	data;
 
-	first_struct(&data);
+	first_struct(&data, fd);
 	va_start(args, str);
 	i = 0;
 	while (str[i] != '\0')

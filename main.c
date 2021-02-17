@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/26 12:50:24 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/05 12:36:18 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 14:56:02 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av, char **envp)
 
 	if (ac != 1)
 	{
-		ft_printf("%s doesn't work with arguments.\n", av[0]);
+		ft_printf(1, "%s doesn't work with arguments.\n", av[0]);
 		return (0);
 	}
 	ignore_signals();
