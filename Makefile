@@ -6,13 +6,13 @@
 #    By: gbouwen <gbouwen@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/07/29 09:29:26 by gbouwen       #+#    #+#                  #
-#    Updated: 2021/02/17 10:43:15 by gbouwen       ########   odam.nl          #
+#    Updated: 2021/02/17 15:44:04 by gbouwen       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 SOURCE_C =	main.c \
 			initialize_free/initialize_data.c \
 			initialize_free/initialize_lexer.c \

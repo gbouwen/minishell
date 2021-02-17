@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/17 14:57:21 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 15:39:40 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	multiline_command(t_data *data)
 
 static int	empty_line(char *cmdline)
 {
-	free(cmdline);
+	if (cmdline)
+		free(cmdline);
 	g_prompt = 0;
 	return (1);
 }
