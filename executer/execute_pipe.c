@@ -6,7 +6,7 @@
 /*   By: tiemen <tiemen@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/07 15:49:39 by tiemen        #+#    #+#                 */
-/*   Updated: 2021/02/17 16:12:29 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/17 16:22:04 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	redirect(t_pipe *pipe_switch, int i, t_node *node, t_data *data)
 		execute_simple_command(data, node);
 	close_fds(data->current_fds);
 	free_struct(data);
-	free(pipe_switch);
 	exit(g_question_mark);
 }
 
@@ -92,26 +91,25 @@ t_node		*check_node(t_node *node)
 
 void		execute_pipe(t_data *data, t_node *node)
 {
-	t_pipe	*pipe_switch;
+	t_pipe	pipe_switch;
 	pid_t	pid;
 	int		i;
 	t_node	*command_node;
 
-	pipe_switch = init_pipe_switch(data, node);
+	pipe_switch.num_cmds = count_cmds(node);
 	i = 0;
-	while (i < pipe_switch->num_cmds)
+	while (i < pipe_switch.num_cmds)
 	{
 		command_node = check_node(node);
-		if (i < pipe_switch->num_cmds - 1)
-			pipe(pipe_switch->new_fds);
+		if (i < pipe_switch.num_cmds - 1)
+			pipe(pipe_switch.new_fds);
 		pid = fork();
 		if (pid == 0)
-			redirect(pipe_switch, i, command_node, data);
+			redirect(&pipe_switch, i, command_node, data);
 		else
-			connect_pipes(pipe_switch, i);
+			connect_pipes(&pipe_switch, i);
 		node = node->left;
 		i++;
 	}
 	wait_for_children();
-	free(pipe_switch);
 }

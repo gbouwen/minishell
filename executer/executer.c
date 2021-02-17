@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:28:53 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/17 16:35:19 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/17 16:40:45 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	multiline_command(t_data *data)
 
 static int	empty_line(char *cmdline, t_lexer *lexer)
 {
-	free(cmdline);
+	if (cmdline)
+		free(cmdline);
 	if (lexer->token_list != NULL)
 		ft_lstclear(&lexer->token_list, free_list_content);
 	g_prompt = 0;
