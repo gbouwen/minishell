@@ -6,7 +6,7 @@
 /*   By: tblanker <tblanker@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:49:45 by tblanker      #+#    #+#                 */
-/*   Updated: 2021/02/15 13:04:26 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/17 14:14:27 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	exit_signal(t_data *data)
 		free_str_array(data->env_variables);
 	free(g_work_dir);
 	ft_printf("exit\n");
-	exit(1);
+	exit(0);
 }
