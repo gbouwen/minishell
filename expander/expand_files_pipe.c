@@ -6,11 +6,19 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/11 12:20:55 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/17 12:17:09 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 16:44:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+static void	free_content_and_save(t_node *node, char *save)
+{
+	free(node->content);
+	node->content = ft_strdup(save);
+	node->type = AMBIGUOUS_REDIRECT;
+	free(save);
+}
 
 static int	check_ambiguous_redirect_pipe(t_data *data, t_node *node)
 {
@@ -27,10 +35,7 @@ static int	check_ambiguous_redirect_pipe(t_data *data, t_node *node)
 		}
 		else if (check_for_spaces(node->content, save) == 0)
 		{
-			free(node->content);
-			node->content = ft_strdup(save);
-			node->type = AMBIGUOUS_REDIRECT;
-			free(save);
+			free_content_and_save(node, save);
 			return (0);
 		}
 		if (node->type == FILE_IN)

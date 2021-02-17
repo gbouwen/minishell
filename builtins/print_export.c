@@ -24,7 +24,7 @@ static void	print_value(char *env_variable, int x)
 	ft_printf(1, "\"\n");
 }
 
-void	print_sorted(char **env, int sorted_indexes[], int len)
+void		print_sorted(char **env, int sorted_indexes[], int len)
 {
 	int	i;
 	int	x;

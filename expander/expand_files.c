@@ -35,15 +35,11 @@ void	open_or_create_file(t_data *data, t_node *node)
 	fd = -1;
 	node->content = remove_quotes(data, node->content);
 	if (node->type == FILE_OUT)
-	{
 		fd = open(node->content, O_CREAT | O_WRONLY | O_TRUNC,
 					S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-	}
 	else if (node->type == FILE_OUT_APPEND)
-	{
 		fd = open(node->content, O_CREAT | O_WRONLY | O_EXCL,
 					S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-	}
 	if (fd == -1)
 	{
 		if (errno != EEXIST)

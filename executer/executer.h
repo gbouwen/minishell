@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 15:29:10 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/17 16:00:40 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 16:42:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	restore_stdin_stdout(int save_in, int save_out);
 
 void	execute_pipe(t_data *data, t_node *node);
 int		count_cmds(t_node *node);
-
 
 void	execute_simple_command(t_data *data, t_node *node);
 void	fork_and_execute(t_data *data, t_node *node);

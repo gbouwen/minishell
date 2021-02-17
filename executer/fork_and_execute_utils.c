@@ -35,7 +35,8 @@ void	correct_error(t_data *data, t_node *node)
 	restore_stdin_stdout(data->save_in, data->save_out);
 	if (compare_both(node->content, ".") == 0)
 	{
-		ft_printf(2, "minishell: %s: filename argument required\n", node->content);
+		ft_printf(2, "minishell: %s: filename argument required\n",
+															node->content);
 		free_struct(data);
 		exit(2);
 	}
