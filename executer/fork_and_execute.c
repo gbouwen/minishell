@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 13:46:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/17 10:59:49 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 14:45:03 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		fork_and_execute(t_data *data, t_node *node)
 	pid_t	pid;
 	int		status;
 
+	g_exit_status = 0;
 	pid = fork();
 	if (pid == 0)
 		child_actions(data, node);
@@ -67,6 +68,10 @@ void		fork_and_execute(t_data *data, t_node *node)
 		wait(&status);
 		g_question_mark = status / 256;
 		if (g_exit_status > 0)
+		{
+			if (g_exit_status == 131)
+				ft_printf("^\\Quit.\n");
 			g_question_mark = g_exit_status;
+		}
 	}
 }
