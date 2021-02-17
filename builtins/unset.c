@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:07:25 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/11 15:57:24 by tiemen        ########   odam.nl         */
+/*   Updated: 2021/02/17 14:58:22 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	search_unset_variable(t_data *data, char *var)
 	if (is_punctuation_mark(var[i]) == 1 || ft_isdigit(var[i]) == 1 ||
 		ft_strlen(var) < 1)
 	{
-		ft_printf("bash: unset: '%s': not a valid identifier\n");
+		ft_printf(2, "bash: unset: '%s': not a valid identifier\n");
 		g_question_mark = 1;
 		return ;
 	}

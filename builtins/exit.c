@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 17:03:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/17 12:53:40 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 14:52:17 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ static void	exit_with_numeric_arguments(t_data *data, t_node *node)
 	exit_status = 0;
 	if (node->right != NULL)
 	{
-		ft_putstr_fd("exit\n", 2);
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		ft_printf(2, "exit\n");
+		ft_printf(2, "minishell: exit: too many arguments\n");
 		g_question_mark = 1;
 	}
 	else
 	{
-		ft_putstr_fd("exit\n", 2);
+		ft_printf(2, "exit\n");
 		exit_status = ft_atoi(node->content);
 		free_struct(data);
 		exit(exit_status);
@@ -50,10 +50,9 @@ static void	correct_exit(t_data *data, t_node *node)
 {
 	if (check_if_number(node->content) == 0)
 	{
-		ft_putstr_fd("exit\n", 2);
-		ft_putstr_fd("minishell: exit: ", 2);
-		ft_putstr_fd(node->content, 2);
-		ft_putstr_fd(": numeric argument required\n", 2);
+		ft_printf(2, "exit\n");
+		ft_printf(2, "minishell: exit: %s", node->content);
+		ft_printf(2, ": numeric argument required\n", 2);
 		free_struct(data);
 		exit(2);
 	}
@@ -65,7 +64,7 @@ void		builtin_exit(t_data *data, t_node *node)
 {
 	if (node->right == NULL)
 	{
-		ft_putstr_fd("exit\n", 2);
+		ft_printf(2, "exit\n");
 		free_struct(data);
 		exit(0);
 	}

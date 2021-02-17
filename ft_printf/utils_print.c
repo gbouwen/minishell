@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 13:47:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/01/17 13:23:08 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 14:49:57 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 void	ft_putchar(t_stats *data, unsigned char c)
 {
-	if (write(1, &c, 1) == -1)
-		data->error = 1;
+	if (data->fd == 1)
+	{
+		if (write(1, &c, 1) == -1)
+			data->error = 1;
+	}
+	else if (data->fd == 2)
+	{
+		if (write(2, &c, 1) == -1)
+			data->error = 1;
+	}
 	data->len++;
 }
 

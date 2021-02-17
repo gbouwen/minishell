@@ -6,7 +6,7 @@
 /*   By: gbouwen <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 14:36:07 by gbouwen       #+#    #+#                 */
-/*   Updated: 2020/01/17 13:08:24 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 14:48:09 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ typedef struct	s_stats
 	int		precision;
 	int		len;
 	int		error;
+	int		fd;
 }				t_stats;
 
-int				ft_printf(const char *str, ...);
+int				ft_printf(int fd, const char *str, ...);
 
 void			ft_putchar(t_stats *data, unsigned char c);
 void			ft_putstr(t_stats *data, const char *str);

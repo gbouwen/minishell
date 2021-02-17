@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:52:00 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/17 12:51:56 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 14:53:10 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	change_pwd_env(char **envp)
 			free(envp[i]);
 			if (getcwd(buff, 4096) == NULL)
 			{
-				ft_printf("cd: error retrieving current directory: ");
-				ft_printf("getcwd: cannot access parent directories: No such");
-				ft_printf(" file or directory\n");
+				ft_printf(2, "cd: error retrieving current directory: ");
+				ft_printf(2, "getcwd: cannot access parent directories:");
+				ft_printf(2, " No such file or directory\n");
 			}
 			envp[i] = ft_strjoin("PWD=", buff);
 			break ;
@@ -75,7 +75,7 @@ static int	home_variable_check(t_node *node, char **envp)
 	if ((node == NULL || compare_both(node->content, "~") == 0) &&
 												is_home_set(envp) == 0)
 	{
-		ft_printf("minishell: cd: HOME not set\n");
+		ft_printf(2, "minishell: cd: HOME not set\n");
 		g_question_mark = 1;
 		return (-1);
 	}
@@ -99,7 +99,7 @@ void		builtin_cd(t_node *node, char **envp)
 		return ;
 	if (node != NULL && node->right != NULL)
 	{
-		ft_printf("minishell: cd: too many arguments\n");
+		ft_printf(2, "minishell: cd: too many arguments\n");
 		g_question_mark = 1;
 		return ;
 	}
@@ -108,7 +108,7 @@ void		builtin_cd(t_node *node, char **envp)
 		ret = chdir(node->content);
 	if (ret == -1)
 	{
-		ft_printf("minishell: cd: %s: %s\n", node->content, strerror(errno));
+		ft_printf(2, "minishell: cd: %s: %s\n", node->content, strerror(errno));
 		g_question_mark = 1;
 		return ;
 	}
