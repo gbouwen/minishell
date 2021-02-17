@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 14:07:33 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/12 12:22:46 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 16:55:54 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		execute_simple_command(t_data *data, t_node *node)
 	else if (compare_both(node->content, "unset") == 0)
 		builtin_unset(data, node);
 	else if (compare_both(node->content, "env") == 0)
-		builtin_env(data->env_variables);
+		builtin_env(data->env_variables, node);
 	else if (compare_both(node->content, "exit") == 0)
 		builtin_exit(data, node);
 	else
