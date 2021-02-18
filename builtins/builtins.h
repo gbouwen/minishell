@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 15:31:41 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/16 15:51:34 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/17 16:57:07 by tiemen        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	builtin_export_no_arguments(char **envp);
 void	print_sorted(char **env, int sorted_indexes[], int len);
 void	builtin_export_variable(t_data *data, t_node *node);
 void	builtin_unset(t_data *data, t_node *node);
-void	builtin_env(char **envp);
+void	builtin_env(char **envp, t_node *node);
 void	builtin_exit(t_data *data, t_node *node);
 
 #endif
