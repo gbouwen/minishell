@@ -1,6 +1,6 @@
 # minishell
 The aim of this project is to create a simple shell. 
-This project was done with https://github.com/tiementurner)
+This project was done with @tiementurner (https://github.com/tiementurner)
 
 ### Requirements:
 - Show a prompt when waiting for a new command
