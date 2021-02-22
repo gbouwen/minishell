@@ -6,7 +6,7 @@
 /*   By: gbouwen <gbouwen@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 17:03:49 by gbouwen       #+#    #+#                 */
-/*   Updated: 2021/02/17 14:52:17 by gbouwen       ########   odam.nl         */
+/*   Updated: 2021/02/22 11:25:03 by gbouwen       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		builtin_exit(t_data *data, t_node *node)
 	{
 		ft_printf(2, "exit\n");
 		free_struct(data);
-		exit(0);
+		exit(g_question_mark);
 	}
 	node = node->right;
 	correct_exit(data, node);
